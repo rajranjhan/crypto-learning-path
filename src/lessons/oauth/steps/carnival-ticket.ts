@@ -19,7 +19,7 @@ export const carnivalTicket: Step = {
     "Does holding it prove it's yours? (Proof of Possession) — None: no enforced relationship between the buyer and whoever redeems it",
   ],
   diagram: `
-    <img class="diagram-img" src="/diagrams/carnival-ticket.png"
+    <img class="diagram-img" src="diagrams/carnival-ticket.png"
          alt="A carnival RIDE ticket (No. 5606, stub 02) with the same six token properties radiating out, each filled in with the ticket's weak answer: Issuer Trust Implicit, Authorization Bearer, Redemption Model Scoped, Validity Window None, Revocation None, Proof of Possession None." />
     <p class="diagram-note">
       The ticket sits where <strong>TOKEN</strong> sat in the previous diagram, and

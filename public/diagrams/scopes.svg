@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1850 740" font-family="ui-monospace, 'Cascadia Code', 'SFMono-Regular', Menlo, Consolas, monospace">
+  <rect width="1850" height="740" fill="#ffffff"/>
+
+  <text x="900" y="50" font-size="30" text-anchor="middle" fill="#1e40af">Scopes: What Ended Up on the Ticket</text>
+  <text x="900" y="82" font-size="14" text-anchor="middle" fill="#64748b">The app requested six scopes — only some of them made it onto the ticket.</text>
+
+  <line x1="790" y1="430" x2="660" y2="165" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="790" y1="470" x2="660" y2="420" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="790" y1="510" x2="660" y2="675" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6 5"/>
+  <line x1="1050" y1="430" x2="1180" y2="165" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="1050" y1="470" x2="1180" y2="420" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="1050" y1="510" x2="1180" y2="675" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6 5"/>
+
+  <rect x="790" y="400" width="260" height="140" rx="12" fill="#bfdbfe" stroke="#1e40af" stroke-width="2"/>
+  <line x1="980" y1="408" x2="980" y2="532" stroke="#1e40af" stroke-width="1" stroke-dasharray="6 5"/>
+  <text x="885" y="428" font-size="12" text-anchor="middle" fill="#1e40af">ADMIT ONE</text>
+  <text x="885" y="478" font-size="40" text-anchor="middle" fill="#1e3a5f">RIDE</text>
+  <text x="885" y="513" font-size="13" text-anchor="middle" fill="#64748b">No. 5606</text>
+  <text x="1018" y="480" font-size="24" text-anchor="middle" fill="#1e40af">02</text>
+
+  <circle cx="660" cy="165" r="6" fill="#3b82f6" stroke="#3b82f6"/>
+  <circle cx="660" cy="420" r="6" fill="#3b82f6" stroke="#3b82f6"/>
+  <circle cx="660" cy="675" r="6" fill="#cbd5e1" stroke="#94a3b8"/>
+  <circle cx="1180" cy="165" r="6" fill="#3b82f6" stroke="#3b82f6"/>
+  <circle cx="1180" cy="420" r="6" fill="#3b82f6" stroke="#3b82f6"/>
+  <circle cx="1180" cy="675" r="6" fill="#cbd5e1" stroke="#94a3b8"/>
+
+  <text x="640" y="154" font-size="19" text-anchor="end" fill="#1e40af">rides:basic — Granted</text>
+  <text x="640" y="176" font-size="13" text-anchor="end" fill="#64748b">Carousel and kiddie rides.</text>
+
+  <text x="640" y="409" font-size="19" text-anchor="end" fill="#1e40af">rides:premium — Granted</text>
+  <text x="640" y="431" font-size="13" text-anchor="end" fill="#64748b">Roller coasters and the Ferris wheel.</text>
+
+  <text x="640" y="664" font-size="19" text-anchor="end" fill="#94a3b8">profile:write — Denied</text>
+  <text x="640" y="686" font-size="13" text-anchor="end" fill="#94a3b8">Requested, but you said no.</text>
+
+  <text x="1200" y="154" font-size="19" text-anchor="start" fill="#1e40af">food:discount — Granted</text>
+  <text x="1200" y="176" font-size="13" text-anchor="start" fill="#64748b">10% off the snack stands.</text>
+
+  <text x="1200" y="409" font-size="19" text-anchor="start" fill="#1e40af">profile:read — Granted</text>
+  <text x="1200" y="431" font-size="13" text-anchor="start" fill="#64748b">Read your name and membership tier.</text>
+
+  <text x="1200" y="664" font-size="19" text-anchor="start" fill="#94a3b8">account:delete — Denied</text>
+  <text x="1200" y="686" font-size="13" text-anchor="start" fill="#94a3b8">Requested, but never even offered as a choice.</text>
+</svg>

@@ -6,7 +6,7 @@ import type { Step } from "../../../types";
 // matches its single payload byte, and all six bytes are annotated with no gaps.
 export const clientChangeCipherSpec: Step = {
   id: "client-change-cipher-spec",
-  title: "Client ChangeCipherSpec",
+  title: "Keeping Up Appearances, Continued",
   bytes: [0x14, 0x03, 0x03, 0x00, 0x01, 0x01],
   annotations: [
     {
@@ -39,7 +39,8 @@ export const clientChangeCipherSpec: Step = {
     },
   ],
   prose:
-    "The client sends its own ChangeCipherSpec for the same reason the server did: pure middlebox compatibility. In TLS 1.3 the client switched to encrypted records the moment it processed the server's key_share, so this byte triggers no state change. Emitting it keeps the client's flow looking like a familiar TLS 1.2 handshake to any firewall or proxy on the path. Both endpoints send this record once, and both ignore it on receipt.",
+    "<p>Your computer sends the same empty gesture back: another <strong>ChangeCipherSpec</strong>, one meaningless byte.</p>" +
+    "<p>Just like the bank's earlier one, this changes nothing — your keys switched on the moment you received the bank's key_share. It's here purely so the mailroom's old sorting equipment sees a familiar shape on both sides of the conversation, not just one. Both endpoints send this record once, and both ignore it on receipt.</p>",
   bullets: [
     "A single-byte (0x01) ChangeCipherSpec record from the client",
     "A legacy no-op in TLS 1.3 — it changes no cipher state",

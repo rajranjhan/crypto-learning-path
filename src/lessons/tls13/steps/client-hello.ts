@@ -9,7 +9,7 @@ import type { Step } from "../../../types";
 // key live inside the extensions block.
 export const clientHello: Step = {
   id: "client-hello",
-  title: "ClientHello",
+  title: "Introductions",
   bytes: [
     // -- Record header (5 bytes) --
     0x16, // record type: handshake
@@ -162,7 +162,9 @@ export const clientHello: Step = {
     },
   ],
   prose:
-    "The handshake opens with the client's proposal. On the wire the legacy version and session-id fields (offsets 9 and 44) still look like TLS 1.2 for middlebox compatibility, but the real work happens in the extensions (offset 88). There the client signals TLS 1.3 via supported_versions and, unlike TLS 1.2, already includes its ephemeral public key in the key_share extension. This lets the server compute the shared secret from the very first exchange, so key agreement finishes in one round trip.",
+    "<p>Think of TLS 1.3 like sending a confidential document to your bank, but the mail still has to pass through a shared office mailroom where anyone could peek.</p>" +
+    "<p>The conversation opens the same way: your computer speaks first. \"I want to talk securely — here's what encryption methods I support.\"</p>" +
+    "<p>But this time it says more. On the wire that's a <strong>ClientHello</strong>: the legacy version and session-id fields (offsets 9 and 44) still look like TLS 1.2 for the mailroom's old equipment, but the real work is in the extensions (offset 88), where the client announces TLS 1.3 and — unlike TLS 1.2 — already hands over its half of a shared key in <strong>key_share</strong>. The bank's server can start computing a secret from this very first envelope.</p>",
   bullets: [
     "A legacy version pinned at TLS 1.2, with the real TLS 1.3 offer in supported_versions",
     "32 bytes of client random data (used in the key schedule)",

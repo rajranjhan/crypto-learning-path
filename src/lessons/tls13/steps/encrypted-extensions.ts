@@ -8,7 +8,7 @@ import type { Step } from "../../../types";
 // inner bytes shown, and annotations tile from offset 0 with no gaps.
 export const encryptedExtensions: Step = {
   id: "encrypted-extensions",
-  title: "EncryptedExtensions",
+  title: "Locking the Documents",
   bytes: [
     // -- Record header (5 bytes, visible on the wire) --
     0x17, // record type: application_data (TLS 1.3 hides handshake messages)
@@ -64,7 +64,9 @@ export const encryptedExtensions: Step = {
     },
   ],
   prose:
-    "This is the first encrypted handshake message. Immediately after the key_shares were exchanged, both sides derived handshake traffic keys, so from here on every handshake message travels inside a record whose content type reads 0x17 (application_data) and whose body is AEAD ciphertext. Shown here is the decrypted inner content: an EncryptedExtensions message (type 0x08). It carries server extensions that are not needed to negotiate keys — such as ALPN or supported groups — which in TLS 1.2 would have been sent in the clear ServerHello. Moving them here keeps them hidden from eavesdroppers and middleboxes.",
+    "<p>This is the moment the envelope actually seals — and in TLS 1.3, it happens astonishingly early.</p>" +
+    "<p>The instant both key_shares were exchanged, both sides derived a shared key. From here on, every message the bank sends travels inside a record that looks like ordinary mail (0x17, the same type as real application data) but whose contents are locked.</p>" +
+    "<p>The first thing sent this way is <strong>EncryptedExtensions</strong> — bank-side details, like which follow-up format it'll use, that TLS 1.2 used to send in the open ServerHello. Nobody in the mailroom can read this one. Compare that to TLS 1.2, where the bank's actual ID and signature still traveled in the open for two more messages.</p>",
   bullets: [
     "Carries server extensions not needed for key negotiation (e.g. ALPN)",
     "The first handshake message encrypted with the handshake traffic keys",

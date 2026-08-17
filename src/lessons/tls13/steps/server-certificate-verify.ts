@@ -9,7 +9,7 @@ import type { Step } from "../../../types";
 // from offset 0 with no gaps or overlaps.
 export const serverCertificateVerify: Step = {
   id: "server-certificate-verify",
-  title: "CertificateVerify",
+  title: "Proving It's Really Theirs",
   bytes: [
     0x17, 0x03, 0x03, 0x01, 0x08, 0x0f, 0x00, 0x01, 0x04, 0x08, 0x04, 0x01,
     0x00, 0x6c, 0x74, 0x6f, 0x0b, 0x4c, 0x85, 0xf9, 0x92, 0x25, 0xb0, 0xa0,
@@ -94,7 +94,9 @@ export const serverCertificateVerify: Step = {
     },
   ],
   prose:
-    "This message is where the server proves it actually holds the private key for the certificate it just sent. It signs a hash of the whole handshake transcript up to this point with that private key, using a modern scheme (here RSA-PSS with SHA-256). Because the transcript includes both sides' ephemeral key_shares and randoms, the signature ties certificate ownership to this exact session — presenting a stolen certificate is useless without the matching private key. TLS 1.2 folded this proof into the key exchange for some cipher suites; TLS 1.3 makes it an explicit, always-present message.",
+    "<p>An ID alone isn't proof you're holding it legitimately — anyone could photocopy someone else's ID. So the bank does one more thing: it signs for it.</p>" +
+    "<p>This is the <strong>CertificateVerify</strong> message. The bank signs a hash of the entire conversation so far with the private key that matches the certificate it just sent, using a modern scheme (here RSA-PSS with SHA-256) — proving it's not just showing you an ID, it actually holds the key behind it.</p>" +
+    "<p>TLS 1.2 sometimes folded this proof into the earlier key-exchange signature; TLS 1.3 makes it its own explicit, always-present envelope. Because the signature covers everything said so far, a stolen certificate is useless to anyone without the matching private key.</p>",
   bullets: [
     "An RSA-PSS (or ECDSA) signature over the handshake transcript hash",
     "Proves the server holds the private key for the certificate it sent",

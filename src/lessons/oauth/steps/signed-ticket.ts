@@ -21,7 +21,7 @@ export const signedTicket: Step = {
     "Can it be cancelled early? (Revocation) — Still limited: no kill switch, but a stolen ticket is useless without your hand",
   ],
   diagram: `
-    <img class="diagram-img" src="/diagrams/signed-ticket.png"
+    <img class="diagram-img" src="diagrams/signed-ticket.png"
          alt="The same carnival RIDE ticket (No. 5606, stub 02) as before, but now signed 'Sam Rivera' in red handwriting at purchase. The six token properties radiate out; three are now green — Authorization Sender-constrained, Proof of Possession Enforced, Validity Window Per ride — while Issuer Trust, Redemption Model, and Revocation are unchanged in blue." />
     <p class="diagram-note">
       Compare this to the plain ride ticket two steps back: the hub and layout are

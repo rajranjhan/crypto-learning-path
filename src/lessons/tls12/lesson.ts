@@ -19,7 +19,7 @@ export const tls12Lesson: Lesson = {
     "in full view of that mailroom, then use it to encrypt everything that follows. " +
     "Walk through each record byte by byte below.",
   diagram: `
-    <img class="diagram-img" src="/diagrams/tls-mailroom.svg"
+    <img class="diagram-img" src="diagrams/tls-mailroom.svg"
          alt="A sender (YOU) and recipient (BANK) on either side of a shared office mailroom. Inside the mailroom, an open envelope labeled 'confidential document' sits exposed with its contents visible, while a coworker peeks at it." />
     <p class="diagram-note">
       Without TLS, every record in this handshake — and the application data after

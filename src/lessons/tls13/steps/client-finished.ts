@@ -8,7 +8,7 @@ import type { Step } from "../../../types";
 // offset 0 with no gaps or overlaps.
 export const clientFinished: Step = {
   id: "client-finished",
-  title: "Client Finished",
+  title: "Tamper-Proofing, Continued",
   bytes: [
     0x17, 0x03, 0x03, 0x00, 0x34, 0x14, 0x00, 0x00, 0x30, 0xd6, 0x60, 0xcf,
     0xcf, 0x61, 0xc1, 0xac, 0x1f, 0xd3, 0xdd, 0x38, 0xe6, 0x3d, 0xbf, 0x16,
@@ -61,7 +61,9 @@ export const clientFinished: Step = {
     },
   ],
   prose:
-    "The client answers with its own Finished, encrypted under its handshake traffic secret. Its verify_data (offset 9) is an HMAC over the transcript the client has seen — which now includes the server's Finished. Once the server checks this value, the handshake is complete in both directions: the two ends have mutually confirmed identical keys and an unaltered negotiation. In TLS 1.3 the client can actually send this Finished (and even application data) in its very first flight back, so a full handshake costs just one round trip.",
+    "<p>You attach your own wax seal in reply.</p>" +
+    "<p>This is your <strong>Finished</strong> message — encrypted, and covering a transcript that now includes the bank's Finished too. Once the bank checks it, both of you have proven the same thing from opposite ends: identical keys, an untampered conversation.</p>" +
+    "<p>TLS 1.3 lets you send this — and even your first real document — in the very same return trip, which is why the whole handshake costs just one round trip instead of two.</p>",
   bullets: [
     "HMAC verify_data computed over the handshake transcript, including the server's Finished",
     "Encrypted under the client's handshake traffic secret",

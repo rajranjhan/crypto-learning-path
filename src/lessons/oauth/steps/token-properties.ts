@@ -22,7 +22,7 @@ export const tokenProperties: Step = {
     "Can it be cancelled early? (Revocation)",
   ],
   diagram: `
-    <img class="diagram-img" src="/diagrams/token-properties.png"
+    <img class="diagram-img" src="diagrams/token-properties.png"
          alt="A central TOKEN with six properties radiating out: Issuer Trust, Authorization, Redemption Model, Proof of Possession, Validity Window, and Revocation." />
     <p class="diagram-note">
       These six properties are the lens for the whole lesson. As we move from

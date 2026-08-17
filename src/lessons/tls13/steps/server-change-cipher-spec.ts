@@ -7,7 +7,7 @@ import type { Step } from "../../../types";
 // its single payload byte, and all six bytes are annotated with no gaps.
 export const serverChangeCipherSpec: Step = {
   id: "server-change-cipher-spec",
-  title: "Server ChangeCipherSpec",
+  title: "Keeping Up Appearances",
   bytes: [0x14, 0x03, 0x03, 0x00, 0x01, 0x01],
   annotations: [
     {
@@ -40,7 +40,9 @@ export const serverChangeCipherSpec: Step = {
     },
   ],
   prose:
-    "This tiny record is a fossil. In TLS 1.2 the ChangeCipherSpec message genuinely signaled the switch to encrypted records, but TLS 1.3 derives and activates its handshake keys immediately after the key_shares are exchanged. The record is retained purely for 'middlebox compatibility mode': many firewalls and proxies were built assuming a TLS 1.2 handshake shape, and would choke on a flow that never sent a ChangeCipherSpec. So both sides emit this harmless 0x01 and ignore it on receipt.",
+    "<p>Here's a strange little envelope that does nothing at all.</p>" +
+    "<p>The keys are already locked in — they were ready the moment the bank's key_share arrived. But some old equipment in the mailroom only knows how to handle mail shaped like TLS 1.2, and would jam if a delivery never included this specific slip.</p>" +
+    "<p>So the bank sends a <strong>ChangeCipherSpec</strong> record anyway: one byte, 0x01, meaning nothing. Nobody reads it. Nobody's cipher state changes. It's purely a costume, so old mailroom sorting machines see the shape they expect and wave the real mail through.</p>",
   bullets: [
     "A single-byte (0x01) ChangeCipherSpec record",
     "A legacy no-op in TLS 1.3 — it changes no cipher state",

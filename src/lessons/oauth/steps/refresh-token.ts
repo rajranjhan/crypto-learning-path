@@ -24,7 +24,7 @@ export const refreshToken: Step = {
     "Where'd it come from, and why do you believe that? (Issuer Trust) — Implicit: unchanged; you got it from the booth alongside your first access token",
   ],
   diagram: `
-    <img class="diagram-img" src="/diagrams/refresh-token.png"
+    <img class="diagram-img" src="diagrams/refresh-token.png"
          alt="A carnival SEASON PASS labelled REFRESH (Pass No. 88-231, 'trade at booth for a ride ticket') with the same six token properties radiating out. Revocation is green — Supported: the booth keeps a record and can cancel the pass — while Issuer Trust Implicit, Redemption Model Renewable, Validity Window Long-lived, Authorization Bearer, and Proof of Possession None stay blue." />
     <p class="diagram-note">
       Same layout as the plain ride ticket two steps back, so you can compare them

@@ -90,4 +90,6 @@ export interface RegistryEntry {
   slug: string;
   title: string;
   status: "available" | "coming-soon";
+  /** Optional group name (e.g. "OAuth"). Entries sharing a category nest under one collapsible header in the sidebar. */
+  category?: string;
 }

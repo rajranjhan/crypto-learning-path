@@ -8,7 +8,7 @@ import type { Step } from "../../../types";
 // authentication tag). Annotations tile from offset 0 with no gaps or overlaps.
 export const applicationData: Step = {
   id: "application-data",
-  title: "Application Data",
+  title: "Sending the Document",
   bytes: [
     0x17, 0x03, 0x03, 0x00, 0x49, 0xe2, 0x65, 0x2a, 0x8d, 0xa9, 0x5f, 0x1a,
     0x25, 0xb8, 0x3f, 0x7f, 0xd6, 0x5e, 0xc9, 0x71, 0x68, 0xb5, 0xd7, 0xbd,
@@ -49,7 +49,9 @@ export const applicationData: Step = {
     },
   ],
   prose:
-    "The payoff. This is the first Application Data record — an encrypted HTTP request protected with the application traffic keys derived after the handshake. Every byte after the 5-byte record header (offset 5) is AEAD ciphertext with an authentication tag: confidential and tamper-evident. TLS 1.3 even hides the true record type inside the encrypted payload, so on the wire it is just an opaque 0x17 blob. From here the connection simply exchanges 0x17 records in both directions until one side closes. But TLS only protects data in transit — the moment it is decrypted and stored, other controls take over.",
+    "<p>This is the payoff: your actual confidential document, finally sealed and sent.</p>" +
+    "<p>Every byte after the 5-byte record header (offset 5) is AEAD ciphertext with an authentication tag — to anyone in the mailroom it's indistinguishable from random noise. TLS 1.3 even hides what kind of mail this is: it's tagged the same 0x17 as the EncryptedExtensions and Certificate that came before it, so an observer can't tell handshake traffic from your real document just by watching the wrapper.</p>" +
+    "<p>From here the two of you just keep exchanging sealed envelopes until one side ends the conversation. But remember: TLS only protects the document while it's in the mailroom. Once it's unsealed and filed away at the bank, other safeguards have to take over.</p>",
   bullets: [
     "A record type of 0x17 (Application Data)",
     "The AEAD-encrypted payload (here an HTTP request) under the application traffic keys",

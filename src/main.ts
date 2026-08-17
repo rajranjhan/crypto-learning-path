@@ -6,6 +6,7 @@ import { tls13Lesson } from "./lessons/tls13/lesson";
 import { mtlsLesson } from "./lessons/mtls/lesson";
 import { oauthLesson } from "./lessons/oauth/lesson";
 import { oauthFurtherLearningLesson } from "./lessons/oauth-further-learning/lesson";
+import { oauthFlowsLesson } from "./lessons/oauth-flows/lesson";
 import { renderSidebar } from "./layout/sidebar";
 import { renderStepView } from "./components/hexdump";
 import { renderStepper } from "./components/stepper";
@@ -20,6 +21,7 @@ const lessons: Record<string, Lesson> = {
   mtls: mtlsLesson,
   oauth: oauthLesson,
   "oauth-further-learning": oauthFurtherLearningLesson,
+  "oauth-flows": oauthFlowsLesson,
 };
 
 // In dev, surface authoring mistakes (bad annotation offsets, duplicate slugs)

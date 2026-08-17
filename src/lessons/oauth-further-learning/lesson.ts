@@ -5,7 +5,6 @@ import { scopes } from "./steps/scopes";
 import { claims } from "./steps/claims";
 import { audienceRestriction } from "./steps/audience-restriction";
 import { oauthVsOidc } from "./steps/oauth-vs-oidc";
-import { otherGrantTypes } from "./steps/other-grant-types";
 import { entitlements } from "./steps/entitlements";
 
 export const oauthFurtherLearningLesson: Lesson = {
@@ -24,10 +23,9 @@ export const oauthFurtherLearningLesson: Lesson = {
     clientTypes,
     stateAndRedirectUri,
     scopes,
+    entitlements,
     claims,
     audienceRestriction,
     oauthVsOidc,
-    otherGrantTypes,
-    entitlements,
   ],
 };

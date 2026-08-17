@@ -1,4 +1,4 @@
-# On The Wire
+# Crypto Learning Path
 
 A static, single-page site that teaches applied cryptography and web security protocols by walking through the actual bytes on the wire — hex-dump breakdowns, annotated JWTs, and sequence diagrams, not just prose.
 

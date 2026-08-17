@@ -6,6 +6,7 @@ import { tls13Lesson } from "../src/lessons/tls13/lesson";
 import { mtlsLesson } from "../src/lessons/mtls/lesson";
 import { oauthLesson } from "../src/lessons/oauth/lesson";
 import { oauthFurtherLearningLesson } from "../src/lessons/oauth-further-learning/lesson";
+import { oauthFlowsLesson } from "../src/lessons/oauth-flows/lesson";
 import { validateLesson, validateRegistry } from "../src/lessons/validate";
 import type { Lesson } from "../src/types";
 
@@ -16,6 +17,7 @@ const lessons: Record<string, Lesson> = {
   mtls: mtlsLesson,
   oauth: oauthLesson,
   "oauth-further-learning": oauthFurtherLearningLesson,
+  "oauth-flows": oauthFlowsLesson,
 };
 
 describe("registry", () => {

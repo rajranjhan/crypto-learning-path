@@ -13,7 +13,7 @@ import type { Step } from "../../../types";
 // tile from offset 0 with no gaps or overlaps.
 export const serverCertificate: Step = {
   id: "server-certificate",
-  title: "Certificate",
+  title: "Verifying the ID",
   bytes: [
     0x17, 0x03, 0x03, 0x04, 0x99, 0x0b, 0x00, 0x04, 0x95, 0x00, 0x00, 0x04,
     0x91, 0x00, 0x04, 0x8c, 0x30, 0x82, 0x04, 0x88, 0x30, 0x82, 0x03, 0x70,
@@ -188,7 +188,9 @@ export const serverCertificate: Step = {
     },
   ],
   prose:
-    "The server proves its identity with a certificate — but in TLS 1.3 this message is encrypted under the handshake traffic keys, unlike TLS 1.2 where it travelled in the clear. On the wire the record type reads 0x17 (application_data); shown here is the decrypted inner Certificate message (type 0x0b). The certificate is signed by a certificate authority the client trusts. All length fields are self-consistent: the 1164-byte DER (offset 16) is framed by a 1169-byte certificate list, a 1173-byte handshake body, and a 1177-byte record. TLS 1.3 also adds a per-certificate extensions field (offset 1180) that TLS 1.2 lacked.",
+    "<p>Now the bank hands over its notarized ID — but this time, inside a sealed envelope.</p>" +
+    "<p>That's the <strong>Certificate</strong> message: an X.509 certificate signed by a certificate authority you both trust. In TLS 1.2 this traveled in the clear, readable by anyone in the mailroom. Here, it's locked the moment it leaves the bank — on the wire the record type reads 0x17 (application_data), and what's shown here is the decrypted inner content.</p>" +
+    "<p>Your computer will still check it against a trusted registry the same way — but now nobody watching the mailroom even gets to see whose ID is being checked, let alone read it. All length fields stay self-consistent: the 1164-byte DER (offset 16) is framed by a 1169-byte certificate list, a 1173-byte handshake body, and a 1177-byte record. TLS 1.3 also adds a per-certificate extensions field (offset 1180) that TLS 1.2 lacked.</p>",
   bullets: [
     "An X.509 certificate containing the server's hostname and public key",
     "A certificate chain whose signature validates ownership",

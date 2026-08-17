@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 760" font-family="ui-monospace, 'Cascadia Code', 'SFMono-Regular', Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="760" fill="#ffffff"/>
+
+  <text x="500" y="42" font-size="26" text-anchor="middle" fill="#1e40af">How Standards Proliferate</text>
+  <text x="500" y="66" font-size="13" text-anchor="middle" fill="#64748b">(a familiar shape, borrowed from xkcd.com/927)</text>
+
+  <rect x="150" y="110" width="700" height="130" rx="12" fill="#bfdbfe" stroke="#1e40af" stroke-width="2"/>
+  <text x="500" y="140" font-size="13" text-anchor="middle" fill="#1e40af">SITUATION</text>
+  <text x="500" y="190" font-size="19" text-anchor="middle" fill="#1e3a5f">There are 14 competing OAuth</text>
+  <text x="500" y="214" font-size="19" text-anchor="middle" fill="#1e3a5f">flows and extensions.</text>
+
+  <line x1="500" y1="240" x2="500" y2="300" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <rect x="150" y="310" width="700" height="160" rx="12" fill="#fff8e1" stroke="#d97706" stroke-width="2"/>
+  <text x="500" y="342" font-size="13" text-anchor="middle" fill="#92400e">PROPOSAL</text>
+  <text x="500" y="390" font-size="17" text-anchor="middle" fill="#92400e">"14 is ridiculous. We need one universal</text>
+  <text x="500" y="416" font-size="17" text-anchor="middle" fill="#92400e">grant that covers every use case."</text>
+
+  <line x1="500" y1="470" x2="500" y2="530" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <rect x="150" y="540" width="700" height="130" rx="12" fill="#bfdbfe" stroke="#1e40af" stroke-width="2"/>
+  <text x="500" y="570" font-size="13" text-anchor="middle" fill="#1e40af">SOON</text>
+  <text x="500" y="620" font-size="19" text-anchor="middle" fill="#1e3a5f">There are 15 competing OAuth</text>
+  <text x="500" y="644" font-size="19" text-anchor="middle" fill="#1e3a5f">flows and extensions.</text>
+</svg>

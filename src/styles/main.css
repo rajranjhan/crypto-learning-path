@@ -21,6 +21,10 @@ body { margin: 0; font-family: system-ui, sans-serif; color: var(--fg); backgrou
 .lesson-header .lesson-label { flex: 1; }
 .lesson-item.coming-soon { color: var(--muted); opacity: 0.6; cursor: default; }
 .lesson-steps { margin: 2px 0 6px 14px; border-left: 1px solid var(--border); padding-left: 8px; }
+.category-group { margin-bottom: 4px; }
+.category-header .lesson-label { font-weight: 600; }
+.category-lessons { margin: 2px 0 6px 14px; border-left: 1px solid var(--border); padding-left: 8px; }
+.category-lessons .lesson-item { font-size: 13px; }
 .step-item { display: block; padding: 5px 8px; border-radius: 5px; text-decoration: none; color: var(--fg); font-size: 13px; }
 .step-item:hover { background: #eef2ff; }
 .step-item.active { background: var(--accent); color: #fff; }

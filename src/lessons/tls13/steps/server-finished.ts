@@ -8,7 +8,7 @@ import type { Step } from "../../../types";
 // Annotations tile from offset 0 with no gaps or overlaps.
 export const serverFinished: Step = {
   id: "server-finished",
-  title: "Server Finished",
+  title: "Tamper-Proofing",
   bytes: [
     0x17, 0x03, 0x03, 0x00, 0x34, 0x14, 0x00, 0x00, 0x30, 0x23, 0x12, 0x5d,
     0xf0, 0xd4, 0x16, 0x06, 0xb8, 0x2e, 0x10, 0xb6, 0xfd, 0xf2, 0x28, 0xcc,
@@ -61,7 +61,9 @@ export const serverFinished: Step = {
     },
   ],
   prose:
-    "The server closes its half of the handshake with Finished. The verify_data (offset 9) is an HMAC computed over the full handshake transcript using a key derived from the server's handshake traffic secret. Because that secret comes from the shared ECDHE key, only a peer that derived the identical keys can produce or verify this value — so it simultaneously confirms handshake integrity (nothing was altered) and that both sides really share the same keys. It is itself encrypted under the handshake traffic keys.",
+    "<p>The bank attaches something like a wax seal to its side of the conversation: proof that nothing said so far was altered in the mailroom.</p>" +
+    "<p>This is <strong>Finished</strong> — the verify_data (offset 9) is an HMAC computed over the full handshake transcript, keyed by the bank's own handshake traffic secret. Only someone who derived the identical keys could have produced it.</p>" +
+    "<p>If your computer recomputes the same value, it knows two things at once: the bank really does hold the matching keys, and not one byte of the conversation was tampered with in transit. It's itself encrypted under the handshake traffic keys.</p>",
   bullets: [
     "HMAC verify_data computed over the handshake transcript",
     "Confirms handshake integrity using the server's handshake traffic secret",

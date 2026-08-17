@@ -8,7 +8,7 @@ import type { Step } from "../../../types";
 // (TLS 1.3) and the server's ephemeral key live in the extensions.
 export const serverHello: Step = {
   id: "server-hello",
-  title: "ServerHello",
+  title: "Introductions, Continued",
   bytes: [
     // -- Record header (5 bytes) --
     0x16, // record type: handshake
@@ -134,7 +134,9 @@ export const serverHello: Step = {
     },
   ],
   prose:
-    "The server answers with its selections. It picks one cipher suite (offset 76) and, in the extensions (offset 81), confirms TLS 1.3 via supported_versions and returns its own ephemeral public key in key_share. That single key_share completes the ECDHE agreement: from the very next message onward, both sides share a secret and the rest of the handshake is encrypted. This is the big shift from TLS 1.2, where the certificate and key exchange were still sent in the clear.",
+    "<p>The bank's server replies: \"Let's use this method.\"</p>" +
+    "<p>That's the <strong>ServerHello</strong> — it confirms TLS 1.3 in the extensions (offset 81), picks a cipher suite (offset 76), and hands back its own half of the key in <strong>key_share</strong>.</p>" +
+    "<p>That's it — the combination lock is done. In TLS 1.2 this took two more messages (ServerKeyExchange, ClientKeyExchange) and a full extra round trip; here both halves were exchanged in the very first envelopes each side sent. Everything from the bank's next message onward travels already sealed.</p>",
   bullets: [
     "A legacy version of TLS 1.2, with the real choice of TLS 1.3 in supported_versions",
     "32 bytes of server random data (used in the key schedule)",

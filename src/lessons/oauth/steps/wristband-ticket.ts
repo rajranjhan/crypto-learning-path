@@ -25,7 +25,7 @@ export const wristbandTicket: Step = {
     "Can it be cancelled early? (Revocation) — Still limited: no easy kill switch for one lost band; the station can only refuse a known-bad one",
   ],
   diagram: `
-    <img class="diagram-img" src="/diagrams/wristband-ticket.png"
+    <img class="diagram-img" src="diagrams/wristband-ticket.png"
          alt="The same carnival RIDE ticket (No. 5606, stub 02) as before, but now locked to a wristband (BAND A7-5606) issued at purchase. The six token properties radiate out; three are now green — Issuer Trust Verified, Authorization Sender-constrained, Proof of Possession Enforced — while Redemption Model, Validity Window, and Revocation are unchanged in blue." />
     <p class="diagram-note">
       This is the FAPI / mTLS answer, the sibling of the signed ticket coming up
