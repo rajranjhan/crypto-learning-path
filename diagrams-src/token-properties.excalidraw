@@ -1,0 +1,254 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "appState": { "viewBackgroundColor": "#ffffff", "gridSize": 20 },
+  "files": {},
+  "elements": [
+    {
+      "type": "text", "id": "title", "x": 420, "y": 30, "width": 560, "height": 40,
+      "text": "Six Properties of a Token", "originalText": "Six Properties of a Token",
+      "fontSize": 30, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300001, "version": 1, "versionNonce": 300002, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "subtitle", "x": 420, "y": 74, "width": 560, "height": 22,
+      "text": "A token is defined by how it is trusted, spent, and controlled — not by what it looks like.",
+      "originalText": "A token is defined by how it is trusted, spent, and controlled — not by what it looks like.",
+      "fontSize": 14, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300003, "version": 1, "versionNonce": 300004, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+
+    {
+      "type": "rectangle", "id": "token_rect", "x": 590, "y": 360, "width": 260, "height": 120,
+      "strokeColor": "#1e3a5f", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300010, "version": 1, "versionNonce": 300011, "isDeleted": false,
+      "groupIds": [], "boundElements": [{ "id": "token_text", "type": "text" }],
+      "link": null, "locked": false, "roundness": { "type": 3 }
+    },
+    {
+      "type": "text", "id": "token_text", "x": 620, "y": 405, "width": 200, "height": 30,
+      "text": "TOKEN", "originalText": "TOKEN",
+      "fontSize": 26, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle",
+      "strokeColor": "#ffffff", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300012, "version": 1, "versionNonce": 300013, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": "token_rect", "lineHeight": 1.25
+    },
+
+    {
+      "type": "line", "id": "line_p1", "x": 590, "y": 385, "width": 130, "height": 220,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300020, "version": 1, "versionNonce": 300021, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [-130, -220]]
+    },
+    {
+      "type": "line", "id": "line_p2", "x": 590, "y": 420, "width": 130, "height": 0,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300022, "version": 1, "versionNonce": 300023, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [-130, 0]]
+    },
+    {
+      "type": "line", "id": "line_p3", "x": 590, "y": 455, "width": 130, "height": 220,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300024, "version": 1, "versionNonce": 300025, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [-130, 220]]
+    },
+    {
+      "type": "line", "id": "line_p4", "x": 850, "y": 385, "width": 130, "height": 220,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300026, "version": 1, "versionNonce": 300027, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [130, -220]]
+    },
+    {
+      "type": "line", "id": "line_p5", "x": 850, "y": 420, "width": 130, "height": 0,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300028, "version": 1, "versionNonce": 300029, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [130, 0]]
+    },
+    {
+      "type": "line", "id": "line_p6", "x": 850, "y": 455, "width": 130, "height": 220,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300030, "version": 1, "versionNonce": 300031, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [130, 220]]
+    },
+
+    {
+      "type": "ellipse", "id": "dot_p1", "x": 454, "y": 159, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300040, "version": 1, "versionNonce": 300041, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p2", "x": 454, "y": 414, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300042, "version": 1, "versionNonce": 300043, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p3", "x": 454, "y": 669, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300044, "version": 1, "versionNonce": 300045, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p4", "x": 974, "y": 159, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300046, "version": 1, "versionNonce": 300047, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p5", "x": 974, "y": 414, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300048, "version": 1, "versionNonce": 300049, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p6", "x": 974, "y": 669, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300050, "version": 1, "versionNonce": 300051, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+
+    {
+      "type": "text", "id": "p1_title", "x": -160, "y": 135, "width": 600, "height": 24,
+      "text": "Issuer Trust", "originalText": "Issuer Trust",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#3b82f6", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300060, "version": 1, "versionNonce": 300061, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p1_desc", "x": -160, "y": 163, "width": 600, "height": 40,
+      "text": "Who vouches for this token, and why anyone believes it.",
+      "originalText": "Who vouches for this token, and why anyone believes it.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300062, "version": 1, "versionNonce": 300063, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p2_title", "x": -160, "y": 390, "width": 600, "height": 24,
+      "text": "Redemption Model", "originalText": "Redemption Model",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#3b82f6", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300064, "version": 1, "versionNonce": 300065, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p2_desc", "x": -160, "y": 418, "width": 600, "height": 40,
+      "text": "Spent once and gone, or reusable many times?",
+      "originalText": "Spent once and gone, or reusable many times?",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300066, "version": 1, "versionNonce": 300067, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p3_title", "x": -160, "y": 645, "width": 600, "height": 24,
+      "text": "Validity Window", "originalText": "Validity Window",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#3b82f6", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300068, "version": 1, "versionNonce": 300069, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p3_desc", "x": -160, "y": 673, "width": 600, "height": 40,
+      "text": "When it starts working and when it expires.",
+      "originalText": "When it starts working and when it expires.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300070, "version": 1, "versionNonce": 300071, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+
+    {
+      "type": "text", "id": "p4_title", "x": 1000, "y": 135, "width": 400, "height": 24,
+      "text": "Authorization", "originalText": "Authorization",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#3b82f6", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300072, "version": 1, "versionNonce": 300073, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p4_desc", "x": 1000, "y": 163, "width": 400, "height": 40,
+      "text": "What holding the token actually lets you do.",
+      "originalText": "What holding the token actually lets you do.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300074, "version": 1, "versionNonce": 300075, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p5_title", "x": 1000, "y": 390, "width": 400, "height": 24,
+      "text": "Proof of Possession", "originalText": "Proof of Possession",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#3b82f6", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300076, "version": 1, "versionNonce": 300077, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p5_desc", "x": 1000, "y": 418, "width": 400, "height": 40,
+      "text": "Must the holder prove the token is really theirs?",
+      "originalText": "Must the holder prove the token is really theirs?",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300078, "version": 1, "versionNonce": 300079, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p6_title", "x": 1000, "y": 645, "width": 400, "height": 24,
+      "text": "Revocation", "originalText": "Revocation",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#3b82f6", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300080, "version": 1, "versionNonce": 300081, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p6_desc", "x": 1000, "y": 673, "width": 400, "height": 40,
+      "text": "Can it be cancelled before it expires?",
+      "originalText": "Can it be cancelled before it expires?",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 300082, "version": 1, "versionNonce": 300083, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    }
+  ]
+}

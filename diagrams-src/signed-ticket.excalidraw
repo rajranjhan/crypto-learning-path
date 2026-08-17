@@ -1,0 +1,306 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "appState": { "viewBackgroundColor": "#ffffff", "gridSize": 20 },
+  "files": {},
+  "elements": [
+    {
+      "type": "text", "id": "title", "x": 320, "y": 24, "width": 760, "height": 40,
+      "text": "The Signed Ride Ticket", "originalText": "The Signed Ride Ticket",
+      "fontSize": 30, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410001, "version": 1, "versionNonce": 410002, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "subtitle", "x": 220, "y": 68, "width": 960, "height": 22,
+      "text": "Sign the ticket in your own handwriting, and it stops being a bearer token — this is DPoP.",
+      "originalText": "Sign the ticket in your own handwriting, and it stops being a bearer token — this is DPoP.",
+      "fontSize": 14, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410003, "version": 1, "versionNonce": 410004, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+
+    {
+      "type": "rectangle", "id": "ticket_body", "x": 590, "y": 400, "width": 260, "height": 140,
+      "strokeColor": "#1e40af", "backgroundColor": "#bfdbfe", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410010, "version": 1, "versionNonce": 410011, "isDeleted": false,
+      "groupIds": ["ticket"], "boundElements": null, "link": null, "locked": false, "roundness": { "type": 3 }
+    },
+    {
+      "type": "line", "id": "ticket_perf", "x": 780, "y": 408, "width": 0, "height": 124,
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "dashed", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410012, "version": 1, "versionNonce": 410013, "isDeleted": false,
+      "groupIds": ["ticket"], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [0, 124]]
+    },
+    {
+      "type": "text", "id": "ticket_admit", "x": 600, "y": 412, "width": 170, "height": 16,
+      "text": "ADMIT ONE", "originalText": "ADMIT ONE",
+      "fontSize": 12, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410014, "version": 1, "versionNonce": 410015, "isDeleted": false,
+      "groupIds": ["ticket"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "ticket_ride", "x": 600, "y": 430, "width": 170, "height": 38,
+      "text": "RIDE", "originalText": "RIDE",
+      "fontSize": 34, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle",
+      "strokeColor": "#1e3a5f", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410016, "version": 1, "versionNonce": 410017, "isDeleted": false,
+      "groupIds": ["ticket"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "ticket_sig_label", "x": 600, "y": 476, "width": 170, "height": 12,
+      "text": "signed at purchase:", "originalText": "signed at purchase:",
+      "fontSize": 9, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410018, "version": 1, "versionNonce": 410019, "isDeleted": false,
+      "groupIds": ["ticket"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "ticket_sig", "x": 600, "y": 488, "width": 170, "height": 28,
+      "text": "Sam Rivera", "originalText": "Sam Rivera",
+      "fontSize": 22, "fontFamily": 1, "textAlign": "center", "verticalAlign": "middle",
+      "strokeColor": "#b91c1c", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": -3,
+      "seed": 410020, "version": 1, "versionNonce": 410021, "isDeleted": false,
+      "groupIds": ["ticket"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "ticket_serial", "x": 600, "y": 518, "width": 170, "height": 14,
+      "text": "No. 5606", "originalText": "No. 5606",
+      "fontSize": 12, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410022, "version": 1, "versionNonce": 410023, "isDeleted": false,
+      "groupIds": ["ticket"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "ticket_stub", "x": 790, "y": 458, "width": 56, "height": 28,
+      "text": "02", "originalText": "02",
+      "fontSize": 24, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410024, "version": 1, "versionNonce": 410025, "isDeleted": false,
+      "groupIds": ["ticket"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+
+    {
+      "type": "line", "id": "line_p1", "x": 590, "y": 430, "width": 130, "height": 265,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410030, "version": 1, "versionNonce": 410031, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [-130, -265]]
+    },
+    {
+      "type": "line", "id": "line_p2", "x": 590, "y": 470, "width": 130, "height": 50,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410032, "version": 1, "versionNonce": 410033, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [-130, -50]]
+    },
+    {
+      "type": "line", "id": "line_p3", "x": 590, "y": 510, "width": 130, "height": 165,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410034, "version": 1, "versionNonce": 410035, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [-130, 165]]
+    },
+    {
+      "type": "line", "id": "line_p4", "x": 850, "y": 430, "width": 130, "height": 265,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410036, "version": 1, "versionNonce": 410037, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [130, -265]]
+    },
+    {
+      "type": "line", "id": "line_p5", "x": 850, "y": 470, "width": 130, "height": 50,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410038, "version": 1, "versionNonce": 410039, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [130, -50]]
+    },
+    {
+      "type": "line", "id": "line_p6", "x": 850, "y": 510, "width": 130, "height": 165,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410040, "version": 1, "versionNonce": 410041, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [130, 165]]
+    },
+
+    {
+      "type": "ellipse", "id": "dot_p1", "x": 454, "y": 159, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410050, "version": 1, "versionNonce": 410051, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p2", "x": 454, "y": 414, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410052, "version": 1, "versionNonce": 410053, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p3", "x": 454, "y": 669, "width": 12, "height": 12,
+      "strokeColor": "#047857", "backgroundColor": "#047857", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410054, "version": 1, "versionNonce": 410055, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p4", "x": 974, "y": 159, "width": 12, "height": 12,
+      "strokeColor": "#047857", "backgroundColor": "#047857", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410056, "version": 1, "versionNonce": 410057, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p5", "x": 974, "y": 414, "width": 12, "height": 12,
+      "strokeColor": "#047857", "backgroundColor": "#047857", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410058, "version": 1, "versionNonce": 410059, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p6", "x": 974, "y": 669, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410060, "version": 1, "versionNonce": 410061, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+
+    {
+      "type": "text", "id": "p1_title", "x": -160, "y": 135, "width": 600, "height": 24,
+      "text": "Issuer Trust: Implicit", "originalText": "Issuer Trust: Implicit",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410070, "version": 1, "versionNonce": 410071, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p1_desc", "x": -160, "y": 163, "width": 600, "height": 40,
+      "text": "Unchanged — you still buy it at the booth, trust is proximity & context.",
+      "originalText": "Unchanged — you still buy it at the booth, trust is proximity & context.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410072, "version": 1, "versionNonce": 410073, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p2_title", "x": -160, "y": 390, "width": 600, "height": 24,
+      "text": "Redemption Model: Scoped", "originalText": "Redemption Model: Scoped",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410074, "version": 1, "versionNonce": 410075, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p2_desc", "x": -160, "y": 418, "width": 600, "height": 40,
+      "text": "Unchanged — still good for one item, one ride, then it's spent.",
+      "originalText": "Unchanged — still good for one item, one ride, then it's spent.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410076, "version": 1, "versionNonce": 410077, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p3_title", "x": -160, "y": 645, "width": 600, "height": 24,
+      "text": "Validity Window: Per ride", "originalText": "Validity Window: Per ride",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410078, "version": 1, "versionNonce": 410079, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p3_desc", "x": -160, "y": 673, "width": 600, "height": 40,
+      "text": "Each fresh signature is good for this one gate, right now — old ones expire.",
+      "originalText": "Each fresh signature is good for this one gate, right now — old ones expire.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410080, "version": 1, "versionNonce": 410081, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+
+    {
+      "type": "text", "id": "p4_title", "x": 1000, "y": 135, "width": 600, "height": 24,
+      "text": "Authorization: Sender-constrained", "originalText": "Authorization: Sender-constrained",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410082, "version": 1, "versionNonce": 410083, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p4_desc", "x": 1000, "y": 163, "width": 600, "height": 40,
+      "text": "Holding the ticket isn't enough — only the matching handwriting rides.",
+      "originalText": "Holding the ticket isn't enough — only the matching handwriting rides.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410084, "version": 1, "versionNonce": 410085, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p5_title", "x": 1000, "y": 390, "width": 600, "height": 24,
+      "text": "Proof of Possession: Enforced", "originalText": "Proof of Possession: Enforced",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410086, "version": 1, "versionNonce": 410087, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p5_desc", "x": 1000, "y": 418, "width": 600, "height": 40,
+      "text": "You sign at purchase, then sign again at the gate — the two must match.",
+      "originalText": "You sign at purchase, then sign again at the gate — the two must match.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410088, "version": 1, "versionNonce": 410089, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p6_title", "x": 1000, "y": 645, "width": 600, "height": 24,
+      "text": "Revocation: Still limited", "originalText": "Revocation: Still limited",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410090, "version": 1, "versionNonce": 410091, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p6_desc", "x": 1000, "y": 673, "width": 600, "height": 40,
+      "text": "Still no kill switch — but a stolen ticket is useless without your hand.",
+      "originalText": "Still no kill switch — but a stolen ticket is useless without your hand.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410092, "version": 1, "versionNonce": 410093, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    }
+  ]
+}

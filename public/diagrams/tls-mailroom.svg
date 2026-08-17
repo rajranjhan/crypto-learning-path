@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 580" font-family="ui-monospace, 'Cascadia Code', 'SFMono-Regular', Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1e3a5f"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="580" fill="#ffffff"/>
+
+  <text x="700" y="50" font-size="30" text-anchor="middle" fill="#1e40af">Why TLS? A Shared Mailroom</text>
+  <text x="700" y="82" font-size="14" text-anchor="middle" fill="#64748b">You want to send a confidential document to your bank — but the mail has to</text>
+  <text x="700" y="100" font-size="14" text-anchor="middle" fill="#64748b">pass through a shared office mailroom, where anyone can peek.</text>
+
+  <rect x="430" y="170" width="540" height="330" rx="12" fill="#fff8e1" stroke="#d97706" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="700" y="205" font-size="16" text-anchor="middle" fill="#92400e">SHARED OFFICE MAILROOM</text>
+
+  <line x1="275" y1="340" x2="1120" y2="340" stroke="#1e3a5f" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+
+  <ellipse cx="180" cy="340" rx="95" ry="65" fill="#bfdbfe" stroke="#1e40af" stroke-width="2"/>
+  <text x="180" y="338" font-size="22" text-anchor="middle" fill="#1e3a5f">YOU</text>
+  <text x="180" y="362" font-size="12" text-anchor="middle" fill="#1e40af">(Sender)</text>
+
+  <ellipse cx="1220" cy="340" rx="95" ry="65" fill="#0891b2" stroke="#164e63" stroke-width="2"/>
+  <text x="1220" y="338" font-size="22" text-anchor="middle" fill="#ffffff">BANK</text>
+  <text x="1220" y="362" font-size="12" text-anchor="middle" fill="#ffffff">(Recipient)</text>
+
+  <rect x="620" y="310" width="160" height="100" fill="#ffffff" stroke="#92400e" stroke-width="1.5"/>
+  <path d="M620,310 L700,265 L780,310" fill="none" stroke="#92400e" stroke-width="1.5"/>
+  <line x1="636" y1="322" x2="764" y2="322" stroke="#cbd5e1" stroke-width="4"/>
+  <line x1="636" y1="334" x2="764" y2="334" stroke="#cbd5e1" stroke-width="4"/>
+  <line x1="636" y1="346" x2="764" y2="346" stroke="#cbd5e1" stroke-width="4"/>
+  <line x1="636" y1="358" x2="764" y2="358" stroke="#cbd5e1" stroke-width="4"/>
+  <text x="700" y="432" font-size="12" text-anchor="middle" fill="#92400e">confidential document</text>
+
+  <ellipse cx="880" cy="270.5" rx="45" ry="22.5" fill="#ffffff" stroke="#92400e" stroke-width="2"/>
+  <circle cx="880" cy="270" r="10" fill="#92400e"/>
+  <line x1="868" y1="288" x2="770" y2="310" stroke="#92400e" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="880" y="322" font-size="12" text-anchor="middle" fill="#92400e">a coworker peeking</text>
+</svg>

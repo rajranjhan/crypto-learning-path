@@ -1,0 +1,40 @@
+{
+  "name": "informational-diagram",
+  "version": "1.0.0",
+  "description": "Generate Excalidraw diagrams that argue visually across seven styles — whiteboard, infographic, presentation, diagram, mindmap, mindmap-structured, and mockup",
+  "author": {
+    "name": "rajranjhan"
+  },
+  "license": "MIT",
+  "created": "2026-08-14",
+  "updated": "2026-08-14",
+  "keywords": [
+    "informational-diagram",
+    "excalidraw",
+    "whiteboard",
+    "infographic",
+    "presentation",
+    "diagram",
+    "mindmap",
+    "mockup",
+    "wireframe"
+  ],
+  "dependencies": {
+    "runtime": [
+      "uv",
+      "playwright"
+    ],
+    "env": [],
+    "skills": []
+  },
+  "styles": [
+    "whiteboard",
+    "infographic",
+    "presentation",
+    "diagram",
+    "mindmap",
+    "mindmap-structured",
+    "mockup"
+  ],
+  "entry": "SKILL.md"
+}

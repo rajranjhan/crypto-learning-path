@@ -1,0 +1,297 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "appState": { "viewBackgroundColor": "#ffffff", "gridSize": 20 },
+  "files": {},
+  "elements": [
+    {
+      "type": "text", "id": "title", "x": 320, "y": 24, "width": 760, "height": 40,
+      "text": "The Season Pass — a Refresh Token", "originalText": "The Season Pass — a Refresh Token",
+      "fontSize": 30, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440001, "version": 1, "versionNonce": 440002, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "subtitle", "x": 220, "y": 68, "width": 960, "height": 22,
+      "text": "You don't ride with it — you trade it at the booth for fresh ride tickets, and the booth can cancel it.",
+      "originalText": "You don't ride with it — you trade it at the booth for fresh ride tickets, and the booth can cancel it.",
+      "fontSize": 14, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440003, "version": 1, "versionNonce": 440004, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+
+    {
+      "type": "rectangle", "id": "pass_body", "x": 590, "y": 400, "width": 260, "height": 140,
+      "strokeColor": "#1e40af", "backgroundColor": "#bfdbfe", "fillStyle": "solid",
+      "strokeWidth": 2, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440010, "version": 1, "versionNonce": 440011, "isDeleted": false,
+      "groupIds": ["pass"], "boundElements": null, "link": null, "locked": false, "roundness": { "type": 3 }
+    },
+    {
+      "type": "line", "id": "pass_perf", "x": 780, "y": 408, "width": 0, "height": 124,
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "dashed", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440012, "version": 1, "versionNonce": 440013, "isDeleted": false,
+      "groupIds": ["pass"], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [0, 124]]
+    },
+    {
+      "type": "text", "id": "pass_admit", "x": 600, "y": 414, "width": 170, "height": 18,
+      "text": "SEASON PASS", "originalText": "SEASON PASS",
+      "fontSize": 12, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440014, "version": 1, "versionNonce": 440015, "isDeleted": false,
+      "groupIds": ["pass"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "pass_word", "x": 600, "y": 436, "width": 170, "height": 30,
+      "text": "REFRESH", "originalText": "REFRESH",
+      "fontSize": 28, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle",
+      "strokeColor": "#1e3a5f", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440016, "version": 1, "versionNonce": 440017, "isDeleted": false,
+      "groupIds": ["pass"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "pass_use", "x": 596, "y": 472, "width": 178, "height": 12,
+      "text": "trade at booth for a ride ticket", "originalText": "trade at booth for a ride ticket",
+      "fontSize": 9, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440018, "version": 1, "versionNonce": 440019, "isDeleted": false,
+      "groupIds": ["pass"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "pass_serial", "x": 600, "y": 500, "width": 170, "height": 18,
+      "text": "Pass No. 88-231", "originalText": "Pass No. 88-231",
+      "fontSize": 12, "fontFamily": 3, "textAlign": "center", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440020, "version": 1, "versionNonce": 440021, "isDeleted": false,
+      "groupIds": ["pass"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "pass_stub", "x": 790, "y": 456, "width": 56, "height": 28,
+      "text": "↺", "originalText": "↺",
+      "fontSize": 26, "fontFamily": 3, "textAlign": "center", "verticalAlign": "middle",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440022, "version": 1, "versionNonce": 440023, "isDeleted": false,
+      "groupIds": ["pass"], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+
+    {
+      "type": "line", "id": "line_p1", "x": 590, "y": 430, "width": 130, "height": 265,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440030, "version": 1, "versionNonce": 440031, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [-130, -265]]
+    },
+    {
+      "type": "line", "id": "line_p2", "x": 590, "y": 470, "width": 130, "height": 50,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440032, "version": 1, "versionNonce": 440033, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [-130, -50]]
+    },
+    {
+      "type": "line", "id": "line_p3", "x": 590, "y": 510, "width": 130, "height": 165,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440034, "version": 1, "versionNonce": 440035, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [-130, 165]]
+    },
+    {
+      "type": "line", "id": "line_p4", "x": 850, "y": 430, "width": 130, "height": 265,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440036, "version": 1, "versionNonce": 440037, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [130, -265]]
+    },
+    {
+      "type": "line", "id": "line_p5", "x": 850, "y": 470, "width": 130, "height": 50,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440038, "version": 1, "versionNonce": 440039, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [130, -50]]
+    },
+    {
+      "type": "line", "id": "line_p6", "x": 850, "y": 510, "width": 130, "height": 165,
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440040, "version": 1, "versionNonce": 440041, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false,
+      "points": [[0, 0], [130, 165]]
+    },
+
+    {
+      "type": "ellipse", "id": "dot_p1", "x": 454, "y": 159, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440050, "version": 1, "versionNonce": 440051, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p2", "x": 454, "y": 414, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440052, "version": 1, "versionNonce": 440053, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p3", "x": 454, "y": 669, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440054, "version": 1, "versionNonce": 440055, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p4", "x": 974, "y": 159, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440056, "version": 1, "versionNonce": 440057, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p5", "x": 974, "y": 414, "width": 12, "height": 12,
+      "strokeColor": "#3b82f6", "backgroundColor": "#3b82f6", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440058, "version": 1, "versionNonce": 440059, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+    {
+      "type": "ellipse", "id": "dot_p6", "x": 974, "y": 669, "width": 12, "height": 12,
+      "strokeColor": "#047857", "backgroundColor": "#047857", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440060, "version": 1, "versionNonce": 440061, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false
+    },
+
+    {
+      "type": "text", "id": "p1_title", "x": -160, "y": 135, "width": 600, "height": 24,
+      "text": "Issuer Trust: Implicit", "originalText": "Issuer Trust: Implicit",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440070, "version": 1, "versionNonce": 440071, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p1_desc", "x": -160, "y": 163, "width": 600, "height": 44,
+      "text": "You get it from the booth alongside your first ride ticket.",
+      "originalText": "You get it from the booth alongside your first ride ticket.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440072, "version": 1, "versionNonce": 440073, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p2_title", "x": -160, "y": 390, "width": 600, "height": 24,
+      "text": "Redemption Model: Renewable", "originalText": "Redemption Model: Renewable",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440074, "version": 1, "versionNonce": 440075, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p2_desc", "x": -160, "y": 418, "width": 600, "height": 44,
+      "text": "Trade it at the booth for a fresh ride ticket, again and again.",
+      "originalText": "Trade it at the booth for a fresh ride ticket, again and again.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440076, "version": 1, "versionNonce": 440077, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p3_title", "x": -160, "y": 645, "width": 600, "height": 24,
+      "text": "Validity Window: Long-lived", "originalText": "Validity Window: Long-lived",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440078, "version": 1, "versionNonce": 440079, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p3_desc", "x": -160, "y": 673, "width": 600, "height": 44,
+      "text": "Lasts far longer than a ride ticket — days or weeks, not one visit.",
+      "originalText": "Lasts far longer than a ride ticket — days or weeks, not one visit.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "right", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440080, "version": 1, "versionNonce": 440081, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+
+    {
+      "type": "text", "id": "p4_title", "x": 1000, "y": 135, "width": 600, "height": 24,
+      "text": "Authorization: Bearer", "originalText": "Authorization: Bearer",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440082, "version": 1, "versionNonce": 440083, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p4_desc", "x": 1000, "y": 163, "width": 560, "height": 44,
+      "text": "Whoever holds it can trade it; rotation swaps it on each use.",
+      "originalText": "Whoever holds it can trade it; rotation swaps it on each use.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440084, "version": 1, "versionNonce": 440085, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p5_title", "x": 1000, "y": 390, "width": 600, "height": 24,
+      "text": "Proof of Possession: None", "originalText": "Proof of Possession: None",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440086, "version": 1, "versionNonce": 440087, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p5_desc", "x": 1000, "y": 418, "width": 560, "height": 44,
+      "text": "By default just held; it can be bound like the ride ticket for more safety.",
+      "originalText": "By default just held; it can be bound like the ride ticket for more safety.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#64748b", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440088, "version": 1, "versionNonce": 440089, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p6_title", "x": 1000, "y": 645, "width": 600, "height": 24,
+      "text": "Revocation: Supported", "originalText": "Revocation: Supported",
+      "fontSize": 19, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440090, "version": 1, "versionNonce": 440091, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    },
+    {
+      "type": "text", "id": "p6_desc", "x": 1000, "y": 673, "width": 560, "height": 44,
+      "text": "The booth keeps a record and can cancel your pass anytime — its big upgrade.",
+      "originalText": "The booth keeps a record and can cancel your pass anytime — its big upgrade.",
+      "fontSize": 13, "fontFamily": 3, "textAlign": "left", "verticalAlign": "top",
+      "strokeColor": "#047857", "backgroundColor": "transparent", "fillStyle": "solid",
+      "strokeWidth": 1, "strokeStyle": "solid", "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 440092, "version": 1, "versionNonce": 440093, "isDeleted": false,
+      "groupIds": [], "boundElements": null, "link": null, "locked": false, "containerId": null, "lineHeight": 1.25
+    }
+  ]
+}

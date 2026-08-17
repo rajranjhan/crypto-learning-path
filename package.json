@@ -1,0 +1,19 @@
+{
+    "name": "on-the-wire",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc &&vite build",
+        "preview": "vite preview",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "devDependencies": {
+        "jsdom": "^25.0.0",
+        "typescript": "^5.9.3",
+        "vite": "^4.0.0",
+        "vitest": "^0.28.5"
+    }
+}

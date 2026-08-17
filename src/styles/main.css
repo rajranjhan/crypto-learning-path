@@ -1,0 +1,128 @@
+:root {
+  --bg: #ffffff; --fg: #1a1a1a; --muted: #6b7280;
+  --sidebar-bg: #f7f7f8; --border: #e5e7eb; --accent: #2563eb;
+  --hex-bg: #1e1e1e; --hex-fg: #eaeaea; --callout-bg: #fff8e1; --callout-border: #ffd54f;
+  --c-rec: #8ecae6; --c-ver: #219ebc; --c-len: #ffb703; --c-hs: #fb8500;
+  --c-rand: #8338ec; --c-cipher: #06d6a0;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; color: var(--fg); background: var(--bg); }
+.shell { display: flex; min-height: 100vh; }
+.sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border); padding: 16px; }
+.sidebar-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--fg); margin-bottom: 20px; }
+.sidebar-brand-icon { border-radius: 6px; flex: none; }
+.sidebar-brand-name { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
+.sidebar-title { font-weight: 700; text-transform: uppercase; font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+.lesson-group { margin-bottom: 4px; }
+.lesson-item { display: block; padding: 8px 10px; border-radius: 6px; text-decoration: none; color: var(--fg); font-size: 14px; }
+.lesson-header { width: 100%; text-align: left; background: none; border: none; font: inherit; color: var(--fg); cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.lesson-header.active { background: var(--accent); color: #fff; }
+.lesson-header .caret { font-size: 11px; width: 12px; flex: none; }
+.lesson-header .lesson-label { flex: 1; }
+.lesson-item.coming-soon { color: var(--muted); opacity: 0.6; cursor: default; }
+.lesson-steps { margin: 2px 0 6px 14px; border-left: 1px solid var(--border); padding-left: 8px; }
+.step-item { display: block; padding: 5px 8px; border-radius: 5px; text-decoration: none; color: var(--fg); font-size: 13px; }
+.step-item:hover { background: #eef2ff; }
+.step-item.active { background: var(--accent); color: #fff; }
+.step-item.overview-item { font-weight: 600; }
+.content { flex: 1; padding: 24px 32px; max-width: 1000px; }
+.step-columns { display: flex; gap: 24px; margin: 16px 0; }
+.step-left { flex: 1.2; } .step-right { flex: 1; }
+.hexdump { font-family: ui-monospace, monospace; font-size: 14px; line-height: 2; background: var(--hex-bg); color: var(--hex-fg); padding: 14px; border-radius: 8px; word-break: break-all; }
+.hex-byte { padding: 1px 2px; border-radius: 3px; cursor: pointer; }
+.hex-byte.active { outline: 2px solid #fff; }
+.hex-byte.c-rec { background: var(--c-rec); color: #000; }
+.hex-byte.c-ver { background: var(--c-ver); color: #fff; }
+.hex-byte.c-len { background: var(--c-len); color: #000; }
+.hex-byte.c-hs { background: var(--c-hs); color: #000; }
+.hex-byte.c-rand { background: var(--c-rand); color: #fff; }
+.hex-byte.c-cipher { background: var(--c-cipher); color: #000; }
+.annotation { padding: 6px 10px; border-left: 3px solid var(--border); margin-bottom: 6px; font-size: 13px; cursor: pointer; }
+.annotation.active { border-left-color: var(--accent); background: #eef2ff; }
+.callouts { margin-top: 16px; }
+.callout { background: var(--callout-bg); border: 1px solid var(--callout-border); border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; }
+.callout-head { margin-bottom: 4px; }
+.callout-req { display: inline-block; background: #333; color: #fff; font-size: 11px; padding: 1px 6px; border-radius: 4px; margin-right: 8px; }
+.stepper { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.stepper button { padding: 8px 14px; border: 1px solid var(--border); background: #fff; border-radius: 6px; cursor: pointer; }
+.stepper button:disabled { opacity: 0.4; cursor: default; }
+.prose { line-height: 1.6; margin: 0 0 16px; }
+.prose p { margin: 0 0 12px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--accent); font-weight: 600; }
+.step-bullets { margin: 0 0 16px; padding-left: 22px; line-height: 1.7; font-size: 14px; }
+.step-bullets li { margin-bottom: 3px; }
+
+/* Overview + flow diagram (also used by concept steps in the step view) */
+.overview .diagram, .step-view .diagram { margin: 20px 0; padding: 20px; background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 8px; }
+.flow { display: flex; align-items: stretch; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.flow .node { flex: 1; min-width: 120px; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; }
+.flow .node-proxy { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(37,99,235,0.15); }
+.flow .node-title { font-weight: 700; font-size: 14px; }
+.flow .node-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.flow .link { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 90px; color: var(--muted); font-size: 12px; }
+.flow .link .lock { font-size: 18px; }
+.flow .link .arrow { font-size: 20px; color: var(--accent); }
+.diagram-img { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+.diagram-note { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 14px 0 0; }
+.overview-steps { margin: 16px 0; padding-left: 22px; line-height: 1.9; }
+.overview-steps a { color: var(--accent); text-decoration: none; }
+.overview-steps a:hover { text-decoration: underline; }
+.start-link { display: inline-block; margin-top: 8px; padding: 10px 16px; background: var(--accent); color: #fff; border-radius: 6px; text-decoration: none; font-size: 14px; }
+
+/* Sequence diagram — UML lifelines with icon heads, horizontal message arrows,
+   and dotted self-loops for internal actions. Consistent actor columns per
+   lesson (see src/lessons/actors.ts) keep the flow readable step-to-step. */
+.sequence { margin: 20px 0; padding: 16px 16px 20px; background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 8px; overflow-x: auto; }
+
+/* Actor heads. */
+.seq-actors { display: grid; grid-template-columns: repeat(var(--seq-cols), 1fr); gap: 12px; margin-bottom: 6px; }
+.seq-actor { display: flex; flex-direction: column; align-items: center; gap: 4px; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 8px 6px; text-align: center; }
+.seq-actor-icon { font-size: 22px; line-height: 1; }
+.seq-actor-label { font-weight: 700; font-size: 12px; }
+
+/* Message area: lifelines painted behind, messages in front. */
+.seq-body { position: relative; }
+.seq-lifelines { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(var(--seq-cols), 1fr); pointer-events: none; }
+.seq-life { position: relative; }
+.seq-life::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); border-left: 2px solid var(--border); }
+
+.seq-messages { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 22px; padding: 20px 0 4px; }
+.seq-row { display: grid; grid-template-columns: repeat(calc(var(--seq-cols) * 2), 1fr); align-items: end; min-height: 34px; }
+
+/* Cross-actor arrow: a horizontal rule spanning center→center, label above it. */
+.seq-arrow { position: relative; padding-bottom: 12px; min-width: 0; }
+.seq-arrow::after { content: ""; position: absolute; left: 0; right: 0; bottom: 5px; border-top: 2px solid var(--accent); }
+.seq-arrow-right::before, .seq-arrow-left::before { content: ""; position: absolute; bottom: 6px; transform: translateY(50%); border: 6px solid transparent; }
+.seq-arrow-right::before { right: -1px; border-left-color: var(--accent); border-right-width: 0; }
+.seq-arrow-left::before { left: -1px; border-right-color: var(--accent); border-left-width: 0; }
+.seq-caption { display: block; text-align: center; font-size: 12px; padding: 0 8px; }
+
+/* Self-loop: dotted, rounded badge over the actor's own lifeline. */
+.seq-self { justify-self: center; max-width: 220px; background: #fff; border: 1.5px dashed var(--accent); border-radius: 10px; padding: 6px 10px; text-align: center; font-size: 12px; }
+.seq-self::before { content: "↻ "; color: var(--accent); font-weight: 700; }
+
+.seq-num { display: inline-block; min-width: 18px; height: 18px; line-height: 18px; text-align: center; background: var(--accent); color: #fff; border-radius: 50%; font-size: 11px; margin-right: 6px; }
+.seq-label { font-weight: 600; }
+.seq-note { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+
+/* Highlight = the message this step is about. */
+.seq-highlight .seq-arrow::after { border-color: var(--c-hs); border-top-width: 3px; }
+.seq-highlight .seq-arrow-right::before { border-left-color: var(--c-hs); }
+.seq-highlight .seq-arrow-left::before { border-right-color: var(--c-hs); }
+.seq-highlight .seq-self { border-color: var(--c-hs); background: #fff8e1; }
+.seq-highlight .seq-self::before { color: var(--c-hs); }
+.seq-highlight .seq-num { background: var(--c-hs); color: #000; }
+.seq-highlight .seq-label { color: #92600a; }
+
+/* Annotated text block (JWT / JSON / HTTP) — mirrors the hexdump columns. */
+.text-block { font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--hex-bg); color: var(--hex-fg); padding: 14px; border-radius: 8px; margin: 0; white-space: pre-wrap; word-break: break-word; }
+.text-block .tb-line { display: block; padding: 0 4px; border-radius: 3px; }
+.text-block .tb-line[data-annotation] { cursor: pointer; }
+.text-block .tb-line.active { outline: 2px solid #fff; }
+.text-block .tb-line.c-rec { background: var(--c-rec); color: #000; }
+.text-block .tb-line.c-ver { background: var(--c-ver); color: #fff; }
+.text-block .tb-line.c-len { background: var(--c-len); color: #000; }
+.text-block .tb-line.c-hs { background: var(--c-hs); color: #000; }
+.text-block .tb-line.c-rand { background: var(--c-rand); color: #fff; }
+.text-block .tb-line.c-cipher { background: var(--c-cipher); color: #000; }
