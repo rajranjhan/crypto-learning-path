@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 
 // These are the exact bytes of a real TLS 1.3 ServerHello record, prefixed with
 // its 5-byte record header "16 03 03 00 9b". The record length (0x009b = 155)
@@ -144,4 +145,5 @@ export const serverHello: Step = {
     "The single cipher suite selected from the client's list",
     "The server's ephemeral public key in the key_share extension",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 2),
 };

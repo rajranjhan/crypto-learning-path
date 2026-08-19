@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 
 // Byte source: captured live on 2026-07-10 via
 //   `openssl s_client -connect example.com:443 -tls1_2 -msg -state`
@@ -54,4 +55,5 @@ export const serverHelloDone: Step = {
     "A zero-length message indicating the server has finished its handshake messages",
     "Signals that it is now the client's turn to respond",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 5),
 };

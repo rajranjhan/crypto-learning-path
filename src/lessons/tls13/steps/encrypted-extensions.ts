@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 
 // On the wire this record's content type is 0x17 (application_data) and its body
 // is AEAD-encrypted under the handshake traffic keys, so a capture shows only
@@ -73,4 +74,5 @@ export const encryptedExtensions: Step = {
     "On the wire it looks like application_data (0x17), hiding it from eavesdroppers and middleboxes",
     "In TLS 1.2 these parameters were sent in the clear ServerHello",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 4),
 };

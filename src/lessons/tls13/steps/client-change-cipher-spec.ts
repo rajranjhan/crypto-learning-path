@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 
 // A 6-byte ChangeCipherSpec record from the client: header "14 03 03 00 01" plus
 // the single payload byte 0x01. As with the server's, this is a legacy no-op in
@@ -47,4 +48,5 @@ export const clientChangeCipherSpec: Step = {
     "Sent only for middlebox compatibility, mirroring the server's record",
     "The client already switched to encrypted records after the ServerHello key_share",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 8),
 };

@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 
 // A 6-byte ChangeCipherSpec record: header "14 03 03 00 01" plus the single
 // payload byte 0x01. In TLS 1.3 this record carries no meaning — it is a legacy
@@ -49,4 +50,5 @@ export const serverChangeCipherSpec: Step = {
     "Sent only for middlebox compatibility, so the flow resembles TLS 1.2",
     "The real key switch already happened after the ServerHello key_share",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 3),
 };

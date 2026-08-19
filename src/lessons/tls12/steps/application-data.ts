@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 
 // Byte source: captured live on 2026-07-10 with a Python `ssl` memory-BIO
 // client (TLS 1.2 pinned) against example.com:443. These are the exact on-wire
@@ -61,6 +62,7 @@ export const applicationData: Step = {
     "An authentication tag making the record tamper-evident",
     "To anyone on the wire it is indistinguishable from random data",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 9),
   callouts: [
     {
       requirementId: "At rest",

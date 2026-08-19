@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 
 // Byte source: captured live on 2026-07-10 with
 //   `openssl s_client -connect example.com:443 -tls1_2 -msg -state`
@@ -159,6 +160,7 @@ export const clientHello: Step = {
     "The list of compression methods (none used)",
     "A list of extensions (SNI, signature algorithms, supported curves, etc.)",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 1),
   callouts: [
     {
       requirementId: "Versions",

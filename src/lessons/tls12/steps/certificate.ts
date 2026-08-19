@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 
 // Byte source: captured live on 2026-07-10 with a Python `ssl` memory-BIO
 // client (TLS 1.2 pinned) against example.com:443. The exact DER of the leaf
@@ -183,6 +184,7 @@ export const certificate: Step = {
     "The server's public key for asymmetric cryptography",
     "A certificate chain whose signature validates ownership",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 3),
   callouts: [
     {
       requirementId: "mTLS",

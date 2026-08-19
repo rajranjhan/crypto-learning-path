@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 
 // These are the exact bytes of a real TLS 1.3 ClientHello record, prefixed with
 // its 5-byte record header "16 03 03 01 15". The record length (0x0115 = 277)
@@ -172,6 +173,7 @@ export const clientHello: Step = {
     "The TLS 1.3 AEAD cipher suites the client will accept",
     "The key_share extension carrying the client's ephemeral public key",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 1),
   callouts: [
     {
       requirementId: "Versions",

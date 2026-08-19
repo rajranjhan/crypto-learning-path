@@ -61,10 +61,13 @@ export function renderStepView(step: Step): HTMLElement {
     view.appendChild(list);
   }
 
-  // Concept steps carry no wire bytes: render their sequence diagram, authored
-  // diagram, and/or annotated text block, and skip the hexdump columns entirely.
+  // A sequence diagram, when present, always sits above the byte-level view —
+  // it's the "who sent what to whom" context for the hexdump that follows.
+  if (step.sequence) view.appendChild(renderSequence(step.sequence));
+
+  // Concept steps carry no wire bytes: render their authored diagram and/or
+  // annotated text block, and skip the hexdump columns entirely.
   if (!step.bytes?.length) {
-    if (step.sequence) view.appendChild(renderSequence(step.sequence));
     if (step.diagram) {
       const diagram = document.createElement("div");
       diagram.className = "diagram";

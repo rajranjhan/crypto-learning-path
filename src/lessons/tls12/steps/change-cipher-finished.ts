@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 
 // Byte source: captured live on 2026-07-10 with a Python `ssl` memory-BIO
 // client (TLS 1.2 pinned) against example.com:443,
@@ -89,4 +90,5 @@ export const changeCipherFinished: Step = {
     "The Finished body is the first message encrypted with the new keys, so it is opaque ciphertext",
     "Each side sends its own pair; verifying the peer's Finished proves both agreed on keys and nobody altered the negotiation",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 8, 2),
 };

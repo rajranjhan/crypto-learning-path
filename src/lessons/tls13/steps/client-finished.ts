@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 
 // On the wire this record is content type 0x17 (application_data), AEAD-encrypted
 // under the CLIENT's handshake traffic keys. What follows the 5-byte record
@@ -70,4 +71,5 @@ export const clientFinished: Step = {
     "Completes mutual confirmation that both ends derived identical keys",
     "Sent in the client's first return flight, enabling a one round-trip handshake",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 9),
 };

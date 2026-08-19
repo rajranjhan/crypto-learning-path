@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 
 // On the wire this record's content type is 0x17 (application_data) and its body
 // is AEAD-encrypted under the handshake traffic keys — a capture shows only
@@ -197,6 +198,7 @@ export const serverCertificate: Step = {
     "Now encrypted under the handshake traffic keys — unlike TLS 1.2, where the certificate was sent in the clear",
     "Adds a per-certificate extensions field (e.g. for OCSP stapling)",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 5),
   callouts: [
     {
       requirementId: "mTLS",

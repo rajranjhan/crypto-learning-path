@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 
 // These are the exact on-wire bytes of the first Application Data record sent
 // after the handshake (an encrypted "GET / HTTP/1.1" request), protected with
@@ -58,6 +59,7 @@ export const applicationData: Step = {
     "An authentication tag making the record tamper-evident",
     "To anyone on the wire it is indistinguishable from random data",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 10),
   callouts: [
     {
       requirementId: "At rest",

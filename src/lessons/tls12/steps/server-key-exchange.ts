@@ -1,4 +1,5 @@
 import type { Step } from "../../../types";
+import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 
 // Byte source: captured live on 2026-07-10 with
 //   `openssl s_client -connect example.com:443 -tls1_2 -msg -state`
@@ -140,4 +141,5 @@ export const serverKeyExchange: Step = {
     "The server's ephemeral ECDH public key (65 bytes)",
     "An RSA signature over the parameters, proving certificate ownership",
   ],
+  sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 4),
 };
