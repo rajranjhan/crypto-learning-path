@@ -3,6 +3,7 @@ import { clientTypes } from "./steps/client-types";
 import { stateAndRedirectUri } from "./steps/state-and-redirect-uri";
 import { scopes } from "./steps/scopes";
 import { claims } from "./steps/claims";
+import { confusedDeputy } from "./steps/confused-deputy";
 import { audienceRestriction } from "./steps/audience-restriction";
 import { oauthVsOidc } from "./steps/oauth-vs-oidc";
 import { entitlements } from "./steps/entitlements";
@@ -25,6 +26,7 @@ export const oauthFurtherLearningLesson: Lesson = {
     scopes,
     entitlements,
     claims,
+    confusedDeputy,
     audienceRestriction,
     oauthVsOidc,
   ],

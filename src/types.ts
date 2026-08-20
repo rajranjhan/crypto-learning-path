@@ -73,6 +73,22 @@ export interface Step {
   /** Optional sequence diagram (actors + ordered messages). */
   sequence?: Sequence;
   callouts?: Callout[];
+  /**
+   * Ids of other steps in the same lesson (e.g. concrete examples) to nest
+   * under this one in the sidebar, indented beneath it. Referenced steps
+   * still appear in `Lesson.steps` at their natural position — routing, the
+   * stepper, and step numbering are unaffected; this only changes how the
+   * sidebar groups them visually.
+   */
+  subSteps?: string[];
+  /**
+   * Short label shown as a small heading in the sidebar directly above this
+   * step, when rendered as a nested sub-step (see `subSteps`) and its group
+   * differs from the previous sibling's — e.g. separating "Classical
+   * Ciphers" from "Modern Symmetric Ciphers" within Symmetric Encryption's
+   * sub-steps. Has no effect on a step rendered at the top level.
+   */
+  sidebarGroup?: string;
 }
 
 export interface Lesson {

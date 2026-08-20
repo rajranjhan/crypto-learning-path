@@ -94,3 +94,34 @@ export const OAUTH_ACTORS_WITH_USER: SequenceActor[] = [
   { id: "as", label: "Authorization Server (Ticket Booth)", icon: "🎫" },
   { id: "rs", label: "Resource Server (Ferris Wheel)", icon: "🎡" },
 ];
+
+/**
+ * You → the Staff House's two windows → a backstage door, used by every
+ * Kerberos step. The AS and TGS are physically one building (the KDC) but get
+ * separate lifelines because they play distinct roles in the exchange — the
+ * same way real Kerberos message flows are drawn. Carries the lesson's
+ * "backstage badge, not guest ticket" metaphor: OAuth's actors sell guests a
+ * ride ticket; these actors badge staff through backstage doors.
+ */
+export const KERBEROS_ACTORS: SequenceActor[] = [
+  { id: "user", label: "You (staff)", icon: "🧑" },
+  { id: "as", label: "Staff House — Check-In (AS)", icon: "🪪" },
+  { id: "tgs", label: "Staff House — Backstage Desk (TGS)", icon: "🎟️" },
+  { id: "door", label: "Backstage Door (Service)", icon: "🚪" },
+];
+
+/**
+ * Full ordered message list for one day's Kerberos exchange (AS, then TGS,
+ * then AP) — 6 messages across the 3 exchange steps. Built once and sliced
+ * with `buildSequence` (below) so each step shows the whole conversation so
+ * far with only its own messages highlighted, the same cumulative pattern
+ * TLS12_MESSAGES/TLS13_MESSAGES use.
+ */
+export const KERBEROS_MESSAGES: SequenceMessage[] = [
+  { from: "user", to: "as", label: "AS-REQ — \"It's me, right now\"", note: "a timestamp sealed with a key derived from your password (pre-authentication)" },
+  { from: "as", to: "user", label: "AS-REP — Day Badge + shift code word", note: "badge sealed with the Staff House's own master seal; code word sealed with your key" },
+  { from: "user", to: "tgs", label: "TGS-REQ — Day Badge + Authenticator", note: "authenticator: a fresh timestamp sealed with the shift code word" },
+  { from: "tgs", to: "user", label: "TGS-REP — Door Pass + door code word", note: "pass sealed with that door's own secret; code word sealed with your shift code word" },
+  { from: "user", to: "door", label: "AP-REQ — Door Pass + Authenticator", note: "authenticator: a fresh timestamp sealed with the door code word" },
+  { from: "door", to: "user", label: "AP-REP — timestamp + 1, sealed with the door code word", note: "optional: proves the door itself is genuine (mutual authentication)" },
+];

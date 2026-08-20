@@ -29,6 +29,16 @@ body { margin: 0; font-family: system-ui, sans-serif; color: var(--fg); backgrou
 .step-item:hover { background: #eef2ff; }
 .step-item.active { background: var(--accent); color: #fff; }
 .step-item.overview-item { font-weight: 600; }
+
+/* A step that nests other steps under it in the sidebar (see Step.subSteps) —
+   e.g. concrete cipher examples grouped under a concept step. */
+.step-group-header { display: flex; align-items: center; gap: 2px; }
+.step-group-header .step-item { flex: 1; }
+.step-caret { background: none; border: none; cursor: pointer; padding: 0; width: 14px; flex: none; font-size: 11px; color: var(--muted); }
+.sub-steps { margin: 2px 0 4px 18px; border-left: 1px solid var(--border); padding-left: 8px; }
+.sub-steps .step-item { font-size: 12px; }
+.sub-steps-heading { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 6px 0 2px; padding-left: 2px; }
+.sub-steps-heading:first-child { margin-top: 0; }
 .content { flex: 1; padding: 24px 32px; max-width: 1000px; }
 .step-columns { display: flex; gap: 24px; margin: 16px 0; }
 .step-left { flex: 1.2; } .step-right { flex: 1; }

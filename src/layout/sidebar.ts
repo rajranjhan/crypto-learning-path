@@ -1,4 +1,4 @@
-import type { Lesson, RegistryEntry } from "../types";
+import type { Lesson, RegistryEntry, Step } from "../types";
 
 export interface SidebarState {
   /** Slug of the lesson currently being viewed. */
@@ -36,6 +36,83 @@ function groupByCategory(entries: RegistryEntry[]): SidebarRow[] {
     }
   }
   return rows;
+}
+
+/**
+ * Render one top-level step that nests other steps beneath it in the sidebar
+ * (see `Step.subSteps`) — a caret toggles the nested list, while the step's
+ * own title stays a normal link so its content is still reachable. Expanded
+ * by default whenever the active step is this step or one of its children.
+ */
+function renderStepGroup(
+  parent: Step,
+  parentIndex: number,
+  displayNumber: number,
+  slug: string,
+  lesson: Lesson,
+  lessonActive: boolean,
+  state: SidebarState,
+): HTMLElement {
+  const group = document.createElement("div");
+  group.className = "step-group";
+
+  const childIndexes = (parent.subSteps ?? [])
+    .map((id) => lesson.steps.findIndex((s) => s.id === id))
+    .filter((i) => i !== -1);
+
+  const isParentActive = lessonActive && state.activeStep === parentIndex;
+  const containsActiveChild = lessonActive && typeof state.activeStep === "number" && childIndexes.includes(state.activeStep);
+  let expanded = isParentActive || containsActiveChild;
+
+  const headerRow = document.createElement("div");
+  headerRow.className = "step-group-header";
+
+  const caret = document.createElement("button");
+  caret.type = "button";
+  caret.className = "step-caret";
+  caret.setAttribute("aria-label", "Toggle sub-steps");
+  caret.textContent = expanded ? "▾" : "▸";
+  headerRow.appendChild(caret);
+
+  const link = document.createElement("a");
+  link.className = "step-item" + (isParentActive ? " active" : "");
+  link.href = `#/lesson/${slug}/${parentIndex}`;
+  link.textContent = `${displayNumber}. ${parent.title}`;
+  headerRow.appendChild(link);
+
+  group.appendChild(headerRow);
+
+  const subList = document.createElement("div");
+  subList.className = "sub-steps";
+  subList.hidden = !expanded;
+  let lastGroup: string | undefined;
+  childIndexes.forEach((ci) => {
+    const child = lesson.steps[ci];
+    // A sub-step's `sidebarGroup` starts a new small heading whenever it
+    // differs from the previous sibling's, so related sub-steps (e.g. every
+    // "Classical Cipher") visually cluster without needing another level of
+    // Step nesting.
+    if (child.sidebarGroup && child.sidebarGroup !== lastGroup) {
+      const heading = document.createElement("div");
+      heading.className = "sub-steps-heading";
+      heading.textContent = child.sidebarGroup;
+      subList.appendChild(heading);
+      lastGroup = child.sidebarGroup;
+    }
+    const childLink = document.createElement("a");
+    childLink.className = "step-item" + (lessonActive && state.activeStep === ci ? " active" : "");
+    childLink.href = `#/lesson/${slug}/${ci}`;
+    childLink.textContent = `· ${child.title}`;
+    subList.appendChild(childLink);
+  });
+  group.appendChild(subList);
+
+  caret.addEventListener("click", () => {
+    subList.hidden = !subList.hidden;
+    caret.textContent = subList.hidden ? "▸" : "▾";
+  });
+
+  return group;
 }
 
 /** Render one lesson's collapsible header + step list (used at any nesting depth). */
@@ -84,12 +161,25 @@ function renderLessonGroup(
     overview.textContent = "Overview";
     sub.appendChild(overview);
 
+    // Steps referenced by another step's `subSteps` render nested under their
+    // parent instead of as their own top-level entry; the visible "N." count
+    // only advances for top-level entries, so numbering has no gaps.
+    const childIds = new Set(lesson.steps.flatMap((s) => s.subSteps ?? []));
+    let displayNumber = 0;
     lesson.steps.forEach((s, si) => {
+      if (childIds.has(s.id)) return;
+      displayNumber += 1;
+
+      if (s.subSteps?.length) {
+        sub.appendChild(renderStepGroup(s, si, displayNumber, entry.slug, lesson, isActive, state));
+        return;
+      }
+
       const stepLink = document.createElement("a");
       stepLink.className =
         "step-item" + (isActive && state.activeStep === si ? " active" : "");
       stepLink.href = `#/lesson/${entry.slug}/${si}`;
-      stepLink.textContent = `${si + 1}. ${s.title}`;
+      stepLink.textContent = `${displayNumber}. ${s.title}`;
       sub.appendChild(stepLink);
     });
 

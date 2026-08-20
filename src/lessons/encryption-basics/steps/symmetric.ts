@@ -39,4 +39,5 @@ export const symmetric: Step = {
       they shared that key.
     </p>
   `,
+  subSteps: ["substitution", "caesar", "block", "stream"],
 };

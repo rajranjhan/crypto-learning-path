@@ -13,13 +13,16 @@ export const asymmetric: Step = {
     "Because the locking key and the unlocking key are different, you no longer " +
     "need to secretly share a single key first — anyone can send you something " +
     "only you can read. The trade-off is that this padlock is slow and clumsy for " +
-    "large amounts of data, so it's used sparingly.",
+    "large amounts of data, so it's used sparingly. It's also not the only trick " +
+    "asymmetric math can do — the next step shows a stranger one: deriving a " +
+    "shared secret without ever sending it.",
   bullets: [
     "Two matching keys: a public one (locks) and a private one (unlocks)",
     "The public key can be shared with anyone — no secret handoff needed",
     "Only the private key can open what the public key locked",
     "Slower than symmetric, so it's used only for small, critical steps",
   ],
+  subSteps: ["diffie-hellman"],
   diagram: `
     <div class="flow">
       <div class="node">

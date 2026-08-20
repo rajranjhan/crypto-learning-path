@@ -8,4 +8,5 @@ export const registry: RegistryEntry[] = [
   { slug: "oauth", title: "Fundamentals", status: "available", category: "OAuth" },
   { slug: "oauth-further-learning", title: "Further Learning", status: "available", category: "OAuth" },
   { slug: "oauth-flows", title: "Flows & Federation", status: "available", category: "OAuth" },
+  { slug: "kerberos", title: "Kerberos: Ticket-Based Authentication", status: "available" },
 ];

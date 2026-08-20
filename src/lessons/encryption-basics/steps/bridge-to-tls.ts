@@ -7,8 +7,10 @@ export const bridgeToTls: Step = {
     "Each approach solves the other's weakness. Symmetric is fast but needs a " +
     "shared secret key that's dangerous to hand over. Asymmetric solves the " +
     "handover but is too slow for real traffic. So TLS combines them: it uses the " +
-    "slow public-padlock (asymmetric) step just once, at the start, purely to " +
-    "agree on a fresh shared secret key that no eavesdropper can learn. From then " +
+    "slow asymmetric math just once, at the start, purely to " +
+    "agree on a fresh shared secret key that no eavesdropper can learn — usually " +
+    "via Diffie-Hellman, the previous step, rather than by encrypting the key " +
+    "outright with the padlock. From then " +
     "on, both sides switch to the fast shared-key lockbox (symmetric) to protect " +
     "every message. Think of it as using the padlock only to safely pass over a " +
     "brand-new key, then locking the actual conversation with that key. The TLS " +

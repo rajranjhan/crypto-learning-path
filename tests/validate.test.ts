@@ -90,6 +90,28 @@ describe("validateLesson", () => {
     };
     expect(validateLesson(lesson)).toEqual(["step-1: sequence message 'Hello' references an unknown actor"]);
   });
+
+  it("accepts subSteps that reference real steps in the same lesson", () => {
+    const lesson: Lesson = {
+      slug: "l",
+      title: "L",
+      status: "available",
+      steps: [baseStep({ subSteps: ["step-2"] }), baseStep({ id: "step-2" })],
+    };
+    expect(validateLesson(lesson)).toEqual([]);
+  });
+
+  it("flags subSteps referencing an unknown step or itself", () => {
+    const lesson: Lesson = {
+      slug: "l",
+      title: "L",
+      status: "available",
+      steps: [baseStep({ subSteps: ["ghost", "step-1"] })],
+    };
+    const errors = validateLesson(lesson);
+    expect(errors).toContain("step-1: subSteps references unknown step 'ghost'");
+    expect(errors).toContain("step-1: subSteps references itself");
+  });
 });
 
 describe("validateRegistry", () => {

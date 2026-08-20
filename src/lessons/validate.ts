@@ -2,11 +2,22 @@ import type { Lesson, RegistryEntry } from "../types";
 
 export function validateLesson(lesson: Lesson): string[] {
   const errors: string[] = [];
+  const stepIds = new Set(lesson.steps.map((s) => s.id));
   for (const step of lesson.steps) {
     // Every step needs a title and prose. Bytes/annotations are only required
     // for wire walkthroughs; concept steps legitimately omit them.
     if (!step.title || !step.prose) {
       errors.push(`${step.id}: missing required fields`);
+    }
+
+    // Sidebar sub-step grouping: every referenced id must be a real step in
+    // this lesson, and a step can't nest itself.
+    for (const childId of step.subSteps ?? []) {
+      if (childId === step.id) {
+        errors.push(`${step.id}: subSteps references itself`);
+      } else if (!stepIds.has(childId)) {
+        errors.push(`${step.id}: subSteps references unknown step '${childId}'`);
+      }
     }
     // Annotated-text steps: every annotation must point at a real line.
     if (step.textBlock) {

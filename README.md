@@ -13,6 +13,7 @@ Built with plain TypeScript and [Vite](https://vitejs.dev/) — no UI framework,
 | How TLS 1.3 Works | `tls13` |
 | Mutual TLS: Client Authentication | `mtls` |
 | OAuth 2.0: Tokens, FAPI & DPoP | `oauth` |
+| Kerberos: Ticket-Based Authentication | `kerberos` |
 
 Each lesson is a sequence of steps. A step either dissects a real wire record byte-by-byte (hexdump + hover-linked annotations) or explains a concept via prose, bullets, a sequence diagram, or an authored diagram.
 
