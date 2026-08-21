@@ -12,7 +12,7 @@ import { applicationData } from "./steps/application-data";
 
 export const tls13Lesson: Lesson = {
   slug: "tls13",
-  title: "How TLS 1.3 Works",
+  title: "TLS 1.3: One-Round-Trip Handshake",
   status: "available",
   overview:
     "Same mailroom, same problem: you want to send a confidential document to your " +

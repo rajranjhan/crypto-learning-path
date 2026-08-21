@@ -1,9 +1,14 @@
 import "./styles/main.css";
 import { registry } from "./lessons/registry";
 import { encryptionBasicsLesson } from "./lessons/encryption-basics/lesson";
+import { symmetricPrimitivesLesson } from "./lessons/symmetric-primitives/lesson";
+import { asymmetricPrimitivesLesson } from "./lessons/asymmetric-primitives/lesson";
+import { pkiLesson } from "./lessons/pki/lesson";
 import { tls12Lesson } from "./lessons/tls12/lesson";
 import { tls13Lesson } from "./lessons/tls13/lesson";
 import { mtlsLesson } from "./lessons/mtls/lesson";
+import { encryptionAtRestLesson } from "./lessons/encryption-at-rest/lesson";
+import { homomorphicEncryptionLesson } from "./lessons/homomorphic-encryption/lesson";
 import { oauthLesson } from "./lessons/oauth/lesson";
 import { oauthFurtherLearningLesson } from "./lessons/oauth-further-learning/lesson";
 import { oauthFlowsLesson } from "./lessons/oauth-flows/lesson";
@@ -18,9 +23,14 @@ import type { Lesson } from "./types";
 
 const lessons: Record<string, Lesson> = {
   "encryption-basics": encryptionBasicsLesson,
+  "symmetric-primitives": symmetricPrimitivesLesson,
+  "asymmetric-primitives": asymmetricPrimitivesLesson,
+  pki: pkiLesson,
   tls12: tls12Lesson,
   tls13: tls13Lesson,
   mtls: mtlsLesson,
+  "encryption-at-rest": encryptionAtRestLesson,
+  "homomorphic-encryption": homomorphicEncryptionLesson,
   oauth: oauthLesson,
   "oauth-further-learning": oauthFurtherLearningLesson,
   "oauth-flows": oauthFlowsLesson,

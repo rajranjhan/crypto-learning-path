@@ -125,3 +125,32 @@ export const KERBEROS_MESSAGES: SequenceMessage[] = [
   { from: "user", to: "door", label: "AP-REQ — Door Pass + Authenticator", note: "authenticator: a fresh timestamp sealed with the door code word" },
   { from: "door", to: "user", label: "AP-REP — timestamp + 1, sealed with the door code word", note: "optional: proves the door itself is genuine (mutual authentication)" },
 ];
+
+/**
+ * Application ↔ Database/Storage Engine ↔ Key Management Service, used by the
+ * Encryption at Rest lesson's sequence diagrams. Continues the TLS lessons'
+ * bank metaphor one step further: TLS seals the document while it crosses the
+ * mailroom, and these three actors are what protects it once it's filed away.
+ */
+export const REST_ACTORS: SequenceActor[] = [
+  { id: "app", label: "Application", icon: "💻" },
+  { id: "db", label: "Database / Storage Engine", icon: "🗄️" },
+  { id: "kms", label: "Key Management Service", icon: "🔐" },
+];
+
+/**
+ * Data Owner ↔ Untrusted Cloud, used by the Homomorphic Encryption lesson.
+ * Carries the lesson's own "sealed glovebox" metaphor: the owner locks data
+ * inside, the cloud works it through the gloves, and the box never opens.
+ */
+export const HE_ACTORS: SequenceActor[] = [
+  { id: "owner", label: "Data Owner", icon: "🧑" },
+  { id: "cloud", label: "Untrusted Cloud", icon: "☁️" },
+];
+
+/** Client ↔ Server ↔ Certificate Authority, used by the PKI lesson's sequence diagrams. */
+export const PKI_ACTORS: SequenceActor[] = [
+  { id: "client", label: "Client", icon: "💻" },
+  { id: "server", label: "Server", icon: "🖥️" },
+  { id: "ca", label: "Certificate Authority", icon: "🏛️" },
+];

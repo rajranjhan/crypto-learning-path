@@ -9,15 +9,16 @@ import { kerberosVsOauth } from "./steps/kerberos-vs-oauth";
 
 export const kerberosLesson: Lesson = {
   slug: "kerberos",
-  title: "Kerberos: Ticket-Based Authentication",
+  title: "Kerberos: Proving Who You Are with Tickets",
   status: "available",
   overview:
     "Kerberos is how staff on a trusted internal network — a Windows domain, a " +
     "university campus — prove who they are to dozens of internal systems without " +
     "retyping a password at every one of them, and without that password ever " +
-    "crossing the wire. This lesson uses a metaphor from the same carnival as the " +
-    "OAuth lesson, but flips it around: instead of a guest buying a ride ticket at " +
-    "the front gate, you're staff badging through backstage doors. One check-in " +
+    "crossing the wire. This lesson sets its metaphor in the same carnival the " +
+    "OAuth lessons use later in this series, but from the other side of the gate: " +
+    "instead of a guest buying a ride ticket at the front gate, you're staff " +
+    "badging through backstage doors. One check-in " +
     "each morning at the Staff House, then a fresh door-specific pass for every " +
     "backstage door you need, all day, without ever going back to say your " +
     "password again. Follow the same three lifelines — you, the Staff House's two " +

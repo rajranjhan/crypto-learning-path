@@ -10,7 +10,7 @@ import { applicationData } from "./steps/application-data";
 
 export const tls12Lesson: Lesson = {
   slug: "tls12",
-  title: "How TLS 1.2 Works",
+  title: "TLS 1.2: Two-Round-Trip Handshake",
   status: "available",
   overview:
     "You want to send a confidential document to your bank, but the mail has to " +

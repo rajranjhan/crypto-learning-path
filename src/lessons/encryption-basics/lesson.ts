@@ -10,7 +10,7 @@ import { bridgeToTls } from "./steps/bridge-to-tls";
 
 export const encryptionBasicsLesson: Lesson = {
   slug: "encryption-basics",
-  title: "Encryption Basics: Symmetric & Asymmetric",
+  title: "Encryption Basics: Symmetric & Asymmetric Keys",
   status: "available",
   overview:
     "Before diving into TLS, it helps to understand the two kinds of encryption " +

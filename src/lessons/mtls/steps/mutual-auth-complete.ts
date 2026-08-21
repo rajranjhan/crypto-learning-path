@@ -10,10 +10,11 @@ export const mutualAuthComplete: Step = {
     "exactly as ordinary TLS does. From here, encrypted application data flows over " +
     "a channel where each end knows precisely who the other is. Enterprises use " +
     "mTLS for service-to-service calls, API gateways, and zero-trust networks. " +
-    "Most importantly for the next lesson: mTLS lets an OAuth authorization server " +
-    "bind an access token to the client's certificate (RFC 8705), so a stolen token " +
-    "is useless without the client's private key. That idea — a token tied to a key " +
-    "— is exactly where the OAuth lesson picks up.",
+    "Most importantly, looking ahead to the OAuth lessons later in this series: " +
+    "mTLS lets an OAuth authorization server bind an access token to the client's " +
+    "certificate (RFC 8705), so a stolen token is useless without the client's " +
+    "private key. That idea — a token tied to a key — is exactly where the OAuth " +
+    "lessons pick up the thread.",
   bullets: [
     "Both parties are now authenticated; the handshake completes like normal TLS",
     "Used for service-to-service auth, API gateways, and zero-trust networks",
