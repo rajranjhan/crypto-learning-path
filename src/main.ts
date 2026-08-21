@@ -12,6 +12,7 @@ import { renderSidebar } from "./layout/sidebar";
 import { renderStepView } from "./components/hexdump";
 import { renderStepper } from "./components/stepper";
 import { renderOverview } from "./components/overview";
+import { renderSearch } from "./components/search";
 import { validateLesson, validateRegistry } from "./lessons/validate";
 import type { Lesson } from "./types";
 
@@ -74,17 +75,27 @@ function render(): void {
 
   if (notFound) {
     main.innerHTML = `<h2>Lesson not found</h2><p><a href="#/lesson/encryption-basics">Go to the first lesson</a>.</p>`;
-  } else if (step === "overview") {
-    main.appendChild(renderOverview(lesson));
   } else {
-    const idx = Math.max(0, Math.min(step, lesson.steps.length - 1));
-    main.appendChild(renderStepper({
-      index: idx,
-      total: lesson.steps.length,
-      onPrev: () => { location.hash = `#/lesson/${slug}/${idx - 1}`; },
-      onNext: () => { location.hash = `#/lesson/${slug}/${idx + 1}`; },
-    }));
-    main.appendChild(renderStepView(lesson.steps[idx]));
+    // Top bar of the content area: the stepper (on step pages only) on the
+    // left, search pinned to the far right — present on every lesson page,
+    // including the overview, where there's no stepper to sit next to.
+    const toolbar = document.createElement("div");
+    toolbar.className = "content-toolbar";
+
+    let idx = -1;
+    if (step !== "overview") {
+      idx = Math.max(0, Math.min(step, lesson.steps.length - 1));
+      toolbar.appendChild(renderStepper({
+        index: idx,
+        total: lesson.steps.length,
+        onPrev: () => { location.hash = `#/lesson/${slug}/${idx - 1}`; },
+        onNext: () => { location.hash = `#/lesson/${slug}/${idx + 1}`; },
+      }));
+    }
+    toolbar.appendChild(renderSearch(registry, lessons));
+    main.appendChild(toolbar);
+
+    main.appendChild(step === "overview" ? renderOverview(lesson) : renderStepView(lesson.steps[idx]));
   }
   shell.appendChild(main);
   app.appendChild(shell);
@@ -93,3 +104,19 @@ function render(): void {
 window.addEventListener("hashchange", render);
 window.addEventListener("DOMContentLoaded", render);
 render();
+
+// "/" focuses the content-area search box, unless the user is already
+// typing somewhere. Registered once here (not inside render()) since the
+// whole content area — and the search input within it — is torn down and
+// rebuilt on every hashchange; this listener just looks up whichever
+// instance is live.
+window.addEventListener("keydown", (e) => {
+  if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+  const active = document.activeElement;
+  if (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement) return;
+  const input = document.querySelector<HTMLInputElement>(".search-input");
+  if (input) {
+    e.preventDefault();
+    input.focus();
+  }
+});

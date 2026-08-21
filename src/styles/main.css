@@ -57,9 +57,28 @@ body { margin: 0; font-family: system-ui, sans-serif; color: var(--fg); backgrou
 .callout { background: var(--callout-bg); border: 1px solid var(--callout-border); border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; }
 .callout-head { margin-bottom: 4px; }
 .callout-req { display: inline-block; background: #333; color: #fff; font-size: 11px; padding: 1px 6px; border-radius: 4px; margin-right: 8px; }
-.stepper { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+/* Top bar of the content area: the stepper (when on a step page) on the
+   left, the search box pinned to the far right via margin-left: auto so it
+   lands there whether or not a stepper is present (e.g. on overview pages). */
+.content-toolbar { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.content-toolbar .search-box { margin-left: auto; }
+.stepper { display: flex; align-items: center; gap: 12px; }
 .stepper button { padding: 8px 14px; border: 1px solid var(--border); background: #fff; border-radius: 6px; cursor: pointer; }
 .stepper button:disabled { opacity: 0.4; cursor: default; }
+
+/* Search box: a text input with a dropdown of matching lessons/steps. */
+.search-box { position: relative; width: 260px; max-width: 100%; }
+.search-input { width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; font: inherit; font-size: 13px; background: #fff; color: var(--fg); }
+.search-input:focus { outline: none; border-color: var(--accent); }
+.search-results { position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 10; background: #fff; border: 1px solid var(--border); border-radius: 8px; max-height: 60vh; overflow-y: auto; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
+.search-result { display: block; padding: 8px 10px; text-decoration: none; color: var(--fg); border-bottom: 1px solid var(--border); }
+.search-result:last-child { border-bottom: none; }
+.search-result:hover, .search-result:focus { background: #eef2ff; }
+.search-result-lesson { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.search-result-title { font-size: 13px; font-weight: 600; margin-top: 1px; }
+.search-result-snippet { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+.search-result mark { background: #fef08a; color: inherit; border-radius: 2px; padding: 0 1px; }
+.search-no-results { padding: 10px; font-size: 13px; color: var(--muted); }
 .prose { line-height: 1.6; margin: 0 0 16px; }
 .prose p { margin: 0 0 12px; }
 .prose p:last-child { margin-bottom: 0; }

@@ -50,8 +50,9 @@ public/diagrams/            Static PNG diagrams referenced by lesson steps (serv
 src/
   main.ts                   App bootstrap: routing (hash-based), top-level render loop
   types.ts                  Shared types (Lesson, Step, Annotation, Sequence, ...)
+  search.ts                  In-memory search index + substring search over every lesson's overview/steps
   styles/main.css           All styling
-  components/                Rendering for hexdumps, sequence diagrams, annotated text blocks, steppers, callouts
+  components/                Rendering for hexdumps, sequence diagrams, annotated text blocks, steppers, callouts, the search box (top-right of the content area, next to the stepper)
   layout/sidebar.ts          Lesson navigation sidebar
   lessons/
     registry.ts               The list of lessons shown in the sidebar (slug, title, status)
