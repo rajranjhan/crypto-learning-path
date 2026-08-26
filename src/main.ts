@@ -13,6 +13,7 @@ import { oauthLesson } from "./lessons/oauth/lesson";
 import { oauthFurtherLearningLesson } from "./lessons/oauth-further-learning/lesson";
 import { oauthFlowsLesson } from "./lessons/oauth-flows/lesson";
 import { kerberosLesson } from "./lessons/kerberos/lesson";
+import { quantumCryptographyLesson } from "./lessons/quantum-cryptography/lesson";
 import { renderSidebar } from "./layout/sidebar";
 import { renderStepView } from "./components/hexdump";
 import { renderStepper } from "./components/stepper";
@@ -35,6 +36,7 @@ const lessons: Record<string, Lesson> = {
   "oauth-further-learning": oauthFurtherLearningLesson,
   "oauth-flows": oauthFlowsLesson,
   kerberos: kerberosLesson,
+  "quantum-cryptography": quantumCryptographyLesson,
 };
 
 // In dev, surface authoring mistakes (bad annotation offsets, duplicate slugs)

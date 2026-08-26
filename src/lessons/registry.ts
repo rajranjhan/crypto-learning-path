@@ -14,4 +14,5 @@ export const registry: RegistryEntry[] = [
   { slug: "oauth", title: "Fundamentals", status: "available", category: "OAuth: Who's Allowed to Do What" },
   { slug: "oauth-further-learning", title: "Further Learning", status: "available", category: "OAuth: Who's Allowed to Do What" },
   { slug: "oauth-flows", title: "Flows & Federation", status: "available", category: "OAuth: Who's Allowed to Do What" },
+  { slug: "quantum-cryptography", title: "Quantum Cryptography: Threats to Today's Encryption", status: "available" },
 ];

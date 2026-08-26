@@ -148,9 +148,14 @@ export const HE_ACTORS: SequenceActor[] = [
   { id: "cloud", label: "Untrusted Cloud", icon: "☁️" },
 ];
 
-/** Client ↔ Server ↔ Certificate Authority, used by the PKI lesson's sequence diagrams. */
+/**
+ * You ↔ The Bank ↔ Notary Office, used by the PKI lesson's sequence diagrams.
+ * Carries the lesson's own "notarized ID card" metaphor forward: the bank's
+ * certificate is the laminated ID card, and the CA is the notary office whose
+ * stamp is what makes that card worth trusting in the first place.
+ */
 export const PKI_ACTORS: SequenceActor[] = [
-  { id: "client", label: "Client", icon: "💻" },
-  { id: "server", label: "Server", icon: "🖥️" },
-  { id: "ca", label: "Certificate Authority", icon: "🏛️" },
+  { id: "client", label: "You", icon: "🧑" },
+  { id: "server", label: "The Bank", icon: "🏦" },
+  { id: "ca", label: "Notary Office (CA)", icon: "🏛️" },
 ];

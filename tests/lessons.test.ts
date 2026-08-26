@@ -13,6 +13,7 @@ import { oauthLesson } from "../src/lessons/oauth/lesson";
 import { oauthFurtherLearningLesson } from "../src/lessons/oauth-further-learning/lesson";
 import { oauthFlowsLesson } from "../src/lessons/oauth-flows/lesson";
 import { kerberosLesson } from "../src/lessons/kerberos/lesson";
+import { quantumCryptographyLesson } from "../src/lessons/quantum-cryptography/lesson";
 import { validateLesson, validateRegistry } from "../src/lessons/validate";
 import type { Lesson } from "../src/types";
 
@@ -30,6 +31,7 @@ const lessons: Record<string, Lesson> = {
   "oauth-further-learning": oauthFurtherLearningLesson,
   "oauth-flows": oauthFlowsLesson,
   kerberos: kerberosLesson,
+  "quantum-cryptography": quantumCryptographyLesson,
 };
 
 describe("registry", () => {
