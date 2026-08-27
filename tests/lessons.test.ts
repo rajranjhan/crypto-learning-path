@@ -9,6 +9,7 @@ import { tls13Lesson } from "../src/lessons/tls13/lesson";
 import { mtlsLesson } from "../src/lessons/mtls/lesson";
 import { encryptionAtRestLesson } from "../src/lessons/encryption-at-rest/lesson";
 import { homomorphicEncryptionLesson } from "../src/lessons/homomorphic-encryption/lesson";
+import { zeroKnowledgeProofsLesson } from "../src/lessons/zero-knowledge-proofs/lesson";
 import { oauthLesson } from "../src/lessons/oauth/lesson";
 import { oauthFurtherLearningLesson } from "../src/lessons/oauth-further-learning/lesson";
 import { oauthFlowsLesson } from "../src/lessons/oauth-flows/lesson";
@@ -27,6 +28,7 @@ const lessons: Record<string, Lesson> = {
   mtls: mtlsLesson,
   "encryption-at-rest": encryptionAtRestLesson,
   "homomorphic-encryption": homomorphicEncryptionLesson,
+  "zero-knowledge-proofs": zeroKnowledgeProofsLesson,
   oauth: oauthLesson,
   "oauth-further-learning": oauthFurtherLearningLesson,
   "oauth-flows": oauthFlowsLesson,

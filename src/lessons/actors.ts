@@ -149,6 +149,17 @@ export const HE_ACTORS: SequenceActor[] = [
 ];
 
 /**
+ * Peggy (Prover) ↔ Victor (Verifier), used by the Zero-Knowledge Proofs
+ * lesson. Peggy/Victor is the standard naming convention in the ZKP
+ * literature, going back to the "Ali Baba's cave" explanation this lesson
+ * opens with.
+ */
+export const ZKP_ACTORS: SequenceActor[] = [
+  { id: "prover", label: "Peggy (Prover)", icon: "🙋" },
+  { id: "verifier", label: "Victor (Verifier)", icon: "🕵️" },
+];
+
+/**
  * You ↔ The Bank ↔ Notary Office, used by the PKI lesson's sequence diagrams.
  * Carries the lesson's own "notarized ID card" metaphor forward: the bank's
  * certificate is the laminated ID card, and the CA is the notary office whose
