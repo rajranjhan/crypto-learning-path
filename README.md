@@ -8,12 +8,21 @@ Built with plain TypeScript and [Vite](https://vitejs.dev/) — no UI framework,
 
 | Lesson | Slug |
 |---|---|
-| Encryption Basics: Symmetric & Asymmetric | `encryption-basics` |
-| How TLS 1.2 Works | `tls12` |
-| How TLS 1.3 Works | `tls13` |
+| Encryption Basics: Symmetric & Asymmetric Keys | `encryption-basics` |
+| Symmetric Primitives: AES, SHA & HMAC | `symmetric-primitives` |
+| Asymmetric Primitives: RSA, ECC & Diffie-Hellman | `asymmetric-primitives` |
+| PKI: Certificates, CAs & Trust Chains | `pki` |
+| TLS 1.2: Two-Round-Trip Handshake | `tls12` |
+| TLS 1.3: One-Round-Trip Handshake | `tls13` |
 | Mutual TLS: Client Authentication | `mtls` |
-| OAuth 2.0: Tokens, FAPI & DPoP | `oauth` |
-| Kerberos: Ticket-Based Authentication | `kerberos` |
+| Encryption at Rest: Protecting Stored Data & Keys | `encryption-at-rest` |
+| Kerberos: Proving Who You Are with Tickets | `kerberos` |
+| OAuth: Fundamentals | `oauth` |
+| OAuth: Further Learning | `oauth-further-learning` |
+| OAuth: Flows & Federation | `oauth-flows` |
+| Homomorphic Encryption: Computing on Encrypted Data | `homomorphic-encryption` |
+| Zero-Knowledge Proofs: Proving Without Revealing | `zero-knowledge-proofs` |
+| Quantum Cryptography: Threats to Today's Encryption | `quantum-cryptography` |
 
 Each lesson is a sequence of steps. A step either dissects a real wire record byte-by-byte (hexdump + hover-linked annotations) or explains a concept via prose, bullets, a sequence diagram, or an authored diagram.
 

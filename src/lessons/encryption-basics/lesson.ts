@@ -13,10 +13,12 @@ export const encryptionBasicsLesson: Lesson = {
   title: "Encryption Basics: Symmetric & Asymmetric Keys",
   status: "available",
   overview:
-    "Before diving into TLS, it helps to understand the two kinds of encryption " +
-    "it relies on. Think in terms of locks and keys: symmetric encryption is one " +
-    "shared key that both locks and unlocks, while asymmetric encryption is a " +
-    "public padlock anyone can snap shut but only your private key can open. TLS " +
-    "combines the two. Walk through the three short steps below.",
+    "Start with the simplest version of the problem: how do you scramble a " +
+    "message so only the right person can read it? This lesson begins with " +
+    "the shared-key idea, uses classical ciphers to make it concrete, then " +
+    "moves to modern symmetric encryption, asymmetric public/private keys, " +
+    "and Diffie-Hellman. By the end, you'll have the mental model the rest " +
+    "of the learning path builds on: fast shared-key encryption for data, " +
+    "asymmetric math for safely agreeing on keys and proving identity.",
   steps: [symmetric, substitution, caesar, block, stream, asymmetric, diffieHellman, bridgeToTls],
 };
