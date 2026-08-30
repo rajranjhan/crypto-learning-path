@@ -55,7 +55,7 @@ npm run test:watch # Run the test suite in watch mode
 
 ```
 index.html                  Vite entry point, loads src/main.ts
-public/diagrams/            Static PNG diagrams referenced by lesson steps (served at /diagrams/*.png)
+public/diagrams/            Static diagram exports referenced by lesson steps (served at /diagrams/*)
 src/
   main.ts                   App bootstrap: routing (hash-based), top-level render loop
   types.ts                  Shared types (Lesson, Step, Annotation, Sequence, ...)
@@ -64,6 +64,7 @@ src/
   components/                Rendering for hexdumps, sequence diagrams, annotated text blocks, steppers, callouts, the search box (top-right of the content area, next to the stepper)
   layout/sidebar.ts          Lesson navigation sidebar
   lessons/
+    index.ts                  Shared lesson module map used by the app and tests
     registry.ts               The list of lessons shown in the sidebar (slug, title, status)
     validate.ts                Dev-time authoring checks (bad annotation offsets, duplicate slugs, ...)
     <lesson>/lesson.ts          Each lesson's step sequence

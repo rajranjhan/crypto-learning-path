@@ -103,11 +103,24 @@ export function renderStepView(step: Step): HTMLElement {
   });
 
   // Hover linkage: byte <-> annotation.
-  const setActive = (annIndex: string | undefined, on: boolean) => {
+  const bytesByAnnotation = new Map<string, HTMLElement[]>();
+  hex.querySelectorAll<HTMLElement>(".hex-byte[data-annotation]").forEach((b) => {
+    const annIndex = b.dataset.annotation;
     if (annIndex === undefined) return;
-    hex.querySelectorAll<HTMLElement>(`.hex-byte[data-annotation="${annIndex}"]`).forEach((b) => b.classList.toggle("active", on));
-    const ann = right.querySelector<HTMLElement>(`.annotation[data-annotation="${annIndex}"]`);
-    ann?.classList.toggle("active", on);
+    const bytes = bytesByAnnotation.get(annIndex) ?? [];
+    bytes.push(b);
+    bytesByAnnotation.set(annIndex, bytes);
+  });
+
+  const annotationsByIndex = new Map<string, HTMLElement>();
+  right.querySelectorAll<HTMLElement>(".annotation").forEach((a) => {
+    if (a.dataset.annotation !== undefined) annotationsByIndex.set(a.dataset.annotation, a);
+  });
+
+  const setActive = (annIndex: string | undefined, on: boolean): void => {
+    if (annIndex === undefined) return;
+    bytesByAnnotation.get(annIndex)?.forEach((b) => b.classList.toggle("active", on));
+    annotationsByIndex.get(annIndex)?.classList.toggle("active", on);
   };
   hex.querySelectorAll<HTMLElement>(".hex-byte").forEach((b) => {
     b.addEventListener("mouseenter", () => setActive(b.dataset.annotation, true));

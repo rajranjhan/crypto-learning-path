@@ -1,5 +1,4 @@
-import type { Lesson, RegistryEntry } from "../types";
-import { buildSearchIndex, search } from "../search";
+import { search, type SearchEntry } from "../search";
 
 /** Split `text` at the first case-insensitive match of `query` and append it as plain text + a <mark>, avoiding innerHTML entirely (text here can contain authored `<`/`&`). */
 function appendHighlighted(container: HTMLElement, text: string, query: string): void {
@@ -24,9 +23,7 @@ function appendHighlighted(container: HTMLElement, text: string, query: string):
  * document-level listener, so nothing needs cleaning up when the content
  * area is torn down and rebuilt on the next hash change.
  */
-export function renderSearch(registry: RegistryEntry[], lessons: Record<string, Lesson>): HTMLElement {
-  const index = buildSearchIndex(registry, lessons);
-
+export function renderSearch(index: SearchEntry[]): HTMLElement {
   const wrap = document.createElement("div");
   wrap.className = "search-box";
 

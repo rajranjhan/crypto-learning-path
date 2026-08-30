@@ -50,6 +50,7 @@ function renderStepGroup(
   displayNumber: number,
   slug: string,
   lesson: Lesson,
+  stepIndexById: Map<string, number>,
   lessonActive: boolean,
   state: SidebarState,
 ): HTMLElement {
@@ -57,7 +58,7 @@ function renderStepGroup(
   group.className = "step-group";
 
   const childIndexes = (parent.subSteps ?? [])
-    .map((id) => lesson.steps.findIndex((s) => s.id === id))
+    .map((id) => stepIndexById.get(id) ?? -1)
     .filter((i) => i !== -1);
 
   const isParentActive = lessonActive && state.activeStep === parentIndex;
@@ -165,13 +166,14 @@ function renderLessonGroup(
     // parent instead of as their own top-level entry; the visible "N." count
     // only advances for top-level entries, so numbering has no gaps.
     const childIds = new Set(lesson.steps.flatMap((s) => s.subSteps ?? []));
+    const stepIndexById = new Map(lesson.steps.map((s, i) => [s.id, i]));
     let displayNumber = 0;
     lesson.steps.forEach((s, si) => {
       if (childIds.has(s.id)) return;
       displayNumber += 1;
 
       if (s.subSteps?.length) {
-        sub.appendChild(renderStepGroup(s, si, displayNumber, entry.slug, lesson, isActive, state));
+        sub.appendChild(renderStepGroup(s, si, displayNumber, entry.slug, lesson, stepIndexById, isActive, state));
         return;
       }
 

@@ -1,45 +1,15 @@
 import "./styles/main.css";
+import { lessons } from "./lessons";
 import { registry } from "./lessons/registry";
-import { encryptionBasicsLesson } from "./lessons/encryption-basics/lesson";
-import { symmetricPrimitivesLesson } from "./lessons/symmetric-primitives/lesson";
-import { asymmetricPrimitivesLesson } from "./lessons/asymmetric-primitives/lesson";
-import { pkiLesson } from "./lessons/pki/lesson";
-import { tls12Lesson } from "./lessons/tls12/lesson";
-import { tls13Lesson } from "./lessons/tls13/lesson";
-import { mtlsLesson } from "./lessons/mtls/lesson";
-import { encryptionAtRestLesson } from "./lessons/encryption-at-rest/lesson";
-import { homomorphicEncryptionLesson } from "./lessons/homomorphic-encryption/lesson";
-import { zeroKnowledgeProofsLesson } from "./lessons/zero-knowledge-proofs/lesson";
-import { oauthLesson } from "./lessons/oauth/lesson";
-import { oauthFurtherLearningLesson } from "./lessons/oauth-further-learning/lesson";
-import { oauthFlowsLesson } from "./lessons/oauth-flows/lesson";
-import { kerberosLesson } from "./lessons/kerberos/lesson";
-import { quantumCryptographyLesson } from "./lessons/quantum-cryptography/lesson";
 import { renderSidebar } from "./layout/sidebar";
 import { renderStepView } from "./components/hexdump";
 import { renderStepper } from "./components/stepper";
 import { renderOverview } from "./components/overview";
 import { renderSearch } from "./components/search";
+import { buildSearchIndex } from "./search";
 import { validateLesson, validateRegistry } from "./lessons/validate";
-import type { Lesson } from "./types";
 
-const lessons: Record<string, Lesson> = {
-  "encryption-basics": encryptionBasicsLesson,
-  "symmetric-primitives": symmetricPrimitivesLesson,
-  "asymmetric-primitives": asymmetricPrimitivesLesson,
-  pki: pkiLesson,
-  tls12: tls12Lesson,
-  tls13: tls13Lesson,
-  mtls: mtlsLesson,
-  "encryption-at-rest": encryptionAtRestLesson,
-  "homomorphic-encryption": homomorphicEncryptionLesson,
-  "zero-knowledge-proofs": zeroKnowledgeProofsLesson,
-  oauth: oauthLesson,
-  "oauth-further-learning": oauthFurtherLearningLesson,
-  "oauth-flows": oauthFlowsLesson,
-  kerberos: kerberosLesson,
-  "quantum-cryptography": quantumCryptographyLesson,
-};
+const searchIndex = buildSearchIndex(registry, lessons);
 
 // In dev, surface authoring mistakes (bad annotation offsets, duplicate slugs)
 // immediately in the console instead of letting them render as silent glitches.
@@ -106,7 +76,7 @@ function render(): void {
         onNext: () => { location.hash = `#/lesson/${slug}/${idx + 1}`; },
       }));
     }
-    toolbar.appendChild(renderSearch(registry, lessons));
+    toolbar.appendChild(renderSearch(searchIndex));
     main.appendChild(toolbar);
 
     main.appendChild(step === "overview" ? renderOverview(lesson) : renderStepView(lesson.steps[idx]));
@@ -116,7 +86,6 @@ function render(): void {
 }
 
 window.addEventListener("hashchange", render);
-window.addEventListener("DOMContentLoaded", render);
 render();
 
 // "/" focuses the content-area search box, unless the user is already
