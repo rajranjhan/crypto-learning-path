@@ -4,6 +4,7 @@ export const registry: RegistryEntry[] = [
   { slug: "encryption-basics", title: "Encryption Basics: Symmetric & Asymmetric Keys", status: "available" },
   { slug: "symmetric-primitives", title: "Symmetric Primitives: AES, SHA & HMAC", status: "available" },
   { slug: "asymmetric-primitives", title: "Asymmetric Primitives: RSA, ECC & Diffie-Hellman", status: "available" },
+  { slug: "blockchain-cryptography", title: "Blockchain Cryptography: Hashes, Signatures & Consensus", status: "available" },
   { slug: "pki", title: "PKI: Certificates, CAs & Trust Chains", status: "available" },
   { slug: "tls12", title: "TLS 1.2: Two-Round-Trip Handshake", status: "available", category: "TLS: Protecting Data in Motion" },
   { slug: "tls13", title: "TLS 1.3: One-Round-Trip Handshake", status: "available", category: "TLS: Protecting Data in Motion" },

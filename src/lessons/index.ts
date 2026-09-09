@@ -1,5 +1,6 @@
 import type { Lesson } from "../types";
 import { asymmetricPrimitivesLesson } from "./asymmetric-primitives/lesson";
+import { blockchainCryptographyLesson } from "./blockchain-cryptography/lesson";
 import { encryptionAtRestLesson } from "./encryption-at-rest/lesson";
 import { encryptionBasicsLesson } from "./encryption-basics/lesson";
 import { homomorphicEncryptionLesson } from "./homomorphic-encryption/lesson";
@@ -19,6 +20,7 @@ export const lessons: Record<string, Lesson> = {
   "encryption-basics": encryptionBasicsLesson,
   "symmetric-primitives": symmetricPrimitivesLesson,
   "asymmetric-primitives": asymmetricPrimitivesLesson,
+  "blockchain-cryptography": blockchainCryptographyLesson,
   pki: pkiLesson,
   tls12: tls12Lesson,
   tls13: tls13Lesson,
