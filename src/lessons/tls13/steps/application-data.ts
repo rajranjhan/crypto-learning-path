@@ -52,7 +52,8 @@ export const applicationData: Step = {
   prose:
     "<p>This is the payoff: your actual confidential document, finally sealed and sent.</p>" +
     "<p>Every byte after the 5-byte record header (offset 5) is AEAD ciphertext with an authentication tag — to anyone in the mailroom it's indistinguishable from random noise. TLS 1.3 even hides what kind of mail this is: it's tagged the same 0x17 as the EncryptedExtensions and Certificate that came before it, so an observer can't tell handshake traffic from your real document just by watching the wrapper.</p>" +
-    "<p>From here the two of you just keep exchanging sealed envelopes until one side ends the conversation. But remember: TLS only protects the document while it's in the mailroom. Once it's unsealed and filed away at the bank, other safeguards have to take over.</p>",
+    "<p>From here the two of you just keep exchanging sealed envelopes until one side ends the conversation. But remember: TLS only protects the document while it's in the mailroom. Once it's unsealed and filed away at the bank, other safeguards have to take over.</p>" +
+    "<p><strong>Recap:</strong> TLS 1.3 keeps the same purpose as TLS 1.2 — authenticated encryption in transit — but moves key agreement into the first flight, removes legacy negotiation, and encrypts most server authentication details after ServerHello. ClientHello and ServerHello remain visible because they are needed to create those first handshake keys.</p>",
   bullets: [
     "A record type of 0x17 (Application Data)",
     "The AEAD-encrypted payload (here an HTTP request) under the application traffic keys",
@@ -61,6 +62,12 @@ export const applicationData: Step = {
   ],
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 10),
   callouts: [
+    {
+      type: "key-idea",
+      requirementId: "TLS 1.3 recap",
+      title: "What TLS 1.3 changed",
+      body: "TLS 1.3 establishes handshake keys right after ServerHello, encrypts more of the handshake, and removes many legacy choices. It is still TLS: authenticate the peer, agree on fresh keys, then protect records with AEAD.",
+    },
     {
       requirementId: "At rest",
       title: "Encryption in transit vs. at rest",

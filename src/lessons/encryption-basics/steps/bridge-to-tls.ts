@@ -4,7 +4,8 @@ export const bridgeToTls: Step = {
   id: "bridge-to-tls",
   title: "Best of Both — How TLS Uses Them Together",
   prose:
-    "Each approach solves the other's weakness. Symmetric is fast but needs a " +
+    "Modern systems usually combine symmetric and asymmetric cryptography rather " +
+    "than choosing one or the other. Each approach solves the other's weakness. Symmetric is fast but needs a " +
     "shared secret key that's dangerous to hand over. Asymmetric solves the " +
     "handover but is too slow for real traffic. So TLS combines them: it uses the " +
     "slow asymmetric math just once, at the start, purely to " +
@@ -13,11 +14,12 @@ export const bridgeToTls: Step = {
     "outright with the padlock. From then " +
     "on, both sides switch to the fast shared-key lockbox (symmetric) to protect " +
     "every message. Think of it as using the padlock only to safely pass over a " +
-    "brand-new key, then locking the actual conversation with that key. The TLS " +
+    "brand-new key, then locking the actual conversation with that key. The metaphor stops being exact here: TLS does not usually send a symmetric key inside an RSA envelope; modern TLS derives fresh keys with authenticated Diffie-Hellman. The TLS " +
     "lessons that follow show this happening byte by byte on the wire.",
   bullets: [
     "Asymmetric first: safely agree on a shared secret without a risky handoff",
     "Symmetric after: use that shared key for fast bulk encryption",
+    "The usual design is hybrid: asymmetric cryptography bootstraps trust and key agreement; symmetric cryptography protects the bulk data",
     "This handshake-then-transfer pattern is exactly what the TLS lessons walk through",
   ],
   diagram: `

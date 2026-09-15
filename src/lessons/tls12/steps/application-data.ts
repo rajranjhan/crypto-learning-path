@@ -55,7 +55,8 @@ export const applicationData: Step = {
     "<p>This is the payoff. Your computer sends something like \"transfer $500 to savings\" — and to anyone in the mailroom, it becomes unreadable gibberish, like a document locked in a briefcase only you and the bank have keys to.</p>" +
     "<p>TLS also attaches something like a wax seal to that document: an authentication tag proving nobody altered it in transit. If even one character were changed, the seal would break, and both sides would know immediately.</p>" +
     "<p>On the wire this is the first real <strong>Application Data</strong> record — an encrypted HTTP request. Every byte after the 5-byte record header (offset 5) is AES-256-GCM ciphertext with that authentication tag baked in.</p>" +
-    "<p>From here the connection simply exchanges 0x17 records in both directions until one side closes. But TLS only protects data in transit — the moment it is decrypted and stored, other controls take over.</p>",
+    "<p>From here the connection simply exchanges 0x17 records in both directions until one side closes. But TLS only protects data in transit — the moment it is decrypted and stored, other controls take over.</p>" +
+    "<p><strong>Recap:</strong> TLS 1.2 authenticates the server with PKI, negotiates shared symmetric keys with an ephemeral key exchange, and then protects records with AEAD encryption. Compared with TLS 1.3, more of this handshake remains visible and the key exchange takes longer.</p>",
   bullets: [
     "A record type of 0x17 (Application Data)",
     "The AES-256-GCM-encrypted payload (here an HTTP request)",
@@ -64,6 +65,12 @@ export const applicationData: Step = {
   ],
   sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 9),
   callouts: [
+    {
+      type: "key-idea",
+      requirementId: "TLS 1.2 recap",
+      title: "What TLS 1.2 accomplished",
+      body: "The handshake turned an untrusted network path into an authenticated, encrypted channel: PKI identified the server, ephemeral key exchange created fresh shared secrets, and AEAD records now protect application data.",
+    },
     {
       requirementId: "At rest",
       title: "Encryption in transit vs. at rest",

@@ -13,7 +13,7 @@ export const merkleTrees: Step = {
     "The proof stays small even when the page holds many transactions",
   ],
   diagram: `
-    <div class="flow" style="align-items: center;">
+    <div class="flow center">
       <div class="node">
         <div class="node-title">Receipt C</div>
         <div class="node-sub">the payment being proved</div>

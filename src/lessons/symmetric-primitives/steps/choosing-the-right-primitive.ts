@@ -14,20 +14,20 @@ export const choosingTheRightPrimitive: Step = {
     "Use vetted standard library implementations, not homegrown code — most real-world breaks come from misuse, not from broken math",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">Confidentiality</div>
         <div class="node-sub">AES-GCM / ChaCha20-Poly1305</div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Fingerprinting</div>
         <div class="node-sub">SHA-256 / SHA-384</div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Authenticity</div>
         <div class="node-sub">HMAC-SHA256</div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Passwords</div>
         <div class="node-sub">Argon2 / bcrypt / scrypt</div>
       </div>

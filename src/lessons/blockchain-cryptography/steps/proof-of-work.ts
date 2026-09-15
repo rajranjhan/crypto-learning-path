@@ -5,12 +5,13 @@ export const proofOfWork: Step = {
   title: "Proof of Work Turns Hashing Into a Cost",
   prose:
     "<p>Proof of work is like saying: before you may add the next notebook page, solve a hard lottery puzzle printed on that page. Miners repeatedly change a nonce in the block header and hash the header until the result is below the network's target. There is no shortcut better than trying many candidates, but verification is cheap: one hash tells everyone whether the page really solved the puzzle.</p>" +
-    "<p>The security idea is economic, not just mathematical. Rewriting history means replacing the old page and then catching up to the honest notebook, paying the same puzzle cost for each replacement page. The hashes make the work easy to verify; the consensus rule tells nodes which valid notebook to extend. Other blockchains use different consensus mechanisms, but they still rely on cryptographic checks for identity, integrity, and compact verification.</p>",
+    "<p>The security idea is economic and network-based, not just mathematical. Rewriting history means replacing the old page and then catching up to the honest notebook, paying the same puzzle cost for each replacement page. The hashes make the work easy to verify; the consensus rule tells nodes which valid notebook to extend. Cryptography alone does not create consensus. It supplies verifiable evidence — signatures, hashes, commitments, work proofs — that a separate consensus protocol uses to choose one history.</p>",
   bullets: [
     "Mining searches for a page fingerprint below a target",
     "Finding the winning nonce is expensive; checking it is cheap",
     "Rewriting history requires redoing the puzzle for the changed page and its descendants",
-    "Consensus is not just cryptography; it combines cryptographic checks with network and economic rules",
+    "Cryptography supplies verifiable evidence; the consensus protocol decides which valid history the network extends",
+    "Consensus is not just cryptography; it combines checks with network, timing, and incentive assumptions",
   ],
   diagram: `
     <div class="flow">

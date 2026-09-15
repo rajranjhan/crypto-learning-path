@@ -22,13 +22,13 @@ export const caesar: Step = {
     "That's small enough to try every single one by hand in minutes — a brute-force attack that doesn't even need frequency analysis",
   ],
   diagram: `
-    <div style="font-family: ui-monospace, monospace; background: var(--hex-bg); color: var(--hex-fg); padding: 14px; border-radius: 8px; font-size: 14px; line-height: 2; overflow-x: auto; white-space: pre;">
+    <div class="mono-panel">
 Plain:      A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 Shift +3:   D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</div>
-    <div class="flow" style="margin-top: 16px;">
+    <div class="flow spaced">
       <div class="node">
         <div class="node-title">Plaintext</div>
-        <div class="node-sub" style="font-family: ui-monospace, monospace; font-size: 16px;">HELLO</div>
+        <div class="node-sub mono large">HELLO</div>
       </div>
       <div class="link">
         <div class="lock">🔢</div>
@@ -37,7 +37,7 @@ Shift +3:   D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</div>
       </div>
       <div class="node node-proxy">
         <div class="node-title">Ciphertext</div>
-        <div class="node-sub" style="font-family: ui-monospace, monospace; font-size: 16px;">KHOOR</div>
+        <div class="node-sub mono large">KHOOR</div>
       </div>
     </div>
     <p class="diagram-note">

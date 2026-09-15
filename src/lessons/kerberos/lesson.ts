@@ -11,6 +11,25 @@ export const kerberosLesson: Lesson = {
   slug: "kerberos",
   title: "Kerberos: Proving Who You Are with Tickets",
   status: "available",
+  summary: "Explains Kerberos ticket-based authentication for trusted internal networks.",
+  whyItMatters:
+    "Kerberos is still foundational in Windows domains and many enterprise environments. It shows how symmetric cryptography, tickets, time limits, and replay protection can provide single sign-on without sending passwords to every service.",
+  objectives: [
+    "Trace the AS, TGS, and AP exchanges",
+    "Explain ticket-granting tickets and service tickets",
+    "Describe replay protection and ticket lifetimes",
+    "Compare Kerberos's trust model with OAuth",
+  ],
+  prerequisites: ["symmetric-primitives"],
+  keyTakeaways: [
+    "Kerberos centralizes authentication in the KDC",
+    "Services validate tickets instead of seeing user passwords",
+    "Short-lived authenticators limit replay risk",
+    "Golden and silver tickets represent high-impact key compromise",
+  ],
+  estimatedMinutes: 35,
+  difficulty: "Intermediate",
+  lessonType: "protocol",
   overview:
     "Kerberos is how staff on a trusted internal network — a Windows domain, a " +
     "university campus — prove who they are to dozens of internal systems without " +
@@ -24,6 +43,24 @@ export const kerberosLesson: Lesson = {
     "password again. Follow the same three lifelines — you, the Staff House's two " +
     "windows, and a door — as they build up the full exchange step by step.",
   diagram: `
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Metaphor</th>
+          <th>Kerberos term</th>
+          <th>Role in the protocol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>Staff House</th><td>KDC</td><td>Trusted central authority for the realm.</td></tr>
+        <tr><th>Check-In Window</th><td>Authentication Server (AS)</td><td>Authenticates the user and issues a Ticket Granting Ticket.</td></tr>
+        <tr><th>Backstage Desk</th><td>Ticket Granting Server (TGS)</td><td>Trades the TGT for a service-specific ticket.</td></tr>
+        <tr><th>Day Badge</th><td>Ticket Granting Ticket (TGT)</td><td>Reusable ticket for asking the TGS for service tickets.</td></tr>
+        <tr><th>Door Pass</th><td>Service ticket</td><td>Ticket sealed for one target service.</td></tr>
+        <tr><th>Code word</th><td>Session key</td><td>Fresh symmetric key shared for one stage of the exchange.</td></tr>
+        <tr><th>Timestamp slip</th><td>Authenticator</td><td>Fresh proof that prevents simple replay of a copied ticket.</td></tr>
+      </tbody>
+    </table>
     <div class="flow">
       <div class="node">
         <div class="node-title">You</div>
@@ -34,7 +71,7 @@ export const kerberosLesson: Lesson = {
         <div class="link-label">check in once</div>
         <div class="arrow">→</div>
       </div>
-      <div class="node" style="border-color: var(--accent); box-shadow: 0 0 0 2px rgba(37,99,235,0.15);">
+      <div class="node trusted">
         <div class="node-title">Staff House (KDC)</div>
         <div class="node-sub">Check-In Window + Backstage Desk</div>
       </div>

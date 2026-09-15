@@ -15,19 +15,19 @@ export const rsaVsEcc: Step = {
     "Stick to standardized, heavily analyzed curves — P-256, P-384, Curve25519 — rather than a non-standard or homegrown one",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1; border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">❌ Avoid</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+    <div class="flow">
+      <div class="node equal attacker">
+        <div class="node-title text-warning">❌ Avoid</div>
+        <div class="node-sub left">
           Plain RSA key transport (no forward secrecy)<br>
           RSA keys under 2048 bits<br>
           Static or weak DH groups<br>
           Non-standard curves
         </div>
       </div>
-      <div class="node" style="flex: 1; border-color:#047857;">
-        <div class="node-title" style="color:#047857;">✅ Prefer</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+      <div class="node equal trusted">
+        <div class="node-title text-trusted">✅ Prefer</div>
+        <div class="node-sub left">
           ECDHE / DHE (ephemeral, forward-secret)<br>
           RSA-2048+ or ECDSA for signatures<br>
           Standard curves: P-256, P-384, Curve25519

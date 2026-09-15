@@ -20,6 +20,12 @@ export const recap: Step = {
   ],
   sequence: {
     actors: MTLS_ACTORS,
+    progress: {
+      goal: "Understand what client authentication adds to TLS",
+      already: ["ClientHello", "ServerHello"],
+      now: "Server certificate proves only the server identity",
+      next: "Server asks the client for its certificate",
+    },
     messages: [
       { from: "client", to: "server", label: "ClientHello" },
       { from: "server", to: "client", label: "ServerHello" },

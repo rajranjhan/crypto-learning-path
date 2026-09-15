@@ -5,13 +5,14 @@ export const checklist: Step = {
   title: "Putting It Together — A Checklist",
   prose:
     "<p>Back to the locksmith one last time: the vault dial (AES) just needs a couple more digits and the machine's advantage disappears. The padlock and the paint-mixing trick (RSA, ECC, Diffie-Hellman) need an entirely new lock, installed alongside the old one during the transition. And the drawer full of photographs already taken in the mailroom is the one thing no future lock upgrade can undo — which is exactly why it's the priority below.</p>" +
-    "<p>Quantum computing doesn't invalidate this entire series — it changes exactly one family of primitives, and the fix for the other is trivial. Prioritize protecting whatever data needs confidentiality for the longest: that's the harvest-now-decrypt-later exposure, and it's the thing worth acting on before large quantum computers exist, not after.</p>",
+    "<p>Quantum computing doesn't invalidate this entire series, but it changes the migration plan for public-key cryptography and the security-margin plan for symmetric cryptography. Prioritize protecting whatever data needs confidentiality for the longest: that's the harvest-now-decrypt-later exposure, and it's the thing worth acting on before large quantum computers exist, not after.</p>",
   bullets: [
-    "Symmetric side (AES, SHA): use AES-256 and SHA-384/512 — quantum-resistant today, no migration needed",
-    "Asymmetric side (RSA, ECC, Diffie-Hellman): plan a migration to post-quantum or hybrid algorithms — the underlying math will not survive a large quantum computer",
+    "Symmetric side (AES, SHA): use parameter sizes with enough quantum-era margin for the property you need",
+    "Asymmetric side (RSA, ECC, Diffie-Hellman): inventory and migrate to post-quantum or hybrid algorithms — the underlying math will not survive a large quantum computer",
     "Prioritize data with long required confidentiality lifetimes — that's what's being harvested today for future decryption",
     "Favor hybrid (classical + post-quantum) key exchange during the transition, not a hard cutover to post-quantum alone",
-    "Track NIST's standards (ML-KEM, ML-DSA) and your vendors' rollout — this is an active, ongoing migration, not a future hypothetical",
+    "Build algorithm agility into protocols, certificates, file formats, and hardware before the emergency",
+    "Track NIST's standards (ML-KEM, ML-DSA, SLH-DSA) and your vendors' rollout — this is an active migration, not a future hypothetical",
   ],
   callouts: [
     {

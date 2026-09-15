@@ -4,10 +4,10 @@ import type { SequenceActor, Step } from "../../../types";
 // the ride-photo scenario, so this step names Guest Services and the photo
 // kiosk directly rather than reusing OAUTH_ACTORS_WITH_USER's generic labels.
 const RIDE_PHOTO_ACTORS: SequenceActor[] = [
-  { id: "user", label: "You", icon: "🧑" },
-  { id: "client", label: "Photo Dispenser", icon: "💻" },
-  { id: "as", label: "Authorization Server (Guest Services)", icon: "🎫" },
-  { id: "rs", label: "Resource Server (Photo Kiosk)", icon: "📸" },
+  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
+  { id: "client", label: "Client (Photo Dispenser)", icon: "💻", role: "client" },
+  { id: "as", label: "Authorization Server (Guest Services)", icon: "🎫", role: "trusted" },
+  { id: "rs", label: "Resource Server (Photo Kiosk)", icon: "📸", role: "server" },
 ];
 
 export const authCode: Step = {
@@ -31,6 +31,12 @@ export const authCode: Step = {
   ],
   sequence: {
     actors: RIDE_PHOTO_ACTORS,
+    progress: {
+      goal: "Authorize the client to access one protected resource",
+      already: ["Client generated a PKCE verifier and challenge"],
+      now: "User approves access and the client redeems the authorization code",
+      next: "Client calls the resource server with the access token",
+    },
     messages: [
       { from: "client", to: "client", label: "Generate a secret word (code_verifier) and scramble it (code_challenge)" },
       { from: "client", to: "user", label: "\"I can't get that without confirming it's really you — go see Guest Services\" (carries the scrambled word)" },

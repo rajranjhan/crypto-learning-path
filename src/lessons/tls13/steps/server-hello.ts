@@ -137,7 +137,8 @@ export const serverHello: Step = {
   prose:
     "<p>The bank's server replies: \"Let's use this method.\"</p>" +
     "<p>That's the <strong>ServerHello</strong> — it confirms TLS 1.3 in the extensions (offset 81), picks a cipher suite (offset 76), and hands back its own half of the key in <strong>key_share</strong>.</p>" +
-    "<p>That's it — the combination lock is done. In TLS 1.2 this took two more messages (ServerKeyExchange, ClientKeyExchange) and a full extra round trip; here both halves were exchanged in the very first envelopes each side sent. Everything from the bank's next message onward travels already sealed.</p>",
+    "<p>The ServerHello itself is still visible on the wire. After both sides combine the ClientHello and ServerHello key shares, they derive handshake traffic keys; the bank's next real handshake messages — EncryptedExtensions, Certificate, CertificateVerify, and Finished — travel already sealed.</p>" +
+    "<p>In TLS 1.2 this took two more key-exchange messages and a full extra round trip. TLS 1.3 moves that work into the first two messages, which is why protection starts earlier.</p>",
   bullets: [
     "A legacy version of TLS 1.2, with the real choice of TLS 1.3 in supported_versions",
     "32 bytes of server random data (used in the key schedule)",

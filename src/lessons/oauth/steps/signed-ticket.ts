@@ -26,7 +26,7 @@ export const signedTicket: Step = {
     <p class="diagram-note">
       Compare this to the plain ride ticket two steps back: the hub and layout are
       identical, but the buyer's <strong>handwritten signature</strong> turns three
-      <em>None</em>/weak answers <span style="color:#047857">green</span>. That
+      <em>None</em>/weak answers into strong sender-constrained answers. That
       signature is the DPoP proof — a fresh, per-request signature only the real
       key-holder can produce. Revocation stays limited, which is why short-lived
       tokens still matter.

@@ -16,12 +16,12 @@ export const eccEllipticCurves: Step = {
     "ECDSA: ECC's signature scheme — the elliptic-curve counterpart to RSA-PSS",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">RSA</div>
         <div class="node-sub">security from factoring — needs ~3072-bit keys for strong security</div>
       </div>
-      <div class="node node-proxy" style="flex: 1;">
+      <div class="node node-proxy equal">
         <div class="node-title">ECC</div>
         <div class="node-sub">security from the curve discrete log problem — ~256-bit keys, same strength</div>
       </div>

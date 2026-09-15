@@ -16,12 +16,12 @@ export const fullDiskEncryption: Step = {
   ],
   diagram: `
     <div class="flow">
-      <div class="node" style="border-color:#047857;">
-        <div class="node-title" style="color:#047857;">✅ Powered off / disk removed</div>
+      <div class="node trusted">
+        <div class="node-title text-trusted">Powered off / disk removed</div>
         <div class="node-sub">unreadable ciphertext without the key</div>
       </div>
-      <div class="node" style="border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">❌ Running &amp; mounted</div>
+      <div class="node attacker">
+        <div class="node-title text-warning">Running &amp; mounted</div>
         <div class="node-sub">every process sees ordinary plaintext — encryption is invisible above the disk layer</div>
       </div>
     </div>

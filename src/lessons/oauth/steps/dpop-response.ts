@@ -43,6 +43,12 @@ export const dpopResponse: Step = {
   ],
   sequence: {
     actors: OAUTH_ACTORS,
+    progress: {
+      goal: "Bind a token to an application-layer key",
+      already: ["Client proved possession of a DPoP private key"],
+      now: "Authorization server returns a DPoP-bound access token",
+      next: "Client presents the token with a fresh proof at the API",
+    },
     messages: [
       { from: "client", to: "as", label: "POST /token + DPoP proof" },
       { from: "as", to: "as", label: "Compute jkt = SHA-256(public key)" },

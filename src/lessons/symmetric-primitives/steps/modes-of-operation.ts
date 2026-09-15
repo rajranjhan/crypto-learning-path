@@ -17,16 +17,16 @@ export const modesOfOperation: Step = {
   ],
   diagram: `
     <div class="flow">
-      <div class="node" style="border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">❌ ECB</div>
+      <div class="node attacker">
+        <div class="node-title text-warning">❌ ECB</div>
         <div class="node-sub">identical blocks in → identical blocks out — leaks structure</div>
       </div>
       <div class="node">
         <div class="node-title">CBC / CTR</div>
         <div class="node-sub">no repeated patterns — but no built-in authentication</div>
       </div>
-      <div class="node" style="border-color:#047857;">
-        <div class="node-title" style="color:#047857;">✅ GCM</div>
+      <div class="node trusted">
+        <div class="node-title text-trusted">✅ GCM</div>
         <div class="node-sub">CTR encryption + a built-in authentication tag — what TLS actually uses</div>
       </div>
     </div>

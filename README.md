@@ -8,21 +8,29 @@ Built with plain TypeScript and [Vite](https://vitejs.dev/) — no UI framework,
 
 | Lesson | Slug |
 |---|---|
+| **Foundations** | |
 | Encryption Basics: Symmetric & Asymmetric Keys | `encryption-basics` |
-| Symmetric Primitives: AES, SHA & HMAC | `symmetric-primitives` |
-| Asymmetric Primitives: RSA, ECC & Diffie-Hellman | `asymmetric-primitives` |
+| Symmetric Cryptography: AES, SHA & HMAC | `symmetric-primitives` |
+| Asymmetric Cryptography: RSA, ECC & Diffie-Hellman | `asymmetric-primitives` |
+| **Identity and Trust** | |
 | PKI: Certificates, CAs & Trust Chains | `pki` |
 | TLS 1.2: Two-Round-Trip Handshake | `tls12` |
 | TLS 1.3: One-Round-Trip Handshake | `tls13` |
 | Mutual TLS: Client Authentication | `mtls` |
+| **Data Protection** | |
 | Encryption at Rest: Protecting Stored Data & Keys | `encryption-at-rest` |
+| **Authentication and Authorization** | |
 | Kerberos: Proving Who You Are with Tickets | `kerberos` |
 | OAuth: Fundamentals | `oauth` |
-| OAuth: Further Learning | `oauth-further-learning` |
+| OAuth: Tokens, Claims & Security | `oauth-further-learning` |
 | OAuth: Flows & Federation | `oauth-flows` |
-| Homomorphic Encryption: Computing on Encrypted Data | `homomorphic-encryption` |
+| **Advanced Cryptography** | |
 | Zero-Knowledge Proofs: Proving Without Revealing | `zero-knowledge-proofs` |
-| Quantum Cryptography: Threats to Today's Encryption | `quantum-cryptography` |
+| Homomorphic Encryption: Computing on Encrypted Data | `homomorphic-encryption` |
+| **Applied Cryptography** | |
+| Blockchain Cryptography: Hashes, Signatures & Consensus | `blockchain-cryptography` |
+| **Future of Cryptography** | |
+| Post-Quantum Cryptography: Preparing for Quantum Threats | `quantum-cryptography` |
 
 Each lesson is a sequence of steps. A step either dissects a real wire record byte-by-byte (hexdump + hover-linked annotations) or explains a concept via prose, bullets, a sequence diagram, or an authored diagram.
 
@@ -78,6 +86,8 @@ diagrams-src/                Editable .excalidraw sources for the PNGs in public
 Navigation is hash-based: `#/lesson/<slug>` (overview) or `#/lesson/<slug>/<step-index>`. There's no server-side routing to configure — it all resolves client-side in `main.ts`.
 
 ### Adding or editing a lesson
+
+See [AUTHORING.md](AUTHORING.md) for the full course authoring conventions: metadata, step structure, terminology, diagrams, accessibility, and validation rules.
 
 1. Add step content under `src/lessons/<slug>/steps/`.
 2. Assemble the steps into a lesson in `src/lessons/<slug>/lesson.ts`.

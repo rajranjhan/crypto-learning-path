@@ -3,11 +3,13 @@ import { buildSearchIndex, search } from "../src/search";
 import { registry } from "../src/lessons/registry";
 import { encryptionBasicsLesson } from "../src/lessons/encryption-basics/lesson";
 import { kerberosLesson } from "../src/lessons/kerberos/lesson";
+import { quantumCryptographyLesson } from "../src/lessons/quantum-cryptography/lesson";
 import type { Lesson } from "../src/types";
 
 const lessons: Record<string, Lesson> = {
   "encryption-basics": encryptionBasicsLesson,
   kerberos: kerberosLesson,
+  "quantum-cryptography": quantumCryptographyLesson,
 };
 
 describe("buildSearchIndex", () => {
@@ -71,5 +73,10 @@ describe("search", () => {
   it("caps results at the given limit", () => {
     const results = search("the", index, 3);
     expect(results.length).toBeLessThanOrEqual(3);
+  });
+
+  it("finds renamed lessons by old titles", () => {
+    const results = search("Threats to Today's Encryption", index);
+    expect(results.some((r) => r.slug === "quantum-cryptography" && r.step === "overview")).toBe(true);
   });
 });

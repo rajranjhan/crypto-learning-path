@@ -32,7 +32,7 @@ export const wristbandTicket: Step = {
       next. Instead of a signature you make yourself, the carnival
       <strong>issues you a wristband</strong> and ties the ticket to it — a
       credential you carry, checked at the gate. Three
-      <em>None</em>/weak answers turn <span style="color:#047857">green</span>,
+      <em>None</em>/weak answers become strong sender-constrained answers,
       including <strong>Issuer Trust</strong>, because the band comes from a
       trusted station. The Validity Window stays session-long — the band works all
       day — which is the main way this differs from DPoP's per-ride signature.

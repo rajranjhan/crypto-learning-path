@@ -17,26 +17,26 @@ export const fieldLevelEncryption: Step = {
     "Tokenization sidesteps the tradeoff: a random reference token lives in the main database, the real value lives in a separate, tightly access-controlled vault",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">TDE / Full-Disk</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+        <div class="node-sub left">
           Protects: a stolen disk, backup, snapshot<br>
           Doesn't protect: an ordinary DB query<br>
           Cost: none — fully transparent
         </div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Field-Level Encryption</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+        <div class="node-sub left">
           Protects: the above, plus a compromised app account or over-privileged DBA<br>
           Doesn't protect: whatever holds the app's encryption key<br>
           Cost: breaks indexing/search on that column
         </div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Tokenization</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+        <div class="node-sub left">
           Protects: the above — the real value never enters the main DB at all<br>
           Doesn't protect: the separate token vault itself<br>
           Cost: an extra network call to detokenize

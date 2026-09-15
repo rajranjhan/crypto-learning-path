@@ -16,12 +16,12 @@ export const passwordHashing: Step = {
   ],
   diagram: `
     <div class="flow">
-      <div class="node" style="border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">❌ SHA-256(password)</div>
+      <div class="node attacker">
+        <div class="node-title text-warning">❌ SHA-256(password)</div>
         <div class="node-sub">fast — billions of guesses/sec against a stolen database</div>
       </div>
-      <div class="node" style="border-color:#047857;">
-        <div class="node-title" style="color:#047857;">✅ Argon2(password)</div>
+      <div class="node trusted">
+        <div class="node-title text-trusted">✅ Argon2(password)</div>
         <div class="node-sub">deliberately slow &amp; memory-hard — orders of magnitude more expensive to brute-force</div>
       </div>
     </div>

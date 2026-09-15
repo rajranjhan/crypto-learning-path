@@ -1,10 +1,10 @@
 import type { SequenceActor, Step } from "../../../types";
 
 const SSO_ACTORS: SequenceActor[] = [
-  { id: "user", label: "You", icon: "🧑" },
-  { id: "app1", label: "Ferris Wheel App", icon: "🎡" },
-  { id: "idp", label: "Identity Office (OIDC Provider)", icon: "🪪" },
-  { id: "app2", label: "Roller Coaster App", icon: "🎢" },
+  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
+  { id: "app1", label: "Client (Ferris Wheel App)", icon: "🎡", role: "client" },
+  { id: "idp", label: "Identity Provider / Authorization Server", icon: "🪪", role: "trusted" },
+  { id: "app2", label: "Client (Roller Coaster App)", icon: "🎢", role: "client" },
 ];
 
 export const sso: Step = {
@@ -13,7 +13,7 @@ export const sso: Step = {
   prose:
     "<p>Every step so far has had you show ID at one booth for one ride. A real carnival has a dozen rides, and nobody wants to show ID a dozen times.</p>" +
     "<p>Here's the trick: it's still the same one office, run by the carnival, that every ride trusts. The first time you check in, the office remembers you're logged in — it keeps a little chit at its own counter, a session, not just the wristband it hands you. Walk up to the roller coaster, and its own check-in redirects you to that same office; the office notices you're already checked in and waves you through without asking for ID again, issuing a fresh, ride-specific wristband on the spot.</p>" +
-    "<p>That's <strong>Single Sign-On</strong>: not a new grant type, but the same OIDC login (from the OAuth vs. OIDC step in Further Learning) reused across many apps that all trust one identity office. You log in once; every app that trusts that same office gets its own token for you without making you log in again, as long as your session with the office is still active.</p>" +
+    "<p>That's <strong>Single Sign-On</strong>: not a new grant type, but the same OIDC login (from the OAuth vs. OIDC step in Tokens, Claims & Security) reused across many apps that all trust one identity office. You log in once; every app that trusts that same office gets its own token for you without making you log in again, as long as your session with the office is still active.</p>" +
     "<p>The office's session is the load-bearing piece: log out of it, or let it expire, and every ride stops recognizing you the next time you need a fresh wristband — even though the ride itself never saw you log out.</p>",
   bullets: [
     "SSO isn't a separate OAuth grant — it's OIDC login reused across multiple apps that trust the same identity provider",
@@ -23,6 +23,12 @@ export const sso: Step = {
   ],
   sequence: {
     actors: SSO_ACTORS,
+    progress: {
+      goal: "Reuse one identity-provider session across multiple clients",
+      already: ["User authenticated at the identity provider for App 1"],
+      now: "App 2 redirects to the same identity provider",
+      next: "Identity provider issues App 2 its own tokens without another login prompt",
+    },
     messages: [
       { from: "user", to: "app1", label: "Visit the Ferris Wheel app" },
       { from: "app1", to: "idp", label: "Redirect to log in" },

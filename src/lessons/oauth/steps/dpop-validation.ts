@@ -28,6 +28,12 @@ export const dpopValidation: Step = {
   ],
   sequence: {
     actors: OAUTH_ACTORS,
+    progress: {
+      goal: "Stop replay of a stolen access token",
+      already: ["Token is bound to the client's public key"],
+      now: "Resource server validates a fresh DPoP proof for this request",
+      next: "Reject callers that cannot prove possession of the private key",
+    },
     messages: [
       { from: "client", to: "rs", label: "API call: DPoP-bound token + fresh DPoP proof", highlight: true },
       { from: "rs", to: "rs", label: "Verify sig, jkt==SHA-256(jwk), htm/htu, iat/jti" },

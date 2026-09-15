@@ -17,6 +17,12 @@ export const stateAndRedirectUri: Step = {
   ],
   sequence: {
     actors: OAUTH_ACTORS_WITH_USER,
+    progress: {
+      goal: "Protect the authorization-code redirect",
+      already: ["Client is about to redirect the resource owner to the authorization server"],
+      now: "Client binds the returning response with state and an exact redirect_uri",
+      next: "Client rejects mismatched or misdelivered responses",
+    },
     messages: [
       { from: "client", to: "client", label: "Generate state; remember it" },
       { from: "client", to: "as", label: "Authorization request + state + redirect_uri" },

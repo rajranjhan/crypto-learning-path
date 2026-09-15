@@ -14,16 +14,16 @@ export const replayProtection: Step = {
   ],
   diagram: `
     <div class="flow">
-      <div class="node" style="border-color: #047857;">
-        <div class="node-title" style="color: #047857;">✅ Fresh Authenticator</div>
+      <div class="node trusted">
+        <div class="node-title text-trusted">Fresh Authenticator</div>
         <div class="node-sub">"9:41:03am" — inside the skew window, never seen before — accepted</div>
       </div>
-      <div class="node" style="border-color: #b91c1c;">
-        <div class="node-title" style="color: #b91c1c;">❌ Replayed Authenticator</div>
+      <div class="node attacker">
+        <div class="node-title text-warning">Replayed Authenticator</div>
         <div class="node-sub">the exact same sealed slip, shown again — rejected, already seen</div>
       </div>
-      <div class="node" style="border-color: #b91c1c;">
-        <div class="node-title" style="color: #b91c1c;">❌ Stale Authenticator</div>
+      <div class="node attacker">
+        <div class="node-title text-warning">Stale Authenticator</div>
         <div class="node-sub">"9:41:03am" shown at 10:15am — rejected, outside the skew window</div>
       </div>
     </div>

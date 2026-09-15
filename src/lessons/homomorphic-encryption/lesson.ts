@@ -13,6 +13,25 @@ export const homomorphicEncryptionLesson: Lesson = {
   slug: "homomorphic-encryption",
   title: "Homomorphic Encryption: Computing on Encrypted Data",
   status: "available",
+  summary: "Explains how some encryption schemes allow computation directly on ciphertext.",
+  whyItMatters:
+    "Homomorphic encryption addresses the hard case of data in use: letting someone compute without seeing the raw inputs. It is a major privacy-preserving computation tool, but its cost and constraints matter as much as its promise.",
+  objectives: [
+    "Distinguish partial and fully homomorphic encryption",
+    "Follow a small Paillier-style worked example",
+    "Explain noise growth and bootstrapping",
+    "Compare HE with MPC and TEEs",
+  ],
+  prerequisites: ["symmetric-primitives", "asymmetric-primitives"],
+  keyTakeaways: [
+    "Homomorphic encryption enables computation over encrypted data",
+    "Partial schemes support limited operations",
+    "Fully homomorphic encryption requires managing noise",
+    "Performance limits still shape real-world adoption",
+  ],
+  estimatedMinutes: 50,
+  difficulty: "Advanced",
+  lessonType: "concept",
   overview:
     "TLS protects data in transit. Encryption at Rest protects data sitting " +
     "still. This lesson covers the third, stranger state: data in use — " +
@@ -24,6 +43,10 @@ export const homomorphicEncryptionLesson: Lesson = {
     "example, the noise problem that stalled progress for decades, the " +
     "bootstrapping trick that finally solved it, and where this is — and " +
     "isn't — practical today.",
+  references: [
+    { title: "HomomorphicEncryption.org Security Standard", url: "https://homomorphicencryption.org/standard/" },
+    { title: "Microsoft SEAL Homomorphic Encryption Library", url: "https://github.com/microsoft/SEAL" },
+  ],
   diagram: `
     <div class="flow">
       <div class="node">

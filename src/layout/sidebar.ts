@@ -259,7 +259,7 @@ export function renderSidebar(
 
   const brand = document.createElement("a");
   brand.className = "sidebar-brand";
-  brand.href = "#/lesson/encryption-basics";
+  brand.href = "#/home";
 
   const brandIcon = document.createElement("img");
   brandIcon.className = "sidebar-brand-icon";

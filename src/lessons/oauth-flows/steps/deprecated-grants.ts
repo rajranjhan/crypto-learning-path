@@ -18,6 +18,12 @@ export const deprecatedGrants: Step = {
   ],
   sequence: {
     actors: OAUTH_ACTORS,
+    progress: {
+      goal: "Recognize flows that should not normally be used",
+      already: ["Authorization Code + PKCE covers modern browser and mobile clients"],
+      now: "Implicit exposes tokens in the redirect instead of using a code exchange",
+      next: "Avoid Implicit and ROPC; use Authorization Code + PKCE or a fit-for-purpose flow",
+    },
     messages: [
       { from: "client", to: "as", label: "Authorization request (Implicit grant, deprecated)" },
       { from: "as", to: "client", label: "⚠ access_token returned directly in the redirect URL fragment", highlight: true },

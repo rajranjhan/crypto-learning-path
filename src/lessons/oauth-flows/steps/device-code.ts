@@ -1,9 +1,9 @@
 import type { SequenceActor, Step } from "../../../types";
 
 const DEVICE_ACTORS: SequenceActor[] = [
-  { id: "device", label: "Device (Claw Machine)", icon: "🕹️" },
-  { id: "user", label: "You", icon: "🧑" },
-  { id: "as", label: "Authorization Server (Ticket Booth)", icon: "🎫" },
+  { id: "device", label: "Client (Claw Machine)", icon: "🕹️", role: "client" },
+  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
+  { id: "as", label: "Authorization Server (Ticket Booth)", icon: "🎫", role: "trusted" },
 ];
 
 export const deviceCode: Step = {
@@ -22,6 +22,12 @@ export const deviceCode: Step = {
   ],
   sequence: {
     actors: DEVICE_ACTORS,
+    progress: {
+      goal: "Authorize a limited-input device without typing credentials into it",
+      already: ["Device requested a device_code and user_code"],
+      now: "User approves on a separate capable device",
+      next: "Device polls until it receives an access token",
+    },
     messages: [
       { from: "device", to: "as", label: "Request device_code + user_code" },
       { from: "as", to: "device", label: "user_code: WXYZ-4821 + verification_uri" },

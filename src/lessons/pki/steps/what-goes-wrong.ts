@@ -17,18 +17,18 @@ export const whatGoesWrong: Step = {
     "Warning fatigue from repeated self-signed/expired-certificate warnings trains users to click through real ones too",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1; border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">DigiNotar (2011)</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+    <div class="flow">
+      <div class="node equal attacker">
+        <div class="node-title text-warning">DigiNotar (2011)</div>
+        <div class="node-sub left">
           CA compromised, issued fraudulent certs<br>
           Used in real surveillance<br>
           Root distrusted industry-wide
         </div>
       </div>
-      <div class="node" style="flex: 1; border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">Superfish (2015)</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+      <div class="node equal attacker">
+        <div class="node-title text-warning">Superfish (2015)</div>
+        <div class="node-sub left">
           Same private root key shipped on every device<br>
           Trivially extractable<br>
           Forgeable certs for any site

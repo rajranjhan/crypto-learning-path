@@ -16,26 +16,26 @@ export const partialVsFullyHomomorphic: Step = {
     "The first FHE construction wasn't published until 2009 (Craig Gentry) — the gap between SHE and FHE was a genuinely open problem for decades",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">Partial (PHE)</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+        <div class="node-sub left">
           One operation, unlimited times<br>
           Fast, well understood<br>
           e.g. RSA (×), Paillier (+)
         </div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Somewhat (SHE)</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+        <div class="node-sub left">
           + and × together, but a limited budget<br>
           Enough for small, fixed computations<br>
           Breaks past a depth limit
         </div>
       </div>
-      <div class="node node-proxy" style="flex: 1;">
+      <div class="node node-proxy equal">
         <div class="node-title">Fully (FHE)</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+        <div class="node-sub left">
           + and ×, unlimited depth<br>
           Arbitrary computation on ciphertext<br>
           First built in 2009

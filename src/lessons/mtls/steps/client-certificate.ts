@@ -19,6 +19,12 @@ export const clientCertificate: Step = {
   ],
   sequence: {
     actors: MTLS_ACTORS,
+    progress: {
+      goal: "Authenticate both sides of the TLS connection",
+      already: ["CertificateRequest", "ServerHelloDone"],
+      now: "Client sends its certificate chain",
+      next: "Client proves possession of the private key",
+    },
     messages: [
       { from: "server", to: "client", label: "CertificateRequest" },
       { from: "server", to: "client", label: "ServerHelloDone" },

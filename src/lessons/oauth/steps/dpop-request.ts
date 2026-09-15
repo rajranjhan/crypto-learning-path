@@ -43,6 +43,12 @@ export const dpopRequest: Step = {
   ],
   sequence: {
     actors: OAUTH_ACTORS,
+    progress: {
+      goal: "Bind a token to an application-layer key",
+      already: ["Client generated a public/private key pair"],
+      now: "Client sends a signed DPoP proof with the token request",
+      next: "Authorization server binds the token to that public key",
+    },
     messages: [
       { from: "client", to: "client", label: "Generate key pair; build & sign DPoP proof" },
       { from: "client", to: "as", label: "POST /token  +  DPoP: <proof JWT>", highlight: true },

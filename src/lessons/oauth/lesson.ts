@@ -1,31 +1,42 @@
 import type { Lesson } from "../../types";
+import { oauthActorMappingFigure, oauthSequenceFigure } from "../oauth-shared";
 import { tokenProperties } from "./steps/token-properties";
 import { carnivalTicket } from "./steps/carnival-ticket";
 import { authCode } from "./steps/auth-code";
 import { bearerWeakness } from "./steps/bearer-weakness";
 import { refreshToken } from "./steps/refresh-token";
-import { wristbandTicket } from "./steps/wristband-ticket";
-import { fapiMtls } from "./steps/fapi-mtls";
-import { signedTicket } from "./steps/signed-ticket";
-import { dpopRequest } from "./steps/dpop-request";
-import { dpopResponse } from "./steps/dpop-response";
-import { dpopValidation } from "./steps/dpop-validation";
-import { dpopVsFapi } from "./steps/dpop-vs-fapi";
 
 export const oauthLesson: Lesson = {
   slug: "oauth",
   title: "OAuth: Fundamentals",
   status: "available",
+  summary: "OAuth 1 introduces delegated authorization, the canonical OAuth actors, access tokens, the authorization code flow, bearer-token risks, and refresh tokens.",
+  whyItMatters:
+    "OAuth is how modern applications delegate API access without sharing passwords. It is an authorization framework, not by itself an authentication protocol; OpenID Connect adds the identity layer when an app needs to know who the user is.",
+  objectives: [
+    "Distinguish authorization from authentication in OAuth",
+    "Map Resource Owner, Client, Authorization Server, and Resource Server to the carnival metaphor",
+    "Explain access tokens, authorization codes, bearer tokens, and refresh tokens",
+    "Trace the authorization code flow with PKCE",
+  ],
+  prerequisites: ["tls12"],
+  keyTakeaways: [
+    "OAuth delegates authorization with tokens rather than passwords",
+    "OAuth access tokens are not identity assertions",
+    "Bearer tokens are powerful because possession is enough",
+    "Refresh tokens extend sessions and need stronger protection",
+  ],
+  estimatedMinutes: 45,
+  difficulty: "Intermediate",
+  lessonType: "protocol",
   overview:
-    "OAuth 2.0 lets apps call APIs on a user's behalf using tokens instead of " +
-    "passwords. This lesson starts from first principles — the six properties that " +
-    "define any token, made concrete with a carnival ride ticket — then walks from " +
-    "the basic access/refresh token exchange, through the weakness of bearer tokens, " +
-    "to the two ways of locking a token to its rightful owner: certificate-bound " +
-    "tokens (the FAPI approach) and DPoP. The same three actors appear in every " +
-    "flow, and we keep the carnival metaphor going: the Client is you, the " +
-    "Authorization Server is the ticket booth that sells you a ticket, and the " +
-    "Resource Server is the Ferris wheel you redeem it at — so you can follow how " +
-    "the flow changes as the security model tightens.",
-  steps: [tokenProperties, carnivalTicket, authCode, bearerWeakness, refreshToken, wristbandTicket, fapiMtls, signedTicket, dpopRequest, dpopResponse, dpopValidation, dpopVsFapi],
+    "OAuth 1 — Fundamentals starts the OAuth mini-course. OAuth is an authorization " +
+    "framework: it answers what an app may do at an API, not who the user is. " +
+    "OpenID Connect adds the authentication and identity layer on top. This lesson " +
+    "uses the carnival metaphor consistently: you are the Resource Owner, the app " +
+    "is the Client, the ticket booth is the Authorization Server, and the ride gate " +
+    "or kiosk is the Resource Server.",
+  figure: oauthSequenceFigure,
+  diagram: oauthActorMappingFigure.body,
+  steps: [tokenProperties, carnivalTicket, authCode, bearerWeakness, refreshToken],
 };

@@ -15,12 +15,12 @@ export const fiatShamirTransform: Step = {
     "A digital signature (Schnorr, and structurally ECDSA too) is a non-interactive zero-knowledge proof of knowing a private key, bound to a message",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">Interactive</div>
         <div class="node-sub">Victor must be online to generate a live, random challenge</div>
       </div>
-      <div class="node node-proxy" style="flex: 1;">
+      <div class="node node-proxy equal">
         <div class="node-title">Non-interactive (Fiat-Shamir)</div>
         <div class="node-sub">Peggy computes c = H(commitment) herself — verifiable by anyone, anytime</div>
       </div>

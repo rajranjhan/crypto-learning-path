@@ -15,12 +15,12 @@ export const theKeyDistributionProblem: Step = {
     "RSA, ECDHE, and ECDSA all appear by name in the TLS lessons ahead",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">Encryption</div>
         <div class="node-sub">public key locks 🔒, private key unlocks 🔓 — keeps a message secret</div>
       </div>
-      <div class="node node-proxy" style="flex: 1;">
+      <div class="node node-proxy equal">
         <div class="node-title">Signing</div>
         <div class="node-sub">private key locks ✍️, public key unlocks ✅ — proves who sent it</div>
       </div>

@@ -30,7 +30,7 @@ export const refreshToken: Step = {
       Same layout as the plain ride ticket two steps back, so you can compare them
       directly. The pass sits where the ride ticket sat, but its job is different:
       you <strong>trade it for ride tickets</strong> rather than ride with it. The
-      one property that turns <span style="color:#047857">green</span> is
+      one property that turns strong is
       <strong>Revocation</strong> — because the booth records every pass, it can
       cancel a lost one, something a plain bearer ticket could never offer.
     </p>

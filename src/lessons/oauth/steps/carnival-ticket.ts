@@ -2,15 +2,15 @@ import type { Step } from "../../../types";
 
 export const carnivalTicket: Step = {
   id: "carnival-ticket",
-  title: "A Token You Already Know — The Carnival Ride Ticket",
+  title: "Actors and Access Tokens — The Carnival Ride Ticket",
   prose:
-    "You've held a bearer token in real life: the ride ticket you buy at a " +
-    "carnival or festival. You pay at a booth, get a little paper stub, and later " +
-    "hand it over for a ride. Run it through the same six properties and you'll see " +
-    "it's a textbook bearer token — powerful because it's simple, but with almost " +
-    "none of the safety guarantees a real security token needs. That gap is exactly " +
-    "what the rest of this lesson closes.",
+    "<p>Now map the OAuth actors onto the carnival. You are the <strong>Resource Owner</strong>: the person who can approve access. The app is the <strong>Client</strong>: it wants to act with limited permission. The ticket booth is the <strong>Authorization Server</strong>: it applies policy and issues tokens. The ride gate is the <strong>Resource Server</strong>: the API that accepts or rejects the token.</p>" +
+    "<p>You've held a bearer token in real life: the ride ticket you buy at a carnival or festival. You pay at a booth, get a little paper stub, and later hand it over for a ride. Run it through the same six properties and you'll see it's a textbook bearer token — powerful because it's simple, but with almost none of the safety guarantees a real security token needs.</p>",
   bullets: [
+    "Resource Owner — you, the guest who can approve access",
+    "Client — the app asking for delegated access",
+    "Authorization Server — the ticket booth that issues tokens",
+    "Resource Server — the ride gate or API that validates tokens",
     "One use, or reusable? (Redemption Model) — Scoped: good for one item; one ticket, one ride",
     "What does it actually let you do? (Authorization) — Bearer: whoever holds the ticket gets the ride",
     "Where'd it come from, and why do you believe that? (Issuer Trust) — Implicit: trust is based on proximity & context (you're at the booth)",

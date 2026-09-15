@@ -1,4 +1,5 @@
 import type { Sequence } from "../types";
+import { renderProtocolProgress } from "./protocol-progress";
 
 /**
  * Render a UML-style sequence diagram: each actor gets a head (icon + label) and
@@ -23,6 +24,8 @@ export function renderSequence(seq: Sequence): HTMLElement {
   const root = document.createElement("div");
   root.className = "sequence";
 
+  if (seq.progress) root.appendChild(renderProtocolProgress(seq.progress));
+
   const actorIndex = new Map(seq.actors.map((a, i) => [a.id, i]));
   const cols = seq.actors.length;
 
@@ -32,7 +35,9 @@ export function renderSequence(seq: Sequence): HTMLElement {
   head.style.setProperty("--seq-cols", String(cols));
   seq.actors.forEach((a) => {
     const cell = document.createElement("div");
-    cell.className = "seq-actor";
+    const role = a.role ?? "neutral";
+    cell.className = `seq-actor seq-actor-${role}`;
+    cell.dataset.actorId = a.id;
     if (a.icon) {
       const icon = document.createElement("span");
       icon.className = "seq-actor-icon";

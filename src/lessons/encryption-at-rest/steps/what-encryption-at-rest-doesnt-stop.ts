@@ -16,19 +16,19 @@ export const whatEncryptionAtRestDoesntStop: Step = {
     "Encryption at rest is one control in a defense-in-depth stack, not a substitute for access control, least privilege, input validation, or monitoring",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1; border-color:#047857;">
-        <div class="node-title" style="color:#047857;">✅ Protects against</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+    <div class="flow">
+      <div class="node equal trusted">
+        <div class="node-title text-trusted">Protects against</div>
+        <div class="node-sub left">
           A stolen or decommissioned disk<br>
           A leaked backup or snapshot<br>
           A copied database export<br>
           A storage bucket read directly, outside the app
         </div>
       </div>
-      <div class="node" style="flex: 1; border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">❌ Doesn't protect against</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+      <div class="node equal attacker">
+        <div class="node-title text-warning">Doesn't protect against</div>
+        <div class="node-sub left">
           A compromised app credential<br>
           SQL injection or another live exploit<br>
           An over-privileged or malicious insider<br>

@@ -1,5 +1,9 @@
-import type { Step } from "../types";
+import type { Lesson, Step } from "../types";
 import { renderCallouts } from "./callout";
+import { renderFigure } from "./figure";
+import { renderGlossary } from "./glossary";
+import { renderLessonEnding } from "./lesson-ending";
+import { renderProtocolProgress } from "./protocol-progress";
 import { renderSequence } from "./sequence";
 import { renderTextBlock } from "./textblock";
 
@@ -29,6 +33,8 @@ export function renderHexdump(step: Step): HTMLElement {
       const ann = step.annotations![annIndex];
       span.classList.add(ann.colorClass);
       span.dataset.annotation = String(annIndex);
+      span.tabIndex = 0;
+      span.setAttribute("aria-label", `${ann.label}: ${ann.description}`);
     }
     container.appendChild(span);
     container.appendChild(document.createTextNode(" "));
@@ -37,7 +43,8 @@ export function renderHexdump(step: Step): HTMLElement {
   return container;
 }
 
-export function renderStepView(step: Step): HTMLElement {
+export function renderStepView(lesson: Lesson, index: number, nextLesson?: Lesson): HTMLElement {
+  const step = lesson.steps[index];
   const view = document.createElement("div");
   view.className = "step-view";
 
@@ -49,6 +56,8 @@ export function renderStepView(step: Step): HTMLElement {
   prose.className = "prose";
   prose.innerHTML = step.prose; // Static authored markup, no user data.
   view.appendChild(prose);
+
+  if (step.protocolProgress) view.appendChild(renderProtocolProgress(step.protocolProgress));
 
   if (step.bullets?.length) {
     const list = document.createElement("ul");
@@ -68,14 +77,13 @@ export function renderStepView(step: Step): HTMLElement {
   // Concept steps carry no wire bytes: render their authored diagram and/or
   // annotated text block, and skip the hexdump columns entirely.
   if (!step.bytes?.length) {
-    if (step.diagram) {
-      const diagram = document.createElement("div");
-      diagram.className = "diagram";
-      diagram.innerHTML = step.diagram; // Static authored markup, no user data.
-      view.appendChild(diagram);
+    if (step.figure ?? step.diagram) {
+      view.appendChild(renderFigure(step.figure ?? step.diagram!));
     }
     if (step.textBlock) view.appendChild(renderTextBlock(step.textBlock));
+    if (step.glossary?.length) view.appendChild(renderGlossary(step.glossary));
     if (step.callouts?.length) view.appendChild(renderCallouts(step.callouts));
+    if (index === lesson.steps.length - 1) view.appendChild(renderLessonEnding(lesson, nextLesson));
     return view;
   }
 
@@ -93,6 +101,7 @@ export function renderStepView(step: Step): HTMLElement {
     const ann = document.createElement("div");
     ann.className = "annotation";
     ann.dataset.annotation = String(i);
+    ann.tabIndex = 0;
     // Build with textContent (not innerHTML) so authored labels/descriptions
     // containing characters like `<` or `&` render literally.
     const label = document.createElement("strong");
@@ -125,10 +134,14 @@ export function renderStepView(step: Step): HTMLElement {
   hex.querySelectorAll<HTMLElement>(".hex-byte").forEach((b) => {
     b.addEventListener("mouseenter", () => setActive(b.dataset.annotation, true));
     b.addEventListener("mouseleave", () => setActive(b.dataset.annotation, false));
+    b.addEventListener("focus", () => setActive(b.dataset.annotation, true));
+    b.addEventListener("blur", () => setActive(b.dataset.annotation, false));
   });
   right.querySelectorAll<HTMLElement>(".annotation").forEach((a) => {
     a.addEventListener("mouseenter", () => setActive(a.dataset.annotation, true));
     a.addEventListener("mouseleave", () => setActive(a.dataset.annotation, false));
+    a.addEventListener("focus", () => setActive(a.dataset.annotation, true));
+    a.addEventListener("blur", () => setActive(a.dataset.annotation, false));
   });
 
   columns.appendChild(left);
@@ -136,6 +149,8 @@ export function renderStepView(step: Step): HTMLElement {
   view.appendChild(columns);
 
   if (step.callouts?.length) view.appendChild(renderCallouts(step.callouts));
+  if (step.glossary?.length) view.appendChild(renderGlossary(step.glossary));
+  if (index === lesson.steps.length - 1) view.appendChild(renderLessonEnding(lesson, nextLesson));
 
   return view;
 }

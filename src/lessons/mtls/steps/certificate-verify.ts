@@ -20,6 +20,12 @@ export const certificateVerify: Step = {
   ],
   sequence: {
     actors: MTLS_ACTORS,
+    progress: {
+      goal: "Authenticate both sides of the TLS connection",
+      already: ["Client Certificate", "ClientKeyExchange"],
+      now: "Client signs the handshake transcript",
+      next: "Handshake finishes and encrypted application data flows",
+    },
     messages: [
       { from: "client", to: "server", label: "Certificate", note: "client's cert" },
       { from: "client", to: "server", label: "ClientKeyExchange" },

@@ -41,13 +41,13 @@ export const stream: Step = {
         <div class="node-sub">byte by byte, for the length of the message</div>
       </div>
     </div>
-    <div class="flow" style="margin-top: 16px;">
-      <div class="node" style="border-color: #047857;">
-        <div class="node-title" style="color: #047857;">✅ Fresh nonce, every message</div>
+    <div class="flow spaced">
+      <div class="node trusted">
+        <div class="node-title text-trusted">✅ Fresh nonce, every message</div>
         <div class="node-sub">a brand-new, never-repeating keystream each time — safe</div>
       </div>
-      <div class="node" style="border-color: #b91c1c;">
-        <div class="node-title" style="color: #b91c1c;">❌ Reused nonce</div>
+      <div class="node attacker">
+        <div class="node-title text-warning">❌ Reused nonce</div>
         <div class="node-sub">the same keystream twice — XOR the two ciphertexts and the keystream cancels out entirely</div>
       </div>
     </div>

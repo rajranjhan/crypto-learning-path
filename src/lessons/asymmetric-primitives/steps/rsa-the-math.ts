@@ -18,13 +18,22 @@ export const rsaTheMath: Step = {
   prose:
     "<p>RSA's security rests on one asymmetry: multiplying two large prime numbers together is fast, but factoring that product back into its two primes is, for large enough primes, computationally infeasible with any known algorithm. Key generation exploits that gap directly.</p>" +
     "<p>Pick two large secret primes, p and q, and multiply them to get the public modulus n = p × q. Compute Euler's totient, φ(n) = (p-1)(q-1) — a value that stays secret, since computing it requires knowing p and q individually. Choose a public exponent e (65537 is the near-universal real-world choice; this example uses a smaller number for readability) that shares no common factor with φ(n), then compute the private exponent d as e's modular inverse mod φ(n): the one number that makes e × d ≡ 1 (mod φ(n)).</p>" +
-    "<p>The public key is the pair (e, n); the private key is (d, n). Encryption raises the message to the e-th power mod n; decryption raises the ciphertext to the d-th power mod n — and thanks to how modular exponentiation and the totient interact, that always recovers the original message exactly. The numbers below are real, computed values, deliberately tiny — production RSA uses primes hundreds of digits long, but the relationship holds identically at any size.</p>",
+    "<p>The public key is the pair (e, n); the private key is (d, n). In the textbook encryption direction, encryption raises the message to the e-th power mod n; decryption raises the ciphertext to the d-th power mod n. In the signature direction, the private key produces a value that the public key can verify. The same key pair supports both families of operations, but modern systems treat them as different jobs with different padding rules and usually different keys. The numbers below are real, computed values, deliberately tiny — production RSA uses primes hundreds of digits long, but the relationship holds identically at any size.</p>",
   bullets: [
     "n = p × q, where p and q are two large secret primes — n itself is public",
     "φ(n) = (p-1)(q-1) — Euler's totient, computable only if you know p and q, so it stays secret",
     "Public key: (e, n). Private key: (d, n), where d is e's modular inverse mod φ(n)",
-    "Encrypt: c = m^e mod n. Decrypt: m = c^d mod n — always recovers the original message",
+    "Textbook encrypt/decrypt direction: c = m^e mod n, then m = c^d mod n",
+    "Signature direction is a different job: private-key signing, public-key verification",
     "Security rests entirely on factoring n back into p and q being infeasible at real key sizes (2048+ bits)",
+  ],
+  callouts: [
+    {
+      type: "security-warning",
+      requirementId: "Raw RSA",
+      title: "This math is not an API recommendation",
+      body: "The worked example shows why RSA works. Real systems do not use direct/raw RSA; they use padding schemes such as OAEP for encryption and PSS for signatures, or avoid RSA encryption entirely.",
+    },
   ],
   textBlock: {
     lang: "text",

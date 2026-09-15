@@ -3,8 +3,8 @@ import type { SequenceActor, Step } from "../../../types";
 // Local to this step: the attacker doesn't check in through the normal flow,
 // so KERBEROS_ACTORS' "You" column doesn't fit — this needs its own lifeline.
 const FORGERY_ACTORS: SequenceActor[] = [
-  { id: "attacker", label: "Attacker", icon: "🕵️" },
-  { id: "door", label: "Backstage Door (Service)", icon: "🚪" },
+  { id: "attacker", label: "Attacker", icon: "🕵️", role: "attacker" },
+  { id: "door", label: "Backstage Door (Service)", icon: "🚪", role: "server" },
 ];
 
 export const goldenSilverTicket: Step = {
@@ -23,6 +23,12 @@ export const goldenSilverTicket: Step = {
   ],
   sequence: {
     actors: FORGERY_ACTORS,
+    progress: {
+      goal: "Understand ticket-forgery attacks against Kerberos trust material",
+      already: ["Normal AS/TGS issuance is bypassed"],
+      now: "Attacker forges a ticket using stolen long-lived key material",
+      next: "Defend by protecting and rotating the keys that sign/seal tickets",
+    },
     messages: [
       { from: "attacker", to: "attacker", label: "⚠ Steals the door's own secret (no Staff House visit)", highlight: true },
       { from: "attacker", to: "attacker", label: "Forges a Door Pass + Authenticator, entirely offline", highlight: true },
@@ -30,4 +36,12 @@ export const goldenSilverTicket: Step = {
       { from: "door", to: "attacker", label: "Accepted — the seal checks out; the door has no way to know it's forged" },
     ],
   },
+  callouts: [
+    {
+      type: "security-warning",
+      requirementId: "Ticket forgery",
+      title: "These are attacks, not Kerberos features",
+      body: "Golden and Silver Tickets are names for forged-ticket attack techniques after key compromise. They are not normal login flows and should never appear in healthy Kerberos operation.",
+    },
+  ],
 };

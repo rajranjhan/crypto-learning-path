@@ -13,6 +13,10 @@ export const backstageBadges: Step = {
     "KDC (Key Distribution Center) — the Staff House: one building holding everyone's secrets",
     "AS (Authentication Server) — the Check-In Window: verifies who you are, once per day",
     "TGS (Ticket Granting Server) — the Backstage Desk: trades your morning check-in for a pass to a specific door, as many times as you need",
+    "TGT / Day Badge — a ticket sealed for the KDC, carried by you but readable by the Staff House",
+    "Service ticket / Door Pass — a ticket sealed for one service, readable by that service",
+    "Session key / Code word — the fresh symmetric key two parties use after each exchange",
+    "Authenticator / Timestamp slip — fresh proof that this request is happening now",
     "Service — a backstage door, already sharing its own secret with the Staff House",
   ],
   diagram: `
@@ -26,15 +30,15 @@ export const backstageBadges: Step = {
         <div class="link-label">check in once, each morning</div>
         <div class="arrow">→</div>
       </div>
-      <div class="node" style="border-color: var(--accent); box-shadow: 0 0 0 2px rgba(37,99,235,0.15);">
+      <div class="node trusted">
         <div class="node-title">Staff House (KDC)</div>
-        <div style="display: flex; gap: 8px; margin-top: 10px;">
-          <div class="node" style="flex: 1; min-width: 0; padding: 8px;">
-            <div class="node-title" style="font-size: 12px;">Check-In Window</div>
+        <div class="flow spaced">
+          <div class="node compact compact-padding">
+            <div class="node-title small">Check-In Window</div>
             <div class="node-sub">Authentication Server (AS)</div>
           </div>
-          <div class="node" style="flex: 1; min-width: 0; padding: 8px;">
-            <div class="node-title" style="font-size: 12px;">Backstage Desk</div>
+          <div class="node compact compact-padding">
+            <div class="node-title small">Backstage Desk</div>
             <div class="node-sub">Ticket Granting Server (TGS)</div>
           </div>
         </div>

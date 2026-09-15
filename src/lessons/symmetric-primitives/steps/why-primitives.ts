@@ -14,16 +14,16 @@ export const whyPrimitives: Step = {
     "A TLS cipher suite name like TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 is literally a list of these primitives glued together",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">AES</div>
         <div class="node-sub">🔒 confidentiality — reversible with the key</div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">SHA-2</div>
         <div class="node-sub">🔍 fingerprinting — irreversible, detects change</div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">HMAC</div>
         <div class="node-sub">✍️ authenticity — proves who, using a shared secret</div>
       </div>

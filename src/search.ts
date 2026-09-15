@@ -23,6 +23,35 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
 
+function overviewSearchText(lesson: Lesson): string {
+  return [
+    lesson.summary,
+    lesson.whyItMatters,
+    ...(lesson.objectives ?? []),
+    ...(lesson.keyTakeaways ?? []),
+    ...(lesson.references ?? []).map((ref) => ref.title),
+    stripHtml(lesson.overview ?? ""),
+    ...(lessonAliases[lesson.slug] ?? []),
+  ].join(" ");
+}
+
+const lessonAliases: Record<string, string[]> = {
+  "oauth-further-learning": [
+    "OAuth: Further Learning",
+    "OAuth tokens claims security",
+    "OAuth 2",
+  ],
+  "oauth-flows": ["OAuth 3", "federation", "authorization code PKCE"],
+  oauth: ["OAuth 1", "authorization framework"],
+  "quantum-cryptography": [
+    "Quantum Cryptography: Threats to Today's Encryption",
+    "post quantum",
+    "harvest now decrypt later",
+  ],
+  "asymmetric-primitives": ["asymmetric primitives"],
+  "symmetric-primitives": ["symmetric primitives"],
+};
+
 /** Build a flat, searchable index of every available lesson's overview and steps. */
 export function buildSearchIndex(registry: RegistryEntry[], lessons: Record<string, Lesson>): SearchEntry[] {
   const entries: SearchEntry[] = [];
@@ -37,17 +66,19 @@ export function buildSearchIndex(registry: RegistryEntry[], lessons: Record<stri
       lessonTitle: lesson.title,
       step: "overview",
       title: "Overview",
-      text: stripHtml(lesson.overview ?? ""),
+      text: overviewSearchText(lesson),
     });
 
     lesson.steps.forEach((step, i) => {
       const bulletText = (step.bullets ?? []).join(" ");
+      const glossaryText = (step.glossary ?? []).map((g) => `${g.term} ${g.definition}`).join(" ");
+      const calloutText = (step.callouts ?? []).map((c) => `${c.title} ${c.body}`).join(" ");
       entries.push({
         slug: lesson.slug,
         lessonTitle: lesson.title,
         step: i,
         title: step.title,
-        text: `${stripHtml(step.prose)} ${bulletText}`,
+        text: `${stripHtml(step.prose)} ${bulletText} ${glossaryText} ${calloutText}`,
       });
     });
   }

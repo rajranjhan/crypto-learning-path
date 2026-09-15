@@ -17,18 +17,18 @@ export const deprecatedAndWhy: Step = {
     "None of these are theoretical concerns — every one has a documented, real-world attack behind its deprecation",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1; border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">❌ Retired</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+    <div class="flow">
+      <div class="node equal attacker">
+        <div class="node-title text-warning">❌ Retired</div>
+        <div class="node-sub left">
           DES, 3DES — broken/weak block ciphers<br>
           MD5, SHA-1 — broken hash functions<br>
           RC4 — biased stream cipher
         </div>
       </div>
-      <div class="node" style="flex: 1; border-color:#047857;">
-        <div class="node-title" style="color:#047857;">✅ Current standard</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+      <div class="node equal trusted">
+        <div class="node-title text-trusted">✅ Current standard</div>
+        <div class="node-sub left">
           AES-GCM / ChaCha20-Poly1305<br>
           SHA-256/384/512 (SHA-2), or SHA-3<br>
           Any AEAD construction, never a bare stream cipher

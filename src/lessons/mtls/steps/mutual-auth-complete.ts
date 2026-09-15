@@ -14,7 +14,9 @@ export const mutualAuthComplete: Step = {
     "mTLS lets an OAuth authorization server bind an access token to the client's " +
     "certificate (RFC 8705), so a stolen token is useless without the client's " +
     "private key. That idea — a token tied to a key — is exactly where the OAuth " +
-    "lessons pick up the thread.",
+    "lessons pick up the thread. Recap: ordinary TLS authenticates the server; " +
+    "mTLS keeps that server authentication and adds client certificate authentication " +
+    "before application data is accepted.",
   bullets: [
     "Both parties are now authenticated; the handshake completes like normal TLS",
     "Used for service-to-service auth, API gateways, and zero-trust networks",
@@ -22,6 +24,12 @@ export const mutualAuthComplete: Step = {
   ],
   sequence: {
     actors: MTLS_ACTORS,
+    progress: {
+      goal: "Authenticate both sides of the TLS connection",
+      already: ["Client Certificate", "CertificateVerify", "Finished"],
+      now: "Both sides exchange encrypted application data",
+      next: "Use certificate-bound identity in systems such as OAuth",
+    },
     messages: [
       { from: "client", to: "server", label: "CertificateVerify" },
       { from: "client", to: "server", label: "Finished" },
@@ -31,6 +39,12 @@ export const mutualAuthComplete: Step = {
     ],
   },
   callouts: [
+    {
+      type: "key-idea",
+      requirementId: "mTLS recap",
+      title: "What mTLS adds",
+      body: "mTLS is not a separate transport protocol. It is TLS with client certificate authentication added, so both sides prove possession of private keys tied to trusted certificates.",
+    },
     {
       requirementId: "Versions",
       title: "mTLS still requires TLS ≥ 1.2",

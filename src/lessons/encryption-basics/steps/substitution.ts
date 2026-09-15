@@ -21,13 +21,13 @@ export const substitution: Step = {
     "Weakness: the substitution preserves the shape of the underlying message — repeated letters stay repeated, and common letters stay common. That statistical fingerprint is what frequency analysis reads",
   ],
   diagram: `
-    <div style="font-family: ui-monospace, monospace; background: var(--hex-bg); color: var(--hex-fg); padding: 14px; border-radius: 8px; font-size: 14px; line-height: 2; overflow-x: auto; white-space: pre;">
+    <div class="mono-panel">
 Plain:   A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 Cipher:  Q W E R T Y U I O P A S D F G H J K L Z X C V B N M</div>
-    <div class="flow" style="margin-top: 16px;">
+    <div class="flow spaced">
       <div class="node">
         <div class="node-title">Plaintext</div>
-        <div class="node-sub" style="font-family: ui-monospace, monospace; font-size: 16px;">HELLO</div>
+        <div class="node-sub mono large">HELLO</div>
       </div>
       <div class="link">
         <div class="lock">🔑</div>
@@ -36,7 +36,7 @@ Cipher:  Q W E R T Y U I O P A S D F G H J K L Z X C V B N M</div>
       </div>
       <div class="node node-proxy">
         <div class="node-title">Ciphertext</div>
-        <div class="node-sub" style="font-family: ui-monospace, monospace; font-size: 16px;">ITSSG</div>
+        <div class="node-sub mono large">ITSSG</div>
       </div>
     </div>
     <p class="diagram-note">

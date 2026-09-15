@@ -26,7 +26,7 @@ export const block: Step = {
     <div class="flow">
       <div class="node">
         <div class="node-title">Plaintext block</div>
-        <div class="node-sub" style="font-family: ui-monospace, monospace;">128 bits</div>
+        <div class="node-sub mono">128 bits</div>
       </div>
       <div class="link">
         <div class="lock">🔐</div>
@@ -35,16 +35,16 @@ export const block: Step = {
       </div>
       <div class="node node-proxy">
         <div class="node-title">Ciphertext block</div>
-        <div class="node-sub" style="font-family: ui-monospace, monospace;">128 bits, ~50% of bits flipped</div>
+        <div class="node-sub mono">128 bits, ~50% of bits flipped</div>
       </div>
     </div>
-    <div class="flow" style="margin-top: 16px;">
-      <div class="node" style="border-color: #b91c1c;">
-        <div class="node-title" style="color: #b91c1c;">⚠️ ECB mode</div>
+    <div class="flow spaced">
+      <div class="node attacker">
+        <div class="node-title text-warning">⚠️ ECB mode</div>
         <div class="node-sub">same plaintext block in → same ciphertext block out, every time. Repeated structure in the message leaks straight through.</div>
       </div>
-      <div class="node" style="border-color: #047857;">
-        <div class="node-title" style="color: #047857;">✅ CBC / GCM mode</div>
+      <div class="node trusted">
+        <div class="node-title text-trusted">✅ CBC / GCM mode</div>
         <div class="node-sub">each block is mixed with something that changes block to block (an IV or counter), so identical plaintext blocks produce different ciphertext.</div>
       </div>
     </div>

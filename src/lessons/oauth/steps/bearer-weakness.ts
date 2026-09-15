@@ -24,6 +24,12 @@ export const bearerWeakness: Step = {
   ],
   sequence: {
     actors: OAUTH_ACTORS,
+    progress: {
+      goal: "Understand why bearer-token possession is risky",
+      already: ["Authorization server issued an access token"],
+      now: "Anyone holding the bearer token can present it",
+      next: "Constrain tokens to a sender with mTLS or DPoP",
+    },
     messages: [
       { from: "as", to: "client", label: "access_token (bearer ride ticket)" },
       { from: "client", to: "rs", label: "Show ticket at the gate: Bearer <token>" },

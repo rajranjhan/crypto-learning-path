@@ -1,4 +1,5 @@
 import type { Lesson } from "../../types";
+import { tlsComparisonFigure } from "../tls-comparison";
 import { clientHello } from "./steps/client-hello";
 import { serverHello } from "./steps/server-hello";
 import { certificate } from "./steps/certificate";
@@ -12,12 +13,32 @@ export const tls12Lesson: Lesson = {
   slug: "tls12",
   title: "TLS 1.2: Two-Round-Trip Handshake",
   status: "available",
+  summary: "Dissects the TLS 1.2 handshake as a byte-level walkthrough from ClientHello to encrypted application data.",
+  whyItMatters:
+    "TLS is the main protocol that protects web traffic in transit. TLS 1.2 shows the moving parts clearly: negotiation, certificates, ECDHE key exchange, Finished messages, and the transition to encrypted data.",
+  objectives: [
+    "Follow the TLS 1.2 handshake message order",
+    "Identify where certificates and key exchange appear",
+    "Explain how the handshake derives keys before application data",
+    "Read key fields from real TLS records",
+  ],
+  prerequisites: ["pki", "symmetric-primitives", "asymmetric-primitives"],
+  keyTakeaways: [
+    "TLS 1.2 needs multiple visible handshake messages before encryption starts",
+    "Certificates authenticate the server's public key",
+    "ECDHE establishes fresh shared key material",
+    "Finished messages prove both sides derived the same keys",
+  ],
+  estimatedMinutes: 45,
+  difficulty: "Intermediate",
+  lessonType: "protocol",
   overview:
     "You want to send a confidential document to your bank, but the mail has to " +
     "pass through a shared office mailroom where anyone can peek. TLS is what seals " +
     "that envelope: a handshake that lets you and the bank agree on a shared secret " +
     "in full view of that mailroom, then use it to encrypt everything that follows. " +
-    "Walk through each record byte by byte below.",
+    "TLS 1.2 is the longer version of the story: most handshake messages remain visible until both sides send ChangeCipherSpec and Finished. Walk through each record byte by byte below.",
+  figure: tlsComparisonFigure,
   diagram: `
     <img class="diagram-img" src="diagrams/tls-mailroom.svg"
          alt="A sender (YOU) and recipient (BANK) on either side of a shared office mailroom. Inside the mailroom, an open envelope labeled 'confidential document' sits exposed with its contents visible, while a coworker peeks at it." />

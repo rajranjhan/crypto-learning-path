@@ -17,12 +17,12 @@ export const keyRotationCryptoShredding: Step = {
   ],
   diagram: `
     <div class="flow">
-      <div class="node" style="border-color:#047857;">
-        <div class="node-title" style="color:#047857;">✅ Rotate the KEK</div>
+      <div class="node trusted">
+        <div class="node-title text-trusted">Rotate the KEK</div>
         <div class="node-sub">unwrap + rewrap every DEK — seconds, regardless of data size</div>
       </div>
-      <div class="node" style="border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">❌ Rotate a DEK</div>
+      <div class="node warning">
+        <div class="node-title">Rotate a DEK</div>
         <div class="node-sub">re-encrypt every byte it protects — slow, scales with data size</div>
       </div>
     </div>

@@ -1,10 +1,10 @@
 import type { SequenceActor, Step } from "../../../types";
 
 const XAA_ACTORS: SequenceActor[] = [
-  { id: "user", label: "You", icon: "🧑" },
-  { id: "appA", label: "Carnival A's App", icon: "🎠" },
-  { id: "idp", label: "Shared Identity Office", icon: "🪪" },
-  { id: "appB", label: "Carnival B's App", icon: "🎡" },
+  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
+  { id: "appA", label: "Client (Carnival A's App)", icon: "🎠", role: "client" },
+  { id: "idp", label: "Shared Identity Office", icon: "🪪", role: "trusted" },
+  { id: "appB", label: "Client / Authorization Server (Carnival B)", icon: "🎡", role: "server" },
 ];
 
 export const crossAppAccess: Step = {
@@ -13,7 +13,7 @@ export const crossAppAccess: Step = {
   prose:
     "<p>So far every ticket and every trade has stayed inside one carnival. What if you need into a completely different carnival next door — a different company, a different booth, a different Ferris wheel — one you've never registered with directly?</p>" +
     "<p>Say both carnivals, despite being separate businesses, contract with the same regional identity office to vouch for season-pass holders. You're already recognized there because Carnival A's booth already checked you in. Walk up to Carnival B's gate, and instead of registering from scratch, Carnival B's booth can ask that same shared office directly: \"this guest is vouched for by you at Carnival A — assert that to me, and I'll issue my own scoped pass.\"</p>" +
-    "<p>That's <strong>Cross-App Access (XAA)</strong>, formally the Identity Assertion Authorization Grant — an emerging spec, still an IETF draft as of this writing, that extends the shared office's job from just handling logins (SSO) to also brokering API access between apps that never had a direct relationship with each other. The office issues Carnival A's app a signed identity assertion naming Carnival B; Carnival A's app hands that assertion to Carnival B's own booth, which trades it — using the same Token Exchange machinery from the previous step — for a real, scoped access token.</p>" +
+    "<p>That's <strong>Cross-App Access (XAA)</strong>, formally the Identity Assertion Authorization Grant, which extends the shared office's job from just handling logins (SSO) to also brokering API access between apps that never had a direct relationship with each other. The office issues Carnival A's app a signed identity assertion naming Carnival B; Carnival A's app hands that assertion to Carnival B's own booth, which trades it — using the same Token Exchange machinery from the previous step — for a real, scoped access token.</p>" +
     "<p>The two carnivals still never talk to each other directly, and neither one had to register the other as a known client. All either one needs is the same shared trust in the identity office — which is exactly what makes this practical for the newest use case driving it: an AI agent or app that needs to reach into a dozen different SaaS tools on your behalf, without a dozen separate one-off OAuth relationships to set up first.</p>",
   bullets: [
     "Cross-App Access (XAA) / Identity Assertion Authorization Grant (ID-JAG): a still-in-draft IETF spec, not yet a finished RFC",
@@ -25,6 +25,12 @@ export const crossAppAccess: Step = {
   ],
   sequence: {
     actors: XAA_ACTORS,
+    progress: {
+      goal: "Federate access across independent apps through shared trust",
+      already: ["User is known at Carnival A and the shared identity office"],
+      now: "Carnival A obtains and presents an identity assertion for Carnival B",
+      next: "Carnival B exchanges the assertion for its own scoped access token",
+    },
     messages: [
       { from: "user", to: "appA", label: "Already recognized here via SSO" },
       { from: "appA", to: "idp", label: "Request identity assertion for Carnival B", highlight: true },

@@ -7,9 +7,33 @@ export interface Annotation {
 }
 
 export interface Callout {
+  type?: "key-idea" | "security-warning" | "dont-confuse" | "real-world" | "under-the-hood" | "legacy";
   requirementId: string;
   title: string;
   body: string;
+}
+
+export interface Figure {
+  body: string;
+  caption?: string;
+  variant?: "default" | "wide" | "compact";
+}
+
+export interface GlossaryTerm {
+  term: string;
+  definition: string;
+}
+
+export interface CheckYourUnderstanding {
+  question: string;
+  answer?: string;
+}
+
+export interface ProtocolProgress {
+  goal?: string;
+  already?: string[];
+  now: string;
+  next?: string;
 }
 
 /** One annotated line of a JWT/JSON/HTTP block, mirroring the hex annotation model for text. */
@@ -34,6 +58,7 @@ export interface SequenceActor {
   label: string;
   /** Optional glyph shown in the actor's head (e.g. an emoji for app/server). */
   icon?: string;
+  role?: "client" | "server" | "trusted" | "warning" | "attacker" | "neutral" | "encrypted" | "public";
 }
 
 /** One ordered message arrow between two actors in a sequence diagram. */
@@ -50,6 +75,7 @@ export interface SequenceMessage {
 export interface Sequence {
   actors: SequenceActor[];
   messages: SequenceMessage[];
+  progress?: ProtocolProgress;
 }
 
 export interface Step {
@@ -68,10 +94,13 @@ export interface Step {
   bullets?: string[];
   /** Optional authored HTML diagram, shown where the hexdump normally sits. */
   diagram?: string;
+  figure?: Figure;
   /** Optional annotated JWT/JSON/HTTP block with hover-linked, per-line annotations. */
   textBlock?: TextBlock;
   /** Optional sequence diagram (actors + ordered messages). */
   sequence?: Sequence;
+  protocolProgress?: ProtocolProgress;
+  glossary?: GlossaryTerm[];
   callouts?: Callout[];
   /**
    * Ids of other steps in the same lesson (e.g. concrete examples) to nest
@@ -95,11 +124,22 @@ export interface Lesson {
   slug: string;
   title: string;
   status: "available" | "coming-soon";
+  summary: string;
+  whyItMatters: string;
+  objectives: string[];
+  prerequisites?: string[];
+  keyTakeaways: string[];
+  estimatedMinutes?: number;
+  difficulty?: "Beginner" | "Intermediate" | "Advanced";
+  lessonType?: "concept" | "protocol" | "application";
+  references?: { title: string; url: string }[];
+  checkYourUnderstanding?: CheckYourUnderstanding[];
   steps: Step[];
-  /** Optional overview intro prose. Falls back to the default TLS copy when absent. */
+  /** Optional overview intro prose. */
   overview?: string;
   /** Optional authored HTML diagram shown on the overview page, below the intro prose. */
   diagram?: string;
+  figure?: Figure;
 }
 
 export interface RegistryEntry {

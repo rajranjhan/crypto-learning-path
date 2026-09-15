@@ -15,26 +15,26 @@ export const heVsMpcVsTee: Step = {
     "None of these are mutually exclusive — production confidential-computing systems often combine two or more",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">Homomorphic Encryption</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+        <div class="node-sub left">
           One owner, one untrusted computer<br>
           Pure cryptography<br>
           Very slow, no hardware trust needed
         </div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Secure MPC</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+        <div class="node-sub left">
           Several parties, jointly computing<br>
           Active communication during the protocol<br>
           Faster than FHE, still no hardware trust
         </div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Trusted Execution Environment</div>
-        <div class="node-sub" style="text-align: left; margin-top: 8px;">
+        <div class="node-sub left">
           Plaintext, inside a hardware enclave<br>
           Fastest of the three<br>
           Trust shifts to the hardware vendor

@@ -11,8 +11,27 @@ import { checklist } from "./steps/checklist";
 
 export const asymmetricPrimitivesLesson: Lesson = {
   slug: "asymmetric-primitives",
-  title: "Asymmetric Primitives: RSA, ECC & Diffie-Hellman",
+  title: "Asymmetric Cryptography: RSA, ECC & Diffie-Hellman",
   status: "available",
+  summary: "Covers the public-key primitives behind key exchange, signatures, certificates, and modern secure channels.",
+  whyItMatters:
+    "Asymmetric cryptography is what lets strangers bootstrap trust before a shared secret exists. Understanding RSA, Diffie-Hellman, ECC, and signatures prepares you for PKI, TLS, OAuth token binding, blockchain wallets, and post-quantum migration.",
+  objectives: [
+    "Explain the key distribution problem",
+    "Walk through RSA and Diffie-Hellman at a small scale",
+    "Describe why ECC provides smaller modern keys",
+    "Connect digital signatures to identity and protocol authentication",
+  ],
+  prerequisites: ["encryption-basics", "symmetric-primitives"],
+  keyTakeaways: [
+    "Public-key cryptography solves coordination problems symmetric keys cannot",
+    "Diffie-Hellman establishes shared secrets without sending them",
+    "Digital signatures prove authorization or identity",
+    "Certificates package public keys into a trust system",
+  ],
+  estimatedMinutes: 45,
+  difficulty: "Intermediate",
+  lessonType: "concept",
   overview:
     "The previous lesson named the symmetric standards (AES, SHA, HMAC) this " +
     "series relies on. This one does the same for the asymmetric side: real " +
@@ -25,12 +44,12 @@ export const asymmetricPrimitivesLesson: Lesson = {
     "right after this one, and the TLS lessons following it, are where " +
     "that payoff becomes concrete.",
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">RSA</div>
         <div class="node-sub">the padlock — signs the Certificate &amp; CertificateVerify steps ahead</div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Diffie-Hellman / ECC</div>
         <div class="node-sub">the paint-mixing — is exactly TLS's ServerKeyExchange &amp; key_share</div>
       </div>

@@ -27,6 +27,12 @@ export const fapiMtls: Step = {
   ],
   sequence: {
     actors: OAUTH_ACTORS,
+    progress: {
+      goal: "Bind a token to the client that received it",
+      already: ["Client has a trusted certificate from mTLS"],
+      now: "Authorization server issues a certificate-bound token",
+      next: "Resource server checks the same certificate at the API",
+    },
     messages: [
       { from: "client", to: "as", label: "Token request over mTLS (client cert)", highlight: true },
       { from: "as", to: "client", label: "access_token bound to cert thumbprint", note: "certificate-bound", highlight: true },

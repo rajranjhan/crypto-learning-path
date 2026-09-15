@@ -6,16 +6,27 @@ import { renderStepView } from "./components/hexdump";
 import { renderStepper } from "./components/stepper";
 import { renderOverview } from "./components/overview";
 import { renderSearch } from "./components/search";
+import { renderHome } from "./components/home";
 import { buildSearchIndex } from "./search";
-import { validateLesson, validateRegistry } from "./lessons/validate";
+import { validateCourse, validateLesson } from "./lessons/validate";
 
 const searchIndex = buildSearchIndex(registry, lessons);
+
+const slugAliases: Record<string, string> = {
+  "oauth-tokens-claims-security": "oauth-further-learning",
+  "oauth-tokens-claims-and-security": "oauth-further-learning",
+  "oauth-further-learning": "oauth-further-learning",
+  "post-quantum-cryptography": "quantum-cryptography",
+  "quantum-cryptography-threats": "quantum-cryptography",
+  "quantum-cryptography-threats-to-todays-encryption": "quantum-cryptography",
+  "quantum-cryptography-threats-to-today-s-encryption": "quantum-cryptography",
+};
 
 // In dev, surface authoring mistakes (bad annotation offsets, duplicate slugs)
 // immediately in the console instead of letting them render as silent glitches.
 if (import.meta.env.DEV) {
   const problems = [
-    ...validateRegistry(registry),
+    ...validateCourse(registry, lessons),
     ...Object.values(lessons).flatMap((l) => validateLesson(l)),
   ];
   if (problems.length) console.error("Lesson data validation errors:\n" + problems.join("\n"));
@@ -28,38 +39,60 @@ if (import.meta.env.DEV) {
 export function parseHash(hash: string = location.hash): {
   slug: string;
   step: number | "overview";
-} {
+} | { slug: "home"; step: "home" } {
+  if (!hash || hash === "#" || hash === "#/" || hash === "#/home") return { slug: "home", step: "home" };
   const m = hash.match(/^#\/lesson\/([^/]+)(?:\/(overview|\d+))?/);
-  if (!m) return { slug: "encryption-basics", step: "overview" };
+  if (!m) return { slug: "home", step: "home" };
+  const rawSlug = m[1];
+  const canonicalSlug = slugAliases[rawSlug] ?? rawSlug;
   const seg = m[2];
-  if (seg === undefined || seg === "overview") return { slug: m[1], step: "overview" };
-  return { slug: m[1], step: parseInt(seg, 10) };
+  if (canonicalSlug !== rawSlug) {
+    const suffix = seg === undefined ? "/overview" : `/${seg}`;
+    location.replace(`#/lesson/${canonicalSlug}${suffix}`);
+  }
+  if (seg === undefined || seg === "overview") return { slug: canonicalSlug, step: "overview" };
+  return { slug: canonicalSlug, step: parseInt(seg, 10) };
 }
 
 function render(): void {
   const app = document.querySelector<HTMLDivElement>("#app")!;
   app.innerHTML = "";
-  const { slug, step } = parseHash();
+  const route = parseHash();
+  const { slug, step } = route;
 
   const shell = document.createElement("div");
   shell.className = "shell";
-  const active = registry.find((r) => r.slug === slug);
-  const lesson = lessons[slug];
-  const notFound = !lesson || active?.status !== "available";
+  const isHome = slug === "home";
+  const active = isHome ? undefined : registry.find((r) => r.slug === slug);
+  const lesson = isHome ? undefined : lessons[slug];
+  const notFound = !isHome && (!lesson || active?.status !== "available");
+  const activeStep = isHome || notFound || step === "home"
+    ? null
+    : step === "overview"
+      ? "overview"
+      : Math.max(0, Math.min(step, lesson!.steps.length - 1));
 
   shell.appendChild(
     renderSidebar(registry, lessons, {
       activeSlug: active?.slug ?? "",
-      activeStep: notFound ? null : step === "overview" ? "overview" : Math.max(0, Math.min(step, lesson.steps.length - 1)),
+      activeStep,
     }),
   );
 
   const main = document.createElement("main");
   main.className = "content";
 
-  if (notFound) {
+  if (isHome) {
+    const toolbar = document.createElement("div");
+    toolbar.className = "content-toolbar";
+    toolbar.appendChild(renderSearch(searchIndex));
+    main.appendChild(toolbar);
+    main.appendChild(renderHome(registry, lessons));
+  } else if (notFound) {
     main.innerHTML = `<h2>Lesson not found</h2><p><a href="#/lesson/encryption-basics">Go to the first lesson</a>.</p>`;
   } else {
+    const currentLesson = lesson!;
+    const currentStep = step as number | "overview";
     // Top bar of the content area: the stepper (on step pages only) on the
     // left, search pinned to the far right — present on every lesson page,
     // including the overview, where there's no stepper to sit next to.
@@ -67,11 +100,11 @@ function render(): void {
     toolbar.className = "content-toolbar";
 
     let idx = -1;
-    if (step !== "overview") {
-      idx = Math.max(0, Math.min(step, lesson.steps.length - 1));
+    if (currentStep !== "overview") {
+      idx = Math.max(0, Math.min(currentStep, currentLesson.steps.length - 1));
       toolbar.appendChild(renderStepper({
         index: idx,
-        total: lesson.steps.length,
+        total: currentLesson.steps.length,
         onPrev: () => { location.hash = `#/lesson/${slug}/${idx - 1}`; },
         onNext: () => { location.hash = `#/lesson/${slug}/${idx + 1}`; },
       }));
@@ -79,7 +112,9 @@ function render(): void {
     toolbar.appendChild(renderSearch(searchIndex));
     main.appendChild(toolbar);
 
-    main.appendChild(step === "overview" ? renderOverview(lesson) : renderStepView(lesson.steps[idx]));
+    const nextEntry = registry.slice(registry.findIndex((r) => r.slug === slug) + 1).find((r) => r.status === "available" && lessons[r.slug]);
+    const nextLesson = nextEntry ? lessons[nextEntry.slug] : undefined;
+    main.appendChild(currentStep === "overview" ? renderOverview(currentLesson, lessons) : renderStepView(currentLesson, idx, nextLesson));
   }
   shell.appendChild(main);
   app.appendChild(shell);

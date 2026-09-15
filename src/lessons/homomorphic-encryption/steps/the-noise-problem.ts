@@ -16,16 +16,16 @@ export const theNoiseProblem: Step = {
   ],
   diagram: `
     <div class="flow">
-      <div class="node" style="border-color:#047857;">
-        <div class="node-title" style="color:#047857;">✅ Fresh ciphertext</div>
+      <div class="node trusted">
+        <div class="node-title text-trusted">Fresh ciphertext</div>
         <div class="node-sub">low noise — decrypts cleanly</div>
       </div>
       <div class="node">
         <div class="node-title">A few operations later</div>
         <div class="node-sub">noise growing — still decrypts, for now</div>
       </div>
-      <div class="node" style="border-color:#b91c1c;">
-        <div class="node-title" style="color:#b91c1c;">❌ Too many multiplications</div>
+      <div class="node attacker">
+        <div class="node-title text-warning">Too many multiplications</div>
         <div class="node-sub">noise overtakes the message — decryption fails</div>
       </div>
     </div>

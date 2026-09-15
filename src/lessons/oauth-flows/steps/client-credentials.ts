@@ -10,12 +10,18 @@ export const clientCredentials: Step = {
     "<p>Two older grants used to cover the cases Client Credentials and Authorization Code + PKCE handle today — Implicit and Resource Owner Password Credentials. Both are now retired, and it's worth knowing why: that's covered at the end of this lesson.</p>",
   bullets: [
     "Client Credentials: client authenticates as itself, no user involved — for service-to-service calls",
-    "Scope tightly — request and grant only the minimum scopes needed (least privilege, from the Scopes step in Further Learning). Don't issue a token with broad access \"just in case\"",
-    "Use audience restriction (the aud claim, from Further Learning) so a token issued for one service can't be replayed against a different one",
-    "Consider sender-constrained tokens — DPoP or mTLS-bound, from the Fundamentals lesson — so a stolen access token can't be used from a different client or machine",
+    "Scope tightly — request and grant only the minimum scopes needed (least privilege, from Tokens, Claims & Security). Don't issue a token with broad access \"just in case\"",
+    "Use audience restriction (the aud claim, from Tokens, Claims & Security) so a token issued for one service can't be replayed against a different one",
+    "Consider sender-constrained tokens — DPoP or mTLS-bound, from Tokens, Claims & Security — so a stolen access token can't be used from a different client or machine",
   ],
   sequence: {
     actors: OAUTH_ACTORS,
+    progress: {
+      goal: "Authorize a service acting as itself",
+      already: ["No resource owner is present"],
+      now: "Client authenticates directly to the authorization server",
+      next: "Client calls the API with a scoped access token",
+    },
     messages: [
       { from: "client", to: "as", label: "Client credentials + requested scope (no user, no redirect)", highlight: true },
       { from: "as", to: "client", label: "access_token (scoped to the service)" },

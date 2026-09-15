@@ -6,8 +6,8 @@ import type { Sequence, SequenceActor, SequenceMessage } from "../types";
 
 /** Client ↔ Server, used by every mTLS step. */
 export const MTLS_ACTORS: SequenceActor[] = [
-  { id: "client", label: "Client", icon: "💻" },
-  { id: "server", label: "Server", icon: "🖥️" },
+  { id: "client", label: "Client", icon: "💻", role: "client" },
+  { id: "server", label: "Server", icon: "🖥️", role: "server" },
 ];
 
 /**
@@ -16,8 +16,8 @@ export const MTLS_ACTORS: SequenceActor[] = [
  * the lesson's opening metaphor stay visually consistent.
  */
 export const TLS_ACTORS: SequenceActor[] = [
-  { id: "client", label: "Browser/client", icon: "💻" },
-  { id: "server", label: "The Bank", icon: "🏦" },
+  { id: "client", label: "Browser/client", icon: "💻", role: "client" },
+  { id: "server", label: "The Bank", icon: "🏦", role: "server" },
 ];
 
 /**
@@ -32,10 +32,20 @@ export function buildSequence(
   all: SequenceMessage[],
   through: number,
   highlightCount = 1,
+  goal = "Build an authenticated encrypted channel",
 ): Sequence {
+  const visible = all.slice(0, through);
+  const highlighted = visible.slice(Math.max(0, visible.length - highlightCount));
+  const next = all[through];
   return {
     actors,
-    messages: all.slice(0, through).map((m, i) => ({
+    progress: {
+      goal,
+      already: visible.slice(0, Math.max(0, visible.length - highlightCount)).map((m) => m.label),
+      now: highlighted.map((m) => m.label).join(" + "),
+      next: next?.label,
+    },
+    messages: visible.map((m, i) => ({
       ...m,
       highlight: i >= through - highlightCount,
     })),
@@ -76,9 +86,9 @@ export const TLS13_MESSAGES: SequenceMessage[] = [
  * sells you a ticket, and the Resource Server is the Ferris wheel you redeem it at.
  */
 export const OAUTH_ACTORS: SequenceActor[] = [
-  { id: "client", label: "Client (App)", icon: "💻" },
-  { id: "as", label: "Authorization Server (Ticket Booth)", icon: "🎫" },
-  { id: "rs", label: "Resource Server (Ferris Wheel)", icon: "🎡" },
+  { id: "client", label: "Client (App)", icon: "💻", role: "client" },
+  { id: "as", label: "Authorization Server (Ticket Booth)", icon: "🎫", role: "trusted" },
+  { id: "rs", label: "Resource Server / API (Ride Gate)", icon: "🎡", role: "server" },
 ];
 
 /**
@@ -89,10 +99,10 @@ export const OAUTH_ACTORS: SequenceActor[] = [
  * be clutter.
  */
 export const OAUTH_ACTORS_WITH_USER: SequenceActor[] = [
-  { id: "user", label: "You", icon: "🧑" },
-  { id: "client", label: "App", icon: "💻" },
-  { id: "as", label: "Authorization Server (Ticket Booth)", icon: "🎫" },
-  { id: "rs", label: "Resource Server (Ferris Wheel)", icon: "🎡" },
+  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
+  { id: "client", label: "Client (App)", icon: "💻", role: "client" },
+  { id: "as", label: "Authorization Server (Ticket Booth)", icon: "🎫", role: "trusted" },
+  { id: "rs", label: "Resource Server / API (Ride Gate)", icon: "🎡", role: "server" },
 ];
 
 /**
@@ -104,10 +114,10 @@ export const OAUTH_ACTORS_WITH_USER: SequenceActor[] = [
  * ride ticket; these actors badge staff through backstage doors.
  */
 export const KERBEROS_ACTORS: SequenceActor[] = [
-  { id: "user", label: "You (staff)", icon: "🧑" },
-  { id: "as", label: "Staff House — Check-In (AS)", icon: "🪪" },
-  { id: "tgs", label: "Staff House — Backstage Desk (TGS)", icon: "🎟️" },
-  { id: "door", label: "Backstage Door (Service)", icon: "🚪" },
+  { id: "user", label: "You (staff)", icon: "🧑", role: "client" },
+  { id: "as", label: "Staff House — Check-In (AS)", icon: "🪪", role: "trusted" },
+  { id: "tgs", label: "Staff House — Backstage Desk (TGS)", icon: "🎟️", role: "trusted" },
+  { id: "door", label: "Backstage Door (Service)", icon: "🚪", role: "server" },
 ];
 
 /**
@@ -133,9 +143,9 @@ export const KERBEROS_MESSAGES: SequenceMessage[] = [
  * mailroom, and these three actors are what protects it once it's filed away.
  */
 export const REST_ACTORS: SequenceActor[] = [
-  { id: "app", label: "Application", icon: "💻" },
-  { id: "db", label: "Database / Storage Engine", icon: "🗄️" },
-  { id: "kms", label: "Key Management Service", icon: "🔐" },
+  { id: "app", label: "Application", icon: "💻", role: "client" },
+  { id: "db", label: "Database / Storage Engine", icon: "🗄️", role: "server" },
+  { id: "kms", label: "Key Management Service", icon: "🔐", role: "trusted" },
 ];
 
 /**
@@ -144,8 +154,8 @@ export const REST_ACTORS: SequenceActor[] = [
  * inside, the cloud works it through the gloves, and the box never opens.
  */
 export const HE_ACTORS: SequenceActor[] = [
-  { id: "owner", label: "Data Owner", icon: "🧑" },
-  { id: "cloud", label: "Untrusted Cloud", icon: "☁️" },
+  { id: "owner", label: "Data Owner", icon: "🧑", role: "client" },
+  { id: "cloud", label: "Untrusted Cloud", icon: "☁️", role: "warning" },
 ];
 
 /**
@@ -155,8 +165,8 @@ export const HE_ACTORS: SequenceActor[] = [
  * opens with.
  */
 export const ZKP_ACTORS: SequenceActor[] = [
-  { id: "prover", label: "Peggy (Prover)", icon: "🙋" },
-  { id: "verifier", label: "Victor (Verifier)", icon: "🕵️" },
+  { id: "prover", label: "Peggy (Prover)", icon: "🙋", role: "client" },
+  { id: "verifier", label: "Victor (Verifier)", icon: "🕵️", role: "server" },
 ];
 
 /**
@@ -166,7 +176,7 @@ export const ZKP_ACTORS: SequenceActor[] = [
  * stamp is what makes that card worth trusting in the first place.
  */
 export const PKI_ACTORS: SequenceActor[] = [
-  { id: "client", label: "You", icon: "🧑" },
-  { id: "server", label: "The Bank", icon: "🏦" },
-  { id: "ca", label: "Notary Office (CA)", icon: "🏛️" },
+  { id: "client", label: "You", icon: "🧑", role: "client" },
+  { id: "server", label: "The Bank", icon: "🏦", role: "server" },
+  { id: "ca", label: "Notary Office (CA)", icon: "🏛️", role: "trusted" },
 ];

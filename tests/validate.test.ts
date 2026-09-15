@@ -1,48 +1,59 @@
 import { describe, expect, it } from "vitest";
-import { validateLesson, validateRegistry } from "../src/lessons/validate";
+import { validateCourse, validateLesson, validateRegistry } from "../src/lessons/validate";
 import type { Lesson, RegistryEntry, Step } from "../src/types";
 
 function baseStep(overrides: Partial<Step> = {}): Step {
   return { id: "step-1", title: "A step", prose: "Some prose.", ...overrides };
 }
 
+function baseLesson(overrides: Partial<Lesson> = {}): Lesson {
+  return {
+    slug: "a",
+    title: "A",
+    status: "available",
+    summary: "Short summary.",
+    whyItMatters: "Why this lesson matters.",
+    objectives: ["Learn one", "Learn two", "Learn three"],
+    keyTakeaways: ["Take one", "Take two", "Take three"],
+    steps: [baseStep()],
+    ...overrides,
+  };
+}
+
 describe("validateLesson", () => {
   it("accepts a well-formed concept step (no bytes)", () => {
-    expect(validateLesson({ slug: "l", title: "L", status: "available", steps: [baseStep()] })).toEqual([]);
+    expect(validateLesson(baseLesson({ slug: "l", title: "L", steps: [baseStep()] }))).toEqual([]);
   });
 
   it("flags a step missing a title or prose", () => {
-    const lesson: Lesson = {
+    const lesson = baseLesson({
       slug: "l",
       title: "L",
-      status: "available",
       steps: [baseStep({ title: "" }), baseStep({ id: "step-2", prose: "" })],
-    };
+    });
     const errors = validateLesson(lesson);
     expect(errors).toContain("step-1: missing required fields");
     expect(errors).toContain("step-2: missing required fields");
   });
 
   it("flags an annotation that exceeds the byte bounds", () => {
-    const lesson: Lesson = {
+    const lesson = baseLesson({
       slug: "l",
       title: "L",
-      status: "available",
       steps: [
         baseStep({
           bytes: [0x01, 0x02, 0x03],
           annotations: [{ offset: 1, length: 5, label: "Too long", description: "", colorClass: "" }],
         }),
       ],
-    };
+    });
     expect(validateLesson(lesson)).toEqual(["step-1: annotation 'Too long' exceeds byte bounds"]);
   });
 
   it("flags overlapping annotations", () => {
-    const lesson: Lesson = {
+    const lesson = baseLesson({
       slug: "l",
       title: "L",
-      status: "available",
       steps: [
         baseStep({
           bytes: [0x01, 0x02, 0x03, 0x04],
@@ -52,15 +63,14 @@ describe("validateLesson", () => {
           ],
         }),
       ],
-    };
+    });
     expect(validateLesson(lesson)).toEqual(["step-1: annotations 'First' and 'Second' overlap"]);
   });
 
   it("flags a text annotation pointing at an out-of-range line", () => {
-    const lesson: Lesson = {
+    const lesson = baseLesson({
       slug: "l",
       title: "L",
-      status: "available",
       steps: [
         baseStep({
           textBlock: {
@@ -70,15 +80,14 @@ describe("validateLesson", () => {
           },
         }),
       ],
-    };
+    });
     expect(validateLesson(lesson)).toEqual(["step-1: text annotation 'Bad' references out-of-range line 3"]);
   });
 
   it("flags a sequence message referencing an unknown actor", () => {
-    const lesson: Lesson = {
+    const lesson = baseLesson({
       slug: "l",
       title: "L",
-      status: "available",
       steps: [
         baseStep({
           sequence: {
@@ -87,30 +96,66 @@ describe("validateLesson", () => {
           },
         }),
       ],
-    };
+    });
     expect(validateLesson(lesson)).toEqual(["step-1: sequence message 'Hello' references an unknown actor"]);
   });
 
   it("accepts subSteps that reference real steps in the same lesson", () => {
-    const lesson: Lesson = {
+    const lesson = baseLesson({
       slug: "l",
       title: "L",
-      status: "available",
       steps: [baseStep({ subSteps: ["step-2"] }), baseStep({ id: "step-2" })],
-    };
+    });
     expect(validateLesson(lesson)).toEqual([]);
   });
 
   it("flags subSteps referencing an unknown step or itself", () => {
-    const lesson: Lesson = {
+    const lesson = baseLesson({
       slug: "l",
       title: "L",
-      status: "available",
       steps: [baseStep({ subSteps: ["ghost", "step-1"] })],
-    };
+    });
     const errors = validateLesson(lesson);
     expect(errors).toContain("step-1: subSteps references unknown step 'ghost'");
     expect(errors).toContain("step-1: subSteps references itself");
+  });
+
+  it("flags duplicate step ids", () => {
+    const lesson = baseLesson({
+      slug: "l",
+      title: "L",
+      steps: [baseStep(), baseStep({ title: "Second step" })],
+    });
+    expect(validateLesson(lesson)).toContain("l: duplicate step id 'step-1'");
+  });
+
+  it("flags inline styles in authored markup", () => {
+    const lesson = baseLesson({
+      slug: "l",
+      title: "L",
+      steps: [baseStep({ diagram: '<div style="color: red;">Bad</div>' })],
+    });
+    expect(validateLesson(lesson)).toContain("step-1: diagram: inline style attributes are not allowed in authored markup");
+  });
+
+  it("flags images without alt text", () => {
+    const lesson = baseLesson({
+      slug: "l",
+      title: "L",
+      steps: [baseStep({ diagram: '<img src="diagrams/example.svg" />' })],
+    });
+    expect(validateLesson(lesson)).toContain("step-1: diagram: image is missing meaningful alt text");
+  });
+
+  it("flags missing diagram assets when an asset inventory is provided", () => {
+    const lesson = baseLesson({
+      slug: "l",
+      title: "L",
+      steps: [baseStep({ diagram: '<img src="diagrams/missing.svg" alt="A diagram." />' })],
+    });
+    expect(validateLesson(lesson, { diagramAssets: new Set(["diagrams/exists.svg"]) })).toContain(
+      "step-1: diagram: image asset 'diagrams/missing.svg' does not exist",
+    );
   });
 });
 
@@ -129,5 +174,61 @@ describe("validateRegistry", () => {
       { slug: "a", title: "A again", status: "coming-soon" },
     ];
     expect(validateRegistry(entries)).toEqual(["duplicate slug: a"]);
+  });
+});
+
+describe("validateCourse", () => {
+  it("accepts matching registry and lesson metadata", () => {
+    const entries: RegistryEntry[] = [{ slug: "a", title: "A", status: "available" }];
+    expect(validateCourse(entries, { a: baseLesson() })).toEqual([]);
+  });
+
+  it("flags a missing lesson module for an available registry entry", () => {
+    const entries: RegistryEntry[] = [{ slug: "a", title: "A", status: "available" }];
+    expect(validateCourse(entries, {})).toContain("registry entry 'a' has no matching lesson module");
+  });
+
+  it("flags registry and lesson title drift", () => {
+    const entries: RegistryEntry[] = [{ slug: "a", title: "A", status: "available" }];
+    expect(validateCourse(entries, { a: baseLesson({ title: "Different" }) })).toContain(
+      "a: registry title 'A' does not match lesson title 'Different'",
+    );
+  });
+
+  it("flags missing required metadata", () => {
+    const entries: RegistryEntry[] = [{ slug: "a", title: "A", status: "available" }];
+    const errors = validateCourse(entries, { a: baseLesson({ summary: "", objectives: ["one"], keyTakeaways: [] }) });
+    expect(errors).toContain("a: missing metadata summary");
+    expect(errors).toContain("a: metadata objectives must have 3-5 items");
+    expect(errors).toContain("a: metadata keyTakeaways must have 3-6 items");
+  });
+
+  it("flags invalid prerequisite slugs", () => {
+    const entries: RegistryEntry[] = [{ slug: "a", title: "A", status: "available" }];
+    expect(validateCourse(entries, { a: baseLesson({ prerequisites: ["ghost"] }) })).toContain(
+      "a: prerequisite 'ghost' is not an available lesson slug",
+    );
+  });
+
+  it("flags prerequisites that appear later in the registry", () => {
+    const entries: RegistryEntry[] = [
+      { slug: "a", title: "A", status: "available" },
+      { slug: "b", title: "B", status: "available" },
+    ];
+    const errors = validateCourse(entries, {
+      a: baseLesson({ prerequisites: ["b"] }),
+      b: baseLesson({ slug: "b", title: "B" }),
+    });
+    expect(errors).toContain("a: prerequisite 'b' must appear earlier in the registry");
+  });
+
+  it("flags broken internal lesson links", () => {
+    const entries: RegistryEntry[] = [{ slug: "a", title: "A", status: "available" }];
+    const errors = validateCourse(entries, {
+      a: baseLesson({
+        overview: 'Read <a href="#/lesson/missing/overview">Missing</a>.',
+      }),
+    });
+    expect(errors).toContain("a: overview: internal lesson link '#/lesson/missing/overview' references an unknown lesson");
   });
 });

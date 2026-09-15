@@ -14,16 +14,16 @@ export const threeProperties: Step = {
     "Test for zero-knowledge: could someone fake an indistinguishable transcript without knowing the secret? If yes, watching a real one taught the verifier nothing new",
   ],
   diagram: `
-    <div class="flow" style="align-items: stretch;">
-      <div class="node" style="flex: 1;">
+    <div class="flow">
+      <div class="node equal">
         <div class="node-title">Completeness</div>
         <div class="node-sub">true statement + honest prover → always convinces</div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Soundness</div>
         <div class="node-sub">false statement → cheating succeeds only by vanishing chance</div>
       </div>
-      <div class="node" style="flex: 1;">
+      <div class="node equal">
         <div class="node-title">Zero-Knowledge</div>
         <div class="node-sub">verifier learns nothing beyond "it's true"</div>
       </div>
