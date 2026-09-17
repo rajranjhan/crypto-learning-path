@@ -13,7 +13,7 @@ export function renderHome(registry: RegistryEntry[], lessons: Record<string, Le
   const summary = document.createElement("p");
   summary.className = "overview-summary";
   summary.textContent =
-    "Visual explanations of encryption, TLS, PKI, OAuth and modern cryptographic protocols.";
+    "Learn practical cryptography through visual explanations, protocol diagrams, and byte-level walkthroughs. Start with encryption fundamentals, then explore AES, RSA, ECC, PKI, TLS, OAuth, Kerberos, encryption at rest, zero-knowledge proofs, homomorphic encryption, blockchain cryptography, and post-quantum cryptography.";
   header.appendChild(summary);
   root.appendChild(header);
 

@@ -11,7 +11,7 @@ export const kerberosLesson: Lesson = {
   slug: "kerberos",
   title: "Kerberos: Proving Who You Are with Tickets",
   status: "available",
-  summary: "Explains Kerberos ticket-based authentication for trusted internal networks.",
+  summary: "Learn how Kerberos uses a KDC, ticket-granting tickets, service tickets, session keys, and replay protection for internal single sign-on.",
   whyItMatters:
     "Single sign-on should not send your password to every service. Kerberos shows how tickets enable access and why protecting their keys matters.",
   objectives: [

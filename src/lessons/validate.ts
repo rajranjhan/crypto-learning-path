@@ -104,8 +104,16 @@ export function validateLesson(lesson: Lesson, options: ValidationOptions = {}):
     for (const tag of imageTags(chunk.html)) {
       const src = attr(tag, "src");
       const alt = attr(tag, "alt");
+      const width = attr(tag, "width");
+      const height = attr(tag, "height");
       if (alt === undefined || alt.trim().length === 0) {
         errors.push(`${chunk.owner}: image is missing meaningful alt text`);
+      }
+      if (width === undefined || height === undefined || !/^\d+$/.test(width) || !/^\d+$/.test(height)) {
+        errors.push(`${chunk.owner}: image must provide numeric width and height attributes`);
+      }
+      if (src && !src.endsWith(".svg") && attr(tag, "loading") !== "lazy") {
+        errors.push(`${chunk.owner}: raster images must use loading="lazy"`);
       }
       if (src && options.diagramAssets && (src.startsWith("diagrams/") || src.startsWith("/diagrams/"))) {
         const normalized = normalizeAssetPath(src);

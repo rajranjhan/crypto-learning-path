@@ -18,7 +18,7 @@ export const scopes: Step = {
   takeaway: "Scopes should express delegated access narrowly, and resource servers still need to enforce the actual action.",
   figure: {
     body: `
-    <img class="diagram-img" src="diagrams/scopes.svg"
+    <img class="diagram-img" src="diagrams/scopes.svg" width="1850" height="740" loading="lazy" decoding="async"
          alt="A carnival RIDE ticket (No. 5606, stub 02) with six requested scopes radiating out. Four are granted, shown with solid blue lines and dots: rides:basic (carousel and kiddie rides), rides:premium (roller coasters and the Ferris wheel), food:discount (10% off snack stands), and profile:read (read your name and membership tier). Two are denied, shown with dashed grey lines and dots: profile:write (requested, but you said no) and account:delete (requested, but never even offered as a choice)." />
     <p class="diagram-note">
       Solid scopes were granted; dashed scopes were requested but denied.

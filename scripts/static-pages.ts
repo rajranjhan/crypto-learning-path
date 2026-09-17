@@ -16,6 +16,49 @@ const { JSDOM } = createRequire(import.meta.url)("jsdom") as {
   };
 };
 
+function addStructuredData(doc: Document, slug?: string): void {
+  const graph: Record<string, unknown>[] = [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      url: siteUrl,
+      name: "Practical Cryptography, Byte by Byte",
+      description: doc.querySelector('meta[name="description"]')?.getAttribute("content"),
+    },
+  ];
+
+  if (slug) {
+    const lesson = lessons[slug];
+    const url = lessonUrl(slug);
+    const course: Record<string, unknown> = {
+      "@type": ["Course", "LearningResource"],
+      "@id": `${url}#lesson`,
+      url,
+      name: lesson.title,
+      description: lesson.summary,
+      isPartOf: { "@id": `${siteUrl}#website` },
+      educationalLevel: lesson.difficulty,
+      timeRequired: lesson.estimatedMinutes ? `PT${lesson.estimatedMinutes}M` : undefined,
+      teaches: lesson.objectives,
+      about: lesson.objectives,
+    };
+    graph.push(course);
+    graph.push({
+      "@type": "BreadcrumbList",
+      "@id": `${url}#breadcrumbs`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Practical Cryptography", item: siteUrl },
+        { "@type": "ListItem", position: 2, name: lesson.title, item: url },
+      ],
+    });
+  }
+
+  const script = doc.createElement("script");
+  script.type = "application/ld+json";
+  script.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
+  doc.head.appendChild(script);
+}
+
 export function staticPage(template: string, slug?: string): string {
   const url = slug ? lessonUrl(slug) : siteUrl;
   const dom = new JSDOM(template, { url });
@@ -55,6 +98,7 @@ export function staticPage(template: string, slug?: string): string {
       doc.querySelector('link[rel="canonical"]')!.setAttribute("href", url);
       doc.querySelector('meta[property="og:url"]')!.setAttribute("content", url);
     }
+    addStructuredData(doc, slug);
     return dom.serialize();
   } finally {
     if (previousDocument) Object.defineProperty(globalThis, "document", previousDocument);
@@ -81,6 +125,11 @@ export function staticLessonPages(): Plugin {
       }
       this.emitFile({ type: "asset", fileName: "sitemap.xml", source:
         `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${url}</loc></url>`).join("\n")}\n</urlset>\n` });
+      this.emitFile({
+        type: "asset",
+        fileName: "robots.txt",
+        source: `User-agent: *\nAllow: /\nSitemap: ${siteUrl}sitemap.xml\n`,
+      });
       this.emitFile({ type: "asset", fileName: ".nojekyll", source: "" });
     },
     configureServer(server) {

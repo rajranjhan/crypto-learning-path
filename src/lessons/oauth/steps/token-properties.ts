@@ -22,7 +22,7 @@ export const tokenProperties: Step = {
   takeaway: "A token design is only as safe as its answers for issuer trust, authorization, proof of possession, lifetime, and revocation.",
   figure: {
     body: `
-    <img class="diagram-img" src="diagrams/token-properties.png"
+    <img class="diagram-img" src="diagrams/token-properties.webp" width="1800" height="801" loading="lazy" decoding="async"
          alt="A central TOKEN with six properties radiating out: Issuer Trust, Authorization, Redemption Model, Proof of Possession, Validity Window, and Revocation." />
     <p class="diagram-note">
       These six properties frame every token design in the OAuth sequence.

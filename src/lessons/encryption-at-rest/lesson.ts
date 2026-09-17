@@ -13,7 +13,7 @@ export const encryptionAtRestLesson: Lesson = {
   slug: "encryption-at-rest",
   title: "Encryption at Rest: Protecting Stored Data & Keys",
   status: "available",
-  summary: "Surveys the controls that protect stored data, from disk encryption to envelope encryption and field-level protection.",
+  summary: "Learn how disk, database, envelope, object-storage, and field-level encryption protect stored data while key management controls access.",
   whyItMatters:
     "A stolen disk and a compromised application pose different threats. Matching encryption to the storage layer helps you understand what remains exposed.",
   objectives: [

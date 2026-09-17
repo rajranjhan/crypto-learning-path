@@ -12,7 +12,7 @@ export const tls12Lesson: Lesson = {
   slug: "tls12",
   title: "TLS 1.2: Two-Round-Trip Handshake",
   status: "available",
-  summary: "Dissects the TLS 1.2 handshake as a byte-level walkthrough from ClientHello to encrypted application data.",
+  summary: "Learn how the TLS 1.2 handshake negotiates algorithms, authenticates a server with certificates, derives session keys, and protects application data.",
   whyItMatters:
     "Reading a handshake reveals how a connection establishes trust and encryption. That helps you understand packet captures and diagnose connection failures.",
   objectives: [
@@ -48,7 +48,7 @@ export const tls12Lesson: Lesson = {
   transitionToNext: "TLS 1.2 shows the full handshake machinery; TLS 1.3 keeps the same security goals while making the handshake faster and more private.",
   figure: {
     body: `
-    <img class="diagram-img" src="diagrams/tls-mailroom.svg"
+    <img class="diagram-img" src="diagrams/tls-mailroom.svg" width="1400" height="580" loading="lazy" decoding="async"
          alt="A sender (YOU) and recipient (BANK) on either side of a shared office mailroom. Inside the mailroom, an open envelope labeled 'confidential document' sits exposed with its contents visible, while a coworker peeks at it." />
     <p class="diagram-note">
       TLS seals the envelope before confidential data crosses the network.

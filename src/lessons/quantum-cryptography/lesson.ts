@@ -10,7 +10,7 @@ export const quantumCryptographyLesson: Lesson = {
   slug: "quantum-cryptography",
   title: "Post-Quantum Cryptography: Preparing for Quantum Threats",
   status: "available",
-  summary: "Explains how quantum algorithms threaten current cryptography and how post-quantum migration addresses that risk.",
+  summary: "Learn how Shor’s and Grover’s algorithms affect current cryptography, why harvest-now-decrypt-later matters, and how post-quantum migration responds.",
   whyItMatters:
     "Data collected today may need to stay secret for years. Understanding quantum threats helps explain why public-key migration requires advance planning.",
   objectives: [

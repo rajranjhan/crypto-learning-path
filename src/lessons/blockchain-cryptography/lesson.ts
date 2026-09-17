@@ -10,7 +10,7 @@ export const blockchainCryptographyLesson: Lesson = {
   slug: "blockchain-cryptography",
   title: "Blockchain Cryptography: Hashes, Signatures & Consensus",
   status: "available",
-  summary: "Connects hashes, signatures, Merkle trees, and consensus rules to their jobs inside blockchains.",
+  summary: "Learn how hashes, digital signatures, Merkle proofs, smart contracts, and consensus rules provide integrity and authorization in blockchains.",
   whyItMatters:
     "Public verification does not remove every trust assumption. Separating cryptographic checks from consensus helps you evaluate what a blockchain actually guarantees.",
   objectives: [

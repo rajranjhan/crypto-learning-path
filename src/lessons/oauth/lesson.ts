@@ -10,7 +10,7 @@ export const oauthLesson: Lesson = {
   slug: "oauth",
   title: "OAuth: Fundamentals",
   status: "available",
-  summary: "Learn how OAuth gives applications limited API access through tokens instead of shared passwords.",
+  summary: "Learn how OAuth 2.0 lets applications obtain delegated access using authorization codes, access tokens, refresh tokens, scopes, and bearer-token protections.",
   whyItMatters:
     "Apps need limited access to your data without receiving your password. OAuth delegates that access; OpenID Connect adds user authentication.",
   objectives: [

@@ -98,7 +98,7 @@ See [AUTHORING.md](AUTHORING.md) for the full course authoring conventions: meta
 
 ### Adding a diagram image
 
-Export the PNG from Excalidraw into `public/diagrams/`, keep the `.excalidraw` source in `diagrams-src/` for future edits, and reference it from a step `figure.body` as `<img class="diagram-img" src="/diagrams/your-file.png" alt="Meaningful description." />` (see `src/lessons/oauth/steps/carnival-ticket.ts` for an example).
+Prefer SVG for diagrams. When a raster export is necessary, optimize it as WebP, keep its intrinsic `width`/`height`, and add `loading="lazy" decoding="async"`; keep the editable source in `diagrams-src/`. Reference it from a step `figure.body` as `<img class="diagram-img" src="diagrams/your-file.webp" width="1800" height="700" loading="lazy" decoding="async" alt="Meaningful description." />` (see the OAuth diagram steps for examples).
 
 ## Testing
 
@@ -108,11 +108,11 @@ Tests run under [Vitest](https://vitest.dev/) with a jsdom environment. `tests/v
 
 `index.html` contains the search description, canonical URL, Open Graph fields, and Twitter/X large-image card metadata. The canonical deployment is `https://rajranjhan.github.io/crypto-learning-path/`. If the public domain changes, update the canonical, `og:url`, and both absolute social-image URLs together.
 
-The social preview image is `public/social-card.png` (1734 × 907). Vite copies it to the deployment root. Keep the image dimensions and alt text in `index.html` consistent with any replacement. Author metadata uses the repository's public author name, `rajranjhan`; no social account is inferred. Lesson entry pages receive their own title, description, canonical URL, and social metadata during the build. Individual hash-based steps use their parent lesson’s canonical URL.
+The social preview image is `public/social-card.webp` (1200 × 628). Vite copies it to the deployment root. Keep the image dimensions and alt text in `index.html` consistent with any replacement. Author metadata uses the repository's public author name, `rajranjhan`; no social account is inferred. Lesson entry pages receive their own title, description, canonical URL, and social metadata during the build. Individual hash-based steps use their parent lesson’s canonical URL.
 
 ## Static lesson URLs and indexing
 
-`npm run build` generates the homepage and all 16 lesson overviews as HTML, plus `sitemap.xml`. Each lesson has a real directory and `index.html`, so GitHub Pages can serve it without rewrite rules or a server runtime. The existing deployment workflow still uploads `dist/` unchanged.
+`npm run build` generates the homepage and all 16 lesson overviews as HTML, plus `sitemap.xml` and `robots.txt`. The sitemap contains only the homepage and permanent lesson overview pages; individual transient step routes are intentionally excluded. Each lesson page also includes conservative JSON-LD for its `Course`/`LearningResource` description and breadcrumbs. The homepage includes a `WebSite` description. No ratings, reviews, provider, certification, or credential claims are generated. Each lesson has a real directory and `index.html`, so GitHub Pages can serve it without rewrite rules or a server runtime. The existing deployment workflow still uploads `dist/` unchanged.
 
 Public paths are mapped to stable lesson slugs in `src/lesson-urls.ts`. Examples:
 

@@ -13,7 +13,7 @@ export const zeroKnowledgeProofsLesson: Lesson = {
   slug: "zero-knowledge-proofs",
   title: "Zero-Knowledge Proofs: Proving Without Revealing",
   status: "available",
-  summary: "Introduces proofs that convince a verifier a statement is true without revealing the underlying secret.",
+  summary: "Learn how zero-knowledge proofs convince a verifier that a statement is true without revealing the secret evidence, from Schnorr to SNARKs and STARKs.",
   whyItMatters:
     "Sometimes a verifier needs proof without the private evidence behind it. Understanding the proven statement helps you judge what a proof actually guarantees.",
   objectives: [

@@ -14,7 +14,7 @@ export const oauthFlowsLesson: Lesson = {
   slug: "oauth-flows",
   title: "OAuth: Flows & Federation",
   status: "available",
-  summary: "Compare OAuth flows and federation patterns for different clients and trust boundaries.",
+  summary: "Learn how to choose OAuth flows such as authorization code with PKCE, client credentials, device authorization, delegation, SSO, and federation.",
   whyItMatters:
     "Browser apps, background services, and limited-input devices need different flows. Choosing appropriately reduces credential exposure and unintended delegation.",
   objectives: [

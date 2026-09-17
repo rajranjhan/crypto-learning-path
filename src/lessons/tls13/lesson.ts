@@ -14,7 +14,7 @@ export const tls13Lesson: Lesson = {
   slug: "tls13",
   title: "TLS 1.3: One-Round-Trip Handshake",
   status: "available",
-  summary: "Shows how TLS 1.3 compresses and encrypts the handshake earlier than TLS 1.2.",
+  summary: "Learn how the TLS 1.3 handshake establishes encrypted connections, authenticates servers with certificates, derives session keys, and protects application data.",
   whyItMatters:
     "Handshake design affects both latency and privacy. Comparing TLS versions shows how earlier encryption and fewer round trips improve a connection.",
   objectives: [
@@ -50,7 +50,7 @@ export const tls13Lesson: Lesson = {
   transitionToNext: "TLS authenticates servers by default. Mutual TLS extends the same certificate model so clients can authenticate too.",
   figure: {
     body: `
-    <img class="diagram-img" src="diagrams/tls-mailroom.svg"
+    <img class="diagram-img" src="diagrams/tls-mailroom.svg" width="1400" height="580" loading="lazy" decoding="async"
          alt="A sender (YOU) and recipient (BANK) on either side of a shared office mailroom. Inside the mailroom, an open envelope labeled 'confidential document' sits exposed with its contents visible, while a coworker peeks at it." />
     <p class="diagram-note">
       TLS 1.3 closes the envelope earlier, after ServerHello-derived keys exist.

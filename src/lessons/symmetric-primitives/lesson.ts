@@ -13,7 +13,7 @@ export const symmetricPrimitivesLesson: Lesson = {
   slug: "symmetric-primitives",
   title: "Symmetric Cryptography: AES, SHA & HMAC",
   status: "available",
-  summary: "Names the symmetric primitives that appear throughout modern protocols: AES, SHA, HMAC, and password hashing.",
+  summary: "Learn what AES, hash functions, HMAC, authenticated encryption, and password hashing each do, and how to choose the right symmetric primitive.",
   whyItMatters:
     "Choosing the wrong primitive can leave data exposed. Learn which tools provide confidentiality, integrity, and password protection before combining them in protocols.",
   objectives: [

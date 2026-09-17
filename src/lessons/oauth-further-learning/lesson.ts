@@ -20,7 +20,7 @@ export const oauthFurtherLearningLesson: Lesson = {
   slug: "oauth-further-learning",
   title: "OAuth: Tokens, Claims & Security",
   status: "available",
-  summary: "Learn what OAuth tokens mean, where they are valid, and how to limit misuse.",
+  summary: "Learn how OAuth tokens use scopes, claims, audiences, sender constraints, mTLS, and DPoP to express and protect delegated API access.",
   whyItMatters:
     "A valid token can still be used at the wrong API or replayed after theft. Understanding token boundaries helps you spot those failures.",
   objectives: [

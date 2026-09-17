@@ -13,7 +13,7 @@ export const pkiLesson: Lesson = {
   slug: "pki",
   title: "PKI: Certificates, CAs & Trust Chains",
   status: "available",
-  summary: "Explains how certificates, certificate authorities, trust stores, revocation, and transparency make public keys trustworthy.",
+  summary: "Learn how certificates, certificate authorities, trust stores, and certificate chains allow clients to authenticate public keys for specific names.",
   whyItMatters:
     "An attacker can hand you a public key too. Certificate validation helps you decide whether that key belongs to the server you intended to reach.",
   objectives: [

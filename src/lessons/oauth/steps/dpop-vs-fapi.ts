@@ -25,7 +25,7 @@ export const dpopVsFapi: Step = {
   takeaway: "Either way, the API checks a thumbprint and demands proof you hold the bound key.",
   figure: {
     body: `
-    <img class="diagram-img" src="diagrams/dpop-vs-fapi.png"
+    <img class="diagram-img" src="diagrams/dpop-vs-fapi.webp" width="1800" height="1009" loading="lazy" decoding="async"
          alt="A comparison diagram. A single hub, 'Bind the token to its owner,' forks into two columns. Left: mTLS, the FAPI way (RFC 8705), at the transport layer — credential is a client certificate, binding is the certificate's thumbprint, cost is client certs everywhere. Right: DPoP, the app-layer way (RFC 9449), at the application layer — credential is a signed proof JWT, binding is the public key's thumbprint, cost is none extra beyond ordinary TLS. A shared footer reads: either way, holding the token isn't enough; you must prove you hold the bound key." />
     <p class="diagram-note">
       Both approaches bind the token to a holder; they differ by layer.

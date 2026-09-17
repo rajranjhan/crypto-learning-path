@@ -9,9 +9,9 @@ export const mtlsLesson: Lesson = {
   slug: "mtls",
   title: "Mutual TLS: Client Authentication",
   status: "available",
-  summary: "Extends TLS with client certificates so both sides authenticate during the handshake.",
+  summary: "Learn how mutual TLS uses client certificates and proof of private-key possession so both sides authenticate during the TLS handshake.",
   whyItMatters:
-    "Services often need to verify the client as well as the server. mTLS provides that identity check, with certificate management as an operational cost.",
+    "Services often need to verify the client as well as the server. mTLS provides that identity check, with certificate management as an operational cost; it authenticates peers but does not decide which API actions they may perform.",
   objectives: [
     "Explain how mTLS differs from ordinary server-authenticated TLS",
     "Identify CertificateRequest and client certificate messages",

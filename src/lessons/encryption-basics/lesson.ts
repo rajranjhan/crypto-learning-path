@@ -14,7 +14,7 @@ export const encryptionBasicsLesson: Lesson = {
   slug: "encryption-basics",
   title: "Encryption Basics: Symmetric & Asymmetric Keys",
   status: "available",
-  summary: "Introduces the core mental models behind encryption: shared keys, public/private keys, and key exchange.",
+  summary: "Learn how encryption turns plaintext into ciphertext, how symmetric and public-key systems use different keys, and why key exchange is separate from authentication.",
   whyItMatters:
     "Secure protocols combine several tools with different jobs. Knowing which tool protects data, establishes keys, or proves identity makes the rest of the course easier to follow.",
   objectives: [

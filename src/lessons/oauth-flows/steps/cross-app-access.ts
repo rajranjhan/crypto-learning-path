@@ -49,7 +49,7 @@ export const crossAppAccess: Step = {
   },
   figure: {
     body: `
-    <img class="diagram-img" src="diagrams/standards-proliferate.svg"
+    <img class="diagram-img" src="diagrams/standards-proliferate.svg" width="1000" height="760" loading="lazy" decoding="async"
          alt="A three-panel homage to xkcd 927, 'Standards.' Panel 1, SITUATION: there are 14 competing OAuth flows and extensions. Panel 2, PROPOSAL: '14 is ridiculous. We need one universal grant that covers every use case.' Panel 3, SOON: there are 15 competing OAuth flows and extensions." />
     <p class="diagram-note">
       The joke is standards sprawl; the security question is shared trust.

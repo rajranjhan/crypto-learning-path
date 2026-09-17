@@ -169,6 +169,8 @@ Use actor names consistently:
 Every authored lesson should remain usable with keyboard and screen readers:
 
 - Images need meaningful alt text.
+- Authored images need numeric `width` and `height` attributes to reserve layout space.
+- Use SVG for diagrams when practical; use optimized WebP for necessary raster exports and add `loading="lazy" decoding="async"`.
 - Interactive annotations need keyboard focus.
 - Do not communicate meaning by color alone.
 - Keep focus states visible.

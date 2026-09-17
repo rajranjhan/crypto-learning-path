@@ -13,7 +13,7 @@ export const asymmetricPrimitivesLesson: Lesson = {
   slug: "asymmetric-primitives",
   title: "Asymmetric Cryptography: RSA, ECC & Diffie-Hellman",
   status: "available",
-  summary: "Covers the public-key primitives behind key exchange, signatures, certificates, and modern secure channels.",
+  summary: "Learn how RSA, Diffie-Hellman, ECC, and digital signatures solve key exchange and proof-of-key-possession problems in secure channels.",
   whyItMatters:
     "Strangers need a way to establish keys and verify signatures without a shared secret. These building blocks underpin secure connections and digital identity.",
   objectives: [

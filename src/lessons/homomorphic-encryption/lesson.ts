@@ -13,7 +13,7 @@ export const homomorphicEncryptionLesson: Lesson = {
   slug: "homomorphic-encryption",
   title: "Homomorphic Encryption: Computing on Encrypted Data",
   status: "available",
-  summary: "Explains how some encryption schemes allow computation directly on ciphertext.",
+  summary: "Learn how homomorphic encryption lets a service compute on ciphertext without seeing plaintext, and why noise, bootstrapping, and performance matter.",
   whyItMatters:
     "Outsourcing computation can expose sensitive inputs. Homomorphic encryption keeps them encrypted during computation, but performance and supported operations constrain its use.",
   objectives: [
