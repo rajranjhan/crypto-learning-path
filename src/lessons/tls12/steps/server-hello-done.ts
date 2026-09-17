@@ -9,7 +9,7 @@ import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 // Record length 0x0004 = 4 = the 4-byte handshake header that follows.
 export const serverHelloDone: Step = {
   id: "server-hello-done",
-  title: "Your Turn",
+  title: "ServerHelloDone — Server Turn Complete",
   bytes: [0x16, 0x03, 0x03, 0x00, 0x04, 0x0e, 0x00, 0x00, 0x00],
   annotations: [
     {
@@ -48,6 +48,11 @@ export const serverHelloDone: Step = {
       colorClass: "c-len",
     },
   ],
+  wireContext: {
+    where: "The server has sent its parameters, certificate, and signed key share.",
+    now: "The server sends ServerHelloDone.",
+    why: "The client needs to know the server’s initial handshake flight is complete.",
+  },
   prose:
     "<p>A tiny but important message — the full 9-byte record is shown.</p>" +
     "<p><strong>ServerHelloDone</strong> has an empty body (handshake length 0 at offset 6); its only job is to say \"I've sent everything from my side — hello, ID, and my half of the combination lock. Now it's your turn.\"</p>",
@@ -55,5 +60,6 @@ export const serverHelloDone: Step = {
     "A zero-length message indicating the server has finished its handshake messages",
     "Signals that it is now the client's turn to respond",
   ],
+  takeaway: "ServerHelloDone is a protocol marker: the server has finished its cleartext setup and the client must now contribute key material.",
   sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 5),
 };

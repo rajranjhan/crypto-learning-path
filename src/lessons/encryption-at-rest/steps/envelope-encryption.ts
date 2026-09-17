@@ -1,3 +1,4 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 import { REST_ACTORS } from "../../actors";
 
@@ -12,7 +13,13 @@ const envelopeLines = [
 
 export const envelopeEncryption: Step = {
   id: "envelope-encryption",
-  title: "Two Keys, Not One — Envelope Encryption & KMS",
+  glossary: lessonTerms("symmetric key"),
+  title: "Envelope Encryption — KMS Key Hierarchy",
+  wireContext: {
+    where: "Stored data needs encryption while key access remains centrally controlled.",
+    now: "The sequence separates data encryption with a DEK from wrapping that DEK with a KEK.",
+    why: "Separating data keys from wrapping keys makes key management and access control tractable.",
+  },
   prose:
     "<p>TDE's wrapped-DEK trick isn't specific to databases — it's the standard pattern behind almost every serious encryption-at-rest system, usually under the name <strong>envelope encryption</strong>. AWS KMS, Google Cloud KMS, Azure Key Vault, and HashiCorp Vault all work the same way underneath their different names.</p>" +
     "<p>The hierarchy is the important part. A <strong>root key</strong> or <strong>Key Encryption Key (KEK)</strong> lives inside the KMS or a hardware security module and should never leave it in plaintext. A <strong>Data Encryption Key (DEK)</strong> encrypts the actual object, row group, file, tenant, or field. One KEK can wrap many DEKs, and each DEK can protect only the data it was scoped for. That hierarchy gives you audit, blast-radius control, and cheap rotation.</p>" +
@@ -27,6 +34,7 @@ export const envelopeEncryption: Step = {
     "Decryption means sending the wrapped DEK back to the KMS to unwrap it — a natural chokepoint for access control, audit logging, and rate limiting",
     "This is the exact pattern behind AWS KMS, Google Cloud KMS, Azure Key Vault, HashiCorp Vault — and behind TDE's own master-key wrapping from the previous step",
   ],
+  takeaway: "This is the exact pattern behind AWS KMS, Google Cloud KMS, Azure Key Vault, HashiCorp Vault — and behind TDE's own master-key wrapping from the previous step.",
   sequence: {
     actors: REST_ACTORS,
     messages: [

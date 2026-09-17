@@ -27,10 +27,10 @@ function overviewSearchText(lesson: Lesson): string {
   return [
     lesson.summary,
     lesson.whyItMatters,
+    lesson.transitionToNext ?? "",
     ...(lesson.objectives ?? []),
     ...(lesson.keyTakeaways ?? []),
     ...(lesson.references ?? []).map((ref) => ref.title),
-    stripHtml(lesson.overview ?? ""),
     ...(lessonAliases[lesson.slug] ?? []),
   ].join(" ");
 }
@@ -71,6 +71,7 @@ export function buildSearchIndex(registry: RegistryEntry[], lessons: Record<stri
 
     lesson.steps.forEach((step, i) => {
       const bulletText = (step.bullets ?? []).join(" ");
+      const contextText = step.wireContext ? Object.values(step.wireContext).join(" ") : "";
       const glossaryText = (step.glossary ?? []).map((g) => `${g.term} ${g.definition}`).join(" ");
       const calloutText = (step.callouts ?? []).map((c) => `${c.title} ${c.body}`).join(" ");
       entries.push({
@@ -78,7 +79,7 @@ export function buildSearchIndex(registry: RegistryEntry[], lessons: Record<stri
         lessonTitle: lesson.title,
         step: i,
         title: step.title,
-        text: `${stripHtml(step.prose)} ${bulletText} ${glossaryText} ${calloutText}`,
+        text: `${stripHtml(step.prose)} ${bulletText} ${step.takeaway} ${contextText} ${glossaryText} ${calloutText}`,
       });
     });
   }

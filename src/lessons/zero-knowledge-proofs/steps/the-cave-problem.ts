@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const theCaveProblem: Step = {
   id: "the-cave-problem",
-  title: "Ali Baba's Cave — Proving a Secret Without Saying It",
+  title: "Cave Metaphor — Proving Without Revealing",
   prose:
     "<p>Picture a circular cave with a single entrance that splits into two paths, A and B, meeting again at a locked magic door deep inside — a door that only opens to someone who knows the secret word. Peggy claims she knows the word. Victor doesn't believe her, but she doesn't want to just say the word out loud — that would tell Victor the secret, and everyone else who happens to be listening. How can she convince him without giving it away?</p>" +
     "<p>Here's the protocol: Victor waits outside while Peggy walks into the cave and picks either path A or B, out of his sight. Victor then walks to the entrance and shouts which path he wants her to come out of — A or B, his choice, made after she's already committed to a path. If Peggy really knows the secret word, she can always come out the requested side: if she's already on that side, she just walks out; if she's on the other side, she opens the locked door with the word and walks through to the requested exit.</p>" +
@@ -14,7 +14,9 @@ export const theCaveProblem: Step = {
     "A prover who doesn't know the secret only succeeds by chance — 50% per round, shrinking exponentially over repeated rounds",
     "Victor never sees the secret word or the door opening — only ever the outcome of each round",
   ],
-  diagram: `
+  takeaway: "Victor never sees the secret word or the door opening — only ever the outcome of each round.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Peggy</div>
@@ -31,10 +33,8 @@ export const theCaveProblem: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      This is the entire idea of a zero-knowledge proof in one story: prove
-      you can always satisfy an unpredictable challenge, without ever
-      revealing why you can. The next step names the three properties this
-      protocol actually has.
+      The prover answers unpredictable challenges without revealing the secret.
     </p>
   `,
+  },
 };

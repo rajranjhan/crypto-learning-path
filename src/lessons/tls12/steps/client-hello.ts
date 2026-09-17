@@ -11,7 +11,7 @@ import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 // overlaps.
 export const clientHello: Step = {
   id: "client-hello",
-  title: "Introductions",
+  title: "ClientHello — Offering Parameters",
   bytes: [
     // -- Record header (5 bytes) --
     0x16, // record type: handshake
@@ -148,10 +148,15 @@ export const clientHello: Step = {
       colorClass: "c-hs",
     },
   ],
+  wireContext: {
+    where: "The client is opening a TLS connection; no parameters or keys are agreed.",
+    now: "The client offers versions, cipher suites, and extensions in ClientHello.",
+    why: "The server needs the client’s capabilities to choose compatible parameters.",
+  },
   prose:
     "<p>Think of TLS 1.2 like sending a confidential document to your bank, but the mail has to pass through a shared office mailroom where anyone could peek.</p>" +
-    "<p>The conversation opens with your computer speaking first: \"I want to talk securely — here's what encryption methods I support.\"</p>" +
-    "<p>On the wire that's a <strong>ClientHello</strong>: the highest protocol version it offers (TLS 1.2, offset 9), fresh random entropy, and the ordered list of cipher suites it's willing to use. The bank's server chooses from this menu next.</p>",
+    "<p>In protocol terms, your computer or browser is the <strong>Client</strong>, and the bank's system is the <strong>Server</strong>. The conversation opens with the Client speaking first: \"I want to talk securely — here's what encryption methods I support.\"</p>" +
+    "<p>On the wire that's a <strong>ClientHello</strong>: the highest protocol version it offers (TLS 1.2, offset 9), fresh random entropy, and the ordered list of cipher suites it's willing to use. The Server chooses from this menu next.</p>",
   bullets: [
     "The protocol version the client supports",
     "32 bytes of client random data (used later in the handshake)",
@@ -160,6 +165,7 @@ export const clientHello: Step = {
     "The list of compression methods (none used)",
     "A list of extensions (SNI, signature algorithms, supported curves, etc.)",
   ],
+  takeaway: "ClientHello sets the menu: versions, cipher suites, extensions, and randomness, but it does not protect anything yet.",
   sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 1),
   callouts: [
     {

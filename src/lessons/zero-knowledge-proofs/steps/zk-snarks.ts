@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const zkSnarks: Step = {
   id: "zk-snarks",
-  title: "Proving an Entire Computation — zk-SNARKs",
+  title: "zk-SNARKs — Succinct Computation Proofs",
   prose:
     "<p>Schnorr's protocol proves one narrow fact: knowledge of a discrete logarithm. A <strong>zk-SNARK</strong> — Zero-Knowledge Succinct Non-Interactive Argument of Knowledge — generalizes the same three ideas (commitment, unpredictable challenge via Fiat-Shamir, and a response that only checks out if the prover did the real work) to prove an <em>entire arbitrary computation</em> was performed correctly: \"I ran this program on some secret input and got this output,\" without revealing the input, and without the verifier re-running the program at all.</p>" +
     "<p>Two words in the name carry the real weight. <strong>Succinct</strong> means the proof stays tiny and fast to check regardless of how large or expensive the underlying computation was — verifying a proof that a thousand-step program ran correctly can take milliseconds, dramatically less time than actually running those thousand steps. <strong>Argument</strong> (rather than \"proof\") is a technical nod to the fact that soundness here relies on computational hardness assumptions, the same way RSA's security does, rather than being unconditionally true.</p>" +
@@ -14,7 +14,9 @@ export const zkSnarks: Step = {
     "Many SNARK constructions require a trusted setup — public parameters generated from secret randomness that must be destroyed afterward",
     "Leaked trusted-setup randomness ('toxic waste') lets an attacker forge proofs of false statements — mitigated with multi-party ceremonies",
   ],
-  diagram: `
+  takeaway: "Leaked trusted-setup randomness ('toxic waste') lets an attacker forge proofs of false statements — mitigated with multi-party ceremonies.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Expensive computation</div>
@@ -31,9 +33,8 @@ export const zkSnarks: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      This succinctness is what makes SNARKs practical for blockchain
-      scaling, covered a couple of steps ahead — verifying a proof is far
-      cheaper than re-executing the transactions it represents.
+      SNARKs make verification cheaper than re-running the computation.
     </p>
   `,
+  },
 };

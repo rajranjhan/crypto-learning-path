@@ -3,7 +3,12 @@ import { OAUTH_ACTORS } from "../../actors";
 
 export const entitlements: Step = {
   id: "entitlements",
-  title: "The Ride Staff's Last Check — Entitlements",
+  title: "Entitlements — Final Authorization Check",
+  wireContext: {
+    where: "An API has received a token with scopes or other permission-related claims.",
+    now: "The sequence separates token validation from the API’s entitlement decision.",
+    why: "Validating a token does not by itself decide access to a particular tenant, record, or operation.",
+  },
   prose:
     "<p>Scopes get decided once, up front, by the booth, and printed right on the ticket before you ever reach a ride. Entitlements get decided every time you actually try to use it, by the ride staff standing at that specific gate — a separate check, in a separate place, at a separate time.</p>" +
     "<p>The ride staff already confirmed your ticket is real and stamped for this gate. Now they check something else entirely: does it actually cover this specific ride? Does the scope include rides:premium? Are you tall enough — a business rule the token was never meant to carry?</p>" +
@@ -17,6 +22,7 @@ export const entitlements: Step = {
     "Usually implemented as RBAC (roles) or ABAC (attributes/policy) at the resource server",
     "401 = the token itself is the problem; 403 = the token is valid but doesn't entitle this action",
   ],
+  takeaway: "401 = the token itself is the problem; 403 = the token is valid but doesn't entitle this action.",
   sequence: {
     actors: OAUTH_ACTORS,
     messages: [

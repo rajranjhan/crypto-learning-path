@@ -1,15 +1,20 @@
 import type { SequenceActor, Step } from "../../../types";
 
 const OBO_ACTORS: SequenceActor[] = [
-  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
-  { id: "kiosk", label: "Client / Actor (Photo Kiosk)", icon: "📸", role: "client" },
-  { id: "as", label: "Authorization Server (Ticket Booth)", icon: "🎫", role: "trusted" },
-  { id: "printshop", label: "Resource Server (Print Shop)", icon: "🖨️", role: "server" },
+  { id: "user", label: "Resource Owner", icon: "🧑", role: "client" },
+  { id: "kiosk", label: "Client / Actor", icon: "📸", role: "client" },
+  { id: "as", label: "Authorization Server", icon: "🎫", role: "trusted" },
+  { id: "printshop", label: "Resource Server", icon: "🖨️", role: "server" },
 ];
 
 export const onBehalfOf: Step = {
   id: "on-behalf-of",
-  title: "The Kiosk Needs Backup — Token Exchange & On-Behalf-Of",
+  title: "Token Exchange — On-Behalf-Of Access",
+  wireContext: {
+    where: "A middle-tier API has received a request in a user’s context.",
+    now: "It exchanges the incoming credential for a token intended for a downstream API.",
+    why: "Delegation must preserve the appropriate user context without forwarding a token to the wrong audience.",
+  },
   prose:
     "<p>The Photo Kiosk has your ticket — scoped to fetch your ride photo, stamped for the Photo Kiosk specifically. But it turns out the actual photo isn't stored at the kiosk at all. It's filed at the Print Shop, a completely separate counter across the grounds.</p>" +
     "<p>Here's the problem: the kiosk can't just hand your ticket to the Print Shop. Remember audience restriction, from Tokens, Claims & Security — the Print Shop checks that a ticket is actually stamped for it, and yours says Photo Kiosk. A copy-pasted ticket gets rejected on sight.</p>" +
@@ -23,6 +28,7 @@ export const onBehalfOf: Step = {
     "act claims can nest — a request relayed through multiple services can show the whole chain",
     "Solves the confused-deputy risk of one service just forwarding the original token somewhere it was never audience-restricted for",
   ],
+  takeaway: "Solves the confused-deputy risk of one service just forwarding the original token somewhere it was never audience-restricted for.",
   sequence: {
     actors: OBO_ACTORS,
     progress: {

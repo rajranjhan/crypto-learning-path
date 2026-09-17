@@ -12,7 +12,7 @@ export const blockchainCryptographyLesson: Lesson = {
   status: "available",
   summary: "Connects hashes, signatures, Merkle trees, and consensus rules to their jobs inside blockchains.",
   whyItMatters:
-    "Blockchains are applied cryptography systems, not magic trust machines. Understanding which cryptographic checks provide integrity, authorization, and compact verification helps separate real guarantees from common overclaims.",
+    "Public verification does not remove every trust assumption. Separating cryptographic checks from consensus helps you evaluate what a blockchain actually guarantees.",
   objectives: [
     "Explain hash-linked blocks with a public notebook metaphor",
     "Describe Merkle inclusion proofs",
@@ -20,25 +20,31 @@ export const blockchainCryptographyLesson: Lesson = {
     "Distinguish cryptographic checks from consensus and incentive assumptions",
   ],
   prerequisites: ["symmetric-primitives", "asymmetric-primitives"],
+  checkYourUnderstanding: [
+    {
+      question: "Why don't hash-linked blocks alone make a history impossible to rewrite?",
+      answer: "An attacker can recompute hashes for a modified history. Consensus rules and their network or economic assumptions determine which history is accepted.",
+    },
+    {
+      question: "What does a Merkle inclusion proof establish, and what does it not establish?",
+      answer: "It shows that an item belongs under a particular root. It does not by itself establish that the root is trusted or that the item is valid.",
+    },
+    {
+      question: "Why doesn't a valid transaction signature establish the signer's real-world identity?",
+      answer: "It proves authorization by a private key. Linking that key to a person requires evidence outside the signature.",
+    },
+  ],
   keyTakeaways: [
     "Hashes make block history tamper-evident",
     "Merkle trees make inclusion proofs compact",
-    "Digital signatures authorize transactions",
+    "Signatures prove key control; ledger rules determine transaction authorization",
     "Consensus combines cryptography with network and economic assumptions",
     "Most blockchain data is public unless privacy is explicitly added",
   ],
   estimatedMinutes: 30,
   difficulty: "Intermediate",
   lessonType: "application",
-  overview:
-    "Think of a blockchain as a public notebook that many people copy and " +
-    "check. Each new page carries a fingerprint of the page before it, so " +
-    "tearing out or editing an old page is obvious. Each payment is approved " +
-    "with the spender's signature. Each page has a compact receipt folder " +
-    "that proves which payments are on it. And the network's consensus rules " +
-    "decide who gets to write the next accepted page. This lesson connects " +
-    "those notebook jobs to hashes, Merkle trees, digital signatures, and " +
-    "consensus.",
+  transitionToNext: "Blockchain security relies heavily on today's public-key cryptography, which is exactly what post-quantum migration must prepare to replace.",
   references: [
     { title: "Bitcoin: A Peer-to-Peer Electronic Cash System", url: "https://bitcoin.org/bitcoin.pdf" },
     { title: "NIST FIPS 202: SHA-3 Standard", url: "https://csrc.nist.gov/pubs/fips/202/final" },
@@ -72,7 +78,7 @@ export const blockchainCryptographyLesson: Lesson = {
     </div>
     `,
     caption:
-      "The notebook is not private by default. Its safety comes from public, repeatable checks: anyone can recompute the fingerprints, signatures, receipt folders, and consensus evidence.",
+      "Public checks make tampering detectable; they do not make the notebook private.",
   },
   steps: [
     hashesChainBlocks,

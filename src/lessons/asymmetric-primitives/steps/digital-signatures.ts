@@ -1,20 +1,24 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 export const digitalSignatures: Step = {
   id: "digital-signatures",
-  title: "Proving Who Sent It, With Math Instead of a Shared Secret",
+  glossary: lessonTerms("signature"),
+  title: "Digital Signatures — Proving Origin",
   prose:
-    "<p>The symmetric-primitives lesson covered HMAC: proving a message's authenticity using a hash and a secret both sides already share. Signatures solve the same problem — prove who sent something, and that it wasn't altered — without any shared secret at all, which is exactly what's needed when the verifier is a stranger the sender has never coordinated a key with.</p>" +
-    "<p>A common beginner shortcut says a signature is \"encryption with the private key.\" That is a useful memory hook, but it is not precise enough for implementation. To sign safely, the algorithm hashes the message, applies a signature scheme such as RSA-PSS or ECDSA, and produces a signature value. Anyone with the corresponding public key can verify that signature against the message. Only the private key holder could have produced a signature that verifies for that message.</p>" +
+    "<p>The symmetric-primitives lesson covered HMAC: proving a message's authenticity using a hash and a secret both sides already share. Signatures bind a message to a signing key and detect alteration without a shared secret, which is exactly what's needed when the verifier is a stranger the sender has never coordinated a key with.</p>" +
+    "<p>A common beginner shortcut says a signature is \"encryption with the private key.\" That shortcut is misleading: signing is not encryption, and verification is not decryption. To sign safely, the algorithm hashes the message, applies a signature scheme such as RSA-PSS or ECDSA, and produces a signature value. Anyone with the corresponding public key can verify that signature against the message. A valid signature provides evidence that the matching private key signed the message; identity and authorization require separate checks.</p>" +
     "<p>This is precisely what's happening inside the TLS lessons' CertificateVerify step — the server signs a value derived from the handshake transcript with its certificate's private key, and the client verifies it with the public key from that same certificate. It's also what RS256 and ES256 mean as JWT signing algorithms: RSA-with-SHA256 and ECDSA-with-SHA256, the asymmetric counterparts to HMAC's HS256.</p>",
   bullets: [
     "Signing: hash the message and run a signature algorithm with the private key",
     "Verifying: use the public key to check the signature against an independently recomputed hash",
     "Only the private key holder could have produced a signature that verifies for that message",
-    "RSA signatures use PSS padding; ECC signatures use ECDSA — same idea, different underlying math",
+    "RSA-PSS and ECDSA are examples of signature schemes; neither encrypts the message",
     "This is exactly what TLS's CertificateVerify step does, and what RS256/ES256 mean as JWT signing algorithms — the asymmetric counterparts to HMAC's HS256",
   ],
-  diagram: `
+  takeaway: "This is exactly what TLS's CertificateVerify step does, and what RS256/ES256 mean as JWT signing algorithms — the asymmetric counterparts to HMAC's HS256.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Sign</div>
@@ -31,9 +35,8 @@ export const digitalSignatures: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      The direction is opposite from encryption at the trust level: anyone can
-      verify, but only the private key holder could have signed. Real signature
-      algorithms are not raw RSA run backward.
+      The direction is opposite from encryption at the trust level: anyone can verify, but only the private key holder could have signed.
     </p>
   `,
+  },
 };

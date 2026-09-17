@@ -1,8 +1,10 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 export const symmetric: Step = {
   id: "symmetric",
-  title: "Symmetric Encryption — One Shared Key",
+  glossary: lessonTerms("symmetric key"),
+  title: "Symmetric Encryption — Shared Keys",
   prose:
     "Imagine a lockbox with a single key. You lock the box with that key, and " +
     "anyone who owns an identical copy of the same key can unlock it. Symmetric " +
@@ -17,7 +19,9 @@ export const symmetric: Step = {
     "Fast — well suited to encrypting large amounts of data",
     "The catch: how do two strangers agree on the same secret key without anyone overhearing?",
   ],
-  diagram: `
+  takeaway: "Symmetric encryption is fast and strong, but the shared key must already be distributed safely.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Alice</div>
@@ -34,10 +38,9 @@ export const symmetric: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Both people own an exact copy of the same key. Whatever Alice locks, Bob
-      can open — and vice versa. The whole scheme is only as safe as the moment
-      they shared that key.
+      Both people own an exact copy of the same key.
     </p>
   `,
+  },
   subSteps: ["substitution", "caesar", "why-classical-ciphers-fail", "block", "stream"],
 };

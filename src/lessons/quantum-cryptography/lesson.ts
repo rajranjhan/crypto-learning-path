@@ -12,7 +12,7 @@ export const quantumCryptographyLesson: Lesson = {
   status: "available",
   summary: "Explains how quantum algorithms threaten current cryptography and how post-quantum migration addresses that risk.",
   whyItMatters:
-    "Large quantum computers would break widely deployed RSA, ECC, and Diffie-Hellman systems. Migration takes years, and harvest-now-decrypt-later risk means long-lived secrets need planning before such computers exist.",
+    "Data collected today may need to stay secret for years. Understanding quantum threats helps explain why public-key migration requires advance planning.",
   objectives: [
     "Explain the impact of Shor's and Grover's algorithms",
     "Identify harvest-now-decrypt-later risk",
@@ -20,29 +20,33 @@ export const quantumCryptographyLesson: Lesson = {
     "Separate symmetric key-size adjustments from public-key replacement",
   ],
   prerequisites: ["symmetric-primitives", "asymmetric-primitives"],
-  keyTakeaways: [
-    "Shor's algorithm threatens RSA, ECC, and discrete-log-based key exchange and signatures",
-    "Grover's algorithm gives a quadratic speedup against generic brute-force search",
-    "Long-lived encrypted data is already exposed to future decryption risk",
-    "Doubling symmetric key sizes can restore the desired brute-force margin in the simplified model",
-    "Post-quantum migration is an active inventory, agility, and protocol-engineering problem",
+  checkYourUnderstanding: [
+    {
+      question: "Why can long-lived data need migration planning before a cryptographically capable quantum computer exists?",
+      answer: "An adversary can store encrypted traffic now and attempt decryption later. The required secrecy lifetime can exceed the time available to migrate.",
+    },
+    {
+      question: "Why isn't increasing RSA key size equivalent to increasing an AES key size against quantum threats?",
+      answer: "Shor's algorithm changes the difficulty of the mathematical problem behind RSA. Grover's generic search speedup has a different impact, which larger symmetric keys can help offset.",
+    },
+    {
+      question: "Why is post-quantum migration more than replacing one algorithm name?",
+      answer: "Keys, signatures, protocols, libraries, certificates, and operational systems must interoperate with new constructions. Inventory and testing identify dependencies that a simple substitution misses.",
+    },
   ],
+  keyTakeaways: [
+    "Shor's algorithm threatens RSA and discrete-log-based cryptography",
+    "Grover's algorithm speeds up generic brute-force search quadratically",
+    "Long-lived encrypted data is already exposed to future decryption risk",
+    "Larger symmetric keys help offset quantum brute-force speedups",
+    "Migration requires inventory, algorithm agility, and protocol changes",
+  ],
+  transitionToNext: "You have reached the end of the course. Apply the path by mapping a system you know: identify its keys, trust boundaries, and long-lived secrets, then revisit the lessons behind its weakest assumptions.",
   estimatedMinutes: 35,
   difficulty: "Advanced",
   lessonType: "concept",
-  overview:
-    "Every lesson in this series rests on a hardness assumption — something " +
-    "believed too slow to break on a classical computer. A large enough " +
-    "quantum computer doesn't touch all of those assumptions equally: " +
-    "Shor's algorithm threatens the Asymmetric Primitives lesson's RSA, ECC, " +
-    "and discrete-log-based key exchange and signatures, while Grover's algorithm " +
-    "gives a quadratic speedup against generic brute-force search. Doubling a " +
-    "symmetric key size can restore the intended brute-force security margin in " +
-    "the simplified model, but migration still needs careful engineering. This short lesson covers both algorithms, the " +
-    "harvest-now-decrypt-later threat that makes this an urgent problem " +
-    "today rather than a future one, and the post-quantum algorithms " +
-    "already being deployed to answer it.",
-  diagram: `
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal attacker">
         <div class="node-title text-warning">Asymmetric (RSA, ECC, DH)</div>
@@ -53,12 +57,9 @@ export const quantumCryptographyLesson: Lesson = {
         <div class="node-sub">weakened differently; key and digest sizes need margin</div>
       </div>
     </div>
-    <p class="diagram-note">
-      Two very different outcomes for the two halves of this series. The
-      steps below explain why, and what's already being done about the
-      broken half.
-    </p>
+    <p class="diagram-note">Public-key replacement and symmetric security margins require different responses.</p>
   `,
+  },
   references: [
     { title: "NIST Post-Quantum Cryptography Project", url: "https://csrc.nist.gov/projects/post-quantum-cryptography" },
     { title: "NIST FIPS 203: ML-KEM", url: "https://csrc.nist.gov/pubs/fips/203/final" },

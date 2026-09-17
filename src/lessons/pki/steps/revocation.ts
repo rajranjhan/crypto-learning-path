@@ -3,7 +3,12 @@ import { PKI_ACTORS } from "../../actors";
 
 export const revocation: Step = {
   id: "revocation",
-  title: "Expired or Stolen IDs = Revocation",
+  title: "Revocation — Expired or Stolen Certificates",
+  wireContext: {
+    where: "A certificate may still be within its validity period after a compromise.",
+    now: "The sequence shows how certificate status information reaches a relying party.",
+    why: "Expiry alone cannot signal that an issuer has revoked a certificate early.",
+  },
   prose:
     "<p>ID cards have expiration dates, and they can also be reported stolen or invalid before they ever expire — a notary office keeps a \"hotlist\" of voided cards that anyone can check before accepting one as valid. A certificate's Not After date is the expiration date; everything in this step is the hotlist.</p>" +
     "<p>The private key behind a certificate might leak, or the domain might change hands, long before its expiry date arrives. <strong>Revocation</strong> is how a CA takes a certificate back early, and there are three real approaches, with a clear trend in which one's winning.</p>" +
@@ -16,6 +21,7 @@ export const revocation: Step = {
     "OCSP stapling: the server pre-fetches its own signed OCSP response and includes it in the handshake — same freshness, no extra round trip, no privacy leak",
     "Short-lived certificates (days to ~90 days) sidestep revocation almost entirely — a compromised cert simply expires soon regardless",
   ],
+  takeaway: "Short-lived certificates (days to ~90 days) sidestep revocation almost entirely — a compromised cert simply expires soon regardless.",
   sequence: {
     actors: PKI_ACTORS,
     messages: [

@@ -78,13 +78,19 @@ export interface Sequence {
   progress?: ProtocolProgress;
 }
 
+export interface WireContext {
+  where: string;
+  now: string;
+  why: string;
+}
+
 export interface Step {
   id: string;
   title: string;
   /**
    * The raw record bytes for a wire walkthrough. Optional: concept steps that
    * explain an idea (rather than dissect a packet) omit bytes and annotations
-   * and instead render prose, bullets, and an optional diagram.
+   * and instead render prose, bullets, and an optional figure.
    */
   bytes?: number[];
   annotations?: Annotation[];
@@ -92,14 +98,16 @@ export interface Step {
   prose: string;
   /** Optional short bullet points summarizing what the message contains/does. */
   bullets?: string[];
-  /** Optional authored HTML diagram, shown where the hexdump normally sits. */
-  diagram?: string;
+  /** One concise security or protocol consequence to remember from this step. */
+  takeaway: string;
   figure?: Figure;
   /** Optional annotated JWT/JSON/HTTP block with hover-linked, per-line annotations. */
   textBlock?: TextBlock;
   /** Optional sequence diagram (actors + ordered messages). */
   sequence?: Sequence;
   protocolProgress?: ProtocolProgress;
+  /** Brief orientation before bytes, annotated text, or a protocol sequence. */
+  wireContext?: WireContext;
   glossary?: GlossaryTerm[];
   callouts?: Callout[];
   /**
@@ -134,17 +142,15 @@ export interface Lesson {
   lessonType?: "concept" | "protocol" | "application";
   references?: { title: string; url: string }[];
   checkYourUnderstanding?: CheckYourUnderstanding[];
+  transitionToNext?: string;
   steps: Step[];
-  /** Optional overview intro prose. */
-  overview?: string;
-  /** Optional authored HTML diagram shown on the overview page, below the intro prose. */
-  diagram?: string;
   figure?: Figure;
 }
 
 export interface RegistryEntry {
   slug: string;
   title: string;
+  shortTitle?: string;
   status: "available" | "coming-soon";
   /** Optional group name (e.g. "OAuth"). Entries sharing a category nest under one collapsible header in the sidebar. */
   category?: string;

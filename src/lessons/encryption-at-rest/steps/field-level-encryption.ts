@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const fieldLevelEncryption: Step = {
   id: "field-level-encryption",
-  title: "When the Filing Cabinet Isn't Enough — Field-Level Encryption & Tokenization",
+  title: "Field-Level Encryption — Sensitive Fields",
   prose:
     "<p>TDE and full-disk encryption share a blind spot: anyone with a normal, authenticated connection to the running system — a compromised application service account, a curious or over-privileged DBA, an analyst granted read access to the wrong table — sees ordinary plaintext, because decryption happens transparently below the query layer, for everyone equally.</p>" +
     "<p><strong>Field-level encryption</strong> (also called application-level or client-side encryption) closes that gap by encrypting specific sensitive columns — SSNs, card numbers, health records — inside the application, before the value ever reaches the database. Now even someone with full database access, TDE and all, only ever sees ciphertext for that field.</p>" +
@@ -16,37 +16,26 @@ export const fieldLevelEncryption: Step = {
     "Format-preserving encryption keeps ciphertext the same shape as the original, for legacy systems that validate format",
     "Tokenization sidesteps the tradeoff: a random reference token lives in the main database, the real value lives in a separate, tightly access-controlled vault",
   ],
-  diagram: `
+  takeaway: "Tokenization sidesteps the tradeoff: a random reference token lives in the main database, the real value lives in a separate, tightly access-controlled vault.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal">
         <div class="node-title">TDE / Full-Disk</div>
-        <div class="node-sub left">
-          Protects: a stolen disk, backup, snapshot<br>
-          Doesn't protect: an ordinary DB query<br>
-          Cost: none — fully transparent
-        </div>
+        <div class="node-sub left">disk theft; backups; snapshots</div>
       </div>
       <div class="node equal">
         <div class="node-title">Field-Level Encryption</div>
-        <div class="node-sub left">
-          Protects: the above, plus a compromised app account or over-privileged DBA<br>
-          Doesn't protect: whatever holds the app's encryption key<br>
-          Cost: breaks indexing/search on that column
-        </div>
+        <div class="node-sub left">sensitive column isolation</div>
       </div>
       <div class="node equal">
         <div class="node-title">Tokenization</div>
-        <div class="node-sub left">
-          Protects: the above — the real value never enters the main DB at all<br>
-          Doesn't protect: the separate token vault itself<br>
-          Cost: an extra network call to detokenize
-        </div>
+        <div class="node-sub left">real value outside main DB</div>
       </div>
     </div>
     <p class="diagram-note">
-      Read left to right as increasing protection against someone with a
-      legitimate-looking connection to the database — at the cost of
-      increasing complexity and narrower functionality on the protected field.
+      Protection increases left to right; query flexibility decreases.
     </p>
   `,
+  },
 };

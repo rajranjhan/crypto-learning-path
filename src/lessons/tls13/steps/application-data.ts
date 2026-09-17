@@ -9,7 +9,7 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // authentication tag). Annotations tile from offset 0 with no gaps or overlaps.
 export const applicationData: Step = {
   id: "application-data",
-  title: "Sending the Document",
+  title: "Application Data — Protected Records",
   bytes: [
     0x17, 0x03, 0x03, 0x00, 0x49, 0xe2, 0x65, 0x2a, 0x8d, 0xa9, 0x5f, 0x1a,
     0x25, 0xb8, 0x3f, 0x7f, 0xd6, 0x5e, 0xc9, 0x71, 0x68, 0xb5, 0xd7, 0xbd,
@@ -49,6 +49,11 @@ export const applicationData: Step = {
       colorClass: "c-cipher",
     },
   ],
+  wireContext: {
+    where: "The handshake is complete and application traffic keys are available.",
+    now: "The client sends application data protected with those keys.",
+    why: "The secure channel now carries application messages rather than handshake messages.",
+  },
   prose:
     "<p>This is the payoff: your actual confidential document, finally sealed and sent.</p>" +
     "<p>Every byte after the 5-byte record header (offset 5) is AEAD ciphertext with an authentication tag — to anyone in the mailroom it's indistinguishable from random noise. TLS 1.3 even hides what kind of mail this is: it's tagged the same 0x17 as the EncryptedExtensions and Certificate that came before it, so an observer can't tell handshake traffic from your real document just by watching the wrapper.</p>" +
@@ -60,6 +65,7 @@ export const applicationData: Step = {
     "An authentication tag making the record tamper-evident",
     "To anyone on the wire it is indistinguishable from random data",
   ],
+  takeaway: "TLS 1.3 application data is protected by traffic keys derived from the handshake, while metadata such as timing and size can still leak.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 10),
   callouts: [
     {

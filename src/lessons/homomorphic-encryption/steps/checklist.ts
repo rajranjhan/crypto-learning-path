@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const checklist: Step = {
   id: "checklist",
-  title: "Putting It Together — A Checklist",
+  title: "Homomorphic Encryption Checklist",
   prose:
     "<p>Reach for the narrowest tool that solves the actual problem. A single aggregation or comparison usually only needs partially or somewhat homomorphic encryption — fast, mature, and well understood. Reserve fully homomorphic encryption for cases where the computation must run on genuinely untrusted infrastructure, the data is sensitive enough to justify a large performance cost, and no combination of MPC or a trusted execution environment is an acceptable alternative.</p>",
   bullets: [
@@ -12,6 +12,7 @@ export const checklist: Step = {
     "The private key never leaves the data owner, at any point in the protocol",
     "Ciphertexts still need the same storage- and transit-level protections as any other secret — homomorphic encryption adds to TLS and encryption at rest, it doesn't replace them",
   ],
+  takeaway: "Ciphertexts still need the same storage- and transit-level protections as any other secret — homomorphic encryption adds to TLS and encryption at rest, it doesn't replace them.",
   callouts: [
     {
       requirementId: "At rest",

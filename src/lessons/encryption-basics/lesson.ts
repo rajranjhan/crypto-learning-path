@@ -16,12 +16,26 @@ export const encryptionBasicsLesson: Lesson = {
   status: "available",
   summary: "Introduces the core mental models behind encryption: shared keys, public/private keys, and key exchange.",
   whyItMatters:
-    "Every later protocol in this course depends on knowing which problem each kind of encryption solves. This lesson gives the vocabulary for understanding why fast symmetric encryption protects data, while asymmetric cryptography helps strangers agree on keys and prove identity.",
+    "Secure protocols combine several tools with different jobs. Knowing which tool protects data, establishes keys, or proves identity makes the rest of the course easier to follow.",
   objectives: [
     "Distinguish symmetric and asymmetric encryption",
     "Separate encryption from hashing, MACs, signatures, and encoding",
     "Explain why key exchange is a separate problem from encryption",
     "Connect basic encryption concepts to TLS",
+  ],
+  checkYourUnderstanding: [
+    {
+      question: "Why doesn't Diffie-Hellman by itself prove who you are talking to?",
+      answer: "It establishes a shared secret but does not authenticate the peer. An attacker can establish separate secrets with each side unless the exchange is authenticated.",
+    },
+    {
+      question: "Why do secure protocols combine symmetric and asymmetric cryptography?",
+      answer: "Public-key tools help establish keys and authenticate peers; symmetric encryption efficiently protects the data exchanged afterward.",
+    },
+    {
+      question: "Why can't you recover a message by decrypting its hash?",
+      answer: "Hashing is a one-way fingerprinting operation, not reversible encryption. There is no decryption key that recovers the original input.",
+    },
   ],
   keyTakeaways: [
     "Symmetric encryption is fast but requires a shared secret",
@@ -33,14 +47,16 @@ export const encryptionBasicsLesson: Lesson = {
   estimatedMinutes: 25,
   difficulty: "Beginner",
   lessonType: "concept",
-  overview:
-    "Start with the simplest version of the problem: how do you scramble a " +
-    "message so only the right person can read it? This lesson begins with " +
-    "the shared-key idea, uses classical ciphers to make it concrete, then " +
-    "moves to modern symmetric encryption, asymmetric public/private keys, " +
-    "and Diffie-Hellman. By the end, you'll have the mental model the rest " +
-    "of the learning path builds on: fast shared-key encryption for data, " +
-    "asymmetric math for safely agreeing on keys and proving identity.",
+  transitionToNext: "Now that you understand the two major key models, we'll examine the actual primitives used to implement them.",
+  figure: {
+    body: `
+      <div class="flow">
+        <div class="node equal"><div class="node-title">Shared Key</div><div class="node-sub">Symmetric encryption protects data</div></div>
+        <div class="node equal"><div class="node-title">Public / Private Keys</div><div class="node-sub">Asymmetric tools establish keys or verify signatures</div></div>
+      </div>
+    `,
+    caption: "Secure protocols combine both key models.",
+  },
   steps: [
     whatEncryptionSolves,
     symmetric,

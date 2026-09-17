@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const whatGoesWrong: Step = {
   id: "what-goes-wrong",
-  title: "When Trust Breaks — Real PKI Failures",
+  title: "PKI Failures — When Trust Breaks",
   prose:
     "<p>This whole system's security rests entirely on the root list being trustworthy and small. If a fraudulent root seal ever got added to your trusted wallet — or a legitimate root's private seal got stolen — every card \"verified\" underneath it becomes forgeable. Real-world root CA compromises are treated as major security incidents for exactly this reason: they don't just fake one ID, they undermine the entire notarization system beneath them. Both incidents below are that failure, from opposite directions.</p>" +
     "<p>Every safeguard in this lesson exists because something like this actually happened. In 2011, the Dutch CA <strong>DigiNotar</strong> was compromised by an attacker who used the breach to issue fraudulent certificates for domains including google.com — certificates that chained to a perfectly legitimate, trusted root, and were used in real, active surveillance against users in Iran. Once discovered, every major browser distrusted DigiNotar's root entirely; the company was bankrupt within months. It's the clearest real-world demonstration of exactly the gap Certificate Transparency, the previous step, was built to close — CT logging became a widely deployed requirement largely because of incidents like this one.</p>" +
@@ -16,29 +16,22 @@ export const whatGoesWrong: Step = {
     "Root and intermediate CA private keys are meant to be among the most tightly protected secrets in the industry — never bundled into shipped software",
     "Warning fatigue from repeated self-signed/expired-certificate warnings trains users to click through real ones too",
   ],
-  diagram: `
+  takeaway: "Warning fatigue from repeated self-signed/expired-certificate warnings trains users to click through real ones too.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal attacker">
         <div class="node-title text-warning">DigiNotar (2011)</div>
-        <div class="node-sub left">
-          CA compromised, issued fraudulent certs<br>
-          Used in real surveillance<br>
-          Root distrusted industry-wide
-        </div>
+        <div class="node-sub left">compromised CA; fraudulent certs</div>
       </div>
       <div class="node equal attacker">
         <div class="node-title text-warning">Superfish (2015)</div>
-        <div class="node-sub left">
-          Same private root key shipped on every device<br>
-          Trivially extractable<br>
-          Forgeable certs for any site
-        </div>
+        <div class="node-sub left">shared root key; forgeable certs</div>
       </div>
     </div>
     <p class="diagram-note">
-      Both incidents broke the same assumption — that a root CA's private
-      key stays exclusively controlled and never exposed — from opposite
-      directions: one an external attacker, one built into the product itself.
+      Both failures exposed or abused root-level trust.
     </p>
   `,
+  },
 };

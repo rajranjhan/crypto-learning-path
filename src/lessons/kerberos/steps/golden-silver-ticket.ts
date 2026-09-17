@@ -1,15 +1,20 @@
 import type { SequenceActor, Step } from "../../../types";
 
 // Local to this step: the attacker doesn't check in through the normal flow,
-// so KERBEROS_ACTORS' "You" column doesn't fit — this needs its own lifeline.
+// so KERBEROS_ACTORS' Client Principal column doesn't fit.
 const FORGERY_ACTORS: SequenceActor[] = [
   { id: "attacker", label: "Attacker", icon: "🕵️", role: "attacker" },
-  { id: "door", label: "Backstage Door (Service)", icon: "🚪", role: "server" },
+  { id: "door", label: "Service Server", icon: "🖥️", role: "server" },
 ];
 
 export const goldenSilverTicket: Step = {
   id: "golden-silver-ticket",
-  title: "Steal the Master Seal, Forge Any Badge — Golden & Silver Tickets",
+  title: "Golden and Silver Tickets — Forged Trust",
+  wireContext: {
+    where: "An attacker has compromised a ticket-protection key.",
+    now: "The sequence shows forged tickets being presented to trusted services.",
+    why: "The scope of the stolen key determines which authentication claims the attacker can forge.",
+  },
   prose:
     "<p>Everything you've walked through so far is only as trustworthy as the secrets doing the sealing. Two of those secrets are worth singling out, because stealing either one skips the entire protocol rather than breaking it.</p>" +
     "<p>The Staff House's own master seal — the <code>krbtgt</code> key — is used to seal every single Day Badge, for every staff member, every day. Steal that one secret, and you don't need to check in at all: you can seal a Day Badge for anyone, with any name, any privileges, any expiry you like, entirely offline, without the Check-In Window ever seeing you. Real Kerberos deployments (this is the standard attack against Windows Active Directory) call this a <strong>Golden Ticket</strong>. Because it never touches the Check-In Window, there's no failed login to notice — the forged badge just works.</p>" +
@@ -21,6 +26,7 @@ export const goldenSilverTicket: Step = {
     "Neither forgery touches the party that would normally log the issuance — that's what makes them hard to detect",
     "The whole system's trust concentrates in a few long-lived secrets; real deployments rotate the master seal for exactly this reason",
   ],
+  takeaway: "The whole system's trust concentrates in a few long-lived secrets; real deployments rotate the master seal for exactly this reason.",
   sequence: {
     actors: FORGERY_ACTORS,
     progress: {

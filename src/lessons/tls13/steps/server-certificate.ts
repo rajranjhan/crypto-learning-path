@@ -14,7 +14,7 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // tile from offset 0 with no gaps or overlaps.
 export const serverCertificate: Step = {
   id: "server-certificate",
-  title: "Verifying the ID",
+  title: "Certificate — Encrypted Server Identity",
   bytes: [
     0x17, 0x03, 0x03, 0x04, 0x99, 0x0b, 0x00, 0x04, 0x95, 0x00, 0x00, 0x04,
     0x91, 0x00, 0x04, 0x8c, 0x30, 0x82, 0x04, 0x88, 0x30, 0x82, 0x03, 0x70,
@@ -188,9 +188,14 @@ export const serverCertificate: Step = {
       colorClass: "c-hs",
     },
   ],
+  wireContext: {
+    where: "The hello exchange is complete and handshake encryption is active.",
+    now: "The server sends its certificate chain inside an encrypted record.",
+    why: "The client needs to validate the server’s name-to-key binding before accepting its authentication proof.",
+  },
   prose:
     "<p>Now the bank hands over its notarized ID — but this time, inside a sealed envelope.</p>" +
-    "<p>That's the <strong>Certificate</strong> message: an X.509 certificate signed by a certificate authority you both trust. In TLS 1.2 this traveled in the clear, readable by anyone in the mailroom. Here, it's locked the moment it leaves the bank — on the wire the record type reads 0x17 (application_data), and what's shown here is the decrypted inner content.</p>" +
+    "<p>That's the <strong>Certificate</strong> message: an X.509 certificate whose chain, hostname, validity, and policy the client must validate; CertificateVerify separately proves possession of the matching private key. In TLS 1.2 this traveled in the clear, readable by anyone in the mailroom. Here, it's locked the moment it leaves the bank — on the wire the record type reads 0x17 (application_data), and what's shown here is the decrypted inner content.</p>" +
     "<p>Your computer will still check it against a trusted registry the same way — but now nobody watching the mailroom even gets to see whose ID is being checked, let alone read it. All length fields stay self-consistent: the 1164-byte DER (offset 16) is framed by a 1169-byte certificate list, a 1173-byte handshake body, and a 1177-byte record. TLS 1.3 also adds a per-certificate extensions field (offset 1180) that TLS 1.2 lacked.</p>",
   bullets: [
     "An X.509 certificate containing the server's hostname and public key",
@@ -198,6 +203,7 @@ export const serverCertificate: Step = {
     "Now encrypted under the handshake traffic keys — unlike TLS 1.2, where the certificate was sent in the clear",
     "Adds a per-certificate extensions field (e.g. for OCSP stapling)",
   ],
+  takeaway: "TLS 1.3 encrypts the certificate message, but the client still validates the certificate chain in the normal PKI way.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 5),
   callouts: [
     {

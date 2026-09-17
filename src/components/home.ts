@@ -7,13 +7,13 @@ export function renderHome(registry: RegistryEntry[], lessons: Record<string, Le
   const header = document.createElement("header");
   header.className = "overview-header";
   const heading = document.createElement("h1");
-  heading.textContent = "Crypto Learning Path";
+  heading.textContent = "Practical Cryptography, Byte by Byte";
   header.appendChild(heading);
 
   const summary = document.createElement("p");
   summary.className = "overview-summary";
   summary.textContent =
-    "A structured course for learning applied cryptography, protocols, and security primitives through byte-level walkthroughs, diagrams, and practical threat models.";
+    "Visual explanations of encryption, TLS, PKI, OAuth and modern cryptographic protocols.";
   header.appendChild(summary);
   root.appendChild(header);
 

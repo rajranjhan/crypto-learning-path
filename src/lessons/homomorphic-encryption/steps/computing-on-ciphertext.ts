@@ -1,9 +1,16 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 import { HE_ACTORS } from "../../actors";
 
 export const computingOnCiphertext: Step = {
   id: "computing-on-ciphertext",
-  title: "Handing Your Data to a Cloud You Don't Trust",
+  glossary: lessonTerms("plaintext", "ciphertext"),
+  title: "Ciphertext Computation — Outsourcing Work",
+  wireContext: {
+    where: "The data owner wants an external service to compute without seeing the inputs.",
+    now: "The sequence sends encrypted inputs for evaluation and returns an encrypted result.",
+    why: "The owner can recover the result while keeping plaintext inputs out of the evaluator’s view.",
+  },
   prose:
     "<p>Put the pieces together and the glovebox metaphor from the first step becomes an actual protocol. A data owner encrypts their data locally, using a key nobody else ever holds, and uploads only the ciphertext. An untrusted cloud — or an ML inference service, or an analytics platform — runs whatever computation it's meant to perform, using homomorphic addition and multiplication (with bootstrapping as needed) directly on that ciphertext. It produces a result, but that result is also ciphertext: the cloud computed a real answer without ever being able to read the question or the answer.</p>" +
     "<p>The encrypted result travels back to the data owner, and only there — the one place the private key ever exists — does it get decrypted into something readable. Every hop in between, including the machine that did the actual computing, only ever touched numbers that were cryptographically meaningless without that key.</p>" +
@@ -14,6 +21,7 @@ export const computingOnCiphertext: Step = {
     "Real deployments: private ML inference, encrypted database queries/search, cross-organization analytics on data nobody wants to expose to each other",
     "The protocol's security holds even if the computing party is fully compromised or malicious — it never had anything to leak",
   ],
+  takeaway: "The protocol's security holds even if the computing party is fully compromised or malicious — it never had anything to leak.",
   sequence: {
     actors: HE_ACTORS,
     messages: [

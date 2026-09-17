@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const whyClassicalCiphersFail: Step = {
   id: "why-classical-ciphers-fail",
-  title: "Why Classical Ciphers Fail",
+  title: "Classical Ciphers — Pattern Leakage",
   sidebarGroup: "Classical Ciphers",
   prose:
     "<p>Substitution and Caesar ciphers are useful teaching tools because they make the idea of a key visible. They fail because they preserve too much structure. Repeated letters stay repeated, common letters stay common, and a tiny keyspace can be brute-forced. A patient attacker does not need to know the key ahead of time; the language itself leaks clues.</p>" +
@@ -13,6 +13,7 @@ export const whyClassicalCiphersFail: Step = {
     "Modern ciphers must hide structure, not just replace symbols",
     "A cipher is only one part of a safe construction; modes and authentication matter too",
   ],
+  takeaway: "A cipher is only one part of a safe construction; modes and authentication matter too.",
   callouts: [
     {
       type: "key-idea",

@@ -10,7 +10,7 @@ import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 // from offset 0 with no gaps or overlaps.
 export const clientKeyExchange: Step = {
   id: "client-key-exchange",
-  title: "Agreeing on a Shared Key, Continued",
+  title: "ClientKeyExchange — Client Key Share",
   bytes: [
     0x16, 0x03, 0x03, 0x00, 0x46, 0x10, 0x00, 0x00, 0x42, 0x41, 0x04, 0x4f,
     0x51, 0xbe, 0x70, 0x68, 0x6f, 0x36, 0x37, 0x81, 0x0c, 0xac, 0x7d, 0x9f,
@@ -71,6 +71,11 @@ export const clientKeyExchange: Step = {
       colorClass: "c-rand",
     },
   ],
+  wireContext: {
+    where: "The client has the server’s authenticated ephemeral key share.",
+    now: "The client sends its own ephemeral public key.",
+    why: "Both peers can now compute shared key material and derive traffic keys.",
+  },
   prose:
     "<p>Your computer replies in kind: \"Here's my half of the combination.\"</p>" +
     "<p>On the wire that's the <strong>ClientKeyExchange</strong>: an ephemeral ECDH public key (offset 10).</p>" +
@@ -81,6 +86,7 @@ export const clientKeyExchange: Step = {
     "Lets both parties independently compute the identical pre-master secret",
     "No secret key material is ever sent on the wire",
   ],
+  takeaway: "The client sends an ephemeral public value, not the shared secret, so both sides can derive keys without putting the secret on the wire.",
   sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 6),
   callouts: [
     {

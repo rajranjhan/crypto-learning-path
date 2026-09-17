@@ -3,7 +3,12 @@ import { OAUTH_ACTORS } from "../../actors";
 
 export const fapiMtls: Step = {
   id: "fapi-mtls",
-  title: "Locking a Ticket to One Person — Certificate Binding (FAPI)",
+  title: "mTLS Token Binding — Certificate-Bound Access",
+  wireContext: {
+    where: "The client has a certificate and needs access tokens bound to its key.",
+    now: "The exchange binds a token to the client certificate and checks that binding at the API.",
+    why: "A stolen token alone should not work without TLS proof of the corresponding private key.",
+  },
   prose:
     "This is the wristband from a moment ago, made real. The Financial-grade API " +
     "(FAPI) profiles asked OAuth for tokens that can't be used by whoever steals " +
@@ -25,6 +30,7 @@ export const fapiMtls: Step = {
     "The API accepts the token only over a TLS connection using the matching client cert",
     "Strong, but requires mTLS infrastructure end-to-end — operationally heavy",
   ],
+  takeaway: "Strong, but requires mTLS infrastructure end-to-end — operationally heavy.",
   sequence: {
     actors: OAUTH_ACTORS,
     progress: {

@@ -1,9 +1,16 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 import { OAUTH_ACTORS } from "../../actors";
 
 export const clientCredentials: Step = {
   id: "client-credentials",
-  title: "Not Every Ticket Sale Involves a Person — Client Credentials",
+  glossary: lessonTerms("authentication", "authorization"),
+  title: "Client Credentials — Machine-to-Machine Access",
+  wireContext: {
+    where: "A service needs API access on its own behalf, without a user grant.",
+    now: "The service authenticates to the token endpoint and obtains an access token.",
+    why: "The API needs application permissions, not a claim that a user consented.",
+  },
   prose:
     "<p>Picture the delivery truck that restocks the snack stands overnight. It doesn't buy a ride ticket — the carnival's own backend systems authenticate directly to each other with their own credentials and get a token scoped to \"restock the snack stand,\" with no user, no redirect, no consent screen involved at all. That's the <strong>Client Credentials</strong> grant: OAuth's answer for the case every other flow in this lesson has skipped — nobody standing at the booth, because no person is involved at all.</p>" +
     "<p>Because there's no user in the loop to notice if something's off, it's worth locking a Client Credentials token down deliberately rather than trusting the grant type alone to keep it safe.</p>" +
@@ -14,6 +21,7 @@ export const clientCredentials: Step = {
     "Use audience restriction (the aud claim, from Tokens, Claims & Security) so a token issued for one service can't be replayed against a different one",
     "Consider sender-constrained tokens — DPoP or mTLS-bound, from Tokens, Claims & Security — so a stolen access token can't be used from a different client or machine",
   ],
+  takeaway: "Consider sender-constrained tokens — DPoP or mTLS-bound, from Tokens, Claims & Security — so a stolen access token can't be used from a different client or machine.",
   sequence: {
     actors: OAUTH_ACTORS,
     progress: {

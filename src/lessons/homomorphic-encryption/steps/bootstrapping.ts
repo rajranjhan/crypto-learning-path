@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const bootstrapping: Step = {
   id: "bootstrapping",
-  title: "Cleaning the Ciphertext — Gentry's Bootstrapping",
+  title: "Bootstrapping — Resetting Noise",
   prose:
     "<p>Craig Gentry's 2009 breakthrough was a way to reset a noisy ciphertext back to something close to fresh — without ever decrypting it in the clear, which would defeat the entire point. The trick, called <strong>bootstrapping</strong>, sounds almost circular: encrypt the secret key itself, and use that encrypted key to homomorphically evaluate the scheme's own decryption function, on the ciphertext.</p>" +
     "<p>Walk through what that produces. Run the decryption circuit homomorphically — using the encrypted key as an input — on a noisy ciphertext, and the output is a brand-new ciphertext, encrypted under the same public key, that decrypts to the exact same underlying message, but with the noise reset back down to a fresh, low level. Nothing was ever decrypted in the clear along the way; the entire decryption process itself ran inside the homomorphic scheme.</p>" +
@@ -14,7 +14,9 @@ export const bootstrapping: Step = {
     "Bootstrap often enough (typically after every multiplication) and a computation is no longer limited by a fixed noise budget",
     "This one idea is what turned Somewhat Homomorphic Encryption into genuinely Fully Homomorphic Encryption — and it's also the most computationally expensive step in the whole scheme, a large part of why FHE is so slow (next steps)",
   ],
-  diagram: `
+  takeaway: "This one idea is what turned Somewhat Homomorphic Encryption into genuinely Fully Homomorphic Encryption — and it's also the most computationally expensive step in the whole scheme, a large part of why FHE is so slow (next steps)",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Noisy ciphertext</div>
@@ -31,9 +33,8 @@ export const bootstrapping: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Bootstrapping is expensive, but it removes the hard ceiling somewhat
-      homomorphic encryption runs into — the computation can keep going
-      indefinitely, refreshing the ciphertext whenever it needs to.
+      Bootstrapping refreshes ciphertext so deeper computation can continue.
     </p>
   `,
+  },
 };

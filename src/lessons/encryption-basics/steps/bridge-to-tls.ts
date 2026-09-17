@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const bridgeToTls: Step = {
   id: "bridge-to-tls",
-  title: "Best of Both — How TLS Uses Them Together",
+  title: "Hybrid Encryption — Combining Key Models",
   prose:
     "Modern systems usually combine symmetric and asymmetric cryptography rather " +
     "than choosing one or the other. Each approach solves the other's weakness. Symmetric is fast but needs a " +
@@ -22,7 +22,9 @@ export const bridgeToTls: Step = {
     "The usual design is hybrid: asymmetric cryptography bootstraps trust and key agreement; symmetric cryptography protects the bulk data",
     "This handshake-then-transfer pattern is exactly what the TLS lessons walk through",
   ],
-  diagram: `
+  takeaway: "This handshake-then-transfer pattern is exactly what the TLS lessons walk through.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">1. Agree on a key</div>
@@ -39,9 +41,8 @@ export const bridgeToTls: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      The expensive padlock does one job: get a shared key into both hands
-      safely. Everything after rides on the fast symmetric lockbox — which is
-      precisely the flow you'll see dissected in the TLS 1.2 and TLS 1.3 lessons.
+      The expensive padlock does one job: get a shared key into both hands safely.
     </p>
   `,
+  },
 };

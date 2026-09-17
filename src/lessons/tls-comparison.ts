@@ -20,17 +20,17 @@ export const tlsComparisonFigure: Figure = {
         <tr>
           <th>Cipher suites</th>
           <td>Mix key exchange, authentication, cipher, and hash choices</td>
-          <td>Simplified: cipher suite mainly names AEAD + hash; key exchange/signature move to extensions</td>
+          <td>AEAD + hash; extensions choose the rest</td>
         </tr>
         <tr>
           <th>Key exchange expectation</th>
           <td>Can negotiate older patterns; ECDHE gives forward secrecy</td>
-          <td>Ephemeral Diffie-Hellman is the normal path; static RSA key transport is gone</td>
+          <td>Ephemeral Diffie-Hellman only</td>
         </tr>
         <tr>
           <th>Handshake visibility</th>
           <td>Most handshake messages are visible until ChangeCipherSpec/Finished</td>
-          <td>ClientHello and ServerHello are visible; messages after ServerHello are encrypted with handshake traffic keys</td>
+          <td>ClientHello and ServerHello visible; later handshake encrypted</td>
         </tr>
       </tbody>
     </table>

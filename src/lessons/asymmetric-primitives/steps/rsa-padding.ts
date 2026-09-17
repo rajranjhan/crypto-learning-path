@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const rsaPadding: Step = {
   id: "rsa-padding",
-  title: "Why 'Textbook' RSA Is Never Used Directly",
+  title: "RSA Padding — Avoiding Raw RSA",
   prose:
     "<p>The raw RSA math from the previous step is never used exactly as shown — encrypting a message straight through as c = m^e mod n is called \"textbook RSA,\" and it has serious problems. It's deterministic: the same message always produces the same ciphertext, so an attacker who guesses a small set of likely messages (a yes/no answer, a short PIN) can just encrypt each guess and compare. Textbook RSA is also multiplicatively malleable in exactly the way the homomorphic encryption lesson highlighted as a feature: multiplying two ciphertexts together produces the ciphertext of the product of the two original messages — useful when that's the point, dangerous when it isn't, since it lets an attacker manipulate a ciphertext into a related one without ever decrypting it.</p>" +
     "<p>Real implementations wrap the message in a padding scheme before the RSA math ever runs. <strong>OAEP</strong> (Optimal Asymmetric Encryption Padding) mixes in fresh randomness before encrypting, so the same message never produces the same ciphertext twice, and destroys the clean mathematical structure malleability depends on. For signatures — a different job, covered in an upcoming step — <strong>PSS</strong> (Probabilistic Signature Scheme) plays the equivalent role; the older PKCS#1 v1.5 padding still appears in legacy systems but has known weaknesses OAEP and PSS were designed to avoid.</p>" +
@@ -14,7 +14,9 @@ export const rsaPadding: Step = {
     "PSS is OAEP's counterpart for signatures — both replace the older, weaker PKCS#1 v1.5 padding",
     "Practical rule: never call raw RSA directly — use OAEP for encryption, PSS for signatures, and prefer ECDHE/DHE for key agreement",
   ],
-  diagram: `
+  takeaway: "Practical rule: never call raw RSA directly — use OAEP for encryption, PSS for signatures, and prefer ECDHE/DHE for key agreement.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node attacker">
         <div class="node-title text-warning">❌ Textbook RSA</div>
@@ -22,7 +24,7 @@ export const rsaPadding: Step = {
       </div>
       <div class="node trusted">
         <div class="node-title text-trusted">✅ RSA-OAEP</div>
-        <div class="node-sub">randomness mixed in first — same message, different ciphertext every time</div>
+        <div class="node-sub">randomized before RSA</div>
       </div>
     </div>
     <p class="diagram-note">
@@ -30,4 +32,5 @@ export const rsaPadding: Step = {
       point — using it without padding was.
     </p>
   `,
+  },
 };

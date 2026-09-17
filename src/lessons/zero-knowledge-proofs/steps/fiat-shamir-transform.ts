@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const fiatShamirTransform: Step = {
   id: "fiat-shamir-transform",
-  title: "Removing the Back-and-Forth — the Fiat-Shamir Transform",
+  title: "Fiat-Shamir — Non-Interactive Proofs",
   prose:
     "<p>Schnorr's protocol, as described, needs Victor online and participating — he has to actually send a fresh random challenge after seeing the commitment. That's fine for an interactive identity check, but useless for signing a document that needs to be verifiable by anyone, at any time, with no verifier present at all. The <strong>Fiat-Shamir transform</strong> removes the interaction entirely, with one substitution: instead of waiting for Victor to send a random challenge, Peggy computes it herself, as a hash of her own commitment — c = H(r), or c = H(r, message) if she's proving something about a specific message.</p>" +
     "<p>This works because a cryptographic hash function (from the Symmetric Primitives lesson) is unpredictable in exactly the way a real verifier's random challenge needs to be: Peggy can't know what H(r) will output before she's committed to r, so she still can't precompute a fake response the way she could if she chose the challenge freely herself. The proof — commitment, self-generated challenge, response — becomes one self-contained package Peggy can hand to anyone, who can verify it alone, with no back-and-forth at all.</p>" +
@@ -14,7 +14,9 @@ export const fiatShamirTransform: Step = {
     "The result is a single, self-contained proof anyone can verify later, with no interaction required",
     "A digital signature (Schnorr, and structurally ECDSA too) is a non-interactive zero-knowledge proof of knowing a private key, bound to a message",
   ],
-  diagram: `
+  takeaway: "A digital signature (Schnorr, and structurally ECDSA too) is a non-interactive zero-knowledge proof of knowing a private key, bound to a message.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal">
         <div class="node-title">Interactive</div>
@@ -31,4 +33,5 @@ export const fiatShamirTransform: Step = {
       function standing in for one.
     </p>
   `,
+  },
 };

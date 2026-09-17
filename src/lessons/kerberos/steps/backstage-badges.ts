@@ -2,10 +2,10 @@ import type { Step } from "../../../types";
 
 export const backstageBadges: Step = {
   id: "backstage-badges",
-  title: "Backstage at the Carnival — Employee Badges, Not Guest Tickets",
+  title: "Kerberos Roles — Backstage Badges",
   prose:
     "<p>Picture the carnival from a <strong>guest's</strong> side for a moment: they walk up to the front gate, prove who they are, and walk away with a ride ticket they can show at one gate — that's the world the OAuth lessons cover later in this series. Kerberos solves a different problem — the one behind the scenes. The carnival's own <strong>staff</strong> — ride mechanics, payroll clerks, costume handlers — need to move between dozens of backstage doors all day: the rides control room, the payroll office, the costume vault. Nobody wants to retype their password at every single door, and the carnival really doesn't want that password crossing the wire that many times either.</p>" +
-    "<p>Kerberos, invented at MIT in 1988 for a campus network, solves exactly that. It's named for Cerberus, the three-headed dog guarding the gates of the underworld — fitting, since almost every exchange in this protocol involves three parties: you, a trusted central authority, and the door you're trying to get through. Everyone who works this <strong>realm</strong> (Kerberos's word for one trusted domain — think of it as the carnival's own staff directory, <code>CARNIVAL.LOCAL</code>) already shares a secret with a central office before the day even starts: your password, or a key derived from it.</p>" +
+    "<p>Kerberos, invented at MIT in 1988 for a campus network, solves exactly that. It's named for Cerberus, the three-headed dog guarding the gates of the underworld — fitting, since almost every exchange in this protocol involves three parties: the <strong>Client Principal</strong>, a trusted central authority, and the <strong>Service Server</strong> you're trying to reach. Everyone who works this <strong>realm</strong> (Kerberos's word for one trusted domain — think of it as the carnival's own staff directory, <code>CARNIVAL.LOCAL</code>) already shares a secret with a central office before the day even starts: your password, or a key derived from it.</p>" +
     "<p>That central office is the <strong>Staff House</strong> — Kerberos calls it the <strong>KDC</strong>, the Key Distribution Center. It's one building, but it has two windows that do different jobs: the <strong>Check-In Window</strong> (the <strong>Authentication Server</strong>, or AS) is where you prove who you are, once, each morning. The <strong>Backstage Desk</strong> (the <strong>Ticket Granting Server</strong>, or TGS) is where you trade that morning check-in for a pass to any specific door, as many times as you need, without going back to the Check-In Window again. Each door — each backstage <strong>service</strong> — has already registered its own secret with the Staff House ahead of time, the way a locksmith might set up a master key system once, long before anyone needs to walk through a door.</p>",
   bullets: [
     "Realm — one trusted domain of staff and doors that all share secrets with the same Staff House (e.g. CARNIVAL.LOCAL)",
@@ -19,11 +19,13 @@ export const backstageBadges: Step = {
     "Authenticator / Timestamp slip — fresh proof that this request is happening now",
     "Service — a backstage door, already sharing its own secret with the Staff House",
   ],
-  diagram: `
+  takeaway: "Kerberos works because every party already shares trust material with the KDC, not because tickets are self-validating magic.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
-        <div class="node-title">You</div>
-        <div class="node-sub">carnival staff 🧑, hold a password only you and the Staff House know</div>
+        <div class="node-title">Client Principal</div>
+        <div class="node-sub">staff identity with a password-derived key</div>
       </div>
       <div class="link">
         <div class="lock">🪪</div>
@@ -31,15 +33,15 @@ export const backstageBadges: Step = {
         <div class="arrow">→</div>
       </div>
       <div class="node trusted">
-        <div class="node-title">Staff House (KDC)</div>
+        <div class="node-title">KDC</div>
         <div class="flow spaced">
           <div class="node compact compact-padding">
-            <div class="node-title small">Check-In Window</div>
-            <div class="node-sub">Authentication Server (AS)</div>
+            <div class="node-title small">Authentication Server</div>
+            <div class="node-sub">AS</div>
           </div>
           <div class="node compact compact-padding">
-            <div class="node-title small">Backstage Desk</div>
-            <div class="node-sub">Ticket Granting Server (TGS)</div>
+            <div class="node-title small">Ticket Granting Server</div>
+            <div class="node-sub">TGS</div>
           </div>
         </div>
       </div>
@@ -49,16 +51,13 @@ export const backstageBadges: Step = {
         <div class="arrow">→</div>
       </div>
       <div class="node">
-        <div class="node-title">Backstage Doors</div>
-        <div class="node-sub">Rides Control · Payroll · Costume Vault — each already shares its own secret with the Staff House</div>
+        <div class="node-title">Service Servers</div>
+        <div class="node-sub">services with shared KDC secrets</div>
       </div>
     </div>
     <p class="diagram-note">
-      One check-in, many doors. The next three steps walk this diagram left to
-      right: first you badge in at the Check-In Window, then you trade that
-      badge for a door-specific pass at the Backstage Desk, then you show that
-      pass at the actual door — which never has to call the Staff House to let
-      you in.
+      One login can produce many door-specific service tickets.
     </p>
   `,
+  },
 };

@@ -3,7 +3,12 @@ import { PKI_ACTORS } from "../../actors";
 
 export const chainValidation: Step = {
   id: "chain-validation",
-  title: "The Trust Chain = Following the Paper Trail",
+  title: "Certificate Chains — Establishing Trust",
+  wireContext: {
+    where: "The server has supplied a leaf certificate and intermediate certificates.",
+    now: "The sequence traces validation toward a configured trust anchor.",
+    why: "An issuer signature is useful only within a chain and policy the client accepts.",
+  },
   prose:
     "<p>When you receive the bank's ID card, you're not just looking at one stamp — you're following a chain of stamped authorizations: the bank's card, stamped by a regional notary branch, whose own authority was stamped by the root government, whose seal is already sitting in your trusted list. If every link in that paper trail checks out, you trust the card — even though you've never met the bank, the regional notary, or verified the root government yourself today. That unbroken links-in-a-chain structure is exactly what \"chain of trust\" means.</p>" +
     "<p>Technically, the server sends its leaf certificate and, typically, the intermediate that signed it — the client usually already has the root, so it doesn't need to be sent. Validation walks the chain from the leaf upward, checking several things at every single link, not just the signatures. A root certificate already trusted locally is a <strong>trust anchor</strong>: the chain stops there because the client was configured to trust it ahead of time.</p>" +
@@ -19,6 +24,7 @@ export const chainValidation: Step = {
     "The chain is trusted only once it reaches a certificate already present in the client's own trust store",
     "Any single failed check anywhere in the chain rejects the whole thing — this is what a browser's certificate warning is reporting",
   ],
+  takeaway: "Any single failed check anywhere in the chain rejects the whole thing — this is what a browser's certificate warning is reporting.",
   sequence: {
     actors: PKI_ACTORS,
     messages: [

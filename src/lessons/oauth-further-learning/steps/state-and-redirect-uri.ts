@@ -3,7 +3,12 @@ import { OAUTH_ACTORS_WITH_USER } from "../../actors";
 
 export const stateAndRedirectUri: Step = {
   id: "state-and-redirect-uri",
-  title: "Making Sure the Reply Is Really for You",
+  title: "State and Redirect URI — Response Binding",
+  wireContext: {
+    where: "A browser is about to start an authorization request.",
+    now: "The flow binds the response to a redirect URI and the initiating browser session.",
+    why: "The client must avoid accepting unsolicited responses or sending codes to the wrong destination.",
+  },
   prose:
     "<p>You leave for the booth and come back a minute later. That round trip — the Authorization Code flow's redirect out and back — opens two ways for an attacker to slip in.</p>" +
     "<p>Before you leave, the app hands you a claim-check number: the <strong>state</strong> parameter, a random value it remembers. When the booth sends you back, the app checks the returned state matches the one it handed out. If it doesn't, this isn't a reply to your visit — it's discarded. That's what stops an attacker from tricking you into finishing their trip to the booth instead of yours (CSRF).</p>" +
@@ -15,6 +20,7 @@ export const stateAndRedirectUri: Step = {
     "Skipping either turns 'send the user to log in' into an open-redirect / hijack vector",
     "state and PKCE solve different problems: PKCE binds the code to the client that requested it, state binds the response to the request that triggered it",
   ],
+  takeaway: "state and PKCE solve different problems: PKCE binds the code to the client that requested it, state binds the response to the request that triggered it.",
   sequence: {
     actors: OAUTH_ACTORS_WITH_USER,
     progress: {

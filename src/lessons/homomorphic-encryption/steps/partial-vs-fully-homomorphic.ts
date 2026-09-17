@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const partialVsFullyHomomorphic: Step = {
   id: "partial-vs-fully-homomorphic",
-  title: "How Much Can You Do Inside the Box? — Partial, Somewhat & Fully Homomorphic",
+  title: "Homomorphic Types — Partial, Somewhat & Fully",
   prose:
     "<p>Not every homomorphic scheme lets you do everything through the gloves. There's a real spectrum, and where a scheme sits on it decides what it's actually useful for.</p>" +
     "<p><strong>Partially Homomorphic Encryption (PHE)</strong> supports exactly one operation, but an unlimited number of times. RSA, unmodified, is multiplicatively homomorphic: multiply two RSA ciphertexts together and you get the ciphertext of the product of the two plaintexts. Paillier, in the next step, is additively homomorphic in exactly the same way, but for addition. Either one is fast and well understood, but genuinely limited — a scheme that only adds can't multiply, and vice versa.</p>" +
@@ -15,31 +15,21 @@ export const partialVsFullyHomomorphic: Step = {
     "Addition and multiplication together are enough to build any computation — the same reason logic gates (AND/OR/NOT) can be built from them",
     "The first FHE construction wasn't published until 2009 (Craig Gentry) — the gap between SHE and FHE was a genuinely open problem for decades",
   ],
-  diagram: `
+  takeaway: "The first FHE construction wasn't published until 2009 (Craig Gentry) — the gap between SHE and FHE was a genuinely open problem for decades.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal">
         <div class="node-title">Partial (PHE)</div>
-        <div class="node-sub left">
-          One operation, unlimited times<br>
-          Fast, well understood<br>
-          e.g. RSA (×), Paillier (+)
-        </div>
+        <div class="node-sub left">one operation; unlimited depth</div>
       </div>
       <div class="node equal">
         <div class="node-title">Somewhat (SHE)</div>
-        <div class="node-sub left">
-          + and × together, but a limited budget<br>
-          Enough for small, fixed computations<br>
-          Breaks past a depth limit
-        </div>
+        <div class="node-sub left">+ and ×; limited depth</div>
       </div>
       <div class="node node-proxy equal">
         <div class="node-title">Fully (FHE)</div>
-        <div class="node-sub left">
-          + and ×, unlimited depth<br>
-          Arbitrary computation on ciphertext<br>
-          First built in 2009
-        </div>
+        <div class="node-sub left">+ and ×; unlimited depth</div>
       </div>
     </div>
     <p class="diagram-note">
@@ -48,4 +38,5 @@ export const partialVsFullyHomomorphic: Step = {
       keeps returning to.
     </p>
   `,
+  },
 };

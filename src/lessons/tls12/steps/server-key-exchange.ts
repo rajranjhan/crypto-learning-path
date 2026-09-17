@@ -1,3 +1,4 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 
@@ -13,7 +14,8 @@ import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 // or overlaps.
 export const serverKeyExchange: Step = {
   id: "server-key-exchange",
-  title: "Agreeing on a Shared Key",
+  glossary: lessonTerms("key exchange", "forward secrecy"),
+  title: "ServerKeyExchange — Forward Secrecy",
   bytes: [
     0x16, 0x03, 0x03, 0x01, 0x4d, 0x0c, 0x00, 0x01, 0x49, 0x03, 0x00, 0x17,
     0x41, 0x04, 0x04, 0x2c, 0xbb, 0x03, 0x1e, 0xe9, 0x9c, 0xab, 0x6b, 0x7a,
@@ -131,6 +133,11 @@ export const serverKeyExchange: Step = {
       colorClass: "c-cipher",
     },
   ],
+  wireContext: {
+    where: "The server has sent its certificate, but the shared secret is not yet established.",
+    now: "The server sends an ephemeral ECDH public key and signs the exchange parameters.",
+    why: "The client needs fresh key material authenticated by the server’s certificate key.",
+  },
   prose:
     "<p>Now you and the bank use some clever math to jointly create a shared secret key — without ever sending that key directly through the mailroom.</p>" +
     "<p>It's as if you each said: \"I'll pick a secret number and mix it with yours — even someone watching the whole exchange couldn't work out the result.\" That's the combination lock only the two of you can open.</p>" +
@@ -141,5 +148,6 @@ export const serverKeyExchange: Step = {
     "The server's ephemeral ECDH public key (65 bytes)",
     "An RSA signature over the parameters, proving certificate ownership",
   ],
+  takeaway: "TLS 1.2 gets forward secrecy from fresh ECDHE parameters signed by the server certificate key.",
   sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 4),
 };

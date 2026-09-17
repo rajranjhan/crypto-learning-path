@@ -1,8 +1,10 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 export const refreshToken: Step = {
   id: "refresh-token",
-  title: "Getting a New Ticket Without Queuing Again — The Season Pass",
+  glossary: lessonTerms("refresh token"),
+  title: "Refresh Tokens — Long-Lived Delegation",
   prose:
     "The access token you just got is deliberately short-lived — like a ride " +
     "ticket that's only good for this visit. So how do you keep riding without " +
@@ -19,20 +21,15 @@ export const refreshToken: Step = {
     "One use, or reusable? (Redemption Model) — Renewable: you don't ride with it; you trade it at the booth for a fresh access token, again and again",
     "Can it be cancelled early? (Revocation) — Supported: the booth keeps a record and can cancel your pass anytime — the big upgrade over a plain ride ticket",
     "How long does it work? (Validity Window) — Long-lived: lasts days or weeks, far longer than the short-lived access token",
-    "What does it actually let you do? (Authorization) — Bearer: whoever holds it can still trade it, which is why rotation swaps it on each use",
-    "Does holding it prove it's yours? (Proof of Possession) — None by default: like the ride ticket, it can be bound (DPoP / mTLS) for more safety",
+    "What does it actually let you do? (Authorization) — Permits requesting new access tokens within the existing grant; client authentication or key binding may also be required",
+    "Must the presenter prove control of a bound key? (Proof of Possession) — None by default: like the ride ticket, it can be bound (DPoP / mTLS) for more safety",
     "Where'd it come from, and why do you believe that? (Issuer Trust) — Implicit: unchanged; you got it from the booth alongside your first access token",
   ],
-  diagram: `
-    <img class="diagram-img" src="diagrams/refresh-token.png"
-         alt="A carnival SEASON PASS labelled REFRESH (Pass No. 88-231, 'trade at booth for a ride ticket') with the same six token properties radiating out. Revocation is green — Supported: the booth keeps a record and can cancel the pass — while Issuer Trust Implicit, Redemption Model Renewable, Validity Window Long-lived, Authorization Bearer, and Proof of Possession None stay blue." />
-    <p class="diagram-note">
-      Same layout as the plain ride ticket two steps back, so you can compare them
-      directly. The pass sits where the ride ticket sat, but its job is different:
-      you <strong>trade it for ride tickets</strong> rather than ride with it. The
-      one property that turns strong is
-      <strong>Revocation</strong> — because the booth records every pass, it can
-      cancel a lost one, something a plain bearer ticket could never offer.
-    </p>
+  takeaway: "Refresh tokens reduce repeated sign-in, but they become high-value credentials that need stronger protection than short-lived access tokens.",
+  figure: {
+    body: `
+    <div class="flow"><div class="node equal client"><div class="node-title">Authorization server: accepts refresh token</div></div><div class="node equal server"><div class="node-title">Resource server: accepts access token</div></div></div>
+    <p class="diagram-note">A refresh token requests new access tokens within the existing grant.</p>
   `,
+  },
 };

@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const checklist: Step = {
   id: "checklist",
-  title: "Putting It Together — A Checklist",
+  title: "Zero-Knowledge Proof Checklist",
   prose:
     "<p>Reach for a zero-knowledge proof when the actual requirement is proving a fact without revealing the data behind it — an identity check, a compliance attestation, a batch of transactions — not as a default privacy mechanism for everything. Match the construction to the constraint: interactive Schnorr-style proofs for a live identity check, Fiat-Shamir-based signatures when no verifier is online, a SNARK when proof size matters most and a trusted setup is acceptable, a STARK when transparency or avoiding discrete-log assumptions matters more than proof size.</p>",
   bullets: [
@@ -12,6 +12,7 @@ export const checklist: Step = {
     "Prefer a STARK when avoiding a trusted setup or discrete-log assumptions matters more than minimizing proof size",
     "Audit the circuit or program being proven as carefully as the cryptography itself — a correct proof of the wrong statement is still wrong",
   ],
+  takeaway: "Audit the circuit or program being proven as carefully as the cryptography itself — a correct proof of the wrong statement is still wrong.",
   callouts: [
     {
       requirementId: "Secrets",

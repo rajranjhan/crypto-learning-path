@@ -3,7 +3,12 @@ import { OAUTH_ACTORS } from "../../actors";
 
 export const dpopValidation: Step = {
   id: "dpop-validation",
-  title: "At the Ride — Checking the Ticket and Stopping Copies",
+  title: "DPoP Validation — Replay Protection",
+  wireContext: {
+    where: "The client holds a DPoP-bound token and wants to call the API.",
+    now: "The request presents the token with a fresh signed proof for the request.",
+    why: "The API must check the proof, token binding, and replay protections before granting access.",
+  },
   prose:
     "This is the gate check from the title: the attendant compares the signature " +
     "you make right now against the one on file from the booth. When the client " +
@@ -26,6 +31,7 @@ export const dpopValidation: Step = {
     "Check htm/htu match the request and iat is fresh with an unseen jti",
     "Mitigate proof replay with short lifetimes, jti tracking, and a server nonce",
   ],
+  takeaway: "Mitigate proof replay with short lifetimes, jti tracking, and a server nonce.",
   sequence: {
     actors: OAUTH_ACTORS,
     progress: {

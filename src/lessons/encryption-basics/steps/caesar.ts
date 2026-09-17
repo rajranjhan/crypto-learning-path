@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const caesar: Step = {
   id: "caesar",
-  title: "The Caesar Cipher — A Substitution Cipher with One Number for a Key",
+  title: "Caesar Cipher — Tiny Key Space",
   sidebarGroup: "Classical Ciphers",
   prose:
     "The <strong>Caesar cipher</strong>, said to be used by Julius Caesar for " +
@@ -21,7 +21,9 @@ export const caesar: Step = {
     "Shrinking the key this far shrinks the keyspace too: only 25 possible shifts exist",
     "That's small enough to try every single one by hand in minutes — a brute-force attack that doesn't even need frequency analysis",
   ],
-  diagram: `
+  takeaway: "That's small enough to try every single one by hand in minutes — a brute-force attack that doesn't even need frequency analysis.",
+  figure: {
+    body: `
     <div class="mono-panel">
 Plain:      A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 Shift +3:   D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</div>
@@ -41,11 +43,8 @@ Shift +3:   D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</div>
       </div>
     </div>
     <p class="diagram-note">
-      The whole key is the number 3 — decrypting KHOOR just shifts every letter
-      back by 3. Because there are only 25 possible shifts to try (0 does
-      nothing), an attacker doesn't even need frequency analysis: they can just
-      try all 25 and read off the one that makes sense, by hand, faster than you
-      can finish reading this sentence.
+      A Caesar key is tiny enough to brute-force by hand.
     </p>
   `,
+  },
 };

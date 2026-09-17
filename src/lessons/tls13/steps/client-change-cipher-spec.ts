@@ -7,7 +7,7 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // matches its single payload byte, and all six bytes are annotated with no gaps.
 export const clientChangeCipherSpec: Step = {
   id: "client-change-cipher-spec",
-  title: "Keeping Up Appearances, Continued",
+  title: "Client ChangeCipherSpec — Compatibility Signal",
   bytes: [0x14, 0x03, 0x03, 0x00, 0x01, 0x01],
   annotations: [
     {
@@ -39,6 +39,11 @@ export const clientChangeCipherSpec: Step = {
       colorClass: "c-hs",
     },
   ],
+  wireContext: {
+    where: "The client has received the server’s authentication flight.",
+    now: "The client sends a compatibility ChangeCipherSpec record.",
+    why: "Legacy middleboxes may expect it; TLS 1.3 key changes are independent of this record.",
+  },
   prose:
     "<p>Your computer sends the same empty gesture back: another <strong>ChangeCipherSpec</strong>, one meaningless byte.</p>" +
     "<p>Just like the bank's earlier one, this changes nothing — your keys switched on the moment you received the bank's key_share. It's here purely so the mailroom's old sorting equipment sees a familiar shape on both sides of the conversation, not just one. Both endpoints send this record once, and both ignore it on receipt.</p>",
@@ -48,5 +53,6 @@ export const clientChangeCipherSpec: Step = {
     "Sent only for middlebox compatibility, mirroring the server's record",
     "The client already switched to encrypted records after the ServerHello key_share",
   ],
+  takeaway: "The client compatibility ChangeCipherSpec is a harmless legacy signal, not part of TLS 1.3 security.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 8),
 };

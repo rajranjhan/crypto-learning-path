@@ -1,35 +1,26 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 export const signedTicket: Step = {
   id: "signed-ticket",
-  title: "The Same Ticket, Now Signed by Hand",
+  glossary: lessonTerms("proof of possession"),
+  title: "DPoP Signed Tickets — Proof of Possession",
   prose:
-    "Take the carnival ride ticket from earlier and change one thing: when you buy " +
-    "it, you sign your name across it in your own handwriting, and at the gate the " +
-    "attendant makes you sign again and checks the two signatures match. That single " +
-    "habit is exactly what DPoP does for a token. The ticket is still the same paper " +
-    "stub, but it is no longer a plain bearer token — holding it is no longer enough, " +
-    "because whoever redeems it has to reproduce the signature. Run it through the " +
-    "same six properties and you'll see three of them flip from weak to strong; the " +
-    "next steps show how the real DPoP proof and key binding make this concrete.",
+    "<p>Imagine a ride ticket that names a verification key. At the gate, the holder signs a fresh request with the matching private key. The attendant verifies that signature against the bound public key rather than comparing it with an old signature.</p>" +
+    "<p>DPoP applies this idea to OAuth tokens: the client proves control of the bound key for a request. It does not establish the user's identity or add permissions; the API still checks the token's audience, scope, and other authorization rules.</p>",
   bullets: [
-    "What does it actually let you do? (Authorization) — Sender-constrained: holding the ticket isn't enough; only the matching hand rides (DPoP proof)",
-    "Does holding it prove it's yours? (Proof of Possession) — Enforced: you sign at purchase and again at the gate; the two must match (public key ↔ fresh signature)",
+    "What does it actually let you do? (Authorization) — The token's granted permissions still apply; DPoP does not add access",
+    "Must the presenter prove control of a bound key? (Proof of Possession) — Enforced: verify a fresh proof using the public key bound to the token",
     "How long does it work? (Validity Window) — Per ride: each fresh signature is good for this one gate, right now; old ones expire (htm/htu + iat)",
     "Where'd it come from, and why do you believe that? (Issuer Trust) — Implicit: unchanged; you still buy it at the booth",
-    "One use, or reusable? (Redemption Model) — Scoped: unchanged; still one ticket, one ride",
+    "One use, or reusable? (Redemption Model) — Token reuse follows its policy; each request needs a fresh proof",
     "Can it be cancelled early? (Revocation) — Still limited: no kill switch, but a stolen ticket is useless without your hand",
   ],
-  diagram: `
-    <img class="diagram-img" src="diagrams/signed-ticket.png"
-         alt="The same carnival RIDE ticket (No. 5606, stub 02) as before, but now signed 'Sam Rivera' in red handwriting at purchase. The six token properties radiate out; three are now green — Authorization Sender-constrained, Proof of Possession Enforced, Validity Window Per ride — while Issuer Trust, Redemption Model, and Revocation are unchanged in blue." />
-    <p class="diagram-note">
-      Compare this to the plain ride ticket two steps back: the hub and layout are
-      identical, but the buyer's <strong>handwritten signature</strong> turns three
-      <em>None</em>/weak answers into strong sender-constrained answers. That
-      signature is the DPoP proof — a fresh, per-request signature only the real
-      key-holder can produce. Revocation stays limited, which is why short-lived
-      tokens still matter.
-    </p>
+  takeaway: "DPoP requires a fresh proof of the bound key; it does not establish user identity or expand authorization.",
+  figure: {
+    body: `
+    <div class="flow"><div class="node equal client"><div class="node-title">Authorization: granted API permissions</div></div><div class="node equal server"><div class="node-title">Presentation: token plus fresh proof of the bound key</div></div></div>
+    <p class="diagram-note">Verify the proof with the bound public key, not by matching signature bytes.</p>
   `,
+  },
 };

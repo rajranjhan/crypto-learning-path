@@ -1,12 +1,14 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 export const hmac: Step = {
   id: "hmac",
-  title: "Proving Who Sent It — HMAC",
+  glossary: lessonTerms("MAC", "HMAC", "authentication"),
+  title: "HMAC — Shared-Secret Authentication",
   prose:
     "<p>A plain hash proves a message wasn't altered, but not who sent it — anyone can compute SHA-256 of any message, including an attacker who intercepts and modifies one in transit, then recomputes a matching hash for the tampered version. What's missing is a secret only the real sender holds.</p>" +
     "<p>The obvious fix — just hash the secret and the message together, like SHA256(key + message) — turns out to be exploitable for some hash constructions via a length-extension attack: an attacker who knows a hash of key+message can sometimes compute a valid hash for key+message+extra, without ever knowing the key. <strong>HMAC</strong> avoids that by hashing twice, mixing the key in differently each time: HMAC(key, message) = H((key XOR opad) || H((key XOR ipad) || message)), where opad and ipad are fixed padding constants and H is the underlying hash function (HMAC-SHA256 uses SHA-256 for H).</p>" +
-    "<p>Only someone holding the key can produce a valid HMAC for a given message, and changing even one byte of the message invalidates it — exactly the authenticity and integrity guarantee a plain hash can't provide on its own. This is precisely what the TLS Finished message's verify_data is: an HMAC-style construction over the entire handshake transcript, keyed by a secret only the two endpoints derived. It's also what \"HS256\" means as a JWT signing algorithm — HMAC-SHA256 over the token, keyed by a secret the authorization server and API share.</p>",
+    "<p>Only someone holding the key can produce a valid HMAC for a given message, and changing even one byte of the message invalidates it — exactly the authenticity and integrity guarantee a plain hash can't provide on its own. This is precisely what the TLS Finished message's verify_data is: an HMAC-style construction over the entire handshake transcript, keyed by a secret only the two endpoints derived. Every shared-key holder can generate the tag, so it does not identify which holder sent it. It is a MAC, not an asymmetric digital signature. It's also what \"HS256\" means as a JWT signing algorithm — HMAC-SHA256 over the token, keyed by a secret the authorization server and API share.</p>",
   bullets: [
     "A plain hash proves a message wasn't altered, but anyone can compute one — it doesn't prove who sent it",
     "Naively hashing key + message together is vulnerable to length-extension attacks against some hash constructions",
@@ -14,7 +16,9 @@ export const hmac: Step = {
     "Only someone holding the key can produce a valid HMAC; changing even one byte of the message invalidates it",
     "This is what TLS's Finished/verify_data actually is, and what 'HS256' means as a JWT signing algorithm",
   ],
-  diagram: `
+  takeaway: "This is what TLS's Finished/verify_data actually is, and what 'HS256' means as a JWT signing algorithm.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Inner hash</div>
@@ -27,9 +31,8 @@ export const hmac: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Two nested hash calls, both keyed. Neither the message nor a single
-      hash of it alone is enough to forge — only someone holding the actual
-      key can produce a value that survives both passes.
+      Two nested hash calls, both keyed.
     </p>
   `,
+  },
 };

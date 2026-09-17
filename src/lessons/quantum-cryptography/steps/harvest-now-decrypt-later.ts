@@ -1,8 +1,10 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 export const harvestNowDecryptLater: Step = {
   id: "harvest-now-decrypt-later",
-  title: "The Real Threat Isn't Tomorrow — It's Today's Recorded Traffic",
+  glossary: lessonTerms("forward secrecy"),
+  title: "Harvest Now, Decrypt Later — Long-Lived Data",
   prose:
     "<p>A patient thief doesn't wait around for the locksmith's machine to be built. He walks through the TLS lessons' mailroom today, photographs every locked box crossing the counter, and files the photographs away in a drawer. He can't open a single one of them right now — but the day the skeleton-key machine finally exists, he pulls out years of old photographs and opens every box he ever collected, all at once.</p>" +
     "<p>The most urgent quantum risk has nothing to do with a quantum computer existing yet. An adversary can record encrypted traffic today — a TLS session, a VPN tunnel, an archived backup — and simply store the ciphertext, waiting for a sufficiently powerful quantum computer to arrive years or decades from now, at which point Shor's algorithm decrypts the key exchange and unlocks everything that was ever recorded. This is called <strong>harvest now, decrypt later</strong>, and it's already a documented strategy for well-resourced adversaries, specifically because it works even without a working quantum computer today.</p>" +
@@ -16,7 +18,9 @@ export const harvestNowDecryptLater: Step = {
     "Migrating to post-quantum or hybrid key exchange protects future traffic only — it can't retroactively protect data already harvested",
     "This is the reason post-quantum migration is treated as urgent today, not deferred until quantum computers actually exist",
   ],
-  diagram: `
+  takeaway: "This is the reason post-quantum migration is treated as urgent today, not deferred until quantum computers actually exist.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Today</div>
@@ -39,4 +43,5 @@ export const harvestNowDecryptLater: Step = {
       free.
     </p>
   `,
+  },
 };

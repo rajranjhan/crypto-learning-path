@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const theNoiseProblem: Step = {
   id: "the-noise-problem",
-  title: "Why This Took 30 Years — The Noise Problem",
+  title: "Noise Growth — The Core Constraint",
   prose:
     "<p>If a purely additive scheme like Paillier already works, why did it take until 2009 to get addition <em>and</em> multiplication, unlimited, in the same scheme? The obstacle is <strong>noise</strong>.</p>" +
     "<p>Modern homomorphic schemes — almost all of them lattice-based today — don't encrypt a message cleanly. They deliberately hide it underneath a small amount of random error, because that error is exactly what makes the scheme hard to break. Decryption works by removing the noise and recovering the message underneath it, and that only works as long as the noise hasn't grown too large to tell apart from the message itself.</p>" +
@@ -14,7 +14,9 @@ export const theNoiseProblem: Step = {
     "Past a certain number of chained multiplications, the noise overtakes the message and decryption fails",
     "This budget is exactly what separates Somewhat Homomorphic Encryption from Fully Homomorphic Encryption",
   ],
-  diagram: `
+  takeaway: "This budget is exactly what separates Somewhat Homomorphic Encryption from Fully Homomorphic Encryption.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node trusted">
         <div class="node-title text-trusted">Fresh ciphertext</div>
@@ -30,9 +32,8 @@ export const theNoiseProblem: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Somewhat homomorphic encryption has to stop before that third state.
-      Fully homomorphic encryption needed a way to reset back to the first
-      state without ever decrypting in the clear — that's bootstrapping, next.
+      Bootstrapping resets noise so computation can continue.
     </p>
   `,
+  },
 };

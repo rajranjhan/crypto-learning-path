@@ -1,17 +1,20 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 export const audienceRestriction: Step = {
   id: "audience-restriction",
-  title: "Right Ticket, Wrong Gate — Audience Restriction",
+  glossary: lessonTerms("audience"),
+  title: "Audience Restriction — Right API Only",
   prose:
     "<p>A ticket stamped for the Ferris wheel is a perfectly valid, unexpired, correctly-signed ticket — and the roller coaster gate should still refuse it, because it wasn't issued for them.</p>" +
     "<p>That's what the <strong>aud</strong> (audience) claim controls: which API a token is meant for, which gate it's stamped for. It deserves its own step, because getting this check wrong is a real, recurring vulnerability.</p>" +
-    "<p>Every resource server must check that its own identifier appears in the token's aud claim before trusting anything else about it. Skipping this check is how a token meant for one low-stakes API ends up being accepted by a completely different, more sensitive one — the token is \"valid,\" just not valid here.</p>" +
+    "<p>For a JWT access token, the resource server checks that its identifier appears in aud as part of validating the issuer, signature, lifetime, and permissions. With an opaque token, it obtains the equivalent audience restriction through trusted server-side metadata or introspection. Skipping this check is how a token meant for one low-stakes API ends up being accepted by a completely different, more sensitive one — the token is \"valid,\" just not valid here.</p>" +
     "<p>This is OAuth's own version of the confused deputy problem from the last step: the resource server is the deputy, a valid signature is the genuine-but-not-checked-closely-enough pass, and aud is the one question — <em>was this actually meant for me?</em> — that closes the gap.</p>",
   bullets: [
     "aud identifies which resource server(s) a token is valid for",
-    "A resource server MUST reject tokens where its own identifier isn't in aud, even if the signature and expiry are otherwise fine",
+    "Reject a token intended for another resource server, even when its signature and expiry are valid",
     "Prevents a token issued for API A being replayed against API B",
     "Known as the \"confused deputy\" problem when this check is skipped",
   ],
+  takeaway: "Audience identifies the intended recipient; a valid token for another API is not valid here.",
 };

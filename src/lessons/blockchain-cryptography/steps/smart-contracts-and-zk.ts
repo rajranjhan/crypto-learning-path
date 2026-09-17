@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const smartContractsAndZk: Step = {
   id: "smart-contracts-and-zk",
-  title: "Smart Contracts Add Hashes, Commitments & Proofs",
+  title: "Smart Contracts — Hashes, Commitments & Proofs",
   prose:
     "<p>A smart contract is like a public rule box attached to the notebook. Anyone can put a note into the box, and every node can run the same rule check. The box can check a signature before allowing an action, store a fingerprint commitment instead of the original data, verify a receipt-folder path, or verify a zero-knowledge proof that some off-chain work followed the rules.</p>" +
     "<p>That zero-knowledge connection is the same material from the dedicated ZKP lesson: the contract verifies a compact proof of a precise statement, not the secret witness itself. The warning carries over too — a valid proof only means the encoded statement was satisfied, not that the surrounding contract or bridge design is economically safe.</p>" +
@@ -15,7 +15,9 @@ export const smartContractsAndZk: Step = {
     "ZK proofs can move expensive computation off-chain while keeping verification on-chain; see the dedicated ZKP lesson for the proof-system details",
     "Correct cryptography cannot rescue incorrect contract logic or bad incentives",
   ],
-  diagram: `
+  takeaway: "Correct cryptography cannot rescue incorrect contract logic or bad incentives.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Outside Work</div>
@@ -32,4 +34,5 @@ export const smartContractsAndZk: Step = {
       </div>
     </div>
   `,
+  },
 };

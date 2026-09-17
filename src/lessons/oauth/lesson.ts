@@ -1,5 +1,5 @@
 import type { Lesson } from "../../types";
-import { oauthActorMappingFigure, oauthSequenceFigure } from "../oauth-shared";
+import { oauthSequenceFigure } from "../oauth-shared";
 import { tokenProperties } from "./steps/token-properties";
 import { carnivalTicket } from "./steps/carnival-ticket";
 import { authCode } from "./steps/auth-code";
@@ -10,9 +10,9 @@ export const oauthLesson: Lesson = {
   slug: "oauth",
   title: "OAuth: Fundamentals",
   status: "available",
-  summary: "OAuth 1 introduces delegated authorization, the canonical OAuth actors, access tokens, the authorization code flow, bearer-token risks, and refresh tokens.",
+  summary: "Learn how OAuth gives applications limited API access through tokens instead of shared passwords.",
   whyItMatters:
-    "OAuth is how modern applications delegate API access without sharing passwords. It is an authorization framework, not by itself an authentication protocol; OpenID Connect adds the identity layer when an app needs to know who the user is.",
+    "Apps need limited access to your data without receiving your password. OAuth delegates that access; OpenID Connect adds user authentication.",
   objectives: [
     "Distinguish authorization from authentication in OAuth",
     "Map Resource Owner, Client, Authorization Server, and Resource Server to the carnival metaphor",
@@ -20,6 +20,20 @@ export const oauthLesson: Lesson = {
     "Trace the authorization code flow with PKCE",
   ],
   prerequisites: ["tls12"],
+  checkYourUnderstanding: [
+    {
+      question: "Why is an access token different from proof of who the user is?",
+      answer: "An access token grants access to a resource under an authorization policy. User authentication requires an identity protocol such as OpenID Connect and its validation rules.",
+    },
+    {
+      question: "Why can a stolen bearer token be used without the user's password?",
+      answer: "Possession of the token is the credential. Unless additional constraints apply, the API does not require the user's password or a separate proof of key possession.",
+    },
+    {
+      question: "Why does PKCE help when an authorization code is intercepted?",
+      answer: "The token request must include a verifier matching the challenge used when requesting the code. The intercepted code alone is therefore insufficient.",
+    },
+  ],
   keyTakeaways: [
     "OAuth delegates authorization with tokens rather than passwords",
     "OAuth access tokens are not identity assertions",
@@ -29,14 +43,7 @@ export const oauthLesson: Lesson = {
   estimatedMinutes: 45,
   difficulty: "Intermediate",
   lessonType: "protocol",
-  overview:
-    "OAuth 1 — Fundamentals starts the OAuth mini-course. OAuth is an authorization " +
-    "framework: it answers what an app may do at an API, not who the user is. " +
-    "OpenID Connect adds the authentication and identity layer on top. This lesson " +
-    "uses the carnival metaphor consistently: you are the Resource Owner, the app " +
-    "is the Client, the ticket booth is the Authorization Server, and the ride gate " +
-    "or kiosk is the Resource Server.",
+  transitionToNext: "You can now trace how an app receives access. Next, examine what tokens mean and how audience checks and sender constraints limit misuse.",
   figure: oauthSequenceFigure,
-  diagram: oauthActorMappingFigure.body,
   steps: [tokenProperties, carnivalTicket, authCode, bearerWeakness, refreshToken],
 };

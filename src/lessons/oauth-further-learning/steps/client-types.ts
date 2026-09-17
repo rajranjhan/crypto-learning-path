@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const clientTypes: Step = {
   id: "client-types",
-  title: "Who's Asking? Confidential vs. Public Clients",
+  title: "Client Types — Confidential vs. Public",
   prose:
     "<p>A booth employee wears a lanyard with a staff code only the carnival knows, kept behind the counter, never handed to a guest. You, using the ticket app on your own phone, are the opposite: anyone could take that app apart and read everything inside it. That's the real difference between a confidential client and a public client, and it's the first question every OAuth flow has to answer: can this app actually keep a secret?</p>" +
     "<p>A <strong>confidential client</strong> is the booth employee — a backend server you control, running somewhere only your team can reach. It can hold a real password (a client_secret) and use it to prove who it is.</p>" +
@@ -14,4 +14,5 @@ export const clientTypes: Step = {
     "The authorization server treats them differently: confidential clients authenticate with a secret (or mTLS / private_key_jwt); public clients can't",
     "PKCE exists specifically to give public clients a substitute for a client secret",
   ],
+  takeaway: "PKCE exists specifically to give public clients a substitute for a client secret.",
 };

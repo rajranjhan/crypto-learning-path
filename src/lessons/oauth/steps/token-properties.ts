@@ -1,8 +1,10 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 export const tokenProperties: Step = {
   id: "token-properties",
-  title: "Why OAuth Exists — Delegated Authorization",
+  glossary: lessonTerms("access token", "authentication", "authorization"),
+  title: "OAuth Tokens — Delegated Authorization",
   prose:
     "<p>OAuth exists because users should not have to give an app their password just so that app can call an API. Instead, the user authorizes limited access, the authorization server issues a token, and the app presents that token to the API.</p>" +
     "<p>That makes OAuth an <strong>authorization framework</strong>: it answers \"what may this client do?\" It is not, by itself, an authentication protocol that proves \"who is this user?\" OpenID Connect adds that identity layer with ID tokens and standard user claims.</p>" +
@@ -13,18 +15,18 @@ export const tokenProperties: Step = {
     "Where'd it come from, and why do you believe that? (Issuer Trust)",
     "What does it actually let you do? (Authorization)",
     "One use, or reusable? (Redemption Model)",
-    "Does holding it prove it's yours? (Proof of Possession)",
+    "Must the presenter prove control of a bound key? (Proof of Possession)",
     "How long does it work? (Validity Window)",
     "Can it be cancelled early? (Revocation)",
   ],
-  diagram: `
+  takeaway: "A token design is only as safe as its answers for issuer trust, authorization, proof of possession, lifetime, and revocation.",
+  figure: {
+    body: `
     <img class="diagram-img" src="diagrams/token-properties.png"
          alt="A central TOKEN with six properties radiating out: Issuer Trust, Authorization, Redemption Model, Proof of Possession, Validity Window, and Revocation." />
     <p class="diagram-note">
-      These six properties are the lens for the whole lesson. As we move from
-      bearer tokens to certificate-bound tokens to DPoP, watch how each design
-      answers <em>Proof of Possession</em> and <em>Revocation</em> differently —
-      that's where most of the security difference lives.
+      These six properties frame every token design in the OAuth sequence.
     </p>
   `,
+  },
 };

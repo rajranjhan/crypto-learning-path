@@ -9,7 +9,7 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // Annotations tile from offset 0 with no gaps or overlaps.
 export const serverFinished: Step = {
   id: "server-finished",
-  title: "Tamper-Proofing",
+  title: "Server Finished — Server Key Confirmation",
   bytes: [
     0x17, 0x03, 0x03, 0x00, 0x34, 0x14, 0x00, 0x00, 0x30, 0x23, 0x12, 0x5d,
     0xf0, 0xd4, 0x16, 0x06, 0xb8, 0x2e, 0x10, 0xb6, 0xfd, 0xf2, 0x28, 0xcc,
@@ -61,6 +61,11 @@ export const serverFinished: Step = {
       colorClass: "c-cipher",
     },
   ],
+  wireContext: {
+    where: "The server has sent its certificate and proof of private-key possession.",
+    now: "The server sends Finished, authenticated with a handshake-derived key.",
+    why: "The client checks transcript integrity and the server’s possession of the handshake secret.",
+  },
   prose:
     "<p>The bank attaches something like a wax seal to its side of the conversation: proof that nothing said so far was altered in the mailroom.</p>" +
     "<p>This is <strong>Finished</strong> — the verify_data (offset 9) is an HMAC computed over the full handshake transcript, keyed by the bank's own handshake traffic secret. Only someone who derived the identical keys could have produced it.</p>" +
@@ -71,5 +76,6 @@ export const serverFinished: Step = {
     "Only a peer with identical derived keys can produce or verify it",
     "Encrypted under the handshake traffic keys",
   ],
+  takeaway: "The server Finished message detects tampering across the encrypted TLS 1.3 handshake transcript.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 7),
 };

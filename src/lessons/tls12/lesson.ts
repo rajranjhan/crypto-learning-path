@@ -1,5 +1,4 @@
 import type { Lesson } from "../../types";
-import { tlsComparisonFigure } from "../tls-comparison";
 import { clientHello } from "./steps/client-hello";
 import { serverHello } from "./steps/server-hello";
 import { certificate } from "./steps/certificate";
@@ -15,7 +14,7 @@ export const tls12Lesson: Lesson = {
   status: "available",
   summary: "Dissects the TLS 1.2 handshake as a byte-level walkthrough from ClientHello to encrypted application data.",
   whyItMatters:
-    "TLS is the main protocol that protects web traffic in transit. TLS 1.2 shows the moving parts clearly: negotiation, certificates, ECDHE key exchange, Finished messages, and the transition to encrypted data.",
+    "Reading a handshake reveals how a connection establishes trust and encryption. That helps you understand packet captures and diagnose connection failures.",
   objectives: [
     "Follow the TLS 1.2 handshake message order",
     "Identify where certificates and key exchange appear",
@@ -23,6 +22,20 @@ export const tls12Lesson: Lesson = {
     "Read key fields from real TLS records",
   ],
   prerequisites: ["pki", "symmetric-primitives", "asymmetric-primitives"],
+  checkYourUnderstanding: [
+    {
+      question: "Why does a certificate alone not establish an encrypted session?",
+      answer: "It binds an identity to a public key. The handshake must also authenticate the exchange, establish fresh key material, and derive traffic keys.",
+    },
+    {
+      question: "Why do Finished messages cover the handshake transcript?",
+      answer: "They let peers detect changes to the negotiated handshake using the derived secrets. This binds the session keys to the exchange both peers observed.",
+    },
+    {
+      question: "Why can ephemeral Diffie-Hellman protect old sessions after a certificate key is stolen?",
+      answer: "Past traffic keys depend on ephemeral secrets, not just the certificate key. If those ephemeral secrets were erased, the stolen long-term key cannot reconstruct them.",
+    },
+  ],
   keyTakeaways: [
     "TLS 1.2 needs multiple visible handshake messages before encryption starts",
     "Certificates authenticate the server's public key",
@@ -32,24 +45,16 @@ export const tls12Lesson: Lesson = {
   estimatedMinutes: 45,
   difficulty: "Intermediate",
   lessonType: "protocol",
-  overview:
-    "You want to send a confidential document to your bank, but the mail has to " +
-    "pass through a shared office mailroom where anyone can peek. TLS is what seals " +
-    "that envelope: a handshake that lets you and the bank agree on a shared secret " +
-    "in full view of that mailroom, then use it to encrypt everything that follows. " +
-    "TLS 1.2 is the longer version of the story: most handshake messages remain visible until both sides send ChangeCipherSpec and Finished. Walk through each record byte by byte below.",
-  figure: tlsComparisonFigure,
-  diagram: `
+  transitionToNext: "TLS 1.2 shows the full handshake machinery; TLS 1.3 keeps the same security goals while making the handshake faster and more private.",
+  figure: {
+    body: `
     <img class="diagram-img" src="diagrams/tls-mailroom.svg"
          alt="A sender (YOU) and recipient (BANK) on either side of a shared office mailroom. Inside the mailroom, an open envelope labeled 'confidential document' sits exposed with its contents visible, while a coworker peeks at it." />
     <p class="diagram-note">
-      Without TLS, every record in this handshake — and the application data after
-      it — crosses the network exactly like that open envelope: in the clear, for
-      any router or eavesdropper along the way to read. The steps below show how
-      the handshake negotiates a key that seals the envelope before anything
-      confidential goes in it.
+      TLS seals the envelope before confidential data crosses the network.
     </p>
   `,
+  },
   steps: [
     clientHello, serverHello, certificate, serverKeyExchange, serverHelloDone,
     clientKeyExchange, changeCipherFinished, applicationData,

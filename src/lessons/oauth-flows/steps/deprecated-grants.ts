@@ -3,7 +3,12 @@ import { OAUTH_ACTORS } from "../../actors";
 
 export const deprecatedGrants: Step = {
   id: "deprecated-grants",
-  title: "Shortcuts the Carnival Shut Down — Deprecated Grants",
+  title: "Deprecated Grants — Unsafe Shortcuts",
+  wireContext: {
+    where: "The client needs a way to obtain API access.",
+    now: "The sequence contrasts legacy grant patterns with safer authorization-code handling.",
+    why: "Where credentials and tokens travel determines how easily they can be exposed or misused.",
+  },
   prose:
     "<p>Two more ways to get a ticket used to exist. Both are retired now, and it's worth knowing why.</p>" +
     "<p>The <strong>Implicit</strong> grant skipped the private back-window redemption entirely: instead of handing you a voucher to carry back and trade quietly, the booth used to shout the actual ride ticket straight across the midway — tucked into the redirect URL, where your browser history, extensions, and anything else watching that address could read it. Skipping the back window also meant skipping the secret-word check from your first ticket purchase: whoever intercepted that shout got a fully usable ticket, no questions asked. It existed because early browser-only apps had no way to do a private exchange at all — <strong>PKCE</strong> closed that gap, so there's nothing left for Implicit to justify.</p>" +
@@ -16,6 +21,7 @@ export const deprecatedGrants: Step = {
     "ROPC trains users to trust password prompts inside random apps, and gives the authorization server no way to distinguish the real app from a phishing clone",
     "OAuth 2.1 formally removes both grants — use Authorization Code + PKCE for anything involving a user",
   ],
+  takeaway: "OAuth 2.1 formally removes both grants — use Authorization Code + PKCE for anything involving a user.",
   sequence: {
     actors: OAUTH_ACTORS,
     progress: {

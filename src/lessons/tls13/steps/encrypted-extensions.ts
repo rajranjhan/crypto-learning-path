@@ -9,7 +9,7 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // inner bytes shown, and annotations tile from offset 0 with no gaps.
 export const encryptedExtensions: Step = {
   id: "encrypted-extensions",
-  title: "Locking the Documents",
+  title: "EncryptedExtensions — Protected Parameters",
   bytes: [
     // -- Record header (5 bytes, visible on the wire) --
     0x17, // record type: application_data (TLS 1.3 hides handshake messages)
@@ -64,6 +64,11 @@ export const encryptedExtensions: Step = {
       colorClass: "c-hs",
     },
   ],
+  wireContext: {
+    where: "ServerHello has established the inputs for handshake encryption.",
+    now: "The server sends its remaining extension choices under encryption.",
+    why: "The client needs these negotiated settings without exposing them to passive observers.",
+  },
   prose:
     "<p>This is the moment the envelope actually seals — and in TLS 1.3, it happens astonishingly early.</p>" +
     "<p>The instant both key_shares were exchanged, both sides derived a shared key. From here on, every message the bank sends travels inside a record that looks like ordinary mail (0x17, the same type as real application data) but whose contents are locked.</p>" +
@@ -74,5 +79,6 @@ export const encryptedExtensions: Step = {
     "On the wire it looks like application_data (0x17), hiding it from eavesdroppers and middleboxes",
     "In TLS 1.2 these parameters were sent in the clear ServerHello",
   ],
+  takeaway: "TLS 1.3 hides most server parameters after ServerHello, reducing what passive observers can learn from the handshake.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 4),
 };

@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const checklist: Step = {
   id: "checklist",
-  title: "Putting It Together — A Checklist",
+  title: "Encryption at Rest Checklist",
   prose:
     "<p>Layer these controls rather than picking one: full-disk encryption as a cheap, broad baseline against lost or stolen hardware; TDE for database-level defense in depth that costs nothing in application code; envelope encryption and a KMS as the pattern underneath both, and underneath object storage too; and field-level encryption or tokenization reserved for the handful of fields sensitive enough to justify their extra cost and complexity. Close every design with the same question the previous step raised: what does this actually protect against, and what does it very deliberately not?</p>",
   bullets: [
@@ -12,6 +12,7 @@ export const checklist: Step = {
     "Field-level encryption / tokenization: reserved for the fields sensitive enough to justify the cost",
     "State the threat model explicitly — encryption at rest is not a substitute for access control",
   ],
+  takeaway: "State the threat model explicitly — encryption at rest is not a substitute for access control.",
   callouts: [
     {
       requirementId: "At rest",

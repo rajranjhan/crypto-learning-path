@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const theGloveboxProblem: Step = {
   id: "the-glovebox-problem",
-  title: "The Sealed Glovebox — What Homomorphic Encryption Solves",
+  title: "Homomorphic Encryption — The Sealed Glovebox",
   prose:
     "<p>Picture a jeweler who needs to cut and polish a diamond, except the work has to happen in a city you don't trust. The solution real labs use for exactly this problem is a sealed glovebox: you lock your diamond inside a transparent box fitted with built-in gloves. The jeweler works the gloves from the outside — cutting, polishing, whatever the job requires — without the box ever opening and without their hands ever touching the diamond directly. When the work is done, the sealed box comes back to you, and only you hold the key to open it and see the result.</p>" +
     "<p>That's <strong>homomorphic encryption</strong> in one image. Every lesson so far has protected data either while it was moving (TLS — data in transit) or while it was sitting still (Encryption at Rest — data at rest). Homomorphic encryption protects a third, much stranger state: data <em>while someone else is actively computing on it</em> — data in use. A cloud provider can run a real computation on your ciphertext and hand back an encrypted result, all without ever being able to see the numbers it was actually working with.</p>" +
@@ -13,11 +13,13 @@ export const theGloveboxProblem: Step = {
     "The result comes back still encrypted; only the data owner can decrypt it",
     "Real motivation: outsourcing computation to infrastructure — a cloud, a third-party ML service, a cross-organization aggregator — that shouldn't see the underlying data",
   ],
-  diagram: `
+  takeaway: "Real motivation: outsourcing computation to infrastructure — a cloud, a third-party ML service, a cross-organization aggregator — that shouldn't see the underlying data.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
-        <div class="node-title">You</div>
-        <div class="node-sub">🔒 lock your data in the box, keep the only key</div>
+        <div class="node-title">Data Owner</div>
+        <div class="node-sub">🔒 locks data in the box and keeps the only key</div>
       </div>
       <div class="link">
         <div class="lock">📦</div>
@@ -30,9 +32,8 @@ export const theGloveboxProblem: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      The cloud does real work — additions, comparisons, even a whole machine
-      learning model's inference pass — using only the gloves. It never sees,
-      and cryptographically cannot see, what's actually inside the box.
+      The cloud computes through the box without opening it.
     </p>
   `,
+  },
 };

@@ -119,7 +119,6 @@ function renderStepGroup(
 /** Render one lesson's collapsible header + step list (used at any nesting depth). */
 function renderLessonGroup(
   entry: RegistryEntry,
-  label: string,
   lessons: Record<string, Lesson>,
   state: SidebarState,
 ): HTMLElement {
@@ -145,6 +144,7 @@ function renderLessonGroup(
 
   const labelEl = document.createElement("span");
   labelEl.className = "lesson-label";
+  const label = entry.shortTitle ?? entry.title;
   labelEl.textContent = available ? label : `${label} (coming soon)`;
   header.appendChild(labelEl);
   group.appendChild(header);
@@ -228,8 +228,8 @@ function renderCategoryGroup(
   sub.className = "category-lessons";
   if (!containsActive) sub.hidden = true;
 
-  categoryEntries.forEach((entry, i) => {
-    sub.appendChild(renderLessonGroup(entry, `${i + 1}. ${entry.title}`, lessons, state));
+  categoryEntries.forEach((entry) => {
+    sub.appendChild(renderLessonGroup(entry, lessons, state));
   });
 
   header.addEventListener("click", () => {
@@ -271,7 +271,7 @@ export function renderSidebar(
 
   const brandName = document.createElement("span");
   brandName.className = "sidebar-brand-name";
-  brandName.textContent = "Crypto Learning Path";
+  brandName.textContent = "Practical Cryptography";
   brand.appendChild(brandName);
 
   nav.appendChild(brand);
@@ -283,7 +283,7 @@ export function renderSidebar(
 
   groupByCategory(entries).forEach((row) => {
     if (row.kind === "entry") {
-      nav.appendChild(renderLessonGroup(row.entry, row.entry.title, lessons, state));
+      nav.appendChild(renderLessonGroup(row.entry, lessons, state));
     } else {
       nav.appendChild(renderCategoryGroup(row.name, row.entries, lessons, state));
     }

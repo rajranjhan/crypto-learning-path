@@ -1,9 +1,16 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 import { MTLS_ACTORS } from "../../actors";
 
 export const mutualAuthComplete: Step = {
   id: "mutual-auth-complete",
-  title: "Both Sides Trust Each Other — and Where It's Used",
+  glossary: lessonTerms("authentication", "authorization"),
+  title: "Mutual Authentication — Where mTLS Fits",
+  wireContext: {
+    where: "Both peers have provided their certificate authentication evidence.",
+    now: "The handshake completes and protected application traffic begins.",
+    why: "The application can use the authenticated identities when applying its separate authorization rules.",
+  },
   prose:
     "Once the server verifies the client's CertificateVerify signature, both sides " +
     "have cryptographically proven their identities and the handshake finishes " +
@@ -22,6 +29,7 @@ export const mutualAuthComplete: Step = {
     "Used for service-to-service auth, API gateways, and zero-trust networks",
     "Bridge to OAuth: mTLS can bind an access token to the client cert (RFC 8705)",
   ],
+  takeaway: "mTLS gives the server a cryptographic client identity that higher-level authorization can use, but certificate lifecycle becomes operationally important.",
   sequence: {
     actors: MTLS_ACTORS,
     progress: {

@@ -6,6 +6,7 @@ import { renderLessonEnding } from "./lesson-ending";
 import { renderProtocolProgress } from "./protocol-progress";
 import { renderSequence } from "./sequence";
 import { renderTextBlock } from "./textblock";
+import { renderWireContext } from "./wire-context";
 
 /** Map each byte offset to the index of the annotation covering it (or undefined). */
 function buildOffsetMap(step: Step): (number | undefined)[] {
@@ -43,6 +44,16 @@ export function renderHexdump(step: Step): HTMLElement {
   return container;
 }
 
+function renderTakeaway(step: Step): HTMLElement {
+  const takeaway = document.createElement("p");
+  takeaway.className = "step-takeaway";
+  const label = document.createElement("strong");
+  label.textContent = "Takeaway:";
+  takeaway.appendChild(label);
+  takeaway.appendChild(document.createTextNode(` ${step.takeaway}`));
+  return takeaway;
+}
+
 export function renderStepView(lesson: Lesson, index: number, nextLesson?: Lesson): HTMLElement {
   const step = lesson.steps[index];
   const view = document.createElement("div");
@@ -57,7 +68,7 @@ export function renderStepView(lesson: Lesson, index: number, nextLesson?: Lesso
   prose.innerHTML = step.prose; // Static authored markup, no user data.
   view.appendChild(prose);
 
-  if (step.protocolProgress) view.appendChild(renderProtocolProgress(step.protocolProgress));
+  if (step.protocolProgress && !step.wireContext) view.appendChild(renderProtocolProgress(step.protocolProgress));
 
   if (step.bullets?.length) {
     const list = document.createElement("ul");
@@ -72,17 +83,17 @@ export function renderStepView(lesson: Lesson, index: number, nextLesson?: Lesso
 
   // A sequence diagram, when present, always sits above the byte-level view —
   // it's the "who sent what to whom" context for the hexdump that follows.
-  if (step.sequence) view.appendChild(renderSequence(step.sequence));
+  if (step.figure) view.appendChild(renderFigure(step.figure));
+  if (step.wireContext) view.appendChild(renderWireContext(step.wireContext));
+  if (step.sequence) view.appendChild(renderSequence(step.sequence, !step.wireContext));
+  if (step.textBlock) view.appendChild(renderTextBlock(step.textBlock));
 
-  // Concept steps carry no wire bytes: render their authored diagram and/or
-  // annotated text block, and skip the hexdump columns entirely.
+  // Concept steps carry no wire bytes: render their annotated text block and
+  // supporting components, and skip the hexdump columns entirely.
   if (!step.bytes?.length) {
-    if (step.figure ?? step.diagram) {
-      view.appendChild(renderFigure(step.figure ?? step.diagram!));
-    }
-    if (step.textBlock) view.appendChild(renderTextBlock(step.textBlock));
     if (step.glossary?.length) view.appendChild(renderGlossary(step.glossary));
     if (step.callouts?.length) view.appendChild(renderCallouts(step.callouts));
+    view.appendChild(renderTakeaway(step));
     if (index === lesson.steps.length - 1) view.appendChild(renderLessonEnding(lesson, nextLesson));
     return view;
   }
@@ -150,6 +161,7 @@ export function renderStepView(lesson: Lesson, index: number, nextLesson?: Lesso
 
   if (step.callouts?.length) view.appendChild(renderCallouts(step.callouts));
   if (step.glossary?.length) view.appendChild(renderGlossary(step.glossary));
+  view.appendChild(renderTakeaway(step));
   if (index === lesson.steps.length - 1) view.appendChild(renderLessonEnding(lesson, nextLesson));
 
   return view;

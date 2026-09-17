@@ -38,12 +38,46 @@ export function renderLessonEnding(lesson: Lesson, nextLesson?: Lesson): HTMLEle
     section.appendChild(quiz);
   }
 
+  if (nextLesson || lesson.transitionToNext) {
+    const bridge = document.createElement("div");
+    bridge.className = "lesson-transition";
+    const bridgeHeading = document.createElement("h4");
+    bridgeHeading.textContent = "Next";
+    const bridgeCopy = document.createElement("p");
+    bridgeCopy.textContent = lesson.transitionToNext ?? `Continue with ${nextLesson!.title}.`;
+    bridge.appendChild(bridgeHeading);
+    bridge.appendChild(bridgeCopy);
+    section.appendChild(bridge);
+  }
+
   if (nextLesson) {
     const next = document.createElement("a");
     next.className = "next-lesson-link";
     next.href = `#/lesson/${nextLesson.slug}/overview`;
     next.textContent = `Next Lesson: ${nextLesson.title}`;
     section.appendChild(next);
+  }
+
+  if (lesson.references?.length) {
+    const refs = document.createElement("div");
+    refs.className = "go-deeper";
+    const refsHeading = document.createElement("h4");
+    refsHeading.textContent = "Go Deeper";
+    refs.appendChild(refsHeading);
+
+    const list = document.createElement("ul");
+    for (const ref of lesson.references) {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = ref.url;
+      link.textContent = ref.title;
+      link.target = "_blank";
+      link.rel = "noopener";
+      item.appendChild(link);
+      list.appendChild(item);
+    }
+    refs.appendChild(list);
+    section.appendChild(refs);
   }
 
   return section;

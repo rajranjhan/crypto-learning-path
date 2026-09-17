@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const theVaultProblem: Step = {
   id: "the-vault-problem",
-  title: "Filed Away, Not Just Delivered — Why Encryption at Rest",
+  title: "Encryption at Rest — The Storage Problem",
   prose:
     "<p>The TLS lessons ended the moment your document was delivered: the bank received it, decrypted it, and TLS's job was done. But the document doesn't vanish after that — it gets <strong>filed away</strong>. Written to a database, backed up overnight, copied into a snapshot before a migration. Every one of those copies is <strong>data at rest</strong>: sitting still, not moving over a wire, and TLS has nothing to say about any of it.</p>" +
     "<p>The threat model here is different too. TLS defends against someone listening in on the wire. Encryption at rest defends against someone who gets their hands on the storage medium itself — a stolen laptop, a decommissioned drive sold on secondhand hardware, a leaked backup tape, a cloud storage bucket left publicly readable by mistake. In every one of those cases, the attacker isn't intercepting a live, authenticated connection to the running system — they simply have the disk, or a copy of what was on it.</p>" +
@@ -13,7 +13,9 @@ export const theVaultProblem: Step = {
     "The attacker in this threat model has the storage medium itself — not a live, authenticated connection to the running system",
     "Every disk, database, backup, and snapshot in a system counts as 'at rest' data, not just the primary production database",
   ],
-  diagram: `
+  takeaway: "Every disk, database, backup, and snapshot in a system counts as 'at rest' data, not just the primary production database.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Crossing the mailroom</div>
@@ -30,10 +32,8 @@ export const theVaultProblem: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      TLS's job ends the instant the document is delivered. What happens to it
-      next — filed on disk, backed up, copied into a snapshot — is a
-      completely separate set of locks, and it's easy to build a system that
-      nails the first half and forgets the second.
+      TLS protects delivery; at-rest controls protect storage.
     </p>
   `,
+  },
 };

@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const merkleTrees: Step = {
   id: "merkle-trees",
-  title: "Merkle Trees Prove a Transaction Is Included",
+  title: "Merkle Trees — Inclusion Proofs",
   prose:
     "<p>A notebook page can list thousands of payments, but the page header has room for one compact receipt-folder summary: the Merkle root. Build it by fingerprinting each receipt, pairing those fingerprints, fingerprinting the pairs, and repeating until one final fingerprint remains. If any receipt changes, the path from that receipt to the final fingerprint changes too.</p>" +
     "<p>The useful trick is proof size. To prove receipt C is on a page, a verifier does not need the whole folder. It only needs receipt C plus the neighboring fingerprints along C's path to the root. That is why lightweight clients can verify inclusion without downloading full blocks: they check a short receipt trail against the root already committed in the block header.</p>",
@@ -12,7 +12,9 @@ export const merkleTrees: Step = {
     "The verifier recomputes the path and checks whether it matches the page header",
     "The proof stays small even when the page holds many transactions",
   ],
-  diagram: `
+  takeaway: "Merkle proofs let a verifier check inclusion without downloading or trusting the entire block.",
+  figure: {
+    body: `
     <div class="flow center">
       <div class="node">
         <div class="node-title">Receipt C</div>
@@ -33,4 +35,5 @@ export const merkleTrees: Step = {
       every other receipt in the folder.
     </p>
   `,
+  },
 };

@@ -3,7 +3,12 @@ import { MTLS_ACTORS } from "../../actors";
 
 export const certificateRequest: Step = {
   id: "certificate-request",
-  title: "The Server Asks the Client to Prove Who It Is",
+  title: "CertificateRequest — Asking for Client Identity",
+  wireContext: {
+    where: "The server also needs a certificate-based client identity.",
+    now: "The server requests a client certificate and indicates acceptable parameters.",
+    why: "The client must know which credential and signature scheme to use.",
+  },
   prose:
     "mTLS adds one message on the server's side of the handshake: after sending " +
     "its own certificate, the server sends a CertificateRequest. This tells the " +
@@ -16,6 +21,7 @@ export const certificateRequest: Step = {
     "Lists the CAs the server trusts and the signature algorithms it accepts",
     "Signals that the client MUST present a certificate to continue",
   ],
+  takeaway: "CertificateRequest turns a normal TLS handshake into one where the client must authenticate with a certificate.",
   sequence: {
     actors: MTLS_ACTORS,
     progress: {

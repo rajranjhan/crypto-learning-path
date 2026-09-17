@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const proofOfWork: Step = {
   id: "proof-of-work",
-  title: "Proof of Work Turns Hashing Into a Cost",
+  title: "Proof of Work — Hashing as Cost",
   prose:
     "<p>Proof of work is like saying: before you may add the next notebook page, solve a hard lottery puzzle printed on that page. Miners repeatedly change a nonce in the block header and hash the header until the result is below the network's target. There is no shortcut better than trying many candidates, but verification is cheap: one hash tells everyone whether the page really solved the puzzle.</p>" +
     "<p>The security idea is economic and network-based, not just mathematical. Rewriting history means replacing the old page and then catching up to the honest notebook, paying the same puzzle cost for each replacement page. The hashes make the work easy to verify; the consensus rule tells nodes which valid notebook to extend. Cryptography alone does not create consensus. It supplies verifiable evidence — signatures, hashes, commitments, work proofs — that a separate consensus protocol uses to choose one history.</p>",
@@ -13,7 +13,9 @@ export const proofOfWork: Step = {
     "Cryptography supplies verifiable evidence; the consensus protocol decides which valid history the network extends",
     "Consensus is not just cryptography; it combines checks with network, timing, and incentive assumptions",
   ],
-  diagram: `
+  takeaway: "Consensus is not just cryptography; it combines checks with network, timing, and incentive assumptions.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Page + Nonce</div>
@@ -34,4 +36,5 @@ export const proofOfWork: Step = {
       proves someone spent computation searching.
     </p>
   `,
+  },
 };

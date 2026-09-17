@@ -2,9 +2,9 @@ import type { Step } from "../../../types";
 
 export const whyPki: Step = {
   id: "why-pki",
-  title: "A Public Key Alone Proves Nothing",
+  title: "Public Keys — The Identity Problem",
   prose:
-    "<p>PKI is really about trusting a stranger's identity without ever having met them — like verifying someone's ID in a country where you don't personally know every notary. In the mailroom from the TLS lessons, the bank showed you an ID card (a certificate) to prove it was really \"the bank.\" But that just pushes the question back one level: how do you know that ID card itself isn't forged? A plastic card with a name printed on it proves nothing on its own — and neither does a public key.</p>" +
+    "<p>PKI is really about trusting a stranger's identity without ever having met them — like verifying someone's ID in a country where you don't personally know every notary. In protocol terms, you are the <strong>Client</strong>, the bank is the <strong>Server</strong>, and the notary is the <strong>Certificate Authority</strong>. In the mailroom from the TLS lessons, the Server showed the Client an ID card (a certificate) to claim a binding between a public key and the bank\'s hostname. But that just pushes the question back one level: how do you know that ID card itself isn't forged? A plastic card with a name printed on it proves nothing on its own — and neither does a public key.</p>" +
     "<p>The previous lesson ended on exactly that preview: a public key, on its own, carries no identity. Anyone can generate an RSA or ECC key pair in seconds and claim it belongs to your bank. Signature verification only proves a message was signed by <em>whoever holds the matching private key</em> — it says nothing about who that is, unless something else ties the key to an identity first.</p>" +
     "<p><strong>PKI (Public Key Infrastructure)</strong> is that something else: the whole system of certificates, certificate authorities, and trust stores that lets a stranger's public key be trusted for a specific purpose — usually, \"this key belongs to example.com.\" It's not one algorithm; it's an organizational and technical structure — a system of ID cards, notary stamps, and a government seal you already trust — built on top of the signatures the previous lesson covered.</p>" +
     "<p>This lesson stays one level above the wire. The TLS lessons right after this one dissect a real certificate byte-for-byte and show exactly where it sits in a handshake; this lesson explains the system those bytes are part of — how a certificate gets its authority, how a chain gets validated, what happens when one needs to be revoked before it expires, and where the whole model has actually broken in the real world.</p>",
@@ -15,7 +15,9 @@ export const whyPki: Step = {
     "PKI is a system (certificates + CAs + trust stores), not a single algorithm — it's built on top of the signatures from the previous lesson",
     "The TLS lessons ahead show the wire-level bytes; this lesson explains the trust system behind them",
   ],
-  diagram: `
+  takeaway: "The TLS lessons ahead show the wire-level bytes; this lesson explains the trust system behind them.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Bare public key</div>
@@ -32,9 +34,8 @@ export const whyPki: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Everything in this lesson is about how that arrow works: who's allowed
-      to add that signature, how a client checks it, and what happens when
-      it needs to be taken back.
+      PKI explains who may add the trusted signature.
     </p>
   `,
+  },
 };

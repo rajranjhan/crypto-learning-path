@@ -1,5 +1,6 @@
 import type { Step } from "../../../types";
 import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
+import { tlsComparisonFigure } from "../../tls-comparison";
 
 // These are the exact bytes of a real TLS 1.3 ClientHello record, prefixed with
 // its 5-byte record header "16 03 03 01 15". The record length (0x0115 = 277)
@@ -10,7 +11,7 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // key live inside the extensions block.
 export const clientHello: Step = {
   id: "client-hello",
-  title: "Introductions",
+  title: "ClientHello — One-Round-Trip Key Share",
   bytes: [
     // -- Record header (5 bytes) --
     0x16, // record type: handshake
@@ -162,10 +163,15 @@ export const clientHello: Step = {
       colorClass: "c-rand",
     },
   ],
+  wireContext: {
+    where: "The client is starting a TLS 1.3 connection without established traffic keys.",
+    now: "ClientHello offers parameters and an initial key share.",
+    why: "Sending key material immediately lets the server establish handshake keys sooner.",
+  },
   prose:
     "<p>Think of TLS 1.3 like sending a confidential document to your bank, but the mail still has to pass through a shared office mailroom where anyone could peek.</p>" +
-    "<p>The conversation opens the same way: your computer speaks first. \"I want to talk securely — here's what encryption methods I support.\"</p>" +
-    "<p>But this time it says more. On the wire that's a <strong>ClientHello</strong>: the legacy version and session-id fields (offsets 9 and 44) still look like TLS 1.2 for the mailroom's old equipment, but the real work is in the extensions (offset 88), where the client announces TLS 1.3 and — unlike TLS 1.2 — already hands over its half of a shared key in <strong>key_share</strong>. The bank's server can start computing a secret from this very first envelope.</p>",
+    "<p>In protocol terms, your computer or browser is the <strong>Client</strong>, and the bank's system is the <strong>Server</strong>. The conversation opens the same way: the Client speaks first. \"I want to talk securely — here's what encryption methods I support.\"</p>" +
+    "<p>But this time it says more. On the wire that's a <strong>ClientHello</strong>: the legacy version and session-id fields (offsets 9 and 44) still look like TLS 1.2 for the mailroom's old equipment, but the real work is in the extensions (offset 88), where the Client announces TLS 1.3 and — unlike TLS 1.2 — already hands over its half of a shared key in <strong>key_share</strong>. The Server can start computing a secret from this very first envelope.</p>",
   bullets: [
     "A legacy version pinned at TLS 1.2, with the real TLS 1.3 offer in supported_versions",
     "32 bytes of client random data (used in the key schedule)",
@@ -173,7 +179,9 @@ export const clientHello: Step = {
     "The TLS 1.3 AEAD cipher suites the client will accept",
     "The key_share extension carrying the client's ephemeral public key",
   ],
+  takeaway: "TLS 1.3 moves key agreement into ClientHello so the server can encrypt most of its response after ServerHello.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 1),
+  figure: tlsComparisonFigure,
   callouts: [
     {
       requirementId: "Versions",

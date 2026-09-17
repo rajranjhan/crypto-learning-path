@@ -1,8 +1,10 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 export const stream: Step = {
   id: "stream",
-  title: "Stream Ciphers — A Caesar Shift That Never Repeats",
+  glossary: lessonTerms("nonce"),
+  title: "Stream Ciphers — Non-Repeating Keystreams",
   sidebarGroup: "Modern Symmetric Ciphers",
   prose:
     "A <strong>stream cipher</strong> is, mechanically, closer to the Caesar " +
@@ -12,8 +14,8 @@ export const stream: Step = {
     "the same shift for every letter, which is exactly what made it breakable. A " +
     "stream cipher instead feeds a secret key and a one-time number (a " +
     "<strong>nonce</strong>) into an algorithm that generates an effectively " +
-    "endless, unpredictable sequence of bits — the <strong>keystream</strong> — " +
-    "that never repeats for that key/nonce pair. Encrypting is just <code>XOR</code>: " +
+    "unpredictable sequence of bits within the cipher's message-length limit — the <strong>keystream</strong> — " +
+    "that must not be reused by repeating the key/nonce pair. Encrypting is just <code>XOR</code>: " +
     "combine each plaintext byte with the next keystream byte. Decrypting runs " +
     "the identical operation again, because XOR-ing the same value twice cancels " +
     "it out — which is also exactly why the same key material can never be " +
@@ -25,7 +27,9 @@ export const stream: Step = {
     "Reusing a key/nonce pair is catastrophic: XOR-ing two ciphertexts that share a keystream cancels the keystream out and exposes a relationship between the two plaintexts",
     "ChaCha20 (TLS 1.3) and AES-CTR (which turns a block cipher into a stream cipher) are common modern examples",
   ],
-  diagram: `
+  takeaway: "ChaCha20 (TLS 1.3) and AES-CTR (which turns a block cipher into a stream cipher) are common modern examples.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Key + nonce</div>
@@ -48,15 +52,12 @@ export const stream: Step = {
       </div>
       <div class="node attacker">
         <div class="node-title text-warning">❌ Reused nonce</div>
-        <div class="node-sub">the same keystream twice — XOR the two ciphertexts and the keystream cancels out entirely</div>
+        <div class="node-sub">reused keystream leaks plaintext</div>
       </div>
     </div>
     <p class="diagram-note">
-      Compare this to the Caesar cipher a few steps back: same basic move —
-      combine plaintext with key material, one unit at a time — but the shift is
-      no longer one small, guessable number reused for the whole message. It's a
-      keystream large and unpredictable enough that, used correctly, it never
-      leaks that pattern back out.
+      A stream cipher is safe only when the keystream never repeats.
     </p>
   `,
+  },
 };

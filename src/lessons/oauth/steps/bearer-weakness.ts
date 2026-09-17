@@ -1,9 +1,16 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 import { OAUTH_ACTORS } from "../../actors";
 
 export const bearerWeakness: Step = {
   id: "bearer-weakness",
-  title: "A Ticket Anyone Can Use — Convenient, but Risky",
+  glossary: lessonTerms("bearer token"),
+  title: "Bearer Tokens — The Theft Problem",
+  wireContext: {
+    where: "The authorization server has issued a bearer access token.",
+    now: "The sequence shows the token being leaked and replayed.",
+    why: "An API accepting bearer tokens does not require a separate proof of the presenter’s key.",
+  },
   prose:
     "You already know what a bearer token is, because it's exactly the plain ride " +
     "ticket from a few steps back: whoever's holding it gets to ride. By default, " +
@@ -22,6 +29,7 @@ export const bearerWeakness: Step = {
     "Intercepted or leaked tickets can be used by an attacker, same as a stolen ticket",
     "No holder binding — this is the weakness the wristband and signed ticket (FAPI and DPoP) set out to fix",
   ],
+  takeaway: "A stolen bearer token can normally be replayed by whoever possesses it.",
   sequence: {
     actors: OAUTH_ACTORS,
     progress: {

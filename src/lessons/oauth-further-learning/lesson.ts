@@ -1,5 +1,5 @@
 import type { Lesson } from "../../types";
-import { oauthActorMappingFigure, oauthSequenceFigure } from "../oauth-shared";
+import { oauthSequenceFigure } from "../oauth-shared";
 import { bearerWeakness } from "../oauth/steps/bearer-weakness";
 import { refreshToken } from "../oauth/steps/refresh-token";
 import { wristbandTicket } from "../oauth/steps/wristband-ticket";
@@ -20,9 +20,9 @@ export const oauthFurtherLearningLesson: Lesson = {
   slug: "oauth-further-learning",
   title: "OAuth: Tokens, Claims & Security",
   status: "available",
-  summary: "OAuth 2 deepens token semantics and security: scopes, claims, audience, replay risk, sender-constrained tokens, mTLS, DPoP, confused deputy, and OAuth vs OIDC.",
+  summary: "Learn what OAuth tokens mean, where they are valid, and how to limit misuse.",
   whyItMatters:
-    "Most OAuth failures come from misunderstanding what a token says, who it is for, or which client is allowed to receive it. This lesson sharpens the boundaries between authorization, identity, audience, application-specific permissions, and replay resistance.",
+    "A valid token can still be used at the wrong API or replayed after theft. Understanding token boundaries helps you spot those failures.",
   objectives: [
     "Explain scopes, claims, audiences, and entitlements",
     "Recognize bearer-token theft and replay risk",
@@ -30,26 +30,33 @@ export const oauthFurtherLearningLesson: Lesson = {
     "Separate OAuth authorization from OIDC authentication",
   ],
   prerequisites: ["oauth"],
+  checkYourUnderstanding: [
+    {
+      question: "Why should an API reject a validly signed token intended for another API?",
+      answer: "The signature protects the token's contents but does not grant universal access. Audience validation ensures this API is an intended recipient.",
+    },
+    {
+      question: "Why doesn't signing a bearer token prevent its replay after theft?",
+      answer: "The signature prevents alteration, not copying. Sender constraints add a separate requirement to prove possession of a bound key.",
+    },
+    {
+      question: "Why might a scope check still be insufficient to authorize a request?",
+      answer: "A scope describes delegated access, but an application may also need ownership, tenant, role, or entitlement checks for the specific resource.",
+    },
+  ],
   keyTakeaways: [
     "A token is not the user's identity",
-    "Scopes describe delegated access, but they are not the full entitlement model in every system",
+    "Scopes describe delegated access, not every application permission",
     "Audience restrictions keep tokens from being replayed at the wrong API",
     "Bearer tokens can be replayed if stolen",
-    "Sender-constrained tokens reduce replay risk by requiring proof of key possession",
+    "Sender-constrained tokens require proof of a bound key",
     "OIDC adds identity claims on top of OAuth authorization",
   ],
   estimatedMinutes: 40,
   difficulty: "Intermediate",
   lessonType: "protocol",
-  overview:
-    "OAuth 2 — Tokens, Claims & Security picks up where OAuth 1 left off: same " +
-    "Resource Owner, Client, Authorization Server, and Resource Server; same " +
-    "carnival map. This lesson looks closely at what is printed on a ticket, which " +
-    "gate it is meant for, why stolen bearer tickets are replayable, and how mTLS " +
-    "or DPoP can bind a token to a key. It ends by separating OAuth authorization " +
-    "from OpenID Connect authentication.",
+  transitionToNext: "Once token meaning and replay risk are clear, the next question is which OAuth flow fits a particular client and trust boundary.",
   figure: oauthSequenceFigure,
-  diagram: oauthActorMappingFigure.body,
   steps: [
     scopes,
     claims,

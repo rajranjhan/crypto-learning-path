@@ -11,7 +11,7 @@ export const mtlsLesson: Lesson = {
   status: "available",
   summary: "Extends TLS with client certificates so both sides authenticate during the handshake.",
   whyItMatters:
-    "Many service-to-service systems need stronger client identity than bearer tokens alone. mTLS uses the certificate machinery you already know to authenticate clients as well as servers.",
+    "Services often need to verify the client as well as the server. mTLS provides that identity check, with certificate management as an operational cost.",
   objectives: [
     "Explain how mTLS differs from ordinary server-authenticated TLS",
     "Identify CertificateRequest and client certificate messages",
@@ -19,6 +19,20 @@ export const mtlsLesson: Lesson = {
     "Recognize common mTLS deployment tradeoffs",
   ],
   prerequisites: ["tls12", "tls13", "pki"],
+  checkYourUnderstanding: [
+    {
+      question: "Why isn't sending a client certificate enough to authenticate the client?",
+      answer: "A certificate is public and can be copied. The client must also prove possession of its private key by signing handshake data.",
+    },
+    {
+      question: "Does successful mTLS mean a client may call every API operation?",
+      answer: "No. mTLS establishes a peer identity; application authorization still decides which actions that identity may perform.",
+    },
+    {
+      question: "Why does deploying mTLS create more than a handshake configuration task?",
+      answer: "Clients need certificate issuance, renewal, key protection, and a response to compromise. Those lifecycle controls must work across the deployment.",
+    },
+  ],
   keyTakeaways: [
     "mTLS authenticates both ends of a connection",
     "The client proves possession of a certificate private key",
@@ -28,12 +42,16 @@ export const mtlsLesson: Lesson = {
   estimatedMinutes: 25,
   difficulty: "Intermediate",
   lessonType: "protocol",
-  overview:
-    "Ordinary TLS proves the server's identity to the client. Mutual TLS (mTLS) " +
-    "adds the reverse: the client also proves its identity with a certificate, so " +
-    "both ends know exactly who they are talking to. It's the same TLS handshake " +
-    "you already know, plus a few extra client-authentication messages. Follow the " +
-    "same sequence diagram across each step — the highlighted arrow is the message " +
-    "mTLS adds at that point.",
+  transitionToNext: "TLS protects a connection. Encryption at rest protects data after it has been stored.",
+  figure: {
+    body: `
+      <div class="flow">
+        <div class="node client"><div class="node-title">Client</div><div class="node-sub">Verifies the server certificate and proof</div></div>
+        <div class="link"><div class="link-label">Mutual authentication</div><div class="arrow">↔</div></div>
+        <div class="node server"><div class="node-title">Server</div><div class="node-sub">Verifies the client certificate and proof</div></div>
+      </div>
+    `,
+    caption: "Each peer proves possession of its certificate's private key.",
+  },
   steps: [recap, certificateRequest, clientCertificate, certificateVerify, mutualAuthComplete],
 };

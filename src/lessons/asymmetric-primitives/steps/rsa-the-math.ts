@@ -14,7 +14,12 @@ const rsaLines = [
 
 export const rsaTheMath: Step = {
   id: "rsa-the-math",
-  title: "Inside RSA — A Real, Tiny Worked Example",
+  title: "RSA — Worked Example",
+  wireContext: {
+    where: "The example uses tiny numbers to expose RSA’s key relationship.",
+    now: "The annotated arithmetic constructs keys, encrypts, and decrypts a message.",
+    why: "Seeing the operations explains reversibility; these toy parameters are not secure.",
+  },
   prose:
     "<p>RSA's security rests on one asymmetry: multiplying two large prime numbers together is fast, but factoring that product back into its two primes is, for large enough primes, computationally infeasible with any known algorithm. Key generation exploits that gap directly.</p>" +
     "<p>Pick two large secret primes, p and q, and multiply them to get the public modulus n = p × q. Compute Euler's totient, φ(n) = (p-1)(q-1) — a value that stays secret, since computing it requires knowing p and q individually. Choose a public exponent e (65537 is the near-universal real-world choice; this example uses a smaller number for readability) that shares no common factor with φ(n), then compute the private exponent d as e's modular inverse mod φ(n): the one number that makes e × d ≡ 1 (mod φ(n)).</p>" +
@@ -27,6 +32,7 @@ export const rsaTheMath: Step = {
     "Signature direction is a different job: private-key signing, public-key verification",
     "Security rests entirely on factoring n back into p and q being infeasible at real key sizes (2048+ bits)",
   ],
+  takeaway: "Security rests entirely on factoring n back into p and q being infeasible at real key sizes (2048+ bits)",
   callouts: [
     {
       type: "security-warning",

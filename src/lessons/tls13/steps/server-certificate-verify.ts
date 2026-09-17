@@ -1,3 +1,4 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 
@@ -10,7 +11,8 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // from offset 0 with no gaps or overlaps.
 export const serverCertificateVerify: Step = {
   id: "server-certificate-verify",
-  title: "Proving It's Really Theirs",
+  glossary: lessonTerms("signature", "proof of possession"),
+  title: "CertificateVerify — Server Key Proof",
   bytes: [
     0x17, 0x03, 0x03, 0x01, 0x08, 0x0f, 0x00, 0x01, 0x04, 0x08, 0x04, 0x01,
     0x00, 0x6c, 0x74, 0x6f, 0x0b, 0x4c, 0x85, 0xf9, 0x92, 0x25, 0xb0, 0xa0,
@@ -94,6 +96,11 @@ export const serverCertificateVerify: Step = {
       colorClass: "c-cipher",
     },
   ],
+  wireContext: {
+    where: "The server has supplied its certificate chain.",
+    now: "CertificateVerify signs the handshake context with the certificate’s private key.",
+    why: "The client must verify that this peer controls the private key, not merely a copy of the certificate.",
+  },
   prose:
     "<p>An ID alone isn't proof you're holding it legitimately — anyone could photocopy someone else's ID. So the bank does one more thing: it signs for it.</p>" +
     "<p>This is the <strong>CertificateVerify</strong> message. The bank signs a hash of the entire conversation so far with the private key that matches the certificate it just sent, using a modern scheme (here RSA-PSS with SHA-256) — proving it's not just showing you an ID, it actually holds the key behind it.</p>" +
@@ -104,5 +111,6 @@ export const serverCertificateVerify: Step = {
     "Ties the ephemeral keys to certificate ownership, preventing certificate replay",
     "Encrypted under the handshake traffic keys",
   ],
+  takeaway: "CertificateVerify proves the server controls the private key for the certificate without exposing that key.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 6),
 };

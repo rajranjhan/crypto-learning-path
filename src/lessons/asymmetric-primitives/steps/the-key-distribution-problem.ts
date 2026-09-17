@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const theKeyDistributionProblem: Step = {
   id: "the-key-distribution-problem",
-  title: "The Problem Only a Different Kind of Math Can Solve",
+  title: "The Key Distribution Problem",
   prose:
     "<p>The previous lesson covered AES, SHA, and HMAC — fast, well-understood tools, all built around one assumption: both sides already share a secret key. That assumption is the entire problem. Handing a symmetric key to someone over a channel an attacker might be watching defeats the point of encrypting anything with it afterward.</p>" +
     "<p>Encryption Basics introduced the two metaphors for solving this without ever transmitting the secret directly: a padlock anyone can snap shut but only one key opens, and paint mixed together in a way that can't be un-mixed. This lesson gets concrete. The padlock is <strong>RSA</strong>, built on how hard it is to factor the product of two large primes. The paint-mixing is <strong>Diffie-Hellman</strong> and its modern variant, <strong>ECC (Elliptic Curve Cryptography)</strong>, built on how hard it is to reverse a specific kind of repeated multiplication. Both show up by name in the TLS lessons ahead — RSA and ECDSA sign the Certificate and CertificateVerify messages; ECDHE derives the shared secret itself.</p>" +
@@ -14,7 +14,9 @@ export const theKeyDistributionProblem: Step = {
     "Signatures flip the padlock: the private key locks (signs), the public key unlocks (verifies) — proving origin instead of hiding content",
     "RSA, ECDHE, and ECDSA all appear by name in the TLS lessons ahead",
   ],
-  diagram: `
+  takeaway: "RSA, ECDHE, and ECDSA all appear by name in the TLS lessons ahead.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal">
         <div class="node-title">Encryption</div>
@@ -26,9 +28,8 @@ export const theKeyDistributionProblem: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Same key pair, opposite direction. Keep this distinction in mind for
-      the rest of the lesson — RSA and ECC both do each job, but never at
-      the same time with the same operation.
+      Same key pair, opposite direction.
     </p>
   `,
+  },
 };

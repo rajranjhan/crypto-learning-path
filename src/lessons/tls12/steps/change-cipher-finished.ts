@@ -13,7 +13,7 @@ import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 // 0x0028 = 40. Annotations tile from offset 0 with no gaps or overlaps.
 export const changeCipherFinished: Step = {
   id: "change-cipher-finished",
-  title: "Locking the Documents",
+  title: "ChangeCipherSpec and Finished — Key Confirmation",
   bytes: [
     0x14, 0x03, 0x03, 0x00, 0x01, 0x01, 0x16, 0x03, 0x03, 0x00, 0x28, 0x27,
     0xec, 0xc0, 0x0d, 0xcb, 0xdb, 0x28, 0xe4, 0x82, 0xee, 0x7c, 0xc3, 0xb7,
@@ -79,6 +79,11 @@ export const changeCipherFinished: Step = {
       colorClass: "c-cipher",
     },
   ],
+  wireContext: {
+    where: "Both peers have the key exchange inputs and can derive the session keys.",
+    now: "Each peer switches record protection and sends Finished.",
+    why: "Finished authenticates the transcript and confirms possession of the derived secrets.",
+  },
   prose:
     "<p>Both sides now say, in effect: \"From here on, everything I send is locked with our shared key.\"</p>" +
     "<p>First the tiny <strong>ChangeCipherSpec</strong> record (offsets 0-5) announces that out loud on the wire.</p>" +
@@ -90,5 +95,6 @@ export const changeCipherFinished: Step = {
     "The Finished body is the first message encrypted with the new keys, so it is opaque ciphertext",
     "Each side sends its own pair; verifying the peer's Finished proves both agreed on keys and nobody altered the negotiation",
   ],
+  takeaway: "Finished proves both sides derived the same keys and saw the same handshake transcript.",
   sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 8, 2),
 };

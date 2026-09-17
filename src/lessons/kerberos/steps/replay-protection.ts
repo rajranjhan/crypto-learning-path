@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const replayProtection: Step = {
   id: "replay-protection",
-  title: "Why Every Slip Has a Timestamp — Stopping Replay",
+  title: "Replay Protection — Timestamps and Authenticators",
   prose:
     "<p>Notice that every Authenticator in the last three steps was a timestamp, sealed fresh, every single time. That's not incidental — it's the entire defense against a specific attack: someone copying a slip as it goes by and reusing it later to walk through the same door. A Door Pass alone doesn't stop that; the pass is reusable within its lifetime, the same way a wristband is. What stops it is that the door (or desk) remembers every Authenticator it has seen recently and rejects an exact repeat, and it also rejects anything too old to still be \"right now.\"</p>" +
     "<p>That window — how old is too old — is the <strong>clock skew tolerance</strong>, usually a few minutes. It's why every machine in a Kerberos realm needs a reasonably synchronized clock (this is the actual, mundane reason Windows domains lean so hard on NTP): if your clock and the Staff House's clock disagree by more than the skew window, your perfectly genuine Authenticators start getting rejected as stale. This is a different tradeoff than DPoP — a mechanism the OAuth lessons cover later in this series — which stops replay with a random, single-use ID (the <code>jti</code>) the server remembers, instead of leaning on the clock. Kerberos chose time because in 1988, on a closed campus network, synchronized clocks were the cheaper thing to guarantee.</p>",
@@ -12,7 +12,9 @@ export const replayProtection: Step = {
     "Anything older than the clock skew tolerance (typically a few minutes) is rejected as stale, even if never seen before",
     "This is why Kerberos realms depend on synchronized clocks (NTP) across every machine",
   ],
-  diagram: `
+  takeaway: "This is why Kerberos realms depend on synchronized clocks (NTP) across every machine.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node trusted">
         <div class="node-title text-trusted">Fresh Authenticator</div>
@@ -28,10 +30,8 @@ export const replayProtection: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Only the middle case is new business. A copied slip fails either because
-      it's a repeat of one already logged, or because too much time has passed
-      for it to plausibly be "right now" anymore — the same slip is worthless
-      to an attacker a few minutes after they intercept it.
+      Fresh timestamps pass; repeats and stale slips fail.
     </p>
   `,
+  },
 };

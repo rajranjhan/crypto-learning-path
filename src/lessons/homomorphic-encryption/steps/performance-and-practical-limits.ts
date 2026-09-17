@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const performanceAndPracticalLimits: Step = {
   id: "performance-and-practical-limits",
-  title: "The Price of the Glovebox — Performance & Practical Limits",
+  title: "Performance Limits — Practical Constraints",
   prose:
     "<p>None of this is free. Fully homomorphic encryption is dramatically slower than computing on plaintext directly — historically many orders of magnitude slower, though modern schemes and hardware acceleration have narrowed that gap considerably for specific workloads. Bootstrapping in particular is expensive, and ciphertexts themselves are far larger than the plaintexts they encrypt, so both computation time and data size balloon compared to an unencrypted equivalent.</p>" +
     "<p>That cost shapes how FHE actually gets used in production today: not as a general-purpose replacement for ordinary computation, but selectively, for specific, well-bounded operations on data sensitive enough, and infrastructure untrusted enough, to justify the overhead. Simple arithmetic, statistics, private set-style operations, and carefully optimized inference workloads can be realistic. An entire general-purpose application running fully homomorphically, end to end, usually is not.</p>" +
@@ -15,7 +15,9 @@ export const performanceAndPracticalLimits: Step = {
     "MPC may be more practical when multiple parties can interact; TEEs may be more practical when hardware trust is acceptable and latency matters",
     "Real libraries exist and are improving fast: Microsoft SEAL, IBM HElib, Zama's TFHE/Concrete, Google's FHE transpiler",
   ],
-  diagram: `
+  takeaway: "Homomorphic encryption is practical only when its privacy benefit is worth the latency, data-shape, and engineering costs.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Plaintext computation</div>
@@ -27,10 +29,8 @@ export const performanceAndPracticalLimits: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      The entire value proposition is trading raw performance for a computing
-      party that can be fully untrusted. Whether that trade is worth it
-      depends entirely on how sensitive the data is and how little you trust
-      the infrastructure running the computation.
+      Homomorphic encryption trades speed for untrusted computation.
     </p>
   `,
+  },
 };

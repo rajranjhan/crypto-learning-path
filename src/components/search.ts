@@ -1,3 +1,4 @@
+import { lessonUrl } from "../lesson-urls";
 import { search, type SearchEntry } from "../search";
 
 /** Split `text` at the first case-insensitive match of `query` and append it as plain text + a <mark>, avoiding innerHTML entirely (text here can contain authored `<`/`&`). */
@@ -59,7 +60,9 @@ export function renderSearch(index: SearchEntry[]): HTMLElement {
     matches.forEach((m) => {
       const link = document.createElement("a");
       link.className = "search-result";
-      link.href = `#/lesson/${m.slug}/${m.step}`;
+      link.href = m.step === "overview"
+        ? lessonUrl(m.slug, new URL("./", document.baseURI).href)
+        : `#/lesson/${m.slug}/${m.step}`;
 
       const lessonLine = document.createElement("div");
       lessonLine.className = "search-result-lesson";

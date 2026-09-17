@@ -22,7 +22,12 @@ const responseLines = [
 
 export const dpopResponse: Step = {
   id: "dpop-response",
-  title: "The Ticket Comes Stamped With Your Key (DPoP)",
+  title: "DPoP Token Binding — Key Confirmation",
+  wireContext: {
+    where: "The authorization server has accepted the token request and DPoP proof.",
+    now: "The response returns a token bound to the proof’s public key.",
+    why: "The resource server needs that binding to require matching key-possession evidence.",
+  },
   prose:
     "At the booth, the attendant doesn't just glance at your signature and wave " +
     "you through — they keep a record of it, so it can be checked again at the " +
@@ -41,6 +46,7 @@ export const dpopResponse: Step = {
     "JWT tokens embed cnf directly; opaque tokens expose it via introspection",
     "The token is now useless without the corresponding private key",
   ],
+  takeaway: "The token is now useless without the corresponding private key.",
   sequence: {
     actors: OAUTH_ACTORS,
     progress: {

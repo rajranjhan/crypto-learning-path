@@ -33,7 +33,7 @@ export function renderOverview(lesson: Lesson, lessons: Record<string, Lesson>):
   const header = document.createElement("header");
   header.className = "overview-header";
 
-  const heading = document.createElement("h2");
+  const heading = document.createElement("h1");
   heading.textContent = lesson.title;
   header.appendChild(heading);
 
@@ -67,7 +67,7 @@ export function renderOverview(lesson: Lesson, lessons: Record<string, Lesson>):
     const prereqs = document.createElement("section");
     prereqs.className = "overview-section";
     const prereqHeading = document.createElement("h3");
-    prereqHeading.textContent = "Prerequisites / Builds On";
+    prereqHeading.textContent = "Builds On";
     prereqs.appendChild(prereqHeading);
 
     const list = document.createElement("ul");
@@ -88,33 +88,14 @@ export function renderOverview(lesson: Lesson, lessons: Record<string, Lesson>):
     root.appendChild(prereqs);
   }
 
-  if (lesson.references?.length) {
-    const refs = document.createElement("section");
-    refs.className = "overview-section";
-    const refsHeading = document.createElement("h3");
-    refsHeading.textContent = "Standards & Further Reading";
-    refs.appendChild(refsHeading);
-
-    const list = document.createElement("ul");
-    for (const ref of lesson.references) {
-      const item = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = ref.url;
-      link.textContent = ref.title;
-      link.target = "_blank";
-      link.rel = "noopener";
-      item.appendChild(link);
-      list.appendChild(item);
-    }
-    refs.appendChild(list);
-    root.appendChild(refs);
-  }
-
-  if (lesson.diagram) {
-    root.appendChild(renderFigure(lesson.diagram));
-  }
   if (lesson.figure) {
-    root.appendChild(renderFigure(lesson.figure));
+    const mentalModel = document.createElement("section");
+    mentalModel.className = "overview-section mental-model-section";
+    const mentalModelHeading = document.createElement("h3");
+    mentalModelHeading.textContent = "Mental Model";
+    mentalModel.appendChild(mentalModelHeading);
+    mentalModel.appendChild(renderFigure(lesson.figure));
+    root.appendChild(mentalModel);
   }
 
   const roadmap = document.createElement("section");

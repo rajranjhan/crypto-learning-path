@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const substitution: Step = {
   id: "substitution",
-  title: "Substitution Ciphers — The Earliest Shared-Key Lockbox",
+  title: "Substitution Ciphers — Pattern Leakage",
   sidebarGroup: "Classical Ciphers",
   prose:
     "Long before computers, people were already doing symmetric encryption by " +
@@ -20,7 +20,9 @@ export const substitution: Step = {
     "The keyspace is enormous (26! ≈ 4×10²⁶ possible alphabets) — and yet these ciphers are broken almost every time",
     "Weakness: the substitution preserves the shape of the underlying message — repeated letters stay repeated, and common letters stay common. That statistical fingerprint is what frequency analysis reads",
   ],
-  diagram: `
+  takeaway: "Weakness: the substitution preserves the shape of the underlying message — repeated letters stay repeated, and common letters stay common. That statistical fingerprint is what frequency analysis reads.",
+  figure: {
+    body: `
     <div class="mono-panel">
 Plain:   A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 Cipher:  Q W E R T Y U I O P A S D F G H J K L Z X C V B N M</div>
@@ -40,13 +42,8 @@ Cipher:  Q W E R T Y U I O P A S D F G H J K L Z X C V B N M</div>
       </div>
     </div>
     <p class="diagram-note">
-      This particular key is easy to memorize without writing it down: it's just
-      the top three rows of a QWERTY keyboard, read left to right
-      (<code>QWERTYUIOP</code>, <code>ASDFGHJKL</code>, <code>ZXCVBNM</code>).
-      Look what happens to the double L in HELLO — it becomes a double S in
-      ITSSG. The key hid the letters, but it couldn't hide the <em>pattern</em>
-      of repetition. That leftover structure is exactly what frequency analysis
-      exploits, no matter how large the keyspace is.
+      Substitution hides letters, but repeated patterns still leak.
     </p>
   `,
+  },
 };

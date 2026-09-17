@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const postQuantumCryptography: Step = {
   id: "post-quantum-cryptography",
-  title: "Post-Quantum Cryptography — New Math, Not Bigger Keys",
+  title: "Post-Quantum Cryptography — New Math",
   prose:
     "<p>The locksmiths' guild can't out-cut a machine that reads a lock's mechanism directly — the only real answer is to design an entirely new kind of lock, built on a different physical principle the machine's trick doesn't apply to. Cautious shops don't rip out the old lock the day the new one ships, either: they install both locks on the same door, so a thief has to beat both mechanisms to get in, not just one.</p>" +
     "<p>Unlike the symmetric side's key-size-margin story, protecting key exchange and signatures against Shor's algorithm requires genuinely new mathematical foundations — problems believed hard for quantum computers too, not just classical ones. NIST's first post-quantum standards include <strong>ML-KEM</strong> for key establishment, <strong>ML-DSA</strong> for signatures, and <strong>SLH-DSA</strong> as a stateless hash-based signature option. They are designed around assumptions different from factoring and discrete logarithms, and they are not currently known to be efficiently solvable by Shor's algorithm or another quantum algorithm.</p>" +
@@ -17,7 +17,9 @@ export const postQuantumCryptography: Step = {
     "Hybrid key exchange runs a classical algorithm (ECDHE) and a post-quantum one (ML-KEM) together — breaking either alone isn't enough to recover the key",
     "Prioritize long-lived confidentiality and harvest-now-decrypt-later exposure before short-lived traffic",
   ],
-  diagram: `
+  takeaway: "Prioritize long-lived confidentiality and harvest-now-decrypt-later exposure before short-lived traffic.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">ECDHE</div>
@@ -34,10 +36,8 @@ export const postQuantumCryptography: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Hybrid key exchange needs an attacker to break both halves, not just
-      one — a hedge against post-quantum cryptography itself turning out to
-      have an undiscovered weakness, the same way trust in any new
-      cryptographic scheme is earned gradually.
+      Hybrid exchange requires both halves to fail.
     </p>
   `,
+  },
 };

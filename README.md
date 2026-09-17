@@ -1,4 +1,6 @@
-# Crypto Learning Path
+# Practical Cryptography, Byte by Byte
+
+Visual explanations of encryption, TLS, PKI, OAuth and modern cryptographic protocols.
 
 A static, single-page site that teaches applied cryptography and web security protocols by walking through the actual bytes on the wire — hex-dump breakdowns, annotated JWTs, and sequence diagrams, not just prose.
 
@@ -96,8 +98,30 @@ See [AUTHORING.md](AUTHORING.md) for the full course authoring conventions: meta
 
 ### Adding a diagram image
 
-Export the PNG from Excalidraw into `public/diagrams/`, keep the `.excalidraw` source in `diagrams-src/` for future edits, and reference it from a step as `<img src="/diagrams/your-file.png" />` (see `src/lessons/oauth/steps/carnival-ticket.ts` for an example).
+Export the PNG from Excalidraw into `public/diagrams/`, keep the `.excalidraw` source in `diagrams-src/` for future edits, and reference it from a step `figure.body` as `<img class="diagram-img" src="/diagrams/your-file.png" alt="Meaningful description." />` (see `src/lessons/oauth/steps/carnival-ticket.ts` for an example).
 
 ## Testing
 
 Tests run under [Vitest](https://vitest.dev/) with a jsdom environment. `tests/validate.test.ts` covers the authoring-validation rules directly; `tests/lessons.test.ts` runs those same rules against the real lesson content and registry, so a bad annotation offset or a duplicate slug fails CI instead of only logging a console warning in dev.
+
+## Public metadata
+
+`index.html` contains the search description, canonical URL, Open Graph fields, and Twitter/X large-image card metadata. The canonical deployment is `https://rajranjhan.github.io/crypto-learning-path/`. If the public domain changes, update the canonical, `og:url`, and both absolute social-image URLs together.
+
+The social preview image is `public/social-card.png` (1734 × 907). Vite copies it to the deployment root. Keep the image dimensions and alt text in `index.html` consistent with any replacement. Author metadata uses the repository's public author name, `rajranjhan`; no social account is inferred. Lesson entry pages receive their own title, description, canonical URL, and social metadata during the build. Individual hash-based steps use their parent lesson’s canonical URL.
+
+## Static lesson URLs and indexing
+
+`npm run build` generates the homepage and all 16 lesson overviews as HTML, plus `sitemap.xml`. Each lesson has a real directory and `index.html`, so GitHub Pages can serve it without rewrite rules or a server runtime. The existing deployment workflow still uploads `dist/` unchanged.
+
+Public paths are mapped to stable lesson slugs in `src/lesson-urls.ts`. Examples:
+
+- `tls13` → `/tls-13/`
+- `encryption-basics` → `/cryptography-basics/`
+- `oauth-further-learning` → `/oauth-tokens-security/`
+
+On the current GitHub Pages project, these paths live beneath `/crypto-learning-path/`, such as `https://rajranjhan.github.io/crypto-learning-path/tls-13/`. Relative base URLs let the same build run at a domain root or project subpath; canonical URLs use the configured production origin.
+
+`scripts/static-pages.ts` renders the same overview and navigation components used by the browser. The initial HTML includes the lesson heading, summary, rationale, objectives, visual, prerequisites, roadmap, and crawlable links. JavaScript opens the matching interactive lesson. Existing `#/lesson/...` bookmarks and detailed step routes remain supported, including annotated bytes, JWTs, HTTP messages, and sequences. Individual steps are not separate static pages.
+
+Run `npm run preview` after building to inspect the generated HTML. Clean lesson paths also work with `npm run dev`. If moving domains, update `siteUrl` in `src/lesson-urls.ts` and the site metadata in `index.html`. Submit the deployed `sitemap.xml` URL in your search engine tools; generation creates crawlable pages but does not guarantee indexing.

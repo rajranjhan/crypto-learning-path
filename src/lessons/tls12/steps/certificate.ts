@@ -14,7 +14,7 @@ import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 // 0x00048c = 1164. Annotations tile from offset 0 with no gaps or overlaps.
 export const certificate: Step = {
   id: "certificate",
-  title: "Verifying the ID",
+  title: "Certificate — Server Identity",
   bytes: [
     0x16, 0x03, 0x03, 0x04, 0x96, 0x0b, 0x00, 0x04, 0x92, 0x00, 0x04, 0x8f,
     0x00, 0x04, 0x8c, 0x30, 0x82, 0x04, 0x88, 0x30, 0x82, 0x03, 0x70, 0xa0,
@@ -174,16 +174,22 @@ export const certificate: Step = {
       colorClass: "c-cipher",
     },
   ],
+  wireContext: {
+    where: "Client and server have agreed on protocol parameters.",
+    now: "The server provides its certificate chain.",
+    why: "The client needs a validated binding between the server’s name and public key; key possession is proved separately.",
+  },
   prose:
     "<p>The bank's server replies: \"Here's my notarized ID (a certificate) proving I'm really your bank, not a scammer.\"</p>" +
-    "<p>On the wire that's the <strong>Certificate</strong> message: an X.509 certificate signed by a certificate authority both you and the bank trust.</p>" +
-    "<p>Your computer checks that certificate against a trusted registry — like verifying a notary's seal is real instead of just taking someone's word for it. If it checks out, you know you're talking to your actual bank, not an impersonator.</p>" +
+    "<p>On the wire that's the <strong>Certificate</strong> message: an X.509 certificate whose issuer chain the client validates to a configured trust anchor.</p>" +
+    "<p>Your computer validates the certificate chain, hostname, validity, and applicable policy. The server must also prove possession of the matching private key during the handshake. A domain-validated certificate binds a key to the requested hostname; it does not automatically establish corporate identity or business trustworthiness.</p>" +
     "<p>All length fields here are self-consistent: the 1164-byte DER (offset 15) is framed by a 1167-byte certificate list, a 1170-byte handshake body, and a 1174-byte record payload.</p>",
   bullets: [
     "An X.509 certificate containing the server's hostname",
     "The server's public key for asymmetric cryptography",
     "A certificate chain whose signature validates ownership",
   ],
+  takeaway: "The certificate message binds the server name to a public key, but the handshake still needs proof that the server owns the private key.",
   sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 3),
   callouts: [
     {

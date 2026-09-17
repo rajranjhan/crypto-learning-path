@@ -1,15 +1,20 @@
 import type { SequenceActor, Step } from "../../../types";
 
 const XAA_ACTORS: SequenceActor[] = [
-  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
-  { id: "appA", label: "Client (Carnival A's App)", icon: "🎠", role: "client" },
-  { id: "idp", label: "Shared Identity Office", icon: "🪪", role: "trusted" },
-  { id: "appB", label: "Client / Authorization Server (Carnival B)", icon: "🎡", role: "server" },
+  { id: "user", label: "Resource Owner", icon: "🧑", role: "client" },
+  { id: "appA", label: "Client A", icon: "🎠", role: "client" },
+  { id: "idp", label: "Identity Provider", icon: "🪪", role: "trusted" },
+  { id: "appB", label: "Client B / Authorization Server", icon: "🎡", role: "server" },
 ];
 
 export const crossAppAccess: Step = {
   id: "cross-app-access",
-  title: "Two Carnivals, One Trusted Office — Cross-App Access",
+  title: "Cross-App Access — Federated Trust",
+  wireContext: {
+    where: "Access must cross an application or organizational trust boundary.",
+    now: "The sequence shows the participating services exchanging and checking access credentials.",
+    why: "Each boundary needs explicit issuer trust, audience, and permission checks.",
+  },
   prose:
     "<p>So far every ticket and every trade has stayed inside one carnival. What if you need into a completely different carnival next door — a different company, a different booth, a different Ferris wheel — one you've never registered with directly?</p>" +
     "<p>Say both carnivals, despite being separate businesses, contract with the same regional identity office to vouch for season-pass holders. You're already recognized there because Carnival A's booth already checked you in. Walk up to Carnival B's gate, and instead of registering from scratch, Carnival B's booth can ask that same shared office directly: \"this guest is vouched for by you at Carnival A — assert that to me, and I'll issue my own scoped pass.\"</p>" +
@@ -23,6 +28,7 @@ export const crossAppAccess: Step = {
     "Neither app registers the other directly — both only need to trust the same identity provider",
     "Built for the AI-agent case: reaching into many independent SaaS apps on a user's behalf without a combinatorial explosion of direct integrations",
   ],
+  takeaway: "Cross-app access depends on shared federation trust; without tight audience and issuer checks, one app's assertion can become another app's confused-deputy problem.",
   sequence: {
     actors: XAA_ACTORS,
     progress: {
@@ -40,5 +46,14 @@ export const crossAppAccess: Step = {
       { from: "idp", to: "appB", label: "access_token, scoped to Carnival B" },
       { from: "appB", to: "appA", label: "Access granted — no direct registration needed" },
     ],
+  },
+  figure: {
+    body: `
+    <img class="diagram-img" src="diagrams/standards-proliferate.svg"
+         alt="A three-panel homage to xkcd 927, 'Standards.' Panel 1, SITUATION: there are 14 competing OAuth flows and extensions. Panel 2, PROPOSAL: '14 is ridiculous. We need one universal grant that covers every use case.' Panel 3, SOON: there are 15 competing OAuth flows and extensions." />
+    <p class="diagram-note">
+      The joke is standards sprawl; the security question is shared trust.
+    </p>
+  `,
   },
 };

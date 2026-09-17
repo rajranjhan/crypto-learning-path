@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const groversAlgorithm: Step = {
   id: "grovers-algorithm-and-symmetric-crypto",
-  title: "Grover's Algorithm — Symmetric Security Margins",
+  title: "Grover's Algorithm — Symmetric Margins",
   prose:
     "<p>Now put the same locksmith in front of the shared-key vault dial from the Symmetric Primitives lesson — AES. His machine doesn't cut a key for this kind of lock at all; there's no shortcut math for it to exploit. All it does is let him try dial combinations somewhat faster than by hand. Add a couple more digits to the dial, and he's right back to where he started.</p>" +
     "<p>Symmetric primitives like AES and hash functions like SHA-2 don't rely on factoring or discrete logarithms at all — their security comes from brute-force search being infeasible, trying keys until one works. <strong>Grover's algorithm</strong> does speed up that search on a quantum computer, but only quadratically: searching a space of N possibilities classically takes roughly N attempts, and Grover's algorithm does it in roughly the square root of N.</p>" +
@@ -17,7 +17,9 @@ export const groversAlgorithm: Step = {
     "Preimage and collision resistance are different hash properties and do not degrade in exactly the same way",
     "The practical rule is margin: choose symmetric keys and hash outputs large enough for the property and lifetime you need",
   ],
-  diagram: `
+  takeaway: "The practical rule is margin: choose symmetric keys and hash outputs large enough for the property and lifetime you need.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal">
         <div class="node-title">AES-128</div>
@@ -29,9 +31,8 @@ export const groversAlgorithm: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Compare this to the previous step: no key size rescues RSA or ECC from
-      Shor's algorithm, but larger symmetric parameters can restore the intended
-      search margin under the standard simplified analysis.
+      Symmetric systems need more margin; RSA and ECC need different math.
     </p>
   `,
+  },
 };

@@ -15,7 +15,7 @@ export const homomorphicEncryptionLesson: Lesson = {
   status: "available",
   summary: "Explains how some encryption schemes allow computation directly on ciphertext.",
   whyItMatters:
-    "Homomorphic encryption addresses the hard case of data in use: letting someone compute without seeing the raw inputs. It is a major privacy-preserving computation tool, but its cost and constraints matter as much as its promise.",
+    "Outsourcing computation can expose sensitive inputs. Homomorphic encryption keeps them encrypted during computation, but performance and supported operations constrain its use.",
   objectives: [
     "Distinguish partial and fully homomorphic encryption",
     "Follow a small Paillier-style worked example",
@@ -23,6 +23,20 @@ export const homomorphicEncryptionLesson: Lesson = {
     "Compare HE with MPC and TEEs",
   ],
   prerequisites: ["symmetric-primitives", "asymmetric-primitives"],
+  checkYourUnderstanding: [
+    {
+      question: "Why doesn't ordinary encryption at rest protect inputs during outsourced computation?",
+      answer: "Ordinary computation generally requires decrypting them first. Homomorphic encryption supports selected operations directly on ciphertext.",
+    },
+    {
+      question: "Why must a computation plan account for noise growth?",
+      answer: "In many homomorphic schemes, operations increase ciphertext noise. Exceeding the supported budget can prevent correct decryption, so parameters and refresh operations must match the computation.",
+    },
+    {
+      question: "Does hiding inputs guarantee that a server computed the requested result correctly?",
+      answer: "No. Confidentiality alone does not prove correct execution. Verifying an untrusted computation may require an additional mechanism.",
+    },
+  ],
   keyTakeaways: [
     "Homomorphic encryption enables computation over encrypted data",
     "Partial schemes support limited operations",
@@ -32,22 +46,13 @@ export const homomorphicEncryptionLesson: Lesson = {
   estimatedMinutes: 50,
   difficulty: "Advanced",
   lessonType: "concept",
-  overview:
-    "TLS protects data in transit. Encryption at Rest protects data sitting " +
-    "still. This lesson covers the third, stranger state: data in use — " +
-    "protected even while someone else is actively computing on it. " +
-    "Homomorphic encryption lets an untrusted party run real computations on " +
-    "ciphertext and hand back an encrypted result, without ever being able to " +
-    "see what it was actually working with. Walk through what that takes: " +
-    "the spectrum from partial to fully homomorphic, a worked numeric " +
-    "example, the noise problem that stalled progress for decades, the " +
-    "bootstrapping trick that finally solved it, and where this is — and " +
-    "isn't — practical today.",
+  transitionToNext: "Advanced privacy tools still depend on primitives like hashes and signatures; blockchain systems combine those primitives in public, replicated systems.",
   references: [
     { title: "HomomorphicEncryption.org Security Standard", url: "https://homomorphicencryption.org/standard/" },
     { title: "Microsoft SEAL Homomorphic Encryption Library", url: "https://github.com/microsoft/SEAL" },
   ],
-  diagram: `
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">In Transit</div>
@@ -73,11 +78,10 @@ export const homomorphicEncryptionLesson: Lesson = {
       </div>
     </div>
     <p class="diagram-note">
-      Three states, three different sets of locks. Homomorphic encryption is
-      the newest and strangest: it protects data even while someone else is
-      actively computing on it.
+      Three states, three different sets of locks.
     </p>
   `,
+  },
   steps: [
     theGloveboxProblem,
     partialVsFullyHomomorphic,

@@ -3,7 +3,12 @@ import { MTLS_ACTORS } from "../../actors";
 
 export const clientCertificate: Step = {
   id: "client-certificate",
-  title: "The Client Shows Its ID",
+  title: "Client Certificate — Showing Identity",
+  wireContext: {
+    where: "The server has requested client authentication.",
+    now: "The client sends its certificate chain.",
+    why: "The server needs a validated client name-to-key binding before checking possession of that key.",
+  },
   prose:
     "Responding to the CertificateRequest, the client sends its own Certificate " +
     "message containing its certificate (and usually the chain up to a CA the " +
@@ -17,6 +22,7 @@ export const clientCertificate: Step = {
     "Mirror image of the server's Certificate message",
     "A certificate is public — presenting one is not yet proof of ownership",
   ],
+  takeaway: "Showing a client certificate identifies the claimed client key, but possession is proven only by a later signature.",
   sequence: {
     actors: MTLS_ACTORS,
     progress: {

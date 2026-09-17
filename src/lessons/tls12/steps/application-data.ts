@@ -1,3 +1,4 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 
@@ -10,7 +11,8 @@ import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 // tile from offset 0 with no gaps or overlaps.
 export const applicationData: Step = {
   id: "application-data",
-  title: "Tamper-Proofing",
+  glossary: lessonTerms("session key", "ciphertext"),
+  title: "Application Data — Encrypted Records",
   bytes: [
     0x17, 0x03, 0x03, 0x00, 0x50, 0xa3, 0xc2, 0x9f, 0x7f, 0x3e, 0xb4, 0xa2,
     0x8a, 0xa0, 0x1f, 0x77, 0x9b, 0x90, 0x1b, 0xae, 0x8a, 0x43, 0xb9, 0x9f,
@@ -51,6 +53,11 @@ export const applicationData: Step = {
       colorClass: "c-cipher",
     },
   ],
+  wireContext: {
+    where: "The handshake has completed and both peers have checked Finished.",
+    now: "The client sends an encrypted application record.",
+    why: "Traffic keys now protect the application data’s confidentiality and integrity.",
+  },
   prose:
     "<p>This is the payoff. Your computer sends something like \"transfer $500 to savings\" — and to anyone in the mailroom, it becomes unreadable gibberish, like a document locked in a briefcase only you and the bank have keys to.</p>" +
     "<p>TLS also attaches something like a wax seal to that document: an authentication tag proving nobody altered it in transit. If even one character were changed, the seal would break, and both sides would know immediately.</p>" +
@@ -63,6 +70,7 @@ export const applicationData: Step = {
     "An authentication tag making the record tamper-evident",
     "To anyone on the wire it is indistinguishable from random data",
   ],
+  takeaway: "Once TLS application data starts, observers see record sizes and timing, not the plaintext inside the records.",
   sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 9),
   callouts: [
     {

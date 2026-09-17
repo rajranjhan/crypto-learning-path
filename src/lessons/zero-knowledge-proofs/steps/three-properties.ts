@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const threeProperties: Step = {
   id: "three-properties",
-  title: "The Three Properties That Make It a Real Proof",
+  title: "Completeness, Soundness & Zero Knowledge",
   prose:
     "<p>The cave story isn't just a fun puzzle — it satisfies three precise properties, and any real zero-knowledge proof has to satisfy all three or it doesn't count as one.</p>" +
     "<p><strong>Completeness</strong>: if Peggy genuinely knows the secret word, she can always convince Victor — an honest prover with a true statement never fails to pass. <strong>Soundness</strong>: if Peggy doesn't know the word, she can only fool Victor with some bounded probability per round (50% in the cave), which shrinks toward zero as the protocol repeats — a cheating prover can't reliably convince a verifier of a false statement.</p>" +
@@ -13,7 +13,9 @@ export const threeProperties: Step = {
     "Zero-knowledge: the verifier learns nothing beyond the single fact that the statement is true — not the secret, not any part of it",
     "Test for zero-knowledge: could someone fake an indistinguishable transcript without knowing the secret? If yes, watching a real one taught the verifier nothing new",
   ],
-  diagram: `
+  takeaway: "Test for zero-knowledge: could someone fake an indistinguishable transcript without knowing the secret? If yes, watching a real one taught the verifier nothing new.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal">
         <div class="node-title">Completeness</div>
@@ -33,4 +35,5 @@ export const threeProperties: Step = {
       proof — it's just a proof, or just an obfuscation, but not both at once.
     </p>
   `,
+  },
 };

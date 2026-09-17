@@ -1,3 +1,4 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 const claimLines = [
@@ -14,10 +15,16 @@ const claimLines = [
 
 export const claims: Step = {
   id: "claims",
-  title: "What's Printed on the Ticket — Claims",
+  glossary: lessonTerms("claim", "encoding"),
+  title: "Claims — Token Assertions",
+  wireContext: {
+    where: "A recipient has a structured token whose contents still require validation.",
+    now: "The annotated JSON identifies issuer, subject, audience, times, and scope.",
+    why: "These assertions tell the recipient which checks to perform; decoding them does not establish trust.",
+  },
   prose:
-    "<p>Think of the ticket stub's printed fields: whose name is on it, which carnival issued it, which gate it's valid at, when it was printed, and when it expires. Each of those is a <strong>claim</strong> — a single fact — and the whole ticket is trustworthy only because the carnival's seal (the signature) covers every field at once. Change one digit and the seal breaks.</p>" +
-    "<p>You've already seen a couple of claims up close — cnf/jkt binding a token to a key, back in the DPoP steps. Generalize that, and a JWT is really just a signed bag of claims like the ones on that ticket stub — almost everything interesting about a token lives in them.</p>" +
+    "<p>Think of the ticket stub's printed fields: whose name is on it, which carnival issued it, which gate it's valid at, when it was printed, and when it expires. Each of those is a <strong>claim</strong> — an assertion, not automatically a verified fact. A valid signature protects the asserted fields from alteration; the receiver must still validate the issuer, audience, lifetime, and applicable policy.</p>" +
+    "<p>You've already seen a couple of claims up close — cnf/jkt binding a token to a key, back in the DPoP steps. Generalize that, and the signed JWT in this example carries assertions like those on the ticket stub; JWTs can also use MAC protection or encryption — almost everything interesting about a token lives in them.</p>" +
     "<p>A handful of claims show up almost everywhere and have standardized meanings: sub (subject — who this token is about), iss (issuer — who signed it), aud (audience — who it's meant for, next step), iat (issued at), nbf (not valid before), and exp (expires at).</p>" +
     "<p>Beyond those, an authorization server can add whatever custom claims a deployment needs — scopes, roles, tenant IDs — the same way this lesson's cnf claim added key-binding information.</p>",
   bullets: [
@@ -27,6 +34,7 @@ export const claims: Step = {
     "iat / nbf / exp — issued-at, not-valid-before, and expiry timestamps",
     "Custom claims (scope, roles, cnf, ...) extend the standard set for whatever a deployment needs",
   ],
+  takeaway: "Claims are useful only when the receiver understands who issued them, who they are for, and whether they are authorization assertions or identity assertions.",
   textBlock: {
     lang: "json",
     lines: claimLines,

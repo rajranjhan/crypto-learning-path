@@ -20,11 +20,11 @@ import { renderProtocolProgress } from "./protocol-progress";
  * therefore spans `2*from+2 → 2*to+2`, and a self-loop occupies actor k's full
  * column `2k+1 → 2k+3`. The lifelines are drawn on a matching N-column layer.
  */
-export function renderSequence(seq: Sequence): HTMLElement {
+export function renderSequence(seq: Sequence, showProgress = true): HTMLElement {
   const root = document.createElement("div");
   root.className = "sequence";
 
-  if (seq.progress) root.appendChild(renderProtocolProgress(seq.progress));
+  if (showProgress && seq.progress) root.appendChild(renderProtocolProgress(seq.progress));
 
   const actorIndex = new Map(seq.actors.map((a, i) => [a.id, i]));
   const cols = seq.actors.length;

@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const aesTheCipher: Step = {
   id: "aes-the-cipher",
-  title: "Inside AES — The Standard Block Cipher",
+  title: "AES — The Standard Block Cipher",
   prose:
     "<p>The Advanced Encryption Standard, selected by NIST in 2001 after a public, multi-year competition, is the block cipher nearly every modern protocol defaults to. It encrypts data 128 bits (16 bytes) at a time, using a key of 128, 192, or 256 bits — AES-256 is simply AES run with the longest of the three key options, not a different algorithm.</p>" +
     "<p>Each block passes through several rounds of mixing — 10 rounds for a 128-bit key, 14 for a 256-bit key — and every round repeats the same four operations. <strong>SubBytes</strong> swaps each byte for another value using a fixed lookup table, scrambling the data nonlinearly. <strong>ShiftRows</strong> rotates bytes across the block so a change in one position spreads sideways. <strong>MixColumns</strong> blends the bytes within each column together, spreading a change vertically too. <strong>AddRoundKey</strong> XORs in a fresh slice of key material, unique to that round, derived from the original key by a process called key scheduling.</p>" +
@@ -15,7 +15,9 @@ export const aesTheCipher: Step = {
     "AddRoundKey: XORs in a fresh, unique slice of key material each round, derived from the original key",
     "Selected by NIST in 2001 after an open, multi-year public competition — not designed in secret",
   ],
-  diagram: `
+  takeaway: "AES is a trusted block cipher primitive, but it still needs a safe mode and authentication to protect real messages.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">SubBytes</div>
@@ -38,9 +40,8 @@ export const aesTheCipher: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      One pass through all four steps is one round. AES-128 repeats this
-      cycle 10 times per block; AES-256 repeats it 14 times, trading some
-      speed for a larger key space.
+      One pass through all four steps is one round.
     </p>
   `,
+  },
 };

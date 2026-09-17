@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const deprecatedAndWhy: Step = {
   id: "deprecated-and-why",
-  title: "Retired for a Reason — DES, 3DES, MD5, SHA-1 & RC4",
+  title: "Deprecated Primitives — Retired Algorithms",
   prose:
     "<p>Every algorithm below was once a legitimate standard. Understanding why each one got retired is often more instructive than the current recommendations alone.</p>" +
     "<p><strong>DES</strong> (1977) uses a 56-bit key — trivially small by modern standards. A dedicated cracking machine demonstrated a real DES key recovery in under a day back in 1998; today it's within reach of commodity hardware in hours. <strong>3DES</strong> (Triple DES) patched this by running DES three times with different keys, but it inherits DES's tiny 64-bit block size, which leaks information through birthday-bound collisions on large amounts of traffic (the Sweet32 attack) — NIST formally deprecated it in 2023.</p>" +
@@ -16,30 +16,22 @@ export const deprecatedAndWhy: Step = {
     "RC4: statistical biases allow plaintext recovery from enough ciphertext — formally prohibited in TLS by RFC 7465 (2015)",
     "None of these are theoretical concerns — every one has a documented, real-world attack behind its deprecation",
   ],
-  diagram: `
+  takeaway: "None of these are theoretical concerns — every one has a documented, real-world attack behind its deprecation.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal attacker">
         <div class="node-title text-warning">❌ Retired</div>
-        <div class="node-sub left">
-          DES, 3DES — broken/weak block ciphers<br>
-          MD5, SHA-1 — broken hash functions<br>
-          RC4 — biased stream cipher
-        </div>
+        <div class="node-sub left">DES/3DES; MD5/SHA-1; RC4</div>
       </div>
       <div class="node equal trusted">
         <div class="node-title text-trusted">✅ Current standard</div>
-        <div class="node-sub left">
-          AES-GCM / ChaCha20-Poly1305<br>
-          SHA-256/384/512 (SHA-2), or SHA-3<br>
-          Any AEAD construction, never a bare stream cipher
-        </div>
+        <div class="node-sub left">AEAD; SHA-2/SHA-3; modern ciphers</div>
       </div>
     </div>
     <p class="diagram-note">
-      Every algorithm on the left was once exactly as trusted as the ones on
-      the right are today. Cryptographic agility — being able to swap an
-      algorithm out without redesigning the whole protocol — is what makes
-      retiring a broken one survivable.
+      Cryptographic agility makes retiring broken algorithms survivable.
     </p>
   `,
+  },
 };

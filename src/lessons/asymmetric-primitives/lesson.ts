@@ -15,7 +15,7 @@ export const asymmetricPrimitivesLesson: Lesson = {
   status: "available",
   summary: "Covers the public-key primitives behind key exchange, signatures, certificates, and modern secure channels.",
   whyItMatters:
-    "Asymmetric cryptography is what lets strangers bootstrap trust before a shared secret exists. Understanding RSA, Diffie-Hellman, ECC, and signatures prepares you for PKI, TLS, OAuth token binding, blockchain wallets, and post-quantum migration.",
+    "Strangers need a way to establish keys and verify signatures without a shared secret. These building blocks underpin secure connections and digital identity.",
   objectives: [
     "Explain the key distribution problem",
     "Walk through RSA and Diffie-Hellman at a small scale",
@@ -23,27 +23,32 @@ export const asymmetricPrimitivesLesson: Lesson = {
     "Connect digital signatures to identity and protocol authentication",
   ],
   prerequisites: ["encryption-basics", "symmetric-primitives"],
+  checkYourUnderstanding: [
+    {
+      question: "Why doesn't Diffie-Hellman by itself prove who you are talking to?",
+      answer: "The exchange establishes a secret with whoever participates. Without authentication, an attacker can substitute key shares and establish separate secrets with each peer.",
+    },
+    {
+      question: "What does verifying a signature tell you, and what does it leave unresolved?",
+      answer: "It links the signed message to possession of the corresponding private key. You still need a trusted binding between that public key and the claimed identity.",
+    },
+    {
+      question: "Why can't you compare RSA and ECC security by key length alone?",
+      answer: "They rely on different mathematical problems and attacks. Equal bit lengths do not imply equal work to break them.",
+    },
+  ],
   keyTakeaways: [
     "Public-key cryptography solves coordination problems symmetric keys cannot",
     "Diffie-Hellman establishes shared secrets without sending them",
-    "Digital signatures prove authorization or identity",
+    "Digital signatures bind messages to keys; identity and permission need separate checks",
     "Certificates package public keys into a trust system",
   ],
   estimatedMinutes: 45,
   difficulty: "Intermediate",
   lessonType: "concept",
-  overview:
-    "The previous lesson named the symmetric standards (AES, SHA, HMAC) this " +
-    "series relies on. This one does the same for the asymmetric side: real " +
-    "RSA math with a tiny worked example, a real Diffie-Hellman key exchange " +
-    "computed by hand, elliptic curve cryptography as the modern, " +
-    "smaller-key alternative, and digital signatures — encryption's private " +
-    "and public keys, used in reverse. TLS 1.2's handshake literally uses " +
-    "these primitives (RSA or ECDSA signatures, ECDHE key exchange) to " +
-    "bootstrap the AES key the previous lesson covered — the PKI lesson " +
-    "right after this one, and the TLS lessons following it, are where " +
-    "that payoff becomes concrete.",
-  diagram: `
+  transitionToNext: "Public keys are useful only if you know whose key you received. PKI addresses that trust problem.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal">
         <div class="node-title">RSA</div>
@@ -54,12 +59,9 @@ export const asymmetricPrimitivesLesson: Lesson = {
         <div class="node-sub">the paint-mixing — is exactly TLS's ServerKeyExchange &amp; key_share</div>
       </div>
     </div>
-    <p class="diagram-note">
-      Two families, one job: agree on a shared secret, or prove an identity,
-      without ever transmitting the actual secret. The TLS lessons ahead use
-      both by name.
-    </p>
+    <p class="diagram-note">Key exchange establishes a secret; signatures prove possession of a private key.</p>
   `,
+  },
   steps: [
     theKeyDistributionProblem,
     rsaTheMath,

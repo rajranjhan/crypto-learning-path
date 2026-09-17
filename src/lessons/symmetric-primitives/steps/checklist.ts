@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const checklist: Step = {
   id: "checklist",
-  title: "Putting It Together — A Checklist",
+  title: "Symmetric Cryptography Checklist",
   prose:
     "<p>Reach for combined, vetted constructions rather than assembling cryptography by hand: AEAD modes (AES-GCM, ChaCha20-Poly1305) for confidentiality with built-in integrity, HMAC for authenticating data with a shared secret, and a dedicated password-hashing function — never a general-purpose hash — for anything a human chose. Retire DES, 3DES, MD5, SHA-1, and RC4 anywhere they still show up; every one of them has a documented, practical attack, not just a theoretical weakness.</p>",
   bullets: [
@@ -12,6 +12,7 @@ export const checklist: Step = {
     "Retire DES, 3DES, MD5, SHA-1, and RC4 wherever they're still configured — each has a documented, practical attack",
     "Use standard, audited library implementations; hand-rolled cryptography is one of the most common sources of real-world breaks",
   ],
+  takeaway: "Use standard, audited library implementations; hand-rolled cryptography is one of the most common sources of real-world breaks.",
   callouts: [
     {
       requirementId: "Versions",

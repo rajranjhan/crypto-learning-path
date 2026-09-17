@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const whyQuantumMatters: Step = {
   id: "why-quantum-matters",
-  title: "Why a Different Kind of Computer Changes Everything",
+  title: "Quantum Threat Model — Different Computation",
   prose:
     "<p>Picture a master locksmith who arrives in town with a strange new machine. For some lock designs — a padlock, the paint-mixing trick from the Asymmetric Primitives lesson — the machine looks at the lock and cuts a working key almost instantly, no picking required. For a different kind of lock, a dial vault with a huge number of combinations, the machine doesn't cut a key at all; it just lets the locksmith try combinations somewhat faster than by hand. Same locksmith, same machine, wildly different outcomes depending on what kind of lock he's standing in front of.</p>" +
     "<p>Every security guarantee in this series rests on a hardness assumption: something believed to be, with current computers, too slow to break — RSA's factoring problem, ECC and Diffie-Hellman's discrete logarithm problem, or brute-forcing an AES key by trying every possibility. Those assumptions are about ordinary, classical computers. A sufficiently powerful quantum computer changes the math for some of them, not all of them, and knowing exactly which is the whole point of this lesson.</p>" +
@@ -15,7 +15,9 @@ export const whyQuantumMatters: Step = {
     "Shor's algorithm: efficiently solves factoring and discrete logarithms — the exact hard problems behind RSA, ECC, and Diffie-Hellman",
     "Grover's algorithm: speeds up brute-force search generically, but only by a fixed, limited amount",
   ],
-  diagram: `
+  takeaway: "Grover's algorithm: speeds up brute-force search generically, but only by a fixed, limited amount.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal attacker">
         <div class="node-title text-warning">Shor's algorithm</div>
@@ -32,4 +34,5 @@ export const whyQuantumMatters: Step = {
       steps explain why.
     </p>
   `,
+  },
 };

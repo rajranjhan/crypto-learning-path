@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const block: Step = {
   id: "block",
-  title: "Block Ciphers — Scrambling a Fixed-Size Chunk at a Time",
+  title: "Block Ciphers — Fixed-Size Chunks",
   sidebarGroup: "Modern Symmetric Ciphers",
   prose:
     "Substitution and Caesar share one flaw that dooms them against a patient " +
@@ -22,7 +22,9 @@ export const block: Step = {
     "A message that isn't an exact multiple of the block size needs padding for its last partial block",
     "Encrypting each block independently isn't enough on its own — a mode of operation is still needed to chain blocks safely",
   ],
-  diagram: `
+  takeaway: "Encrypting each block independently isn't enough on its own — a mode of operation is still needed to chain blocks safely.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Plaintext block</div>
@@ -41,19 +43,16 @@ export const block: Step = {
     <div class="flow spaced">
       <div class="node attacker">
         <div class="node-title text-warning">⚠️ ECB mode</div>
-        <div class="node-sub">same plaintext block in → same ciphertext block out, every time. Repeated structure in the message leaks straight through.</div>
+        <div class="node-sub">same block in → same block out</div>
       </div>
       <div class="node trusted">
         <div class="node-title text-trusted">✅ CBC / GCM mode</div>
-        <div class="node-sub">each block is mixed with something that changes block to block (an IV or counter), so identical plaintext blocks produce different ciphertext.</div>
+        <div class="node-sub">mode-specific IV and counter rules</div>
       </div>
     </div>
     <p class="diagram-note">
-      The block transform alone isn't the whole story — encrypting every block
-      the same independent way (ECB) still leaks the shape of the message, just
-      one block at a time instead of one letter at a time. A mode of operation
-      is what actually stops that; it's why "AES" alone is never the full name
-      of a real cipher suite — it's always "AES-GCM" or similar.
+      A mode of operation prevents repeated blocks from leaking structure.
     </p>
   `,
+  },
 };

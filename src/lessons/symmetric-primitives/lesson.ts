@@ -15,7 +15,7 @@ export const symmetricPrimitivesLesson: Lesson = {
   status: "available",
   summary: "Names the symmetric primitives that appear throughout modern protocols: AES, SHA, HMAC, and password hashing.",
   whyItMatters:
-    "Protocol specs often assume you already know what AES-GCM, SHA-256, or HMAC means. This lesson makes those building blocks explicit so later TLS, OAuth, Kerberos, and blockchain lessons can focus on how the primitives are composed.",
+    "Choosing the wrong primitive can leave data exposed. Learn which tools provide confidentiality, integrity, and password protection before combining them in protocols.",
   objectives: [
     "Explain the different jobs of AES, SHA, and HMAC",
     "Identify when password hashing needs a different tool",
@@ -23,6 +23,20 @@ export const symmetricPrimitivesLesson: Lesson = {
     "Choose the right symmetric primitive for common security goals",
   ],
   prerequisites: ["encryption-basics"],
+  checkYourUnderstanding: [
+    {
+      question: "Why doesn't sending a file with its hash prove who sent it?",
+      answer: "An attacker who can replace the file can also replace its unkeyed hash. A MAC or signature adds an authenticity check.",
+    },
+    {
+      question: "Why is a fast general-purpose hash a poor choice for storing passwords?",
+      answer: "Speed makes offline password guessing cheaper. Password hashing uses a unique salt and deliberate computational cost to make guesses harder.",
+    },
+    {
+      question: "Why can a secure cipher still fail when used incorrectly?",
+      answer: "Security depends on the construction around the cipher, including authentication and nonce handling. For example, reusing a nonce with AES-GCM can undermine confidentiality and integrity.",
+    },
+  ],
   keyTakeaways: [
     "AES encrypts data with a shared key",
     "Hash functions provide deterministic fingerprints, not secrecy",
@@ -33,18 +47,9 @@ export const symmetricPrimitivesLesson: Lesson = {
   estimatedMinutes: 35,
   difficulty: "Beginner",
   lessonType: "concept",
-  overview:
-    "The Encryption Basics lesson covered symmetric encryption as a concept — " +
-    "one shared key that locks and unlocks. This lesson names the actual " +
-    "standards every protocol ahead relies on: AES as the symmetric cipher, " +
-    "the SHA-2 family as the hash function, and HMAC as the construction " +
-    "that combines a hash with a secret key for authenticity. It also " +
-    "covers what these primitives are not for — a password needs a " +
-    "different, deliberately slow tool — and closes with a look at DES, " +
-    "3DES, MD5, SHA-1, and RC4: once-standard algorithms retired for " +
-    "documented, practical reasons. The next lesson does the same for the " +
-    "asymmetric side: RSA, ECC, and Diffie-Hellman.",
-  diagram: `
+  transitionToNext: "Symmetric cryptography protects data efficiently; next we solve the key-distribution and identity problem.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal">
         <div class="node-title">AES</div>
@@ -60,11 +65,10 @@ export const symmetricPrimitivesLesson: Lesson = {
       </div>
     </div>
     <p class="diagram-note">
-      Three primitives, reused everywhere. Once you can name what each one
-      actually does, the TLS, OAuth, and Kerberos lessons ahead stop treating
-      "AES-GCM" and "HMAC" as unexplained jargon.
+      Three primitives, reused everywhere.
     </p>
   `,
+  },
   steps: [
     whyPrimitives,
     aesTheCipher,

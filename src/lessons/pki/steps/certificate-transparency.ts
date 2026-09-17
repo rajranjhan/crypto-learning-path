@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const certificateTransparency: Step = {
   id: "certificate-transparency",
-  title: "Watching the Watchers — Certificate Transparency",
+  title: "Certificate Transparency — Watching Issuers",
   prose:
     "<p>Imagine every notary office were required to keep a public logbook of every card it ever stamped, open for anyone to inspect — including the bank itself, checking whether a card was ever stamped in its name that it never asked for. That public logbook is the missing piece: every check covered so far assumes the CA itself behaves correctly, and nothing catches a notary who stamps a card it shouldn't have.</p>" +
     "<p>A CA can make a mistake, get compromised, or — in the incident covered in the next step — get compromised badly enough to issue a fraudulent certificate for a domain it has no business certifying. Nothing in the chain-validation process a client runs would catch that on its own, since the fraudulent certificate would be signed by a perfectly legitimate, trusted CA.</p>" +
@@ -15,4 +15,5 @@ export const certificateTransparency: Step = {
     "This catches a scenario chain validation alone can't: a legitimate, trusted CA issuing a certificate it shouldn't have",
     "Domain owners can monitor CT logs for their own domain and catch fraudulent issuance quickly, rather than only after active exploitation",
   ],
+  takeaway: "Domain owners can monitor CT logs for their own domain and catch fraudulent issuance quickly, rather than only after active exploitation.",
 };

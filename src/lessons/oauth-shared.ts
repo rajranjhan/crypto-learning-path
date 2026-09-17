@@ -14,18 +14,18 @@ export const oauthSequenceFigure: Figure = {
       <tbody>
         <tr>
           <th>OAuth 1 — Fundamentals</th>
-          <td>Actors, delegated authorization, access tokens, authorization code + PKCE, bearer tokens, refresh tokens</td>
-          <td>How does an app get permission to call an API without receiving the user's password?</td>
+          <td>Actors, delegated access, bearer tokens</td>
+          <td>How does an app get limited API access?</td>
         </tr>
         <tr>
           <th>OAuth 2 — Tokens, Claims &amp; Security</th>
-          <td>Scopes, claims, audience, token theft, sender-constrained tokens, mTLS, DPoP, confused deputy, OAuth vs OIDC</td>
-          <td>What exactly does a token say, who is it for, and how do we stop replay?</td>
+          <td>Scopes, claims, audience, replay resistance</td>
+          <td>What does the token mean?</td>
         </tr>
         <tr>
           <th>OAuth 3 — Flows &amp; Federation</th>
-          <td>Authorization code + PKCE, client credentials, device authorization, delegation, SSO/federation, deprecated grants</td>
-          <td>Which flow fits this client, user, and trust boundary?</td>
+          <td>PKCE, client credentials, device flow, federation</td>
+          <td>Which flow fits?</td>
         </tr>
       </tbody>
     </table>
@@ -52,18 +52,18 @@ export const oauthActorMappingFigure: Figure = {
         </tr>
         <tr>
           <th>Client</th>
-          <td>The app, dispenser, kiosk, or service asking for a ticket</td>
-          <td>The software requesting delegated access. It may act for a user or for itself.</td>
+          <td>App, kiosk, or service</td>
+          <td>Software requesting delegated access.</td>
         </tr>
         <tr>
           <th>Authorization Server</th>
           <td>Ticket booth or Guest Services</td>
-          <td>The system that authenticates as needed, asks for consent or applies policy, and issues tokens.</td>
+          <td>Applies policy and issues tokens.</td>
         </tr>
         <tr>
           <th>Resource Server</th>
           <td>Ride gate, photo kiosk, or API</td>
-          <td>The API that validates the token and decides whether a specific request is allowed.</td>
+          <td>Validates tokens for API requests.</td>
         </tr>
       </tbody>
     </table>

@@ -15,7 +15,12 @@ const paillierLines = [
 
 export const workedExamplePaillier: Step = {
   id: "worked-example-paillier",
-  title: "A Working Example — Adding Numbers You Can't See (Paillier)",
+  title: "Paillier — Adding Encrypted Numbers",
+  wireContext: {
+    where: "The example has chosen a small Paillier key pair and plaintext inputs.",
+    now: "The annotated arithmetic encrypts inputs and combines their ciphertexts.",
+    why: "The worked values show how a ciphertext operation corresponds to addition after decryption.",
+  },
   prose:
     "<p>Abstract talk about a \"homomorphic property\" is easier to trust once you've seen one work. <strong>Paillier</strong>, published in 1999, is additively homomorphic: multiplying two Paillier ciphertexts together (modulo n², the scheme's own modulus) produces a new ciphertext that decrypts to the <em>sum</em> of the two original plaintexts — even though whoever performs that multiplication never sees either plaintext, or the sum, at any point.</p>" +
     "<p>The numbers below are shrunk down for illustration — real Paillier keys use numbers hundreds of digits long — but the relationship holds exactly the same way at full size. Alice encrypts 7. Bob encrypts 3. Someone with no key at all — the untrusted cloud from the previous step — multiplies the two ciphertexts together. Only the person holding the private key, decrypting that result, ever learns the sum is 10; at no point does anyone else see 7, 3, or any relationship between them.</p>",
@@ -25,6 +30,7 @@ export const workedExamplePaillier: Step = {
     "Only the private-key holder, decrypting the final ciphertext, ever sees the actual sum",
     "Genuinely useful on its own for one narrow but common case: privately aggregating numbers (votes, totals, sensor readings) without any party seeing the individual inputs",
   ],
+  takeaway: "Genuinely useful on its own for one narrow but common case: privately aggregating numbers (votes, totals, sensor readings) without any party seeing the individual inputs.",
   textBlock: {
     lang: "text",
     lines: paillierLines,

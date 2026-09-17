@@ -3,7 +3,7 @@ import { validateCourse, validateLesson, validateRegistry } from "../src/lessons
 import type { Lesson, RegistryEntry, Step } from "../src/types";
 
 function baseStep(overrides: Partial<Step> = {}): Step {
-  return { id: "step-1", title: "A step", prose: "Some prose.", ...overrides };
+  return { id: "step-1", title: "A step", prose: "Some prose.", takeaway: "Remember the security consequence.", ...overrides };
 }
 
 function baseLesson(overrides: Partial<Lesson> = {}): Lesson {
@@ -29,11 +29,12 @@ describe("validateLesson", () => {
     const lesson = baseLesson({
       slug: "l",
       title: "L",
-      steps: [baseStep({ title: "" }), baseStep({ id: "step-2", prose: "" })],
+      steps: [baseStep({ title: "" }), baseStep({ id: "step-2", prose: "" }), baseStep({ id: "step-3", takeaway: "" })],
     });
     const errors = validateLesson(lesson);
     expect(errors).toContain("step-1: missing required fields");
     expect(errors).toContain("step-2: missing required fields");
+    expect(errors).toContain("step-3: missing required fields");
   });
 
   it("flags an annotation that exceeds the byte bounds", () => {
@@ -133,28 +134,28 @@ describe("validateLesson", () => {
     const lesson = baseLesson({
       slug: "l",
       title: "L",
-      steps: [baseStep({ diagram: '<div style="color: red;">Bad</div>' })],
+      steps: [baseStep({ figure: { body: '<div style="color: red;">Bad</div>' } })],
     });
-    expect(validateLesson(lesson)).toContain("step-1: diagram: inline style attributes are not allowed in authored markup");
+    expect(validateLesson(lesson)).toContain("step-1: figure: inline style attributes are not allowed in authored markup");
   });
 
   it("flags images without alt text", () => {
     const lesson = baseLesson({
       slug: "l",
       title: "L",
-      steps: [baseStep({ diagram: '<img src="diagrams/example.svg" />' })],
+      steps: [baseStep({ figure: { body: '<img src="diagrams/example.svg" />' } })],
     });
-    expect(validateLesson(lesson)).toContain("step-1: diagram: image is missing meaningful alt text");
+    expect(validateLesson(lesson)).toContain("step-1: figure: image is missing meaningful alt text");
   });
 
   it("flags missing diagram assets when an asset inventory is provided", () => {
     const lesson = baseLesson({
       slug: "l",
       title: "L",
-      steps: [baseStep({ diagram: '<img src="diagrams/missing.svg" alt="A diagram." />' })],
+      steps: [baseStep({ figure: { body: '<img src="diagrams/missing.svg" alt="A diagram." />' } })],
     });
     expect(validateLesson(lesson, { diagramAssets: new Set(["diagrams/exists.svg"]) })).toContain(
-      "step-1: diagram: image asset 'diagrams/missing.svg' does not exist",
+      "step-1: figure: image asset 'diagrams/missing.svg' does not exist",
     );
   });
 });
@@ -226,9 +227,9 @@ describe("validateCourse", () => {
     const entries: RegistryEntry[] = [{ slug: "a", title: "A", status: "available" }];
     const errors = validateCourse(entries, {
       a: baseLesson({
-        overview: 'Read <a href="#/lesson/missing/overview">Missing</a>.',
+        steps: [baseStep({ prose: 'Read <a href="#/lesson/missing/overview">Missing</a>.' })],
       }),
     });
-    expect(errors).toContain("a: overview: internal lesson link '#/lesson/missing/overview' references an unknown lesson");
+    expect(errors).toContain("step-1: internal lesson link '#/lesson/missing/overview' references an unknown lesson");
   });
 });

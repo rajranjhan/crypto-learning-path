@@ -1,18 +1,22 @@
 import type { SequenceActor, Step } from "../../../types";
 
-// Local to this step: the general Ticket Booth / Ferris Wheel actors don't fit
-// the ride-photo scenario, so this step names Guest Services and the photo
-// kiosk directly rather than reusing OAUTH_ACTORS_WITH_USER's generic labels.
+// Local to this step: the ride-photo scenario needs a Resource Server with a
+// photo-specific icon, but the lifeline labels stay canonical OAuth roles.
 const RIDE_PHOTO_ACTORS: SequenceActor[] = [
-  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
-  { id: "client", label: "Client (Photo Dispenser)", icon: "💻", role: "client" },
-  { id: "as", label: "Authorization Server (Guest Services)", icon: "🎫", role: "trusted" },
-  { id: "rs", label: "Resource Server (Photo Kiosk)", icon: "📸", role: "server" },
+  { id: "user", label: "Resource Owner", icon: "🧑", role: "client" },
+  { id: "client", label: "Client", icon: "💻", role: "client" },
+  { id: "as", label: "Authorization Server", icon: "🎫", role: "trusted" },
+  { id: "rs", label: "Resource Server", icon: "📸", role: "server" },
 ];
 
 export const authCode: Step = {
   id: "auth-code",
-  title: "Claiming Your Ride Photo",
+  title: "Authorization Code — Redeeming Access",
+  wireContext: {
+    where: "The client needs permission to call an API on the user’s behalf.",
+    now: "The flow obtains an authorization code and exchanges it with a PKCE verifier for tokens.",
+    why: "The client gets limited access without receiving the user’s password.",
+  },
   prose:
     "<p>You ask the Photo Dispenser for your ride photo — the one the coaster's camera snapped of you mid-drop on the Thunderbolt. \"Pull up my photo from Thunderbolt.\" The Photo Dispenser can't just dispense that — it doesn't have a claim ticket for you yet. \"I can't get that without confirming it's really you,\" it displays. \"Go see Guest Services.\"</p>" +
     "<p>You walk up to the Guest Services booth — the authorization server — yourself. \"The Photo Dispenser sent me,\" you tell the attendant. \"I want to claim my ride photo.\" You scan your wristband and confirm your face against the ticket record, and you tell the attendant exactly what the Photo Dispenser's allowed to access on your behalf — just photos, not your whole visit history. That hand-off is the whole point of OAuth 2.0: the Photo Dispenser gets to act for you with the carnival's systems without ever knowing your wristband code itself.</p>" +
@@ -29,6 +33,7 @@ export const authCode: Step = {
     "Access token (the claim ticket) — what the Photo Dispenser actually presents to get the real thing",
     "Resource server / API (the photo kiosk) — where the claim ticket gets redeemed for data",
   ],
+  takeaway: "The authorization code flow keeps API tokens away from the browser redirect and lets the client redeem a short-lived code securely.",
   sequence: {
     actors: RIDE_PHOTO_ACTORS,
     progress: {

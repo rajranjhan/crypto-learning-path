@@ -11,7 +11,12 @@ const DEPUTY_ACTORS: SequenceActor[] = [
 
 export const confusedDeputy: Step = {
   id: "confused-deputy",
-  title: "The Confused Deputy Problem — Valid Credentials, Wrong Purpose",
+  title: "Confused Deputy — Valid Token, Wrong Purpose",
+  wireContext: {
+    where: "A service can act with privileges that its caller does not necessarily have.",
+    now: "The sequence shows a caller trying to exploit that service’s authority.",
+    why: "The service must bind its actions to the caller’s permitted resources and intended audience.",
+  },
   prose:
     "<p>Picture a gate attendant at the carnival holding a master key that opens every door on the lot. A vendor hands over a delivery pass — completely genuine, properly issued, meant only for the supply entrance. If the attendant doesn't check which door that specific pass was actually issued for, and just reaches for the master key because a plausible-looking pass was shown, the vendor can walk it right up to the vault instead. The pass wasn't forged. The attendant wasn't lied to. Nobody checked <em>which door this was for</em>.</p>" +
     "<p>That's the <strong>confused deputy problem</strong>: any time a service (the \"deputy\") holds more authority than whoever is asking it to act, and the service can't tell whether this specific request was actually meant to use that authority, an attacker can borrow it — without stealing a single thing.</p>" +
@@ -25,6 +30,7 @@ export const confusedDeputy: Step = {
     "Nothing is stolen or forged either way — every credential involved is completely legitimate; the deputy is just confused about scope",
     "That's what separates it from bearer-token theft: theft requires stealing something, a confused deputy attack only requires an authority check nobody added",
   ],
+  takeaway: "That's what separates it from bearer-token theft: theft requires stealing something, a confused deputy attack only requires an authority check nobody added.",
   sequence: {
     actors: DEPUTY_ACTORS,
     messages: [

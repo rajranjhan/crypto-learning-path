@@ -1,3 +1,4 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 
 const avalancheLines = [
@@ -10,18 +11,25 @@ const avalancheLines = [
 
 export const hashFunctions: Step = {
   id: "hash-functions",
-  title: "Fingerprinting Data — SHA-2 & Hash Functions",
+  glossary: lessonTerms("hashing", "digest"),
+  title: "Hash Functions — Data Fingerprints",
+  wireContext: {
+    where: "Two messages differ by one character.",
+    now: "The annotated output compares their SHA-256 digests.",
+    why: "The comparison illustrates change detection without encryption or proof of message origin.",
+  },
   prose:
-    "<p>A cryptographic hash function takes an input of any size and produces a fixed-size output — 256 bits for SHA-256, 384 for SHA-384, 512 for SHA-512 — called a <strong>digest</strong>. Unlike encryption, hashing is one-way by design: there's no key, and no way to recover the input from the digest. Its job isn't secrecy; it's producing a compact fingerprint that changes completely if the input changes even slightly.</p>" +
-    "<p>Three properties make that fingerprint trustworthy. <strong>Pre-image resistance</strong>: given a digest, you can't feasibly find an input that produces it. <strong>Collision resistance</strong>: you can't feasibly find two different inputs that produce the same digest. And the <strong>avalanche effect</strong>: flipping a single input bit changes roughly half the output bits, unpredictably — so similar inputs never produce similar-looking digests, which is exactly what makes a hash useful for detecting even the tiniest tampering. The two real SHA-256 digests below, for two messages differing by a single character, show that last property directly — not a single byte of the output lines up.</p>" +
+    "<p>A cryptographic hash function takes an input of any size and produces a fixed-size output — 256 bits for SHA-256, 384 for SHA-384, 512 for SHA-512 — called a <strong>digest</strong>. Unlike encryption, hashing is one-way by design: there is no decryption key or inverse operation, though an attacker can test guesses against the digest. Its job isn't secrecy; it's producing a compact fingerprint that changes completely if the input changes even slightly.</p>" +
+    "<p>Three properties make that fingerprint trustworthy. <strong>Pre-image resistance</strong>: given a digest, you can't feasibly find an input that produces it. <strong>Collision resistance</strong>: you can't feasibly find two different inputs that produce the same digest. And the <strong>avalanche effect</strong>: flipping a single input bit changes roughly half the output bits, unpredictably — so similar inputs have no useful predictable relationship between their digests, which is exactly what makes a hash useful for detecting even the tiniest tampering. The two real SHA-256 digests below, for two messages differing by a single character, show that last property directly — not a single byte of the output lines up.</p>" +
     "<p>SHA-2 (the family standardized in 2001, distinct from the broken SHA-1 covered later in this lesson) is the default choice nearly everywhere in this series: TLS hashes the entire handshake transcript with it before computing a Finished message's verify_data, and Kerberos's own key derivation leans on the same kind of one-way construction.</p>",
   bullets: [
     "Fixed-size output regardless of input size — 256/384/512 bits for SHA-256/384/512",
-    "One-way: no key, and no way to recover the input from the digest — the goal is fingerprinting, not secrecy",
+    "One-way: no decryption operation; guessable inputs can still be recovered by testing candidates",
     "Pre-image resistance: can't feasibly reverse a digest back to an input",
     "Collision resistance: can't feasibly find two different inputs sharing a digest",
-    "Avalanche effect: one changed input bit flips roughly half the output bits — similar inputs never produce similar digests",
+    "Avalanche effect: one changed input bit flips roughly half the output bits — digest changes are unpredictable",
   ],
+  takeaway: "Avalanche effect: one changed input bit flips roughly half the output bits — digest changes are unpredictable.",
   textBlock: {
     lang: "text",
     lines: avalancheLines,

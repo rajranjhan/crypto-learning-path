@@ -10,6 +10,12 @@ import { renderHome } from "./components/home";
 import { buildSearchIndex } from "./search";
 import { validateCourse, validateLesson } from "./lessons/validate";
 
+import { lessonUrl, publicNavigation, siteUrl } from "./lesson-urls";
+
+const entryLesson = document.querySelector<HTMLElement>("#app")?.dataset.lesson;
+const homeTitle = "Practical Cryptography: TLS, PKI, OAuth, Encryption & Security — Byte by Byte";
+const homeDescription = "Learn practical cryptography through visual explanations, protocol diagrams and byte-level walkthroughs of encryption, TLS, PKI, OAuth, Kerberos, zero-knowledge proofs and post-quantum cryptography.";
+
 const searchIndex = buildSearchIndex(registry, lessons);
 
 const slugAliases: Record<string, string> = {
@@ -40,6 +46,7 @@ export function parseHash(hash: string = location.hash): {
   slug: string;
   step: number | "overview";
 } | { slug: "home"; step: "home" } {
+  if (!hash && entryLesson && lessons[entryLesson]) return { slug: entryLesson, step: "overview" };
   if (!hash || hash === "#" || hash === "#/" || hash === "#/home") return { slug: "home", step: "home" };
   const m = hash.match(/^#\/lesson\/([^/]+)(?:\/(overview|\d+))?/);
   if (!m) return { slug: "home", step: "home" };
@@ -117,7 +124,21 @@ function render(): void {
     main.appendChild(currentStep === "overview" ? renderOverview(currentLesson, lessons) : renderStepView(currentLesson, idx, nextLesson));
   }
   shell.appendChild(main);
+  publicNavigation(shell, new URL("./", document.baseURI).href);
   app.appendChild(shell);
+
+  const title = lesson ? `${lesson.title} — Practical Cryptography, Byte by Byte` : homeTitle;
+  const description = lesson?.summary ?? homeDescription;
+  document.title = title;
+  for (const selector of ['meta[name="description"]', 'meta[property="og:description"]', 'meta[name="twitter:description"]']) {
+    document.querySelector(selector)?.setAttribute("content", description);
+  }
+  for (const selector of ['meta[property="og:title"]', 'meta[name="twitter:title"]']) {
+    document.querySelector(selector)?.setAttribute("content", title);
+  }
+  const canonical = lesson ? lessonUrl(lesson.slug) : siteUrl;
+  document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonical);
+  document.querySelector('meta[property="og:url"]')?.setAttribute("content", canonical);
 }
 
 window.addEventListener("hashchange", render);

@@ -23,7 +23,12 @@ const proofLines = [
 
 export const dpopRequest: Step = {
   id: "dpop-request",
-  title: "Proving It's Your Ticket — The Proof on Each Request (DPoP)",
+  title: "DPoP Proof — Sender-Constrained Requests",
+  wireContext: {
+    where: "The client has generated a key pair and is requesting an access token.",
+    now: "The HTTP request includes a signed DPoP proof.",
+    why: "The authorization server needs evidence of the key to which it will bind the token.",
+  },
   prose:
     "Remember signing your name on the ride ticket, then signing again at the gate? " +
     "DPoP (Demonstrating Proof-of-Possession, RFC 9449) is that same signature, made " +
@@ -41,6 +46,7 @@ export const dpopRequest: Step = {
     "Payload binds the proof to this method + URL and makes it single-use",
     "Works over ordinary TLS — no mTLS infrastructure required",
   ],
+  takeaway: "DPoP constrains a bearer-style token at the application layer by requiring a fresh signed proof from the bound key.",
   sequence: {
     actors: OAUTH_ACTORS,
     progress: {

@@ -8,7 +8,7 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // its single payload byte, and all six bytes are annotated with no gaps.
 export const serverChangeCipherSpec: Step = {
   id: "server-change-cipher-spec",
-  title: "Keeping Up Appearances",
+  title: "Server ChangeCipherSpec — Compatibility Signal",
   bytes: [0x14, 0x03, 0x03, 0x00, 0x01, 0x01],
   annotations: [
     {
@@ -40,6 +40,11 @@ export const serverChangeCipherSpec: Step = {
       colorClass: "c-hs",
     },
   ],
+  wireContext: {
+    where: "Handshake keys are available after ServerHello.",
+    now: "The server sends a compatibility ChangeCipherSpec record.",
+    why: "This dummy record accommodates legacy middleboxes; it does not change TLS 1.3 keys.",
+  },
   prose:
     "<p>Here's a strange little envelope that does nothing at all.</p>" +
     "<p>The keys are already locked in — they were ready the moment the bank's key_share arrived. But some old equipment in the mailroom only knows how to handle mail shaped like TLS 1.2, and would jam if a delivery never included this specific slip.</p>" +
@@ -50,5 +55,6 @@ export const serverChangeCipherSpec: Step = {
     "Sent only for middlebox compatibility, so the flow resembles TLS 1.2",
     "The real key switch already happened after the ServerHello key_share",
   ],
+  takeaway: "TLS 1.3 compatibility ChangeCipherSpec messages are camouflage for old middleboxes, not real key changes.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 3),
 };

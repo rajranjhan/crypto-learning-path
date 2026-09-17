@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const whatEncryptionAtRestDoesntStop: Step = {
   id: "what-encryption-at-rest-doesnt-stop",
-  title: "What the Vault Doesn't Protect Against",
+  title: "Encryption at Rest — Limits",
   prose:
     "<p>Every control in this lesson shares one boundary, worth stating plainly because it's such a common design mistake: encryption at rest protects against someone who obtains the storage medium — a disk, a backup tape, a snapshot, an exported file — <em>outside</em> the running, access-controlled system. It is not a control against someone who has a legitimate-looking path <em>into</em> the running system.</p>" +
     "<p>A compromised application credential, a SQL injection vulnerability, an over-privileged or malicious insider, an attacker who dumps the memory of a live, decrypting process — none of these are stopped by anything above. In every one of those cases, the data gets decrypted for the very purpose of being used, by a system that's doing exactly what it was built to do. The encryption already finished its job by the time the request arrived.</p>" +
@@ -15,32 +15,22 @@ export const whatEncryptionAtRestDoesntStop: Step = {
     "Does not protect against: a memory dump of a live process that's actively decrypting data to serve a request",
     "Encryption at rest is one control in a defense-in-depth stack, not a substitute for access control, least privilege, input validation, or monitoring",
   ],
-  diagram: `
+  takeaway: "Encryption at rest is one control in a defense-in-depth stack, not a substitute for access control, least privilege, input validation, or monitoring.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node equal trusted">
         <div class="node-title text-trusted">Protects against</div>
-        <div class="node-sub left">
-          A stolen or decommissioned disk<br>
-          A leaked backup or snapshot<br>
-          A copied database export<br>
-          A storage bucket read directly, outside the app
-        </div>
+        <div class="node-sub left">stolen disks; backups; exports; buckets</div>
       </div>
       <div class="node equal attacker">
         <div class="node-title text-warning">Doesn't protect against</div>
-        <div class="node-sub left">
-          A compromised app credential<br>
-          SQL injection or another live exploit<br>
-          An over-privileged or malicious insider<br>
-          A memory dump of a running, decrypting process
-        </div>
+        <div class="node-sub left">live app access; SQL injection; insiders; memory dumps</div>
       </div>
     </div>
     <p class="diagram-note">
-      The line is the storage medium itself. Anything that reads the raw disk,
-      backup, or snapshot hits ciphertext. Anything that talks to the running,
-      authenticated system — legitimately or not — sees exactly what that
-      system is designed to show it: plaintext.
+      Storage-layer theft sees ciphertext; live authorized access sees plaintext.
     </p>
   `,
+  },
 };

@@ -13,7 +13,7 @@ export const kerberosLesson: Lesson = {
   status: "available",
   summary: "Explains Kerberos ticket-based authentication for trusted internal networks.",
   whyItMatters:
-    "Kerberos is still foundational in Windows domains and many enterprise environments. It shows how symmetric cryptography, tickets, time limits, and replay protection can provide single sign-on without sending passwords to every service.",
+    "Single sign-on should not send your password to every service. Kerberos shows how tickets enable access and why protecting their keys matters.",
   objectives: [
     "Trace the AS, TGS, and AP exchanges",
     "Explain ticket-granting tickets and service tickets",
@@ -21,6 +21,20 @@ export const kerberosLesson: Lesson = {
     "Compare Kerberos's trust model with OAuth",
   ],
   prerequisites: ["symmetric-primitives"],
+  checkYourUnderstanding: [
+    {
+      question: "Why doesn't each service need to receive the user's password?",
+      answer: "The KDC issues a service ticket protected for that service. The client uses the associated session key to prove participation in the exchange.",
+    },
+    {
+      question: "Why does a service need an authenticator as well as a ticket?",
+      answer: "A ticket can be copied. A fresh authenticator proves possession of the session key, while time checks and replay detection limit reuse of captured exchanges.",
+    },
+    {
+      question: "Why is a KDC key compromise broader than one service key compromise?",
+      answer: "KDC keys support issuing tickets across the realm. A service key compromise generally affects tickets for that service, while KDC compromise can undermine the realm's authentication trust.",
+    },
+  ],
   keyTakeaways: [
     "Kerberos centralizes authentication in the KDC",
     "Services validate tickets instead of seeing user passwords",
@@ -30,41 +44,13 @@ export const kerberosLesson: Lesson = {
   estimatedMinutes: 35,
   difficulty: "Intermediate",
   lessonType: "protocol",
-  overview:
-    "Kerberos is how staff on a trusted internal network — a Windows domain, a " +
-    "university campus — prove who they are to dozens of internal systems without " +
-    "retyping a password at every one of them, and without that password ever " +
-    "crossing the wire. This lesson sets its metaphor in the same carnival the " +
-    "OAuth lessons use later in this series, but from the other side of the gate: " +
-    "instead of a guest buying a ride ticket at the front gate, you're staff " +
-    "badging through backstage doors. One check-in " +
-    "each morning at the Staff House, then a fresh door-specific pass for every " +
-    "backstage door you need, all day, without ever going back to say your " +
-    "password again. Follow the same three lifelines — you, the Staff House's two " +
-    "windows, and a door — as they build up the full exchange step by step.",
-  diagram: `
-    <table class="comparison-table">
-      <thead>
-        <tr>
-          <th>Metaphor</th>
-          <th>Kerberos term</th>
-          <th>Role in the protocol</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><th>Staff House</th><td>KDC</td><td>Trusted central authority for the realm.</td></tr>
-        <tr><th>Check-In Window</th><td>Authentication Server (AS)</td><td>Authenticates the user and issues a Ticket Granting Ticket.</td></tr>
-        <tr><th>Backstage Desk</th><td>Ticket Granting Server (TGS)</td><td>Trades the TGT for a service-specific ticket.</td></tr>
-        <tr><th>Day Badge</th><td>Ticket Granting Ticket (TGT)</td><td>Reusable ticket for asking the TGS for service tickets.</td></tr>
-        <tr><th>Door Pass</th><td>Service ticket</td><td>Ticket sealed for one target service.</td></tr>
-        <tr><th>Code word</th><td>Session key</td><td>Fresh symmetric key shared for one stage of the exchange.</td></tr>
-        <tr><th>Timestamp slip</th><td>Authenticator</td><td>Fresh proof that prevents simple replay of a copied ticket.</td></tr>
-      </tbody>
-    </table>
+  transitionToNext: "Kerberos proves who is present inside a realm. OAuth focuses on what an application is allowed to do across APIs.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
-        <div class="node-title">You</div>
-        <div class="node-sub">carnival staff 🧑</div>
+        <div class="node-title">Client Principal</div>
+        <div class="node-sub">staff identity in the realm</div>
       </div>
       <div class="link">
         <div class="lock">🪪</div>
@@ -72,8 +58,8 @@ export const kerberosLesson: Lesson = {
         <div class="arrow">→</div>
       </div>
       <div class="node trusted">
-        <div class="node-title">Staff House (KDC)</div>
-        <div class="node-sub">Check-In Window + Backstage Desk</div>
+        <div class="node-title">KDC</div>
+        <div class="node-sub">AS + TGS</div>
       </div>
       <div class="link">
         <div class="lock">🎟️</div>
@@ -81,15 +67,14 @@ export const kerberosLesson: Lesson = {
         <div class="arrow">→</div>
       </div>
       <div class="node">
-        <div class="node-title">Backstage Door</div>
-        <div class="node-sub">checks the pass itself — no call home</div>
+        <div class="node-title">Service Server</div>
+        <div class="node-sub">validates the service ticket locally</div>
       </div>
     </div>
     <p class="diagram-note">
-      Three exchanges, three lifelines: AS (checking in), TGS (trading the
-      badge for a door pass), and AP (showing the pass at the door). Each step
-      below builds this same diagram one exchange at a time.
+      AS, TGS, and AP are separate trust steps in one Kerberos login.
     </p>
   `,
+  },
   steps: [backstageBadges, asExchange, tgsExchange, apExchange, replayProtection, goldenSilverTicket, kerberosVsOauth],
 };

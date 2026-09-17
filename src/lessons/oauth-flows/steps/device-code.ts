@@ -1,14 +1,19 @@
 import type { SequenceActor, Step } from "../../../types";
 
 const DEVICE_ACTORS: SequenceActor[] = [
-  { id: "device", label: "Client (Claw Machine)", icon: "🕹️", role: "client" },
-  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
-  { id: "as", label: "Authorization Server (Ticket Booth)", icon: "🎫", role: "trusted" },
+  { id: "device", label: "Client", icon: "🕹️", role: "client" },
+  { id: "user", label: "Resource Owner", icon: "🧑", role: "client" },
+  { id: "as", label: "Authorization Server", icon: "🎫", role: "trusted" },
 ];
 
 export const deviceCode: Step = {
   id: "device-code",
-  title: "The Arcade Machine That Can't Type — Device Authorization Grant",
+  title: "Device Authorization — Limited-Input Clients",
+  wireContext: {
+    where: "The client device cannot conveniently handle browser sign-in.",
+    now: "The device requests codes while the user authorizes it in a separate browser.",
+    why: "The device can obtain access without collecting the user’s password.",
+  },
   prose:
     "<p>Some carnival machines can't type. The claw machine by the arcade wall has a screen barely big enough for a code, and no way to show you a login form at all.</p>" +
     "<p>So it does something clever: it displays a short code — say, WXYZ-4821 — and a simple instruction: \"Go to any kiosk and enter this code to link your wristband.\" That's the <strong>Device Authorization Grant</strong> (RFC 8628). The machine requested a device_code (for itself) and a user_code (the short one it shows you) from the booth.</p>" +
@@ -20,6 +25,7 @@ export const deviceCode: Step = {
     "verification_uri: a plain address the user visits on a different, capable device to enter the code and log in normally",
     "The device polls the token endpoint at an interval until the user finishes — no credentials ever touch the limited device",
   ],
+  takeaway: "The device polls the token endpoint at an interval until the user finishes — no credentials ever touch the limited device.",
   sequence: {
     actors: DEVICE_ACTORS,
     progress: {

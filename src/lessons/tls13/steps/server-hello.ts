@@ -9,7 +9,7 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // (TLS 1.3) and the server's ephemeral key live in the extensions.
 export const serverHello: Step = {
   id: "server-hello",
-  title: "Introductions, Continued",
+  title: "ServerHello — Completing Key Agreement",
   bytes: [
     // -- Record header (5 bytes) --
     0x16, // record type: handshake
@@ -134,6 +134,11 @@ export const serverHello: Step = {
       colorClass: "c-rand",
     },
   ],
+  wireContext: {
+    where: "The client has offered algorithms and a key share.",
+    now: "ServerHello selects parameters and supplies the server’s key share.",
+    why: "Both peers can derive handshake keys before the server sends its authentication details.",
+  },
   prose:
     "<p>The bank's server replies: \"Let's use this method.\"</p>" +
     "<p>That's the <strong>ServerHello</strong> — it confirms TLS 1.3 in the extensions (offset 81), picks a cipher suite (offset 76), and hands back its own half of the key in <strong>key_share</strong>.</p>" +
@@ -146,5 +151,6 @@ export const serverHello: Step = {
     "The single cipher suite selected from the client's list",
     "The server's ephemeral public key in the key_share extension",
   ],
+  takeaway: "ServerHello remains visible, but it completes key agreement and enables encrypted handshake records after it.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 2),
 };

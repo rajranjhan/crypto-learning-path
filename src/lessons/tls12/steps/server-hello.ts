@@ -11,7 +11,7 @@ import { TLS_ACTORS, TLS12_MESSAGES, buildSequence } from "../../actors";
 // contiguously from offset 0 with no gaps or overlaps.
 export const serverHello: Step = {
   id: "server-hello",
-  title: "Introductions, Continued",
+  title: "ServerHello — Selecting Parameters",
   bytes: [
     // -- Record header (5 bytes) --
     0x16, // record type: handshake
@@ -131,6 +131,11 @@ export const serverHello: Step = {
       colorClass: "c-hs",
     },
   ],
+  wireContext: {
+    where: "The server has received the client’s proposed parameters.",
+    now: "The server selects the version and cipher suite in ServerHello.",
+    why: "Both peers must use the same algorithms for the rest of the handshake.",
+  },
   prose:
     "<p>The bank's server replies: \"Let's use this method.\"</p>" +
     "<p>That's the <strong>ServerHello</strong> — it confirms the negotiated version (TLS 1.2, offset 9), supplies its own random, and narrows your cipher-suite menu down to exactly one choice (offset 76). From here both sides know which cryptographic algorithms the rest of the handshake will use.</p>" +
@@ -143,5 +148,6 @@ export const serverHello: Step = {
     "The selected compression method",
     "The subset of extensions the server will use",
   ],
+  takeaway: "ServerHello narrows the handshake to one negotiated set of parameters that both sides must use consistently.",
   sequence: buildSequence(TLS_ACTORS, TLS12_MESSAGES, 2),
 };

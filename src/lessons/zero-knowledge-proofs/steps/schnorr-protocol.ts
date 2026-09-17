@@ -1,3 +1,4 @@
+import { lessonTerms } from "../../terminology";
 import type { Step } from "../../../types";
 import { ZKP_ACTORS } from "../../actors";
 
@@ -17,19 +18,26 @@ const schnorrLines = [
 
 export const schnorrProtocol: Step = {
   id: "schnorr-protocol",
-  title: "A Real Proof — Schnorr's Protocol",
+  glossary: lessonTerms("nonce", "proof of possession"),
+  title: "Schnorr Protocol — Proof of Key Knowledge",
+  wireContext: {
+    where: "The prover has a secret and the verifier knows its corresponding public value.",
+    now: "The sequence and arithmetic show commitment, challenge, and response.",
+    why: "The verifier checks knowledge of the secret without receiving it.",
+  },
   prose:
     "<p>The cave is a story; Schnorr's protocol is the same idea built on real math — specifically, the exact discrete-logarithm setup from the Diffie-Hellman step in the Asymmetric Primitives lesson. Peggy's secret is a number x; her public value is y = g^x mod p, published the same way a DH public value or an ECC public key would be. She wants to prove she knows x without revealing it — proving she holds the private key behind a public key, with zero-knowledge.</p>" +
     "<p>Here is where the metaphor stops being literal. There is no cave and no magic door; the \"door\" is a verification equation. The commitment fixes Peggy's choice before the challenge, the challenge is unpredictable, and the response can satisfy the equation only if Peggy knows the witness x.</p>" +
-    "<p>Three messages, mirroring the cave exactly. <strong>Commitment</strong>: Peggy picks a fresh random nonce k and sends r = g^k mod p — this reveals nothing about x, since k is random and thrown away after one use. <strong>Challenge</strong>: Victor sends back a random number c, chosen after he's already seen r, so Peggy can't have prepared a fake response in advance. <strong>Response</strong>: Peggy computes s = k + c·x mod q using her actual secret, and sends it. Victor accepts only if g^s mod p equals r · y^c mod p — an equation that only balances if Peggy actually used the real x to compute s.</p>" +
+    "<p>Three messages, mirroring the cave exactly. <strong>Commitment</strong>: Peggy picks a fresh secret random nonce k, never reuses it, and sends only the commitment r = g^k mod p — this reveals nothing about x, since k is random and thrown away after one use. <strong>Challenge</strong>: Victor sends back a random number c, chosen after he's already seen r, so Peggy can't have prepared a fake response in advance. <strong>Response</strong>: Peggy computes s = k + c·x mod q using her actual secret, and sends it. Victor accepts only if g^s mod p equals r · y^c mod p — an equation that only balances if Peggy actually used the real x to compute s.</p>" +
     "<p>The numbers below are small and real, computed exactly, reusing the same p = 23, g = 5 from the Diffie-Hellman worked example — Peggy's secret x = 6 is literally Alice's old private DH number, and y = 8 is Alice's old public DH value, repurposed here to prove knowledge of that same secret instead of deriving a shared key from it.</p>",
   bullets: [
     "Public: p, g, and y = g^x mod p — the same shape as a Diffie-Hellman public value",
-    "Commitment (r = g^k mod p): a fresh random nonce, revealing nothing about the secret x",
+    "Commitment r = g^k mod p is public; the fresh nonce k stays secret and must not be reused",
     "Challenge (c): Victor's random number, chosen only after seeing the commitment — prevents Peggy from precomputing a fake answer",
     "Response (s = k + c·x mod q): computed using the real secret — a cheating Peggy without x can't produce a valid s for an unpredictable c",
     "Verification: g^s mod p =? r · y^c mod p — balances only if s was genuinely derived from x",
   ],
+  takeaway: "Verification: g^s mod p =? r · y^c mod p — balances only if s was genuinely derived from x.",
   sequence: {
     actors: ZKP_ACTORS,
     messages: [

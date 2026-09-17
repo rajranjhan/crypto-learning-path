@@ -9,7 +9,7 @@ import { TLS_ACTORS, TLS13_MESSAGES, buildSequence } from "../../actors";
 // offset 0 with no gaps or overlaps.
 export const clientFinished: Step = {
   id: "client-finished",
-  title: "Tamper-Proofing, Continued",
+  title: "Client Finished — Client Key Confirmation",
   bytes: [
     0x17, 0x03, 0x03, 0x00, 0x34, 0x14, 0x00, 0x00, 0x30, 0xd6, 0x60, 0xcf,
     0xcf, 0x61, 0xc1, 0xac, 0x1f, 0xd3, 0xdd, 0x38, 0xe6, 0x3d, 0xbf, 0x16,
@@ -61,6 +61,11 @@ export const clientFinished: Step = {
       colorClass: "c-cipher",
     },
   ],
+  wireContext: {
+    where: "The client has checked the server’s certificate, signature, and Finished.",
+    now: "The client sends its own Finished message.",
+    why: "The server needs confirmation that the client derived the handshake secret and saw the same transcript.",
+  },
   prose:
     "<p>You attach your own wax seal in reply.</p>" +
     "<p>This is your <strong>Finished</strong> message — encrypted, and covering a transcript that now includes the bank's Finished too. Once the bank checks it, both of you have proven the same thing from opposite ends: identical keys, an untampered conversation.</p>" +
@@ -71,5 +76,6 @@ export const clientFinished: Step = {
     "Completes mutual confirmation that both ends derived identical keys",
     "Sent in the client's first return flight, enabling a one round-trip handshake",
   ],
+  takeaway: "The client Finished message completes mutual key confirmation for the one-round-trip TLS 1.3 handshake.",
   sequence: buildSequence(TLS_ACTORS, TLS13_MESSAGES, 9),
 };

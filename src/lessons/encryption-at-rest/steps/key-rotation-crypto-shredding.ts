@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const keyRotationCryptoShredding: Step = {
   id: "key-rotation-crypto-shredding",
-  title: "Rewrapping, Not Re-Encrypting — Key Rotation & Crypto-Shredding",
+  title: "Key Rotation — Rewrapping and Crypto-Shredding",
   prose:
     "<p>Envelope encryption's two-tier structure makes key rotation cheap in a way a single flat key never could. Rotating the KEK means unwrapping every DEK with the old KEK and rewrapping it with the new one — a fast operation on a tiny, ~32-byte key, regardless of how many gigabytes of data that DEK protects. The underlying data is never touched, read, or re-encrypted at all. Rotating a DEK itself is a different story: that does mean re-encrypting the actual data it protects, which is exactly the expensive operation envelope encryption exists to keep rare.</p>" +
     "<p>Push the same idea one step further and it solves a much harder problem: <strong>crypto-shredding</strong>. Give each tenant or customer their own DEK, and \"deleting\" their data can be done instantly and provably by deleting only that one DEK. Every copy of their ciphertext — in production, in last night's backup, in a snapshot nobody remembers taking three years ago — becomes permanently unrecoverable in a single operation, without ever having to go find and overwrite each of those copies individually.</p>" +
@@ -15,7 +15,9 @@ export const keyRotationCryptoShredding: Step = {
     "Crypto-shredding sidesteps a real problem: finding and overwriting every backup, replica, and snapshot a piece of data might have been copied into over the years",
     "Per-tenant DEKs also bound the blast radius of a single leaked key to one tenant, not the whole dataset",
   ],
-  diagram: `
+  takeaway: "Per-tenant DEKs also bound the blast radius of a single leaked key to one tenant, not the whole dataset.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node trusted">
         <div class="node-title text-trusted">Rotate the KEK</div>
@@ -27,11 +29,8 @@ export const keyRotationCryptoShredding: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Envelope encryption's whole appeal is keeping the expensive operation
-      (touching the actual data) rare, and the cheap one (rewrapping a tiny
-      key) frequent. Crypto-shredding pushes that one step further: delete a
-      single DEK, and every copy of the data it protected becomes permanently
-      unrecoverable in one operation.
+      Rotate wrappers often; touch bulk data rarely.
     </p>
   `,
+  },
 };

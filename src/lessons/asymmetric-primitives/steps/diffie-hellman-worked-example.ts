@@ -15,7 +15,12 @@ const dhLines = [
 
 export const diffieHellmanWorkedExample: Step = {
   id: "diffie-hellman-worked-example",
-  title: "Diffie-Hellman, in Real Numbers",
+  title: "Diffie-Hellman — Worked Example",
+  wireContext: {
+    where: "Alice and Bob share public group parameters but keep their private exponents secret.",
+    now: "The worked exchange computes public shares and the same shared value on both sides.",
+    why: "The arithmetic shows key agreement without sending the secret, but provides no peer authentication.",
+  },
   prose:
     "<p>Encryption Basics covered Diffie-Hellman as paint mixing — a public base color, a private color each side mixes in, and a final shared color neither side ever transmits. Underneath, the real operation is modular exponentiation, and it's worth seeing with actual numbers to confirm the trick isn't magic.</p>" +
     "<p>Alice and Bob agree publicly on a prime modulus p and a generator g — both can be shouted across an open channel with no harm done. Each picks a private number, never shared with anyone: Alice picks 6, Bob picks 15. Each raises the shared generator g to their own private number, mod p, and sends that result — still not the secret, just a public value derived from it — to the other side.</p>" +
@@ -27,6 +32,7 @@ export const diffieHellmanWorkedExample: Step = {
     "Both sides compute the same shared secret from different starting points: B^a mod p = A^b mod p",
     "Recovering a or b from a public value alone is the discrete logarithm problem — the security guarantee this entire scheme rests on",
   ],
+  takeaway: "Recovering a or b from a public value alone is the discrete logarithm problem — the security guarantee this entire scheme rests on.",
   textBlock: {
     lang: "text",
     lines: dhLines,

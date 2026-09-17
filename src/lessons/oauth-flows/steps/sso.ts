@@ -1,15 +1,20 @@
 import type { SequenceActor, Step } from "../../../types";
 
 const SSO_ACTORS: SequenceActor[] = [
-  { id: "user", label: "Resource Owner (You)", icon: "🧑", role: "client" },
-  { id: "app1", label: "Client (Ferris Wheel App)", icon: "🎡", role: "client" },
+  { id: "user", label: "Resource Owner", icon: "🧑", role: "client" },
+  { id: "app1", label: "Client", icon: "🎡", role: "client" },
   { id: "idp", label: "Identity Provider / Authorization Server", icon: "🪪", role: "trusted" },
-  { id: "app2", label: "Client (Roller Coaster App)", icon: "🎢", role: "client" },
+  { id: "app2", label: "Client", icon: "🎢", role: "client" },
 ];
 
 export const sso: Step = {
   id: "sso",
-  title: "One Wristband, Every Ride — Single Sign-On",
+  title: "Single Sign-On — Shared Sessions",
+  wireContext: {
+    where: "The user has an identity-provider session from signing into one app.",
+    now: "Another app redirects to that provider and receives its own tokens.",
+    why: "Apps can reuse the login session while keeping their audiences and permissions separate.",
+  },
   prose:
     "<p>Every step so far has had you show ID at one booth for one ride. A real carnival has a dozen rides, and nobody wants to show ID a dozen times.</p>" +
     "<p>Here's the trick: it's still the same one office, run by the carnival, that every ride trusts. The first time you check in, the office remembers you're logged in — it keeps a little chit at its own counter, a session, not just the wristband it hands you. Walk up to the roller coaster, and its own check-in redirects you to that same office; the office notices you're already checked in and waves you through without asking for ID again, issuing a fresh, ride-specific wristband on the spot.</p>" +
@@ -21,6 +26,7 @@ export const sso: Step = {
     "Each app still gets its own tokens, scoped to itself — SSO shares the login, not the token",
     "Logging out of the identity provider's session is what actually ends SSO; an individual app can't do that on its own",
   ],
+  takeaway: "Logging out of the identity provider's session is what actually ends SSO; an individual app can't do that on its own.",
   sequence: {
     actors: SSO_ACTORS,
     progress: {

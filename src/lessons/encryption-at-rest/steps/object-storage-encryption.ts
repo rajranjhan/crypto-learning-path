@@ -2,7 +2,7 @@ import type { Step } from "../../../types";
 
 export const objectStorageEncryption: Step = {
   id: "object-storage-encryption",
-  title: "Locking Boxes in Someone Else's Warehouse — Object Storage Encryption",
+  title: "Object Storage Encryption — Cloud Buckets",
   prose:
     "<p>The same DEK/KEK ideas apply directly to cloud object storage — S3, Google Cloud Storage, Azure Blob — which is worth calling out on its own, since misconfigured public buckets are one of the most common sources of real-world data-at-rest breaches. The three server-side modes differ mainly in who holds and manages the key: with a provider-managed key, setup is zero-effort but you get little visibility into key access; with a customer-managed key in the provider's own KMS, you control access through your own key policy and every decrypt is individually logged and auditable; with a customer-supplied key, you send the key with every request and the provider uses it but never stores or retains it, so keeping it safe and getting it there securely is entirely on you.</p>" +
     "<p><strong>Client-side encryption</strong> goes one step further than all three: encrypt before upload, using the exact envelope-encryption pattern from earlier in this lesson, so the storage provider only ever receives and stores ciphertext and never sees a key at all.</p>" +
@@ -14,7 +14,9 @@ export const objectStorageEncryption: Step = {
     "Client-side encryption: encrypt before upload using the envelope-encryption pattern from earlier — the provider only ever stores ciphertext and never sees a key at all",
     "A misconfigured public bucket defeats all of the above: encryption at rest protects data from someone reading raw storage, not from an authorized (or accidentally public) API call that gets a normal decrypt",
   ],
-  diagram: `
+  takeaway: "A misconfigured public bucket defeats all of the above: encryption at rest protects data from someone reading raw storage, not from an authorized (or accidentally public) API call that gets a normal decrypt.",
+  figure: {
+    body: `
     <div class="flow">
       <div class="node">
         <div class="node-title">Provider-managed</div>
@@ -34,9 +36,8 @@ export const objectStorageEncryption: Step = {
       </div>
     </div>
     <p class="diagram-note">
-      Left to right, less trust is placed in the storage provider and more
-      responsibility falls on you — the same tradeoff curve as TDE versus
-      field-level encryption, just one layer further out.
+      Provider trust decreases left to right; your responsibility increases.
     </p>
   `,
+  },
 };

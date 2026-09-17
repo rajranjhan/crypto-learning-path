@@ -11,12 +11,9 @@ export interface ValidationOptions {
 
 function authoredMarkup(lesson: Lesson): { owner: string; html: string }[] {
   const chunks: { owner: string; html: string }[] = [];
-  if (lesson.overview) chunks.push({ owner: `${lesson.slug}: overview`, html: lesson.overview });
-  if (lesson.diagram) chunks.push({ owner: `${lesson.slug}: overview diagram`, html: lesson.diagram });
   if (lesson.figure?.body) chunks.push({ owner: `${lesson.slug}: overview figure`, html: lesson.figure.body });
   for (const step of lesson.steps) {
     chunks.push({ owner: step.id, html: step.prose });
-    if (step.diagram) chunks.push({ owner: `${step.id}: diagram`, html: step.diagram });
     if (step.figure?.body) chunks.push({ owner: `${step.id}: figure`, html: step.figure.body });
   }
   return chunks;
@@ -49,7 +46,7 @@ export function validateLesson(lesson: Lesson, options: ValidationOptions = {}):
   for (const step of lesson.steps) {
     // Every step needs a title and prose. Bytes/annotations are only required
     // for wire walkthroughs; concept steps legitimately omit them.
-    if (!step.title || !step.prose) {
+    if (!step.title || !step.prose || !step.takeaway) {
       errors.push(`${step.id}: missing required fields`);
     }
 
