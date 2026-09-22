@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { staticPage } from "../scripts/static-pages";
+import { build } from "vite";
+import { staticLessonPages, staticPage } from "../scripts/static-pages";
 import { lessons } from "../src/lessons";
 import { registry } from "../src/lessons/registry";
 import { lessonPaths, lessonUrl, publicNavigation, siteUrl } from "../src/lesson-urls";
@@ -60,9 +61,23 @@ describe("static lesson entry pages", () => {
     expect(structuredData["@graph"][0]["@type"]).toBe("WebSite");
   });
 
-  it("generates a sitemap and robots policy for permanent pages only", () => {
-    const sitemap = readFileSync("dist/sitemap.xml", "utf8");
-    const robots = readFileSync("dist/robots.txt", "utf8");
+  it("generates a sitemap and robots policy for permanent pages only", async () => {
+    // Exercise asset emission without depending on a previous production build.
+    const result = await build({
+      configFile: false,
+      plugins: [staticLessonPages()],
+      logLevel: "silent",
+      build: { write: false },
+    });
+    const bundle = Array.isArray(result) ? result[0] : result;
+    if (!("output" in bundle)) throw new Error("Expected a completed build");
+    const assetText = (fileName: string): string => {
+      const asset = bundle.output.find((entry) => entry.fileName === fileName);
+      if (!asset || asset.type !== "asset") throw new Error(`Missing generated asset: ${fileName}`);
+      return String(asset.source);
+    };
+    const sitemap = assetText("sitemap.xml");
+    const robots = assetText("robots.txt");
     expect(robots).toContain("User-agent: *");
     expect(robots).toContain("Allow: /");
     expect(robots).toContain(`Sitemap: ${siteUrl}sitemap.xml`);
@@ -70,7 +85,7 @@ describe("static lesson entry pages", () => {
     expect(sitemap).toContain(`<loc>${siteUrl}</loc>`);
     for (const path of Object.values(lessonPaths)) expect(sitemap).toContain(`<loc>${siteUrl}${path}/</loc>`);
     expect(sitemap).not.toMatch(/#\/lesson|\/\d+<\/loc>/);
-  });
+  }, 20_000);
 
   it("keeps step links and converts overview navigation under the current deployment base", () => {
     const root = document.createElement("div");
